@@ -1,0 +1,539 @@
+body, h1, h2, p {
+    margin: 0;
+    padding: 0; 
+}
+body { 
+    font-family: Arial, sans-serif;
+    background-color: hsl(0, 0%, 100%);
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.hero {
+    position: relative; 
+    display: grid;
+    background-color: rgb(8, 36, 65);  
+    color: #fff;
+    text-align: center;
+    padding: 10%; 
+    max-width: 870px; 
+    margin: 0 auto; 
+}
+
+.image-container {
+    position: flex; 
+    top: 0;
+    left: 0;
+    max-height: 100%;
+}
+
+.hero h1 {
+    font-size: 3em; 
+    margin-bottom: 20px;
+}
+
+.hitex-image { 
+    position: absolute;
+    left: 0px;
+    top: 0x;
+    width: 2.6em; 
+    height: 1.7em;
+    border: 2px solid #fff; 
+    transition: transform 0.3s ease-in-out; 
+    z-index: 1000;
+}
+
+@media screen and (max-width: 680px) {
+    .hero {
+        padding: 20px; 
+    }
+
+    .hero h1 {
+        font-size: 2em; 
+    }
+}
+
+.container {
+    display: flex;
+  }
+  
+  .sidebar {
+    position: absolute;
+    left: -250px; 
+    top: 84.5px;
+    width: 150px;
+    height: 100%;
+    background-color: rgb(6, 7, 37);
+    color: rgb(255, 255, 255);
+    transition: 0.5s;
+  }  
+
+  .sidebar button {
+    top: 0px;
+    left: 0px;
+    background-color: #870404;
+    color: #000000;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+ #closeBtn {
+    position: absolute; 
+    top: 0px; 
+    left: 0px; 
+    background-color: rgb(6, 7, 37);
+    color: white;
+    padding: 10px;
+        }
+
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidebar li {
+    position: relative;
+    top: 80px;
+    padding: 10px;
+    font-family: sans-serif;
+    font-size: 14px;
+    font-weight: bolder;
+    text-align: justify;
+  }
+
+  .sidebar li a {
+    color: #ffffff;
+    text-decoration: none;
+    backdrop-filter: blur(50px);
+    position: relative; /* Needed for positioning the pop-up */
+  }
+  
+.sidebar li:hover .popup-message {
+    display: block;
+}
+.content {  
+    flex: 1;
+    padding: 20px;
+}
+#toggleBtn {
+    position: absolute;
+    top: 90px;
+    background-color: hsl(248, 59%, 21%);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+.content {
+    margin: 30px;
+}
+
+.heading {
+    font-size: 24px;
+}
+
+.paragraph {
+    font-size: 18px;
+    color: #333;
+}
+
+.language-link:hover {
+    color: #2072b8; 
+}
+nav {
+    background-color: transparent;
+}
+
+nav ul {
+    list-style:disc;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 10px 15px;
+    margin: 0 5px; 
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #0f353f;
+}
+
+#fraud-alert {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: transparent;
+    opacity: 0;
+    transition: opacity 0.5s;
+    text-align: center;
+    position: relative;
+}
+
+#fraud-alert h1 {
+    color: #c22222;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+#fraud-alert p {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #666464;
+    text-align: justify;
+}
+
+#fraud-alert a {
+    color: #c22222;
+    text-decoration: underline;
+}
+
+.fraud-color {
+    color: red;
+    font-size: 20px;
+}
+
+.france-directory {
+    background-color: transparent; 
+    color: #fff; 
+    padding: 15px; 
+    position: absolute;
+    top: 74px; 
+    right: 0px; 
+    z-index: 1000; 
+}
+
+.france-directory nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+.france-directory nav li {
+    margin: 0 0px; 
+    border-radius: 100px;
+    overflow: hidden; 
+}
+.france-directory nav a {
+    text-decoration: none;
+    color: #c41414; 
+    font-weight: bold;
+    font-size: 16px; 
+    transition: color 0.3s;
+    background-color: #fff;
+    padding: 10px 15px; 
+    display: block; 
+    border-radius: 50px; 
+}
+.france-directory nav a:hover {
+    color: #3f2d0f; 
+}
+
+body#home {
+    background-image: url("eifel.jpg");
+    background-color: hsl(248, 59%, 21%);
+    background-size:100% auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.landing-directory .hero {
+    background-color: transparent; 
+    padding: 60px;
+    width: 100%;
+}
+
+.automaticwords {
+display: block;
+position: relative;
+right: 11em;
+top: 10em;
+font-size: 35px;
+color: #ffffff;
+font-weight: bold;
+margin-top: 10px; 
+margin-bottom: 20px; 
+}
+
+
+
+.landing-directory header {
+    position: fixed;
+    background-color: #0e062d; 
+    border-bottom: 4px solid #69a8db; 
+    height: 40px; 
+    border-radius: 10px 10px 0 0; 
+    width: 100%; 
+}
+
+body.landing-directory {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    background-image: url("newback.jpg");
+    max-width: 100%;
+    background-color: rgb(255, 255, 255);
+    background-size: cover;
+    background-repeat: repeat;
+    flex: 1;
+}
+
+.landing-directory .language-list {
+    position: relative;
+    top: 2.5em;
+    left: 5em;
+    width: 14vw;
+    padding: 20px 60px;
+    gap: 0px;
+    border: 1px solid #0c1012;
+    border-radius: 5px;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(70px);
+    border-color: transparent;
+    align-self: flex-end;
+}
+
+.landing-directory .language-list li {
+    display: block;
+    padding: 5px 15px;
+    border-radius: 5px;
+    background: rgb(245, 245, 245); 
+    margin-bottom: 5px; 
+    transition: .3s ease-in-out;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.landing-directory .language-list li:hover {
+    background-color: #f0f0f0;
+    color: #000000;
+}
+
+.landing-directory .language-list li :hover {
+    border-radius: 10px;
+}
+
+.landing-directory .language-link {
+    border: #ffffff;
+    display: inline-block;
+    font-family: sans-serif;
+    font-size: larger;
+    color: #be1010;
+    font-weight:800;
+    padding: 0.4em 0.05em; 
+    position: relative;
+    text-decoration: none;
+}
+
+
+.language-selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+}
+
+.landing-directory .language-link:hover {
+    color: rgb(230, 140, 23); 
+}
+
+#languageText {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  #languageText.fade-in {
+    opacity: 20;
+  }  
+
+  .popup {
+    display: none;
+    position: absolute;
+    background-color: #0c0707;
+    border: 0px solid #ccc;
+    padding: 40px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: 'Times New Roman', Times, serif; 
+    text-align: center; 
+    opacity: 0; 
+    transform: scale(0.8);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  }  
+
+  #careersLink {
+    position: relative;
+    text-decoration: none;
+    color: #333;
+  }
+
+  #careersLink:visited {
+    color: #ffffff; 
+  }
+  #careersLink:hover .popup {
+    display: block;
+    opacity: 1; 
+    transform: scale(1); 
+  }
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-bar ul {
+    display: flex;
+    justify-content: center; 
+}
+
+.nav-bar ul li {
+    margin-right: 15px; 
+    color: rgb(255, 255, 255);
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.nav-bar ul li a {
+    text-decoration: none;
+    color: rgb(32, 168, 105)404;
+    font-weight: bold;
+}
+
+.nav-bar ul li a:hover {
+    text-decoration: underline;
+}
+
+.nav-bar .short-cut {
+    position: absolute;
+    top: 58px;
+    right: 40px;
+    left:170px;
+    width: 23px; 
+    height: 23px; 
+    margin-bottom: 5px; 
+    z-index: 9000;
+}
+
+.nav-bar .package-icon {
+    position: absolute;
+    top: 58px;
+    right: 40px;
+    left: 130px;
+    width: 23px; 
+    height: 23px; 
+    margin-bottom: 900px; 
+}
+
+.moment-image {
+    display: grid;
+    grid-template-columns: repeat(3 1fr); 
+    gap: 10px; 
+}
+
+.image-descriptor img {
+    max-width: 100%;
+    position: absolute;
+    top:11em;
+    left: 9.5em;
+    width: 30%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+
+a.image-descriptor {
+    display: inline-block;
+    color: #333;
+    text-decoration: none;
+}
+
+a.image-descriptor:hover {
+    color: #2072b8;
+}  
+
+h2 {
+    top: 13em;
+    position: absolute;
+    left:40em;
+    font-family:sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align:left;
+}
+
+/* Reweb begins from here*/
+
+.header-container {
+    margin: 0 auto;
+    width: 100%;
+    height: 4em;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    padding: 0 10px;
+    background-color: rgb(77, 72, 72);
+}
+
+@media screen and (max-width: 600px) {
+    .header-container {
+        grid-template-columns: 1fr;
+    }
+}
+.header-container a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+}
+
+.header-container img {
+    grid-column: 1/2;
+    width: 30px; 
+    position: absolute;
+    top: 1.2em;
+    left: 27px;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.header-container p {
+    margin: 0;
+}
+header p {
+    background-color: none;
+    color: #ffffff;
+    position: absolute;
+    top:29px;
+    left: 55px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 11px; 
+    font-weight: bold;
+    font-size: 8px;
+    margin: 0; 
+    display: inline-block; 
+}
+
+.language-nav {
+    display: block;
+    align-items: center;
+    background-color: none;
+    padding:70px 0;
+     width: 100%;
+}

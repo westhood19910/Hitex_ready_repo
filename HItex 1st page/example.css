@@ -1,0 +1,91 @@
+
+#services {
+    background-color: #f5f5f5; 
+    padding: 10px;
+    margin-top: 20px;
+}
+
+
+
+#services h2 {
+    color: #333; 
+    text-align: center; 
+}
+
+
+#services ul {
+    list-style-type: lower-alpha; 
+    padding: 20px;
+}
+
+
+#services li {
+    font-size: 16px; 
+    margin-bottom: 10px; 
+    text-align: center;
+}  
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 4fr));
+    grid-gap: 10px;
+    
+}
+
+@media screen and (max-width: 200px) {
+    .container {
+        grid-template-columns: 1fr; 
+    }
+    
+}
+
+.grid-item {
+    background-color: #f0f0f0;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+footer {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+    text-align: center;
+
+}
+
+/* Add additional styles as needed */
+
+@media screen and (max-width: 200px){
+    .container { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+
+    }
+    
+}
+
+.mobile-menu {
+    display: none; /* Hide by default */
+}
+
+.hamburger-icon {
+    display: flex;
+    /* Styles for the hamburger icon */
+}
+
+@media screen and (max-width: 768px) {
+    .mobile-menu {
+        display: block; /* Show on smaller screens */
+    }
+
+    .nav-links {
+        display: fixed;
+        /* Styles for the navigation links */
+    }
+}
+
+
+
+
