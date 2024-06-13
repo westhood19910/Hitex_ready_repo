@@ -281,7 +281,7 @@ body.landing-directory {
     position: relative;
     margin: 0;
     padding: 0;
-    background-image: url("newback.jpg");
+    background-image: url("assets/newback.jpg");
     max-width: 100%;
     background-color: rgb(255, 255, 255);
     background-size: cover;
