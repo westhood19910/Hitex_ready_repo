@@ -3,6 +3,19 @@ function toggleLanguageList() {
   languageList.classList.toggle("show");
 }
 
+// Close the dropdown code
+window.onclick = function(event) {
+  if (!event.target.matches('.toggle-button-2')) {
+      var dropdowns = document.getElementsByClassName("language-list");
+      for (var i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+              openDropdown.classList.remove('show');
+          }
+      }
+  }
+}
+
 var imageIndex = 0;
 var imageSources = ['visa.png', 'master.png', 'paypal-icon.svg']; 
 
@@ -105,9 +118,14 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+document.addEventListener("DOMContentLoaded", function() {
+  var searchButton = document.querySelector(".se-er-ch-bt-001");
+  var searchBarContainer = document.querySelector(".fo_oc_cnt002");
 
-
-
-
-
-
+  searchButton.addEventListener("click", function(event) {
+      if (window.innerWidth <= 600 && !searchBarContainer.classList.contains("active")) {
+          event.preventDefault(); // Prevent form submission
+          searchBarContainer.classList.toggle("active");
+      }
+  });
+});

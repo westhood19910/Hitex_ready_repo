@@ -2,8 +2,10 @@ body, h1, h2, p {
     margin: 0;
     padding: 0; 
 }
+
 body { 
     font-family: Arial, sans-serif;
+    background-image: url(assets/alexim.jpg);
     background-color: hsl(0, 0%, 100%);
     margin: 0;
     padding: 0;
@@ -141,9 +143,6 @@ body {
     color: #333;
 }
 
-.language-link:hover {
-    color: #2072b8; 
-}
 nav {
     background-color: transparent;
 }
@@ -270,6 +269,7 @@ margin-bottom: 20px;
 
 .landing-directory header {
     position: fixed;
+    top: 0;
     background-color: #0e062d; 
     border-bottom: 4px solid #69a8db; 
     height: 40px; 
@@ -281,82 +281,114 @@ body.landing-directory {
     position: relative;
     margin: 0;
     padding: 0;
+    height: max-content;
     background-image: url("assets/newback.jpg");
-    max-width: 100%;
-    background-color: rgb(255, 255, 255);
     background-size: cover;
-    background-repeat: repeat;
-    flex: 1;
+    background-repeat: ;
+    animation: backanimert 20s infinite alternate;
 }
 
-.landing-directory .language-list {
-    position: relative;
+
+@keyframes backanimert {
+    0%{
+        background-image: url(assets/land_bc_001.jpg);
+    }
+
+    25%{
+        background-image: url(assets/land_bc_002.jpg);
+    }
+    
+    50%{
+        background-image: url(assets/land_bc_003.jpg);
+    }
+
+    75%{
+        background-image: url(assets/land_bc_001.jpg);
+    }
+
+    100% {
+        background-image: url(assets/land_bc_001.jpg);
+    }
+}
+
+.img_above_list{
+    width: 15vw;
+    height: 30vh;
+}
+
+@media screen and (max-width: 850px) {
+    .img_above_list{
+        width: 9vw;
+        height: 20vh;
+    }
+}
+
+.language_selector {
     display: flex;
     flex-direction: column;
-    top: 2.5em;
-    left: 5em;
-    width: 14vw;
-    padding: 20px 60px;
-    gap: 0px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 60vw;
+    top: 1em;
+    position: relative;
+    right: 0;
+    height: max-content;
+    height: auto;
+}
+
+.language-list {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.3em;
     border: 1px solid #0c1012;
     border-radius: 5px;
     transition: opacity 0.3s ease;
-    backdrop-filter: blur(70px);
+    background-color: rgba(211, 211, 211, 0.753);
     border-color: transparent;
+    padding: 4em;
+    height: 70vh;
 }
 
-.landing-directory .language-list li {
+.language-list li {
     display: block;
-    padding: 5px 15px;
     border-radius: 5px;
-    background: rgb(245, 245, 245); 
-    margin-bottom: 5px; 
     transition: .3s ease-in-out;
-    margin-bottom: 15px;
     cursor: pointer;
+    padding: 0.3em;
+    margin-bottom: 0.3em;
+    background-color: #ffffff;
 }
 
-.landing-directory .language-list li:hover {
-    background-color: #f0f0f0;
-    color: #000000;
+.language-list li:first-child {
+    background:none;
+    margin-bottom: -4em;
+    margin: -3em 0em;
 }
 
-.landing-directory .language-list li :hover {
-    border-radius: 10px;
-}
-
-.landing-directory .language-link {
-    border: #ffffff;
-    display: inline-block;
+.language-list li a{
+    display: block;
     font-family: sans-serif;
-    font-size: 20px;
+    font-size: 22px;
     color: #be1010;
-    font-weight:800;
-    padding: 0.4em 0.05em; 
+    font-weight:bold; 
     position: relative;
     text-decoration: none;
+    padding: 0.5em;
 }
 
-@media screen and (max-width:938px) {
-    .landing-directory .language-link {
+@media screen and (max-width:738px) {
+    .language-list li a{
         border: #ffffff;
         display: inline-block;
         font-family: sans-serif;
         font-size: 13px;
-        color: #be1010;
-        font-weight:800;
-        padding: 0em 0em; 
-        position: relative;
-        text-decoration: none;
-        text-align: center;
     } 
 }
 
-
-
-.landing-directory .language-link:hover {
-    color: rgb(230, 140, 23); 
-}
 
 #languageText {
     opacity: 0;
@@ -489,6 +521,7 @@ h2 {
 /* Reweb begins from here*/
 
 .header-container {
+    position: relative;
     margin: 0 auto;
     width: 100%;
     height: 4em;
