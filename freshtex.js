@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Close the dropdown menu if the user clicks outside of it
+  // Close the dropdown 
   document.addEventListener('click', function(event) {
     if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
       dropdownMenu.style.display = 'none';
@@ -128,4 +128,25 @@ document.addEventListener("DOMContentLoaded", function() {
           searchBarContainer.classList.toggle("active");
       }
   });
+});
+
+
+// code for home auto text change
+
+document.addEventListener("DOMContentLoaded", () => {
+  const texts = [
+      "Do you Need a redefined Manuscript?",
+      "Are you looking for a fresh perspective?",
+      "Want to elevate your writing?",
+      "Need help with your manuscript?",
+      "Let's transform your ideas!"
+  ];
+
+  let index = 0;
+  const languageText = document.getElementById("languageText");
+
+  setInterval(() => {
+      index = (index + 1) % texts.length;
+      languageText.textContent = texts[index];
+  }, 2000);
 });

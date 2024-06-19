@@ -1236,6 +1236,7 @@ h2 {
   background-position: center;
   min-height: 30em;
   animation: freanim4real 100s infinite alternate;
+  height: 100vh;
 }
 
 @keyframes freanim4real {
@@ -1252,6 +1253,7 @@ h2 {
   background-size:cover;
    min-height: 32em;
    width: 100%;
+   height: 100vh;
 }
 
 .jap_re_co_bre_0xa {
@@ -1432,6 +1434,7 @@ h2 {
   background-size: cover;
   min-height: 30em;
   animation: changeBackground 190s infinite;
+  height: 100vh;
 }
 
 @keyframes changeBackground {

@@ -1,20 +1,16 @@
 body { 
     font-family: Arial, sans-serif;
-    background-image: url(assets/alexim.jpg);
-    background-color: hsl(0, 0%, 100%);
     margin: 0;
     padding: 0;
-    text-align: center;
-    background-image: url("assets/newback.jpg");
-    animation: backanimert 100s infinite alternate;
+    animation: backanimert 80s infinite alternate;
     background-size: cover;
+    background-image: url(assets/newback.jpg);
 }
-
 
 @keyframes backanimert {
 
     0%{
-        background-image: url(assets/land_bc_001.jpg);
+        background-image: url(assets/newback.jpg);
     }
 
     25%{
@@ -26,40 +22,35 @@ body {
     }
 
     75%{
-        background-image: url(assets/land_bc_001.jpg);
+        background-image: url(assets/new_bck_0012.jpg);
     }
 
-    100% {
-        background-image: url(assets/land_bc_001.jpg);
+    100%{
+        background-image: url(assets/new_bck_0012.jpg);
     }
+
 }
 
 .language_selector {
     display: flex;
-    flex-direction: column;
-    position: relative;
     justify-content: center;
-    align-items: center;
-    width: max-content;
-    position: relative;
-    right: 0;
-    height: max-content;
-    height: 100vh;
+    flex-direction: column;
+    align-items: flex-start;
+    width: auto;
+    margin: 0em 2em;
 }
 
 .language-list {
-    position: relative;
     display: flex;
-    justify-content: center;
+    position: relative;
     flex-direction: column;
-    width: 100%;
-    top: 0;
     border: 1px solid #0c1012;
     border-radius: 5px;
     background-color: rgba(211, 211, 211, 0.753);
     border-color: transparent;
-    padding: 2em;
-    height: auto;
+    width: max-content;
+    padding: 2.5em;
+    height: 100vh;
 }
 
 .language-list li {
@@ -67,69 +58,110 @@ body {
     border-radius: 5px;
     transition: .3s ease-in-out;
     cursor: pointer;
-    padding: 0.3em 0.3em;
     margin-bottom: 0.3em;
     background-color: #ffffff;
-    width: 100%;
+    padding: 0.9em;
+    text-align: center;
 }
 
 .language-list li:first-child {
     background: none;
-   
+    margin-bottom: -2em;
+    margin-top: -5em;
 }
 
+@media screen and (max-width:824px) {
+    .language-list li:first-child {
+        background: none;
+        margin-bottom: -1em;
+        margin-top: -2emem;
+    }
+}
 
 .language-list li a{
     display: block;
     font-family: sans-serif;
-    font-size: 22px;
+    font-size: 15px;
     color: #be1010;
     font-weight:bold; 
     position: relative;
     text-decoration: none;
-    padding: 0.5em;
 }
 
 
+@media screen and (max-width: 850px) {
+    .language-list li a{
+        display: block;
+        font-family: sans-serif;
+        font-size: 14px;
+        padding: 0.1em;
+        color: #be1010;
+        font-weight:bold; 
+        position: relative;
+        text-decoration: none;
+    }
+    
+}
 
 .img_above_list{
-    width: 15vw;
+    width: 50%;
     height: 30vh;
 }
 
 @media screen and (max-width: 850px) {
     .img_above_list{
-        width: 9vw;
+        width: 70%;
         height: 20vh;
     }
 }
 
+.new_int_9234 {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1em;
+  }
+
 .image-container {
-    position: flex; 
-    top: 0;
-    left: 0;
-    max-height: 100%;
+    display: flex; 
+    margin: 3em;
 }
 
-.automaticwords {
-    display: block;
-    position: relative;
-    right: 11em;
-    top: 10em;
-    font-size: 35px;
-    color: #ffffff;
-    font-weight: bold;
-    margin-top: 10px; 
-    margin-bottom: 20px; 
-    }
-
     #languageText {
-        opacity: 0;
+        font-size: 60px;
+        font-weight: bold;
         transition: opacity 0.3s ease-in-out;
+        line-height: 0.9em;
+        text-align: center;
+        color: rgba(233, 233, 233, 0.853);
+        background-color: rgba(82, 107, 189, 0.53);
+        padding: 1em;
+        border-radius: 10px;
+      }
+
+      @media screen  and (max-width: 685px){
+        #languageText {
+            font-size: 30px;
+          }
+      }
+      
+
+      @media screen  and (max-width: 473px){
+        #languageText {
+            display: none;
+          }
+      }
+
+      @media screen  and (max-width: 685px){
+          .image-container {
+            display: flex; 
+            margin: 0em;
+        }
       }
       
       #languageText.fade-in {
         opacity: 20;
       }  
     
+     
     
