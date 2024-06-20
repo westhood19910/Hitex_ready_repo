@@ -2,33 +2,31 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    animation: backanimert 80s infinite alternate;
+    animation: backanimert 70s infinite alternate;
     background-size: cover;
-    background-image: url(assets/newback.jpg);
 }
+
+ul {
+    list-style-type: none; 
+    padding: 0; 
+  }
 
 @keyframes backanimert {
 
     0%{
-        background-image: url(assets/newback.jpg);
+        background-image: url(assets/back_t_ed_001.jpg);
     }
 
     25%{
-        background-image: url(assets/land_bc_002.jpg);
-    }
-    
+        background-image: url(assets/back_t_ed_003.jpg);
+    } 
     50%{
-        background-image: url(assets/land_bc_003.jpg);
-    }
-
-    75%{
-        background-image: url(assets/new_bck_0012.jpg);
-    }
-
+        background-image: url(assets/back_t_ed_004.jpg);
+    } 
     100%{
-        background-image: url(assets/new_bck_0012.jpg);
-    }
-
+        background-image: url(assets/back_t_ed_004.jpg);
+    } 
+    
 }
 
 .language_selector {
@@ -46,7 +44,7 @@ body {
     flex-direction: column;
     border: 1px solid #0c1012;
     border-radius: 5px;
-    background-color: rgba(211, 211, 211, 0.753);
+    background-color: rgba(160, 160, 160, 0.793);
     border-color: transparent;
     width: max-content;
     padding: 2.5em;
@@ -58,11 +56,16 @@ body {
     border-radius: 5px;
     transition: .3s ease-in-out;
     cursor: pointer;
-    margin-bottom: 0.3em;
+    margin-bottom: 0.8em;
     background-color: #ffffff;
     padding: 0.9em;
     text-align: center;
 }
+
+.language-list li:hover{
+    background-color: #d8d8d8;
+}
+
 
 .language-list li:first-child {
     background: none;
@@ -74,7 +77,7 @@ body {
     .language-list li:first-child {
         background: none;
         margin-bottom: -1em;
-        margin-top: -2emem;
+        margin-top: -2em;
     }
 }
 
@@ -105,7 +108,7 @@ body {
 
 .img_above_list{
     width: 50%;
-    height: 30vh;
+    height: 25vh;
 }
 
 @media screen and (max-width: 850px) {
@@ -127,18 +130,24 @@ body {
     margin: 3em;
 }
 
-    #languageText {
-        font-size: 60px;
-        font-weight: bold;
-        transition: opacity 0.3s ease-in-out;
-        line-height: 0.9em;
-        text-align: center;
-        color: rgba(233, 233, 233, 0.853);
-        background-color: rgba(82, 107, 189, 0.53);
-        padding: 1em;
-        border-radius: 10px;
-      }
+#languageText {
+    position: absolute;
+    top: 50%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    font-weight: bold;
+    line-height: 0.9em; 
+    text-shadow: 0px 0px 8px rgba(11, 10, 10, 0.5);
+    text-align: center;
+    color: rgba(255, 246, 246, 0.853);
+    border-radius: 10px;
+    transition: opacity 0.80s ease-in-out; 
+}
 
+.languageText-hidden {
+    opacity: 0; 
+}
       @media screen  and (max-width: 685px){
         #languageText {
             font-size: 30px;
@@ -146,7 +155,7 @@ body {
       }
       
 
-      @media screen  and (max-width: 473px){
+      @media screen  and (max-width: 662px){
         #languageText {
             display: none;
           }

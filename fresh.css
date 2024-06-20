@@ -391,20 +391,21 @@ footer {
   font-weight: bold;
   margin-bottom: 1em;
   margin-top: 1em;
-  text-align: left;
+  text-align: center;
+  font-size: 25px;
 }
 
 .m-b5{
   color: goldenrod;
   font-weight: bold;
    margin-bottom: 1em;
-   text-align: left;
+   text-align: center;
    margin-top: 1em;
 }
 .m-b6{
   color: rgb(19, 130, 78);
   font-weight: bold;
-  text-align: left;
+  text-align: center;
   margin-top: 1em;
 }
 
@@ -430,14 +431,24 @@ h2 {
 }
 
 .apts-09-01{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin: 0em 1em;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 20px rgb(109, 109, 109, 0.4);
+  border-radius: 5px;
+  height: 90vh;
 }
+
 .aso-dn-001{
   font-size: 12px;
   font-style: normal;
-  text-align: left;
+  text-align: justify;
   border-bottom: 2px solid #d11a1a;
-  padding-bottom: 2em;
+  padding: 2em;
+  height: max-content;
 }
 
 .unordered-list1 li:hover {
@@ -1146,7 +1157,8 @@ h2 {
 }
 
 .fr_open_01 {
-  display: block;
+  position: relative;
+  left: 0;
 }
 
 @media screen and (max-width:879px) {
@@ -1324,34 +1336,37 @@ h2 {
  }
 }
 
-.re_zi_bre_0xa{
-  background-image: url(assets/modern-laptop-open-stylish-minimal-abstract-horizontal-scene-place-text-trendy-classic-blue-color-3d-rendering_187882-1070.jpg); 
-  background-size:cover;
-   min-height: 32em;
-   width: 100%;
-   animation: portainime 30s infinite alternate;
-   background-position: calc(20% - 20px) calc(50% - 30px);
+.re_zi_bre_0xa {
+  background-size: cover;
+  min-height: 32em;
+  width: 100%;
+  animation: portainime 30s infinite alternate;
+  height: 100vh;
 }
 
-@keyframes portainime  {
+@keyframes portainime {
   0% {
-    background-image: url(assets/por_bc_001.jpg)
+    background-image: url(assets/por_bc_001.jpg);
+    background-position: 100% 50%;
   }
   25% {
-    background-image: url(assets/por_bc_002.jpg)
+    background-image: url(assets/por_bc_002.jpg);
+    background-position: 75% 50%;
   }
   50% {
-    background-image: url(assets/por_bc_003.jpg)
+    background-image: url(assets/por_bc_003.jpg);
+    background-position: 50% 50%;
   }
   75% {
-    background-image: url(assets/por_bc_004.jpg)
+    background-image: url(assets/por_bc_004.jpg);
+    background-position: 25% 50%;
   }
-
   100% {
-    background-image: url(assets/por_bc_005.jpg)
+    background-image: url(assets/por_bc_005.jpg);
+    background-position: 0% 50%;
   }
-  
 }
+
 
 .pag-2-001 {
   top: 9em;
@@ -1373,6 +1388,7 @@ h2 {
   justify-content: space-around;
   align-items: flex-start;
   width: 100%;
+  height: 100vh;
 }
 
 .pag_2_nav_bar ul li a:hover {
@@ -2199,7 +2215,7 @@ font-weight: bold;
 .un_fr_0oper {
   display: flex;
   position: relative;
-  top: 0;
+  top: 5px;
   left: 0;
   bottom: 10px;
   justify-content: flex-start;
@@ -2208,8 +2224,8 @@ font-weight: bold;
 
 .kerpa_023_001{
   position: relative;
-  width:5em;
-  height: 6em;
+  width:6.5em;
+  height: 7.5em;
   left: 0;
 }
 @media screen and (max-width: 660px) {
@@ -2316,7 +2332,6 @@ font-weight: bold;
     padding: 0px 0px;
     margin-right: 0px;
   }
-
 }
 
 .fo_oc_cnt002{
@@ -2370,8 +2385,11 @@ border-radius: 15px 0px 0px 15px;
 }
 
 .gro_btu_01{
+  display: flex;
   position: relative;
   right: 67px;
+  align-self: self-end;
+  right: 40px;
 }
 
 
@@ -2485,16 +2503,25 @@ border-radius: 15px 0px 0px 15px;
 .por_qt_pg_001 {
   background-color:   #0f155e;
   color: #ffffff;
-  padding: 7px 12px;
-  font-size: 12px;
+  padding: 5px 3px;
+  font-size: 11px;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-left: 0em;
   margin-bottom: 10px;
-  box-shadow: 0px 0px 4px rgba(21, 21, 21, 0.9);
+}
+
+@media screen  and (max-width: 761px){
+  .por_qt_pg_001 {
+    background-color:   #0f155e;
+    color: #ffffff;
+    padding: 7px 8px;
+    font-size: 12px;
+    border: none;
+  }
 }
 
 
