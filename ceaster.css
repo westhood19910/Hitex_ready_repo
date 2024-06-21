@@ -11,7 +11,7 @@ ul {
     list-style-type: none; 
     padding: 0; 
   }
-  
+
 
 @keyframes backanimert {
 
@@ -23,13 +23,16 @@ ul {
         background-image: url(assets/back_t_ed_003.jpg);
     } 
     50%{
-        background-image: url(assets/back_t_ed_004.jpg);
+        background-image: url(assets/back_t_ed_006.jpg);
     } 
 
-    100%{
+    75%{
         background-image: url(assets/back_t_ed_001.jpg);
     } 
     
+    100% {
+        background-image: url(assets/back_t_ed_007.jpg);
+    } 
 }
 
 .language_selector {
@@ -69,7 +72,6 @@ ul {
     background-color: #d8d8d8;
 }
 
-
 .language-list li:first-child {
     background: none;
     margin-bottom: -2em;
@@ -106,7 +108,6 @@ ul {
         position: relative;
         text-decoration: none;
     }
-    
 }
 
 .img_above_list{
@@ -140,8 +141,8 @@ ul {
     transform: translate(-50%, -50%);
     font-size: 50px;
     font-weight: bold;
-    line-height: 0.9em; 
-    text-shadow: 0px 0px 8px rgba(11, 10, 10, 0.5);
+    line-height: 0.95em; 
+    text-shadow: 0px 0px 6px rgba(11, 10, 10, 0.7);
     text-align: center;
     color: rgba(255, 246, 246, 0.853);
     border-radius: 10px;
