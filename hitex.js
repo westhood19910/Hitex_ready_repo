@@ -9,25 +9,25 @@ document.addEventListener("DOMContentLoaded", function() {
         "Fast and Reliable Services",
         " Theres is Premium Editing Services for Aspiring Authors",
         "Achieve Perfection with Expert Editing",
-"Elevate Your Writing to New Heights",
-"Enhance the Clarity and Impact of Your Manuscript",
-"Professional Editors with Subject Matter Expertise",
-"Transform Your Draft into a Masterpiece",
-"Quality Editing for Every Type of Manuscript",         
-"Precision and Accuracy in Every Edit",
-"Polish Your Manuscript to Perfection",
-"Expert Editing for Authors and Researchers",
-"Refine Your Work with Hitex Editex",
-"Make a Lasting Impression with Your Writing",
-"Customized Editing Solutions for Your Needs",
-"Trusted by Authors Worldwide",
-"Enhance Readability and Coherence",
-"Boost Your Chances of Publication",
-"Tailored Editing to Fit Your Unique Voice",
-"Comprehensive Editing Services at Competitive Rates",
-"Achieve Success with Professional Editing",
-"Your Manuscript Deserves the Best",
-"Experience the Hitex Editex Difference",
+        "Elevate Your Writing to New Heights",
+        "Enhance the Clarity and Impact of Your Manuscript",
+        "Professional Editors with Subject Matter Expertise",
+        "Transform Your Draft into a Masterpiece",
+        "Quality Editing for Every Type of Manuscript",         
+        "Precision and Accuracy in Every Edit",
+        "Polish Your Manuscript to Perfection",
+        "Expert Editing for Authors and Researchers",
+        "Refine Your Work with Hitex Editex",
+        "Make a Lasting Impression with Your Writing",
+        "Customized Editing Solutions for Your Needs",
+        "Trusted by Authors Worldwide",
+        "Enhance Readability and Coherence",
+        "Boost Your Chances of Publication",
+        "Tailored Editing to Fit Your Unique Voice",
+        "Comprehensive Editing Services at Competitive Rates",
+        "Achieve Success with Professional Editing",
+        "Your Manuscript Deserves the Best",
+        "Experience the Hitex Editex Difference",
     ];
 
     let currentIndex = 0;
@@ -53,10 +53,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 // CODE FOR LANGUAGE WELCOME MESSAGE
 document.addEventListener("DOMContentLoaded", function() {
-    // Select all language link elements
     const languageLinks = document.querySelectorAll('.language-link');
-
-    // Define the translations for "welcome"
     const translations = {
         english: "Welcome",
         chinese: "欢迎",
@@ -67,19 +64,15 @@ document.addEventListener("DOMContentLoaded", function() {
         korean: "환영합니다",
         portuguese: "Bem-vindo"
     };
-
+    
     languageLinks.forEach(function(link) {
-        // Store the original text content
         const originalText = link.textContent;
         const lang = link.getAttribute('data-lang');
-        const translatedText = translations[lang];
-
-        // Add event listener for mouse over
+        
         link.addEventListener('mouseover', function() {
-            link.textContent = translatedText;
+            link.textContent = translations[lang];
         });
 
-        // Add event listener for mouse out
         link.addEventListener('mouseout', function() {
             link.textContent = originalText;
         });

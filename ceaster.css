@@ -4,17 +4,19 @@ body {
     padding: 0;
     animation: backanimert 70s infinite alternate;
     background-size: cover;
+    background-image: url(assets/alexim.jpg);
 }
 
 ul {
     list-style-type: none; 
     padding: 0; 
   }
+  
 
 @keyframes backanimert {
 
     0%{
-        background-image: url(assets/back_t_ed_001.jpg);
+        background-image: url(assets/back_t_ed_004.jpg);
     }
 
     25%{
@@ -23,8 +25,9 @@ ul {
     50%{
         background-image: url(assets/back_t_ed_004.jpg);
     } 
+
     100%{
-        background-image: url(assets/back_t_ed_004.jpg);
+        background-image: url(assets/back_t_ed_001.jpg);
     } 
     
 }
