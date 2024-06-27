@@ -11,12 +11,12 @@ ul {
     list-style-type: none; 
     padding: 0; 
   }
-
+  
 
 @keyframes backanimert {
 
     0%{
-        background-image: url(assets/back_t_ed_004.jpg);
+        background-image: url(assets/back_t_ed_007.jpg);
     }
 
     25%{
@@ -31,7 +31,7 @@ ul {
     } 
     
     100% {
-        background-image: url(assets/back_t_ed_007.jpg);
+        background-image: url(assets/back_t_ed_008.jpg);
     } 
 }
 
@@ -96,6 +96,9 @@ ul {
     text-decoration: none;
 }
 
+.language-link {
+    transition: opacity 0.3s ease-in-out;
+}
 
 @media screen and (max-width: 850px) {
     .language-list li a{
@@ -142,7 +145,7 @@ ul {
     font-size: 50px;
     font-weight: bold;
     line-height: 0.95em; 
-    text-shadow: 0px 0px 6px rgba(11, 10, 10, 0.7);
+    text-shadow: 0px 0px 5px rgba(11, 10, 10, 0.8);
     text-align: center;
     color: rgba(255, 246, 246, 0.853);
     border-radius: 10px;

@@ -3,21 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Click Effect Example</title>
+    <title>Responsive Nav Bar</title>
     <link rel="stylesheet" href="trial.css">
 </head>
 <body>
-    <ul class="main-menu">
-        <li id="menu-trigger">Menu</li>
-        <ul class="dropdown-menu" id="dropdown-menu">
-            <li><a href="#section1">Section 1</a></li>
-            <li><a href="#section2">Section 2</a></li>
-            <li><a href="#section3">Section 3</a></li>
+    <nav class="navbar">
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <ul class="nav-list">
+            <li class="nav-item">
+                <a href="#" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Services</a>
+                <ul class="sub-menu">
+                    <li><a href="#">Service 1</a></li>
+                    <li><a href="#">Service 2</a></li>
+                    <li><a href="#">Service 3</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">About</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Contact</a>
+            </li>
         </ul>
-    </ul>
-    <div class="hercfr">
-        <h1 class="freatge">GHANA IS A SCHOOL</h1>
-    </div>
+    </nav>
     <script src="trial.js"></script>
-</body> 
+</body>
 </html>

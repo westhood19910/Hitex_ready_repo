@@ -1,14 +1,16 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-    const menuTrigger = document.getElementById('menu-trigger');
-    const dropdownMenu = document.getElementById('dropdown-menu');
+const menuToggle = document.querySelector('.menu-toggle');
+const navList = document.querySelector('.nav-list');
+const navItems = document.querySelectorAll('.nav-item');
 
-    menuTrigger.addEventListener('click', () => {
-        dropdownMenu.classList.toggle('show');
-    }); 
-    // Optional: Close the dropdown if the user clicks outside of it
-    document.addEventListener('click', (event) => {
-        if (!menuTrigger.contains(event.target) && !dropdownMenu.contains(event.target)) {
-            dropdownMenu.classList.remove('show');
+menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('active');
+    navList.classList.toggle('active');
+});
+
+navItems.forEach(item => {
+    item.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+            item.classList.toggle('active');
         }
     });
 });
