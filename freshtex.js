@@ -130,4 +130,15 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
-// code for home auto text change
+function showSearchInput() {
+  const form = document.querySelector('.fo_oc_cnt002');
+  form.classList.toggle('show-input');
+}
+
+ const displayDuration = 5000; 
+ const statusMessage = document.getElementById('statusMessage');
+
+ // Set a timeout to hide the span after the specified duration
+ setTimeout(() => {
+     statusMessage.style.display = 'none';
+ }, displayDuration);
