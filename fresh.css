@@ -4,6 +4,7 @@ body {
     background-color: #ffffff;
     overflow-x: hidden;
     box-sizing: border-box;
+    font-family: 'Lora';
 }
 
 * {
@@ -435,7 +436,7 @@ h2 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0em 1em;
+  margin: 0em 0em;
   background-color: #ffffff;
   box-shadow: 0px 0px 20px rgb(109, 109, 109, 0.4);
   border-radius: 5px;
@@ -487,8 +488,8 @@ h2 {
   .cont-but-2 {
   margin-top: 30px;
   font-weight: bold;
-  padding: 10px 40px !important;
-  font-size: 20px !important;
+  padding: 10px 17px !important;
+  font-size: 15px !important;
   background-color: #074d28;
   color: #ffffff;
   border: none;
@@ -594,7 +595,7 @@ h2 {
 /* Footer code here*/
 .fot-dow-1{
   margin-top: 3em;
-  background-color: #161745;
+  background-color: #001524;
   color: #fff;
   height: auto;
   margin-top: 0em;
@@ -723,6 +724,49 @@ h2 {
     margin-left: 0em;
   }
   
+}
+
+.add_va_lue {
+  font-family: sans-serif;
+  color: white;
+  text-align: center;
+}
+
+.kil_er_sty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2em;
+  font-size: 23px;
+}
+
+.gre_er_to{
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  font-weight: bold;
+  width: 30%;
+  padding: 0.5em;
+}
+
+
+.per_dreive{
+  background-image: url(assets/On_tp_yue.jpg);
+   background-size: cover; 
+   height: 75vh; 
+   border-radius: 5px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.res_ope_34 {
+  font-size: 50px;
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+  font-family: 'Lora', serif;
 }
 
 .im-imcny-091 {
@@ -2251,8 +2295,14 @@ font-weight: bold;
 
 .ozone_jer{
   position: relative;
+  height: 40vh;
+}
+
+.oz_one_jer{
+  position: relative;
   height: 30vh;
 }
+
 
 .kerpa_023_001{
   position: relative;
