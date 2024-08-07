@@ -118,6 +118,7 @@ footer {
 
 .language-link:hover {
   color: red;
+
 }
 
 .hamburger-toggle {
@@ -185,7 +186,6 @@ footer {
 }
 
 .language-link {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-decoration: none;
     font-weight:bold;
     color: rgb(255, 255, 255);
@@ -670,6 +670,7 @@ h2 {
 
 .Obtao_0012{
   display: flex;
+  margin-top: 1em;
 }
 
 .fot-ul-003{
@@ -1164,7 +1165,7 @@ h2 {
 
 .toggle-button-2 {
   display: none;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
   background-color: transparent;
   border: none;
@@ -1455,7 +1456,6 @@ h2 {
   line-height: 1.5; 
   color: #ffffff; 
   margin-bottom: 5px; 
-  font-family: cursive;
 }
 
 .gr-ps-tur-001 {
@@ -2360,9 +2360,18 @@ font-weight: bold;
 }
 
 .alb-im-001 {
-  width: 45px; 
+  width: 3em; 
   border-radius: 50%; 
   height: 1.6em;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+}
+
+.kil_im_001 {
+  width: 5em; 
+  border-radius: 50%; 
+  height: 3em;
   cursor: pointer;
   position: relative;
   display: inline-block;
@@ -2506,7 +2515,6 @@ border-radius: 15px 0px 0px 15px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-bottom: 10px;
-  box-shadow: 0px 0px 4px rgba(21, 21, 21, 0.9);
 }
 
 .kor_qt-pg-001 {
@@ -2901,6 +2909,64 @@ color: #ffffff;
   transform: scaleX(-1);
 }
 
+.ger_sd_123 {
+  font-weight: bold;
+  font-size: 23px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.cole_bugh{
+  font-size: 20px;
+  display: block;
+  text-align: center;
+  transition: opacity 0.5s ease-in-out;
+}
+
+#xso_re_erg_12 {
+  width: 100%;
+  height: auto;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.gde_xcd_9df {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f8f8f8;
+  position: relative;
+  max-width: 100vw;
+  margin: 0 auto;
+}
+
+.jue_ohe_9{
+  width: 80%;
+}
+
+#in_ins_034_fr {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  gap: 3em;
+}
+
+#in_ins_034_fr img {
+  width: 8em;
+  height: 8em;
+  border-radius: 30%;
+  border: 5px solid #eeeeee;
+  box-shadow: 0px 0px 30px rgb(109, 109, 109, 0.3);
+ 
+}
+
+.cha_auto_er4{
+  margin-top: 10em;
+}
+
 .reso_im_01{
   max-width:100%;
   max-height: 100%;
@@ -2950,7 +3016,6 @@ color: #ffffff;
   text-align: left;
   margin-top: 0.3em;
   margin-left: 1em;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 @media screen and (max-width:532px) {
@@ -2963,7 +3028,6 @@ color: #ffffff;
     text-align: left;
     margin-top: 0.3em;
     margin-left: 0em;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
 }
 
@@ -3167,7 +3231,6 @@ background-color: rgb(235, 237, 249);
   text-align: center;
   font-size: 50px;
   color: rgb(6, 28, 92);
-  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 @media screen and (max-width: 547px) {
@@ -3179,9 +3242,8 @@ background-color: rgb(235, 237, 249);
 
 .br-sp-001 {
   color: #050657; 
-  font-size: 14.6px; 
+  font-size: 15px; 
   text-align: left;
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 @media screen and (max-width:6650px) {
@@ -3201,7 +3263,6 @@ background-color: rgb(235, 237, 249);
   font-size: 15px;
   text-decoration: none; 
   margin: 5px 30px;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   text-align:center;
 }
 
@@ -3413,17 +3474,14 @@ background-color: rgb(235, 237, 249);
   font-size: 17px; 
   line-height: 1.4; 
   margin-bottom: 20px; 
-  font-family:sans-serif;
   text-align: left;
   margin: 2em 2em;
   text-align: left;
-  font-family:Arial, Helvetica, sans-serif;
 }
 
 .why-sp-002{
   color: rgb(80, 80, 80);
   text-align: center;
-  font-family:sans-serif;
   font-size: 16px;
 }
 
@@ -3442,7 +3500,6 @@ background-color: rgb(235, 237, 249);
   margin-top: 2em;
   text-align: left; 
   text-transform: uppercase; 
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border-bottom: 1px solid #030202;
   margin: 20px 50px;
 }
@@ -3451,7 +3508,6 @@ background-color: rgb(235, 237, 249);
   color: #000000;
   font-size: 9px;
   text-align: left;
-  font-family: 'Times New Roman', Times, serif;
 }
 
 /* Style for the span element */
@@ -3499,7 +3555,6 @@ background-color: rgb(235, 237, 249);
   font-weight: bold;
   margin: 5px 15px;
   color: #ffffff;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 
@@ -3613,7 +3668,6 @@ background-color: rgb(235, 237, 249);
   box-shadow: 0 4px 8px rgba(4, 217, 232, 0.4);
   width: 300px;
   color: #1f1919;
-  font-family: 'Arial', sans-serif;
   font-size: 12px;
   line-height: 1.2;
 }
@@ -3936,7 +3990,6 @@ background-color: rgb(235, 237, 249);
 
 .cr-sp1-001 {
   color: #ffffff; 
-  font-family:sans-serif;
   font-size: 13px; 
   margin: 0em 1em; 
   display: block; 
@@ -4493,9 +4546,8 @@ transform: scale(1.6);
   }
 }
 
-
 .sre-091-670 {
-  width: 40vw; 
+  width: 35vw; 
   padding: 10px; 
   border: 1px solid #ccc; 
   border-radius: 4px; 

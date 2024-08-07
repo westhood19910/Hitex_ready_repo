@@ -142,3 +142,47 @@ function showSearchInput() {
  setTimeout(() => {
      statusMessage.style.display = 'none';
  }, displayDuration);
+
+
+
+
+ // Array of image sources and corresponding texts
+const content = [
+  {
+    image: "assets/jap_rep_001.jpg",
+    title: "Professional Manuscript Editing Services",
+    text: "At Hitex Editex, we provide comprehensive manuscript editing services tailored to meet the needs of authors and researchers."
+  },
+  {
+    image: "assets/jap_rep_002.jpg",
+    title: "Expert Proofreading",
+    text: "Our team of experienced editors ensures your manuscript is free from grammatical errors and typos."
+  },
+  {
+    image: "assets/jap_rep_003.jpg",
+    title: "Formatting and Style Guidelines",
+    text: "We help you adhere to specific journal or publication requirements, ensuring your manuscript meets all formatting standards."
+  }
+];
+
+let currentIndex = 0;
+
+function changeContent() {
+  const title = document.querySelector('.ger_sd_123');
+  const image = document.getElementById('xso_re_erg_12');
+  const text = document.querySelector('.cole_bugh');
+
+  // Update content
+  title.textContent = content[currentIndex].title;
+  image.src = content[currentIndex].image;
+  text.textContent = content[currentIndex].text;
+
+  // Move to next item, or back to start if at end
+  currentIndex = (currentIndex + 1) % content.length;
+}
+
+// Change content every 5 seconds (5000 milliseconds)
+setInterval(changeContent, 5000);
+
+// Initial call to set first content immediately
+changeContent();
