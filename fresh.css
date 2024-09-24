@@ -2362,10 +2362,14 @@ font-weight: bold;
 .alb-im-001 {
   width: 3em; 
   border-radius: 50%; 
-  height: 1.6em;
+  height: 1.9em;
   cursor: pointer;
   position: relative;
   display: inline-block;
+}
+
+.intbeh_01 {
+  padding: ;
 }
 
 .kil_im_001 {
@@ -2416,7 +2420,7 @@ font-weight: bold;
   .alb-im-001 {
     width: 30px; 
     border-radius: 50%; 
-    height: 1.1em;
+    height: 1.7em;
   }
 
   .kli_002_wer{
