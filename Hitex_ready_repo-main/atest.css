@@ -1,0 +1,41 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.moment-image {
+    display: grid;
+    grid-template-columns: 1fr; /* Adjust column structure as needed */
+    gap: 20px; /* Adjust gap between elements */
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.image-descriptor {
+    display: grid;
+    grid-template-columns: 1fr; /* Adjust column structure as needed */
+}
+
+.image-descriptor img {
+    width: 100%;
+    height: auto;
+    max-width: 100%; /* Ensures the image doesn't exceed its natural size */
+}
+
+h2 {
+    margin: 0;
+}
+
+/* Adjust styling for different screen sizes as needed */
+@media (min-width: 768px) {
+    .moment-image {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .moment-image {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
