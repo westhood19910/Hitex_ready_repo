@@ -594,19 +594,26 @@ h2 {
 }
 /* Footer code here*/
 .fot-dow-1{
-  margin-top: 3em;
-  background-color: #001524;
+  margin-top: 10em;
+  background-color: #3689c4;
   color: #fff;
-  height: auto;
-  margin-top: 0em;
+  height: 60vh;
   padding: 2em;
+  align-items: center;
+}
+
+
+.apearbility091 {
+  display: flex;
+  max-width: 100%;
+  height: 100%;
 }
 
 .ColDesghCnt{
   display: flex;
   flex-direction: column;
   position: relative;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -621,8 +628,9 @@ h2 {
 .foot-h3 {
   color: #ffd700; 
   font-weight: bold;
-  font-size: 18px;
-  text-align: center;
+  font-size: 25px;
+  text-align: left;
+  margin-bottom: 1em;
 }
 
 
@@ -646,7 +654,7 @@ h2 {
 .fot-ul-001 li a{
   font-size: 12px;
   font-weight: bold;
-  text-align: center;
+  text-align: left;
   color: rgb(252, 255, 203);
  }
 
@@ -677,7 +685,7 @@ h2 {
   list-style: none;
   padding: 0;
   margin: 0;
-  text-align: center;
+  text-align: left;
 }
 
 .fot-ul-003 li {
@@ -2919,6 +2927,78 @@ color: #ffffff;
   text-transform: uppercase;
   text-align: center;
 }
+
+.vder_654_hr {
+  position: fixed;
+  right: 0;
+  top: 300px; 
+  width: 2vw; 
+  height: 12vh;
+  background-color: #01bd0e;
+  box-shadow: 0px 0px 10px 5px rgba(109, 109, 109, 0.5);
+  z-index: 1000; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+[11:29 am, 27/09/2024] Meta AI: .vder_654_hr {
+  position: fixed;
+  right: 0;
+  top: 300px;
+  width: 2vw;
+  height: 12vh;
+  background-color: #01bd0e;
+  box-shadow: 0px 0px 10px 5px rgba(109, 109, 109, 0.5);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.bete_asi_ide {
+  width: 100%;
+  height: 100%; /* Add height */
+  display: flex; /* Add display flex */
+  justify-content: center;
+  align-items: center;
+}
+
+.bete_asi_ide h2 {
+  font-size: 1.2em;
+  color: white;
+  transform: rotate(-90deg);
+  position: absolute;
+  top: 40%;
+}
+
+
+.bete_asi_ide {
+  width: 100%;
+  height:100%; 
+}
+
+.text-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Match parent height */
+}
+
+.bete_asi_ide h2 {
+  font-size: 1.2em;
+  color: white;
+  transform: rotate(-90deg);
+}
+
+
+
 
 .cole_bugh{
   font-size: 20px;
@@ -5559,7 +5639,7 @@ font-size: 20px;
 
 .irj-001-091 {
   position: relative;
-  top: 0em;
+  top: 10em;
 }
 
 .fr-ag-48{
