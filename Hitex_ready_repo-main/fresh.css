@@ -118,7 +118,6 @@ footer {
 
 .language-link:hover {
   color: red;
-
 }
 
 .hamburger-toggle {
@@ -2242,6 +2241,7 @@ font-weight: bold;
   display: block;
   cursor: pointer;
 }
+
 .cr-ln-001:hover .cr-ul-001{
   display: block;
 }
@@ -2376,9 +2376,6 @@ font-weight: bold;
   display: inline-block;
 }
 
-.intbeh_01 {
-  padding: ;
-}
 
 .kil_im_001 {
   width: 5em; 
@@ -2928,44 +2925,40 @@ color: #ffffff;
   text-align: center;
 }
 
-.vder_654_hr {
+#vder_654_hr {
   position: fixed;
   right: 0;
   top: 300px; 
   width: 2vw; 
   height: 12vh;
   background-color: #01bd0e;
-  box-shadow: 0px 0px 10px 5px rgba(109, 109, 109, 0.5);
-  z-index: 1000; 
+  box-shadow: 0px 0px 6px 3px rgba(12, 12, 12, 0.4);
+  z-index: 32; 
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
 }
 
-[11:29 am, 27/09/2024] Meta AI: .vder_654_hr {
-  position: fixed;
-  right: 0;
-  top: 300px;
-  width: 2vw;
-  height: 12vh;
-  background-color: #01bd0e;
-  box-shadow: 0px 0px 10px 5px rgba(109, 109, 109, 0.5);
-  z-index: 1000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+@media screen and (max-width:692px) {
+  .vder_654_hr {
+    width: 6vw; 
+    height: 12vh;
+  }
+}
+
+.vder_654_hr:hover{
+  background-color: #1b0de2;
 }
 
 .bete_asi_ide {
   width: 100%;
   height: 100%; /* Add height */
-  display: flex; /* Add display flex */
+  display: flex; 
   justify-content: center;
   align-items: center;
 }
@@ -2984,21 +2977,46 @@ color: #ffffff;
   height:100%; 
 }
 
-.text-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%; /* Match parent height */
+.ky_hu7_gd {
+  display: none;
+  position: fixed;
+  right: 0;
+  top: 40%;
+  background-color: #0b71dd;
+  width: fit-content;
+  height: fit-content;
+  z-index: 35;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  box-shadow: 0px 0px 6px 3px rgba(19, 17, 17, 0.4);
 }
 
+.ky_hu7_gd ul{
+list-style: none;
+width: 100%;
+}
+
+.ky_hu7_gd ul li{
+  margin-bottom: 10px;
+  }
+  
+.ky_hu7_gd ul li:last-child{
+  margin-bottom: 0;
+  }
+  
 .bete_asi_ide h2 {
   font-size: 1.2em;
   color: white;
   transform: rotate(-90deg);
 }
 
-
-
+.pet_re_lou7 {
+  width: 90%; 
+  border-radius: 50%; 
+  height: 1.9em;
+  cursor: pointer;
+  position: relative;
+}
 
 .cole_bugh{
   font-size: 20px;
