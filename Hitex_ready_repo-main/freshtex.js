@@ -186,3 +186,22 @@ setInterval(changeContent, 5000);
 
 // Initial call to set first content immediately
 changeContent();
+
+// CODE FORSIDE SOCIAL
+
+document.addEventListener('DOMContentLoaded', function() {
+  const clickElement = document.getElementById('vder_654_hr');
+  const navContainer = document.querySelector('.ky_hu7_gd');
+
+  if (clickElement && navContainer) {
+      clickElement.addEventListener('click', function(event) {
+          event.preventDefault(); 
+          navContainer.style.display = navContainer.style.display === 'none' ? 'block' : 'none';
+      });
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  console.log("Script is running");
+  // ... rest of your code
+});
