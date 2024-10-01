@@ -1,0 +1,53 @@
+.header{
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;background-color: var(--black-color);
+    box-shadow: 0 2px 16px hsla(220, 32%, 8%, .3);
+    z-index: var(--z-fixed);
+}
+
+.nav{
+    height: var(--header--height);
+}
+
+.ter_091-rf {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+} 
+
+.htxe_0921log {
+    display: inline-flex;
+    align-items: center;
+    column-gap: .25rem;
+   font-weight: bold;
+}
+
+.htxe_0921log i {
+    font-weight: initial;
+    position: relative;
+}
+
+.fornac_toggle_1 {
+  position: relative;
+  width: 32px;
+  height: 32px;
+}
+
+.nav_po-burger_001, .nan_close__bre {
+    position: relative;
+    width: max-content;
+    height: max-content;
+    inset: 0;
+    margin: auto;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: opacity .1s, transform .4s;
+  }
+
+  .nan_close__bre{
+   opacity: 0;
+  }
+  
