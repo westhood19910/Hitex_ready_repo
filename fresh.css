@@ -595,7 +595,7 @@ h2 {
 /* Footer code here*/
 .fot-dow-1{
   margin-top: 3em;
-  background-color: #28b9cc;
+  background-color: #111010;
   color: #fff;
   height: auto;
   margin-top: 0em;
@@ -1190,7 +1190,7 @@ h2 {
   width: 100%;
   z-index: 6;
   min-height: 9vh; 
-  justify-content: space-between;
+  justify-content:space-between;
   align-items: center;
 }
 
@@ -1275,13 +1275,13 @@ h2 {
 
 .den_Check {
   position: relative;
-  color: #ffffff;
+  color: #000000;
   font-weight: bolder;
-  font-size: 19px;
+  font-size: 22px;
   cursor: pointer;
   left: 0;
+  background: #e0060609;
   padding: 0px 10px;
-  background: #c20e0e;
   border-radius: 1px;
   transition: .3s ease-in-out;
   display: none;
@@ -2506,12 +2506,14 @@ border-radius: 15px 0px 0px 15px;
 }
 
 .qt-pg-001 {
+  display: flex;
   background-color:#0f155e;
   color: #ffffff;
-  padding: 4px 20px;
+  align-self: flex-end;
+  padding: 10px 20px;
   font-size: 12px;
   border: none;
-  border-radius: 2px;
+  border-radius: 4px;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -2550,8 +2552,9 @@ border-radius: 15px 0px 0px 15px;
 
 @media screen and (max-width:761px) {
   .qt-pg-001 {
-    padding: 7px 20px;
-    font-size: 7px;
+    padding: 7px 10px;
+    font-size: 10px;
+    margin-bottom: 10px;
   }
 }
 
@@ -2573,16 +2576,15 @@ border-radius: 15px 0px 0px 15px;
 .fre_qt-pg-001{
   background-color:   #0f155e;
   color: #ffffff;
-  padding: 7px 25px;
+  padding: 7px 10px;
   font-size: 10px;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-left: 0em;
-  margin-bottom: 10px;
-  box-shadow: 0px 0px 4px rgba(21, 21, 21, 0.9);
+  margin-bottom: 15px;
 }
 
 .qt-pg-001:hover {
@@ -2948,16 +2950,16 @@ color: #ffffff;
   box-shadow: 0px 0px 4px 3px rgba(8, 8, 8, 0.4);
 }
 
-.reg_be_sbg .but_vd_gfd{
+.but_vd_gfd{
 transform: rotate(-90deg);
 position: fixed;
+right: 0em;
 top: 40%;
 color: #01bd0e;
 background-color: #030202;
 border: none;
 border-radius: 5px;
-right: 0;
-z-index: 33;
+padding: 1em;
 }
 
 #ten_tios_nfd {
@@ -3250,6 +3252,13 @@ color: red;
 
 .kl-9l9-015{
   margin: 20em 0em;
+}
+
+
+@media screen and (max-width: 670px){
+  .kl-9l9-015 .row{
+    margin: 0em 0em;
+  }
 }
 
 .dd_h3_006{
@@ -4022,6 +4031,13 @@ background-color: rgb(235, 237, 249);
   align-items: center;
   position: relative;
   gap: 0.6em;
+}
+
+
+@media screen  and (max-width:670px) {
+  .fe_der_irt_se {
+    
+  }
 }
 
 .cr-sp-001 {
