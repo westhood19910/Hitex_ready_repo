@@ -1195,6 +1195,13 @@ h2 {
 }
 
 
+@media screen and (max-width: 869px){
+  .pag_2_nav_bar {
+    background-color: rgb(7, 7, 109);
+  }
+}
+
+
 .pag_2_nav_bar ul {
   list-style: none; 
   margin: 0;
@@ -1285,6 +1292,15 @@ h2 {
   border-radius: 1px;
   transition: .3s ease-in-out;
   display: none;
+}
+
+@media screen and (max-width: 869px){
+  
+  .den_Check {
+    color: #ffffff;
+    background: #86868621;
+  }
+  
 }
 
 .re_co_bro12_0xa {
@@ -2513,11 +2529,22 @@ border-radius: 15px 0px 0px 15px;
   padding: 10px 20px;
   font-size: 12px;
   border: none;
+  text-decoration: none;
   border-radius: 4px;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+
+@media  (max-width:869px) {
+  .qt-pg-001 {
+    display: flex;
+    background-color:#d81919;
+    color: #ffffff;
+    text-decoration: none;
+  }
 }
 
 .kor_qt-pg-001 {
