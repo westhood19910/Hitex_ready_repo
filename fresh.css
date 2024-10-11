@@ -197,26 +197,12 @@ footer {
     transition: .3s ease-in-out;
 }
 
-.action-home {
-    grid-column: 1;
-    font-family: sans-serif;
-    font-weight: bold;
-    font-size: 8px;
-    display: inline-block;
-    position: absolute;
-    margin-right: 42.4rem;
-    margin-top: 0.5rem;
-    align-items: center;
-    text-decoration: none;
-    color: #333; 
-  }
-
-  .action-home img {
-    width: 15px; 
-    height: auto;
-    margin-top: 0px;
-    margin-right: 4px;
-  }
+.lat_clo_001 .fa-solid {
+margin-top: 10px;
+font-size: 15px;
+color: #6d6d6d;
+margin-left: 2px;
+}
     
 .toggle-button:hover {
     color: #555; 
@@ -602,6 +588,12 @@ h2 {
   padding: 9em;
 }
 
+@media screen and (max-width: 896px){
+  .fot-dow-1{
+    padding: 1em;
+  }
+}
+
 .ColDesghCnt{
   display: flex;
   flex-direction: column;
@@ -726,6 +718,20 @@ h2 {
     margin-left: 0em;
   }
   
+}
+
+@media screen and (max-width:789px){
+  .subjects-cont .row{
+    margin: 8em 0em;  
+    background-color: rgb(27, 21, 113); 
+    border-radius: 0px;
+  }
+}
+
+.subjects-cont .row{
+  margin: 8em 10px;  
+  background-color: rgb(27, 21, 113); 
+  border-radius: 10px;
 }
 
 .add_va_lue {
@@ -1164,6 +1170,13 @@ h2 {
     justify-content: space-between;
 }
 
+@media screen and (max-width: 869px) {
+  .pag-2-hed-1 {
+    background-color: #1d1b1b;
+    height: 2.1em;
+}
+}
+
 .toggle-button-2 {
   display: none;
   font-size: 20px;
@@ -1328,6 +1341,7 @@ h2 {
    width: 100%;
    height: 100vh;
 }
+
 
 .jap_re_co_bre_0xa {
   background-image: url(assets/alexim.jpg);
@@ -2330,8 +2344,9 @@ font-weight: bold;
 @media screen and (max-width: 660px) {
   .kerpa_023_001{
     position: relative;
-    width:4.5em;
-    height: 4.5em;
+    width: 5em;
+    height: 6em;
+    left: 0;
   }
 }
 
@@ -2355,6 +2370,12 @@ font-weight: bold;
   left: 0;
   top: 25px;
   padding: 15px 30px;
+}
+
+@media screen and (max-width: 869px){
+  .alb_pa_001{
+    padding: 0px 0px;
+  }
 }
 
 .veryearly001{
@@ -2433,7 +2454,7 @@ font-weight: bold;
   .alb-im-001 {
     width: 30px; 
     border-radius: 50%; 
-    height: 1.7em;
+    height: 1.8em;
   }
 
   .kli_002_wer{
@@ -2500,11 +2521,15 @@ border-radius: 15px 0px 0px 15px;
 .gro_btu_01{
   display: flex;
   position: relative;
-  right: 67px;
   align-self: self-end;
   right: 40px;
 }
 
+@media screen and (max-width:869px){
+  .gro_btu_01{
+    right: 15px;
+  }
+}
 
 .spa_qt-pg-001 {
   background-color:#0f155e;
@@ -2522,10 +2547,8 @@ border-radius: 15px 0px 0px 15px;
 }
 
 .qt-pg-001 {
-  display: flex;
   background-color:#0f155e;
   color: #ffffff;
-  align-self: flex-end;
   padding: 10px 20px;
   font-size: 12px;
   border: none;
@@ -2534,7 +2557,7 @@ border-radius: 15px 0px 0px 15px;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-bottom: 20px;
+  margin-bottom:  10px;
 }
 
 
@@ -2603,20 +2626,44 @@ border-radius: 15px 0px 0px 15px;
 .fre_qt-pg-001{
   background-color:   #0f155e;
   color: #ffffff;
-  padding: 7px 10px;
-  font-size: 10px;
+  padding: 10px 15px;
+  font-size: 12px;
   border: none;
   border-radius: 5px;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-left: 0em;
+  margin-left: -1em;
   margin-bottom: 15px;
+}
+
+@media screen and (max-width:869px){
+  .fre_qt-pg-001{
+    background-color: #c61b1b;
+    color: #ffffff;
+    padding: 7px 5px;
+    font-size: 10px;
+    margin-bottom: 15px;
+  }
 }
 
 .qt-pg-001:hover {
   background-color: #c61b1b;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.Araqt_pg_001 {
+  background-color:#071479;
+  color: #ffffff;
+  padding: 5px 30px;
+  font-size: 17px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 0.5em;
+  margin-bottom: 15px;
 }
 
 .chi_qt-pg-001:hover {
@@ -2962,8 +3009,8 @@ color: #ffffff;
 }
 
 .reg_be_sbg {
+  display: none;
   position: fixed;
-  display: flex;
   justify-content: center;
   align-self: center;
   right: 0;
@@ -4061,11 +4108,13 @@ background-color: rgb(235, 237, 249);
 }
 
 
-@media screen  and (max-width:670px) {
-  .fe_der_irt_se {
-    
+@media screen  and (max-width:869px) {
+  .kl-9l9-015 .row{
+    margin: 0em 0em;
   }
 }
+
+
 
 .cr-sp-001 {
   color: #ffffff; 
