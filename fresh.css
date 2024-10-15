@@ -7,6 +7,11 @@ body {
     font-family: 'Lora';
 }
 
+a {
+  text-decoration: none;
+}
+
+
 * {
   box-sizing: border-box;
 }
@@ -750,18 +755,20 @@ h2 {
 }
 
 .gre_er_to{
-  padding: 10px 20px;
+  padding: 15px 45px;
   border: none;
   border-radius: 50px;
   font-weight: bold;
-  width: 30%;
-  padding: 0.5em;
+  font-size: 25px;
+  color: #062a53;
+  background-color: #f1f1f1;
+  border: 2px dott #1c1d2b;
 }
 
 
 .per_dreive{
   background-image: url(assets/On_tp_yue.jpg);
-   background-size: cover; 
+   background-size:cover; 
    height: 75vh; 
    border-radius: 5px;
    display: flex;
@@ -770,8 +777,9 @@ h2 {
 }
 
 .res_ope_34 {
-  font-size: 50px;
+  font-size: 45px;
   color: white;
+  font-weight: bolder;
   text-transform: uppercase;
   text-align: center;
   font-family: 'Lora', serif;
@@ -2187,12 +2195,12 @@ font-weight: bold;
 }
 
 .abt-ul-001 {
+  display:none;
   list-style-type: none;
   padding: 10px 20px;
   position: absolute;
   background-color: #ffffff;
   width: 30vw;
-  display: none;
   height: max-content;
   box-shadow: 0px 0px 8px rgba(6, 10, 54, 0.3);
   border-radius: 5px;
@@ -2232,7 +2240,7 @@ font-weight: bold;
 .cr-ul-001 {
   list-style-type: none;
   position: absolute;
-  background-color: #ededed;
+  background-color: #ffffff;
   border-radius: 6px;
   width: 30vw;
   padding: 2em;
@@ -2507,8 +2515,9 @@ border-radius: 15px 0px 0px 15px;
     border: none;
    border-radius: 10px;
    line-height: 0.7em;
-   font-size: 18px;
+   font-size: 22px;
    height: 60%;
+   background: none;
   }
 }
 
@@ -2546,7 +2555,8 @@ border-radius: 15px 0px 0px 15px;
   box-shadow: 0px 0px 4px rgba(21, 21, 21, 0.9);
 }
 
-.qt-pg-001 {
+
+ .qt-pg-001 {
   background-color:#0f155e;
   color: #ffffff;
   padding: 10px 20px;
@@ -2620,7 +2630,17 @@ border-radius: 15px 0px 0px 15px;
   transition: background-color 0.3s ease;
   margin-left: 0em;
   margin-bottom: 10px;
-  box-shadow: 0px 0px 4px rgba(21, 21, 21, 0.9);
+  box-shadow: 0px 0px 4px rgba(21, 21, 21, 0.4);
+}
+
+@media screen  and (max-width:896px) {
+  .chi_qt-pg-001{
+    box-shadow: none;
+    background-color: rgb(177, 10, 10);
+    padding: 7px 40px;
+    font-size: 11px;
+    border-radius: 5px;
+  }
 }
 
 .fre_qt-pg-001{
@@ -5390,7 +5410,8 @@ color: #ffffff;
 }
 
 .cnt0-001-71{
-  margin: 0.4em 3em;
+  margin: 0.4em 0em;
+  width: 100%;
 }
 
 .rde-in-joy{
@@ -5399,9 +5420,10 @@ color: #ffffff;
   font-size: 65px;
   font-weight: bold;
   color: #ffffff;
+  max-width: 100%;
 }
 
-@media screen and (max-width:920px) {
+@media screen and (max-width: 896px) {
   .rde-in-joy{
     text-align: left;
     margin: 1em 1em;
