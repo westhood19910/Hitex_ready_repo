@@ -1350,6 +1350,16 @@ h2 {
    height: 100vh;
 }
 
+@media screen and (max-width: 576px){
+  .re_co_bre_0xa {
+    background-image: url(assets/newphonebc2.jpg); 
+    background-size:cover;
+     min-height: 32em;
+     width: 100%;
+     height: 100vh;
+  }
+}
+
 
 .jap_re_co_bre_0xa {
   background-image: url(assets/alexim.jpg);
@@ -1449,7 +1459,6 @@ h2 {
     background-position: 0% 50%;
   }
 }
-
 
 .pag-2-001 {
   top: 9em;
@@ -3348,13 +3357,6 @@ color: red;
   margin: 20em 0em;
 }
 
-
-@media screen and (max-width: 670px){
-  .kl-9l9-015 .row{
-    margin: 0em 0em;
-  }
-}
-
 .dd_h3_006{
   color: #403c82;
   font-size: 23px;
@@ -4118,6 +4120,7 @@ background-color: rgb(235, 237, 249);
 }
 
 /* SECURITY CODE HERE*/
+
 .fe_der_irt_se {
   display: flex;
   flex-direction: column;
@@ -4127,14 +4130,17 @@ background-color: rgb(235, 237, 249);
   gap: 0.6em;
 }
 
+.kl-9l9-015 .row:nth-of-type(1) {
+  background-color: #ca0e0e;
+  margin: 0em 2.6em;
+}
 
-@media screen  and (max-width:869px) {
-  .kl-9l9-015 .row{
+@media screen and (max-width: 576px) {
+  .kl-9l9-015 .row:nth-of-type(1) {
+    background-color: #000000;
     margin: 0em 0em;
   }
 }
-
-
 
 .cr-sp-001 {
   color: #ffffff; 
