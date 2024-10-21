@@ -1343,26 +1343,28 @@ h2 {
 }
 
 .re_co_bre_0xa {
+  position: relative;
   background-image: url(assets/modern-laptop-open-stylish-minimal-abstract-horizontal-scene-place-text-trendy-classic-blue-color-3d-rendering_187882-1070.jpg); 
   background-size:cover;
    min-height: 32em;
-   width: 100%;
-   height: 100vh;
+   width: 110vw;
+   height: 100vh; 
 }
+
 
 @media screen and (max-width: 576px){
   .re_co_bre_0xa {
-    background-image: url(assets/newphonebc2.jpg); 
+    background-image: url(assets/newphonebc3.png); 
     background-size:cover;
      min-height: 32em;
-     width: 100%;
+     width: 110%;
      height: 100vh;
   }
 }
 
 
 .jap_re_co_bre_0xa {
-  background-image: url(assets/alexim.jpg);
+  background-image: url(assets/newphonebc2.jpg);
   background-size:cover;
    min-height: 30em;
    width: 100%;
@@ -1464,14 +1466,14 @@ h2 {
   top: 9em;
   position: relative;
   flex-direction: column;
-  width: 100vw;
+  width: 100%;
 }
 
 .chi_pag_2_001{
   top: 5.5em;
   position: relative;
   flex-direction: column;
-  width: 100vw;
+  width: 80vw;
 }
 
 .per_po_02_re {
@@ -1534,7 +1536,7 @@ h2 {
   }
 }
 
-.row.prePared001 {
+.prePared001 {
   position: relative;
   background-image: url("assets/ara_won_2_fron.jpg");
   background-position: center;
@@ -2601,7 +2603,15 @@ border-radius: 15px 0px 0px 15px;
   transition: background-color 0.3s ease;
   margin-left: 0em;
   margin-bottom: 10px;
-  box-shadow: 0px 0px 4px rgba(21, 21, 21, 0.9);
+}
+
+@media screen and (max-width:869px) {
+.kor_qt-pg-001 {
+  background-color:#c00d0d;
+  color: #ffffff;
+  padding: 5px 25px;
+  font-size: 14px;
+}
 }
 
 .korlan.qt-pg-001 {
@@ -2691,9 +2701,18 @@ border-radius: 15px 0px 0px 15px;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-right: 0.5em;
+  margin-right: 0.2em;
   margin-bottom: 15px;
 }
+
+
+@media screen and (max-width:576px){
+.Araqt_pg_001 {
+  padding: 3px 15px;
+  font-size: 17px;
+}
+}
+
 
 .chi_qt-pg-001:hover {
   background-color: #c61b1b;
