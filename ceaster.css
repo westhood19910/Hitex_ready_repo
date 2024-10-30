@@ -94,8 +94,8 @@ body {
     font-weight:bold; 
     position: relative;
     text-decoration: none;
+    width: 100px;
 }
-
 
 @media screen and (max-width: 896px){
     .language-list li a {
