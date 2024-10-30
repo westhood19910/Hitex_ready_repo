@@ -64,8 +64,6 @@ body {
     transition: .3s ease-in-out;
     cursor: pointer;
     margin-bottom: 0.8em;
-    background-color: #ffffff;
-    padding: 0.80em 3em;
     text-align: center;
 }
 
@@ -75,14 +73,14 @@ body {
         transition: .3s ease-in-out;
         cursor: pointer;
         margin-bottom: 0.6em;
-        background-color: #ffffff;
-        padding: 0.6em 3em;
         text-align: center;
     } 
 }
 
-.language-list li:hover{
-    background-color: #d8d8d8;
+.language-list li a:hover{
+    background-color: #0f155e;
+    color: #ffffff;
+    transform: ;
 }
 
 
@@ -94,7 +92,12 @@ body {
     font-weight:bold; 
     position: relative;
     text-decoration: none;
-    width: 100px;
+    background-color: #ffffff;
+    padding: 1.1em 5em;
+    text-align: center;
+    width: 200px;
+    border-radius: 4px;
+    transition: 0.2s ease-in;
 }
 
 @media screen and (max-width: 896px){
@@ -106,6 +109,7 @@ body {
         font-weight:bold; 
         position: relative;
         text-decoration: none;
+        width: auto;
     }
 }
 
