@@ -1219,7 +1219,7 @@ body {
   left: 0;
   right: 0;
   top: 5.3em;
-  background-color: #ffffff;
+  background-color: #bb2d2d;
   box-shadow: 0 4px 3px rgba(0, 0, 0, 0.1);
   position: fixed;
   width: 100%;
@@ -2496,8 +2496,8 @@ font-weight: bold;
 @media screen and (max-width:752px) {
   .alb-im-001 {
     width: 30px; 
-    height: 1.6em;
-    padding: 0.09em;
+    border-radius: 50%; 
+    height: 1.8em;
   }
 
   .kli_002_wer{
