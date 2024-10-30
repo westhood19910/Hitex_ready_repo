@@ -186,3 +186,8 @@ setInterval(changeContent, 5000);
 
 // Initial call to set first content immediately
 changeContent();
+
+
+
+// CODE FOR NAVIGATION ENHANCEMENT 
+
