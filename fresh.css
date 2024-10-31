@@ -1351,10 +1351,20 @@ body {
 .re_co_bre_0xa {
   position: relative;
   background-image: url(assets/laplace3.jpg); 
-  background-size:cover;
-   min-height: 32em;
-   width: 100vw;
-   height: 100vh; 
+  background-position: center;
+  background-size: cover;
+  min-height: 35em;
+  animation: BackforChinesepage 70s infinite;
+}
+
+
+.row.Yer_uy_oir{
+  position: relative;
+  background-image: url("assets/chi_cil_wrt.jpg");
+  background-position: center;
+  background-size: cover;
+  min-height: 35em;
+  animation: BackforChinesepage 70s infinite;
 }
 
 
@@ -2868,14 +2878,7 @@ color: #ffffff;
 }
 
 /*HOME PAGE CODE HERE*/
-.row.Yer_uy_oir{
-  position: relative;
-  background-image: url("assets/chi_cil_wrt.jpg");
-  background-position: center;
-  background-size: cover;
-  min-height: 35em;
-  animation: BackforChinesepage 70s infinite;
-}
+
 
 .why-h2-001 {
   color: #0c2264;
