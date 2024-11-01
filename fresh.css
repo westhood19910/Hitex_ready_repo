@@ -1357,7 +1357,6 @@ body {
   animation: BackforChinesepage 70s infinite;
 }
 
-
 .row.Yer_uy_oir{
   position: relative;
   background-image: url("assets/chi_cil_wrt.jpg");
@@ -3389,13 +3388,15 @@ color: red;
   padding: 1em;
 }
 
-@media screen and (max-width: 866px){
+@media screen and (max-width: 876px){
   .covFerver {
-    position: relative;
-    justify-content: center;
-    align-items: center;
+    width:max-content;
+    text-align: left;
   }
   
+  .covFerver .why-h1-001{
+    font-size: 35px;
+  }
 }
 
 .secepaerate {
@@ -4192,10 +4193,15 @@ background-color: rgb(235, 237, 249);
   gap: 0.6em;
 }
 
-.kl-9l9-015 .row:nth-of-type(1) {
-  background-color: #ca0e0e;
-  margin: 0em 2.6em;
+@media screen and (max-width:876px){
+  .kl-9l9-015 .row:nth-child(2) {
+    background-color: #ad1717;
+    margin: 0em !important;
+    border-radius: 8px; /* Optional: rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+  }
 }
+
 
 @media screen and (max-width: 576px) {
   .kl-9l9-015 .row:nth-of-type(1) {
