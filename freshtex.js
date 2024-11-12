@@ -189,5 +189,8 @@ changeContent();
 
 
 
-// CODE FOR NAVIGATION ENHANCEMENT 
+// FREQUENTLY ASKED QUESTIONS
 
+function locatefreq () {
+  const soldier = document.getElementById ('est-90-fr-001');
+}
