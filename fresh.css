@@ -2723,7 +2723,7 @@ border-radius: 15px 0px 0px 15px;
 .por_qt_pg_001 {
   background-color:   #0f155e;
   color: #ffffff;
-  padding: 5px 3px;
+  padding: 12px 14px;
   font-size: 11px;
   border: none;
   border-radius: 5px;
@@ -3006,8 +3006,14 @@ color: #ffffff;
   
 }
 
+.opp_iou_hr {
+  margin: 4em 0em;
+}
+
 .rel_ester_09 {
   margin: 0em 2em;
+  background-color: rgb(255, 237, 237);
+  border-radius: 10px;
 }
 
 @media screen and (max-width:590px) {
@@ -3016,7 +3022,6 @@ color: #ffffff;
     border-radius: none;
   }  
 }
-
 
 
 .sm-sp-098{
@@ -3040,7 +3045,7 @@ color: #ffffff;
 
 .dr_dr_img_001 {
   width: 100%;
-  height: 38em;
+  height: 80vh;
 }
 
 .chi_dr_dr_img_001 {
@@ -3176,8 +3181,13 @@ padding: 1em;
 }
 
 .reso_im_01{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   max-width:100%;
   max-height: 100%;
+  background-image: url(assets/alexim.jpg);
+  background-position: center;
 }
 
 .al-cl-im-001 {
