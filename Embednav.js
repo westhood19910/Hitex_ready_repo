@@ -76,3 +76,79 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+
+// DII NAV CODE
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all elements with submenu toggles
+    const submenuToggles = document.querySelectorAll('.submenu-toggle');
+    const menuToggle = document.getElementById('menu-toggle');
+    const mainNav = document.querySelector('.main-nav');
+
+    // Handle submenu toggles
+    submenuToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            const menuItem = this.closest('.menu-item');
+            
+            // On mobile, toggle the active class
+            if (window.innerWidth <= 968) {
+                menuItem.classList.toggle('active');
+                
+                // Update aria-expanded
+                const isExpanded = menuItem.classList.contains('active');
+                this.setAttribute('aria-expanded', isExpanded);
+                
+                // Close other open submenus
+                submenuToggles.forEach(otherToggle => {
+                    const otherMenuItem = otherToggle.closest('.menu-item');
+                    if (otherMenuItem !== menuItem) {
+                        otherMenuItem.classList.remove('active');
+                        otherToggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!mainNav.contains(e.target)) {
+            submenuToggles.forEach(toggle => {
+                const menuItem = toggle.closest('.menu-item');
+                menuItem.classList.remove('active');
+                toggle.setAttribute('aria-expanded', 'false');
+            });
+            menuToggle.checked = false;
+        }
+    });
+
+    // Handle keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            submenuToggles.forEach(toggle => {
+                const menuItem = toggle.closest('.menu-item');
+                menuItem.classList.remove('active');
+                toggle.setAttribute('aria-expanded', 'false');
+            });
+            menuToggle.checked = false;
+        }
+    });
+
+    // Handle window resize
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+            if (window.innerWidth > 968) {
+                submenuToggles.forEach(toggle => {
+                    const menuItem = toggle.closest('.menu-item');
+                    menuItem.classList.remove('active');
+                    toggle.setAttribute('aria-expanded', 'false');
+                });
+                menuToggle.checked = false;
+            }
+        }, 250);
+    });
+});

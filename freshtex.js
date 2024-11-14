@@ -188,9 +188,96 @@ setInterval(changeContent, 5000);
 changeContent();
 
 
+// image slider//
 
-// FREQUENTLY ASKED QUESTIONS
 
-function locatefreq () {
-  const soldier = document.getElementById ('est-90-fr-001');
+// First, let's create an array of content objects that contain both images and text
+const sliderContent = [
+  {
+      title: "Professional Manuscript Editing Services",
+      image: "assets/jap_rep_001.jpg",
+      text: "At Hitex Editex, we provide comprehensive manuscript editing services tailored to meet the needs of authors and researchers."
+  },
+  {
+      title: "Expert Academic Proofreading",
+      image: "assets/jap_rep_002.jpg",
+      text: "Our team of experienced editors ensures your academic work meets the highest standards of clarity and precision."
+  },
+  {
+      title: "Research Paper Enhancement",
+      image: "assets/jap_rep_003.jpg",
+      text: "Transform your research papers with our specialized editing services focused on academic excellence."
+  },
+  {
+      title: "Publication Support Services",
+      image: "assets/jap_rep_004.jpg",
+      text: "Get comprehensive support for your publication journey from our expert editing team."
+  }
+];
+
+// Function to update the content
+function updateContent(index) {
+  const titleElement = document.querySelector('.ger_sd_123');
+  const imageElement = document.getElementById('xso_re_erg_12');
+  const textElement = document.querySelector('.cole_bugh');
+  
+  // Check if elements exist before updating
+  if (titleElement && imageElement && textElement) {
+      // Apply fade out effect
+      titleElement.style.opacity = '0';
+      imageElement.style.opacity = '0';
+      textElement.style.opacity = '0';
+      
+      // Update content after brief delay for fade effect
+      setTimeout(() => {
+          titleElement.textContent = sliderContent[index].title;
+          imageElement.src = sliderContent[index].image;
+          textElement.textContent = sliderContent[index].text;
+          
+          // Fade in new content
+          titleElement.style.opacity = '1';
+          imageElement.style.opacity = '1';
+          textElement.style.opacity = '1';
+      }, 500);
+  }
 }
+
+// Add necessary CSS
+const style = document.createElement('style');
+style.textContent = `
+  .ger_sd_123, #xso_re_erg_12, .cole_bugh {
+      transition: opacity 0.5s ease-in-out;
+  }
+  
+  #xso_re_erg_12 {
+      max-width: 100%;
+      height: auto;
+  }
+`;
+document.head.appendChild(style);
+
+// Initialize variables
+let currentIndex = 0;
+const totalSlides = sliderContent.length;
+
+// Function to move to next slide
+function nextSlide() {
+  currentIndex = (currentIndex + 1) % totalSlides;
+  updateContent(currentIndex);
+}
+
+// Start automatic slideshow
+let slideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+
+// Optional: Pause on hover
+const container = document.getElementById('in_ins_034_fr');
+if (container) {
+  container.addEventListener('mouseenter', () => clearInterval(slideInterval));
+  container.addEventListener('mouseleave', () => {
+      clearInterval(slideInterval);
+      slideInterval = setInterval(nextSlide, 5000);
+  });
+}
+
+// Initialize first slide
+updateContent(0);
