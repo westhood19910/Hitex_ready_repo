@@ -12,7 +12,7 @@ body {
     position: relative;
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: flex-start;
     gap: 2em;
     height: 100vh;
   }
@@ -24,7 +24,7 @@ body {
     height: max-content;
     display: flex;
     max-height: fit-content;
-    justify-content: center;
+    justify-content: space-around;
   }
   }
 
@@ -37,6 +37,13 @@ body {
     height: 100%;
     padding: 2em;
     background-color: rgba(160, 160, 160, 0.693);
+    margin-left: 5em;
+}
+
+@media screen and (max-width:876px){
+    .language_selector {
+        margin-left: 1.5em;
+    }
 }
 
 .language-list {
