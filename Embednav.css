@@ -198,9 +198,260 @@ body {
         width: 100%;
         padding: 0.75rem;
     }
+    
   
     .dropdown-item {
         padding: 0.75rem 1rem;
     }
   }
-  
+
+
+
+  /* DIFF NAV */
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Main Navigation Styles */
+.main-nav {
+  position: fixed;
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+.menu-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Menu Toggle Button (Mobile) */
+#menu-toggle {
+  display: none;
+}
+
+.menu-button {
+  display: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  padding: 0px 5px;
+  background-color: rgba(0, 0, 0, 0.014);
+  border-radius: 3px;
+}
+
+/* Main Menu List */
+.main-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-item {
+  position: relative;
+  padding: 15px 0;
+}
+
+.menu-item > a,
+.submenu-toggle {
+  color: #333;
+  text-decoration: none;
+  padding: 15px 20px;
+  display: block;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  transition: color 0.3s;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.menu-item > a:hover,
+.submenu-toggle:hover {
+  color: #ee1313;
+}
+
+/* Submenu Styles */
+.submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 20em;
+  padding: 0em 0em;
+  background: rgb(255, 255, 255);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  list-style: none;
+  width: fit-content;
+}
+
+.menu-item.has-submenu:hover .submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.submenu li {
+background-color: #0f155e;
+margin-bottom: 1px;
+}
+.submenu li:last-child {
+  background-color: #0f155e;
+  margin-bottom: 0px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  }
+
+
+.submenu li a {
+  display: block;
+  color: #ffffff;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 600;
+  transition: background-color 0.3s;
+  position: relative;
+  padding: 1em 4em;
+  font-size: 16px;
+}
+
+.submenu li a:hover {
+  background-color: #f5f5f5;
+  color: #000000;
+}
+
+/* CTA Button */
+.cta-button {
+  margin-left: 20px;
+}
+
+.quote-button {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #007bff;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.quote-button:hover {
+  background-color: #0056b3;
+}
+
+/* Dropdown arrow */
+.fa-angle-down {
+  margin-left: 5px;
+  transition: transform 0.3s;
+}
+
+.menu-item.has-submenu:hover .fa-angle-down {
+  transform: rotate(180deg);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 968px) {
+  .menu-button {
+      display: block;
+  }
+
+  .main-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100vw;
+      background: #10035a;
+      flex-direction: column;
+      height: max-content;
+      padding: 30px 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  #menu-toggle:checked ~ .main-menu {
+      display: block;
+  }
+
+  .menu-item {
+      width: 100%;
+      padding: 0;
+  }
+
+  .submenu {
+      width: 100%;
+      position: static;
+      box-shadow: none;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      display: none;
+      background-color: none;
+      border-radius: 4px;
+  }
+
+  .menu-item.has-submenu.active .submenu {
+      display: block;
+  }
+
+  .menu-item > a,
+  .submenu-toggle {
+      padding: 25px 10px;
+      text-align: left;
+       color: #ffffff;
+       font-size: 16px;
+  }
+
+  .menu-item > a:hover,
+  .submenu-toggle:hover {
+       color: #ffffff;
+  }
+
+  .cta-button {
+      margin: 20px;
+      text-align: center;
+  }
+
+  .quote-button {
+      width: 100%;
+      text-align: center;
+  }
+.submenu li a {
+  padding: 10px 0px;
+  text-align: center;
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+
+.submenu li {
+  background-color: none;
+  margin-bottom: 0px;
+  }
+
+  .submenu li:last-child {
+    background-color: none;
+    margin-bottom: 0px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    }
+
+    .fa-angle-down {
+      margin-left: 1em;
+      transition: transform 0.3s;
+    }
+
+}
