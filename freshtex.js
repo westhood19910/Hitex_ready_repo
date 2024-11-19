@@ -1,206 +1,191 @@
-function toggleLanguageList() {
-  var languageList = document.getElementById("languagelist");
-  languageList.classList.toggle("show");
-}
+// Configuration object to store all constants
+const CONFIG = {
+  imageSources: ['visa.png', 'master.png', 'paypal-icon.svg'],
+  displayDuration: 5000,
+  slideContent: [
+    {
+      image: "assets/jap_rep_001.jpg",
+      title: "Professional Manuscript Editing Services",
+      text: "At Hitex Editex, we provide comprehensive manuscript editing services tailored to meet the needs of authors and researchers."
+    },
+    // ... other content
+  ]
+};
 
-// Close the dropdown code
-window.onclick = function(event) {
-  if (!event.target.matches('.toggle-button-2')) {
-      var dropdowns = document.getElementsByClassName("language-list");
-      for (var i = 0; i < dropdowns.length; i++) {
-          var openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains('show')) {
-              openDropdown.classList.remove('show');
-          }
+// Language dropdown handler
+class LanguageDropdown {
+  constructor() {
+    this.languageList = document.getElementById("languagelist");
+    if (!this.languageList) return;
+    
+    this.init();
+  }
+
+  init() {
+    // Toggle button handler
+    document.querySelector('.toggle-button-2')?.addEventListener('click', () => {
+      this.toggleLanguageList();
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (event) => {
+      if (!event.target.matches('.toggle-button-2')) {
+        this.closeDropdowns();
       }
+    });
+  }
+
+  toggleLanguageList() {
+    this.languageList?.classList.toggle("show");
+  }
+
+  closeDropdowns() {
+    document.querySelectorAll(".language-list.show").forEach(dropdown => {
+      dropdown.classList.remove('show');
+    });
   }
 }
 
-var imageIndex = 0;
-var imageSources = ['visa.png', 'master.png', 'paypal-icon.svg']; 
+// Image carousel handler
+class ImageCarousel {
+  constructor() {
+    this.imageIndex = 0;
+    this.image = document.getElementById('clickable-image');
+    if (!this.image) return;
 
-function toggleImage() {
-  var clickableImage = document.getElementById('clickable-image');
-  imageIndex = (imageIndex + 1) % imageSources.length;
-  clickableImage.src = imageSources[imageIndex];
-}
+    this.init();
+  }
 
-function previousImage() {
-  var clickableImage = document.getElementById('clickable-image');
-  imageIndex = (imageIndex - 1 + imageSources.length) % imageSources.length;
-  clickableImage.src = imageSources[imageIndex];
-}
+  init() {
+    this.image.addEventListener('error', () => {
+      console.error(`Failed to load image: ${CONFIG.imageSources[this.imageIndex]}`);
+    });
+  }
 
-function nextImage() {
-  var clickableImage = document.getElementById('clickable-image');
-  imageIndex = (imageIndex + 1) % imageSources.length;
-  clickableImage.src = imageSources[imageIndex];
-}
+  toggleImage() {
+    this.setImageIndex((this.imageIndex + 1) % CONFIG.imageSources.length);
+  }
 
-const element = document.getElementById('o45-001p2');
+  previousImage() {
+    this.setImageIndex((this.imageIndex - 1 + CONFIG.imageSources.length) % CONFIG.imageSources.length);
+  }
 
-function isInViewport(element) {
-  const rect = element.getBoundingClientRect();
-  return (
-    rect.top >= 0 &&
-    rect.left >= 0 &&
-    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-  );
-}
+  nextImage() {
+    this.setImageIndex((this.imageIndex + 1) % CONFIG.imageSources.length);
+  }
 
-function handleScroll() {
-  if (isInViewport(element)) {
-    element.classList.add('show');
+  setImageIndex(newIndex) {
+    this.imageIndex = newIndex;
+    if (this.image) {
+      this.image.src = CONFIG.imageSources[this.imageIndex];
+    }
   }
 }
 
-window.addEventListener('scroll', handleScroll);
-handleScroll(); 
+// Scroll animation handler
+class ScrollAnimationHandler {
+  constructor() {
+    this.observer = new IntersectionObserver(this.handleIntersection.bind(this), {
+      threshold: 0.1
+    });
+    
+    this.init();
+  }
 
+  init() {
+    // Initialize animations for different elements
+    this.initializeWhyH1Animations();
+    this.initializeViewportCheck();
+  }
 
-//TEXT ANIMATION CODE HERE
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show');
-      observer.unobserve(entry.target);
-    }
-  });
-});
-
-
-const whIdH1Elements = document.querySelectorAll('.why-h1-001');
-whIdH1Elements.forEach((el) => observer.observe(el));
-
-
-// HOME PAGE AUTO WORDS CODE HERE
-
-const spans = document.querySelectorAll('.gr-ps-tur-001');
-let index = 0;
-
-function showNextSpan() {
-  spans.forEach(span => {
-    span.style.display = 'none';
-  });
-  spans[index].style.display = 'block';
-  index = (index + 1) % spans.length;
-}
-
-setInterval(showNextSpan, 2000);
-const dropdown = document.querySelector('.ser-01');
-dropdown.addEventListener('click', () => {
-    dropdown.classList.toggle('active');
-});
-
-// CODE FOR CLICK DROP DOWN
-
-document.addEventListener('DOMContentLoaded', function() {
-  var dropdownToggle = document.getElementById('s4_gr_902');
-  var dropdownMenu = document.getElementById('On_tcr_pre');
-
-  dropdownToggle.addEventListener('click', function(event) {
-    event.stopPropagation();
-    if (dropdownMenu.style.display === 'none') {
-      dropdownMenu.style.display = 'block';
-    } else {
-      dropdownMenu.style.display = 'none';
-    }
-  });
-
-  // Close the dropdown 
-  document.addEventListener('click', function(event) {
-    if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
-      dropdownMenu.style.display = 'none';
-    }
-  });
-});
-
-
-document.addEventListener("DOMContentLoaded", function() {
-  var searchButton = document.querySelector(".se-er-ch-bt-001");
-  var searchBarContainer = document.querySelector(".fo_oc_cnt002");
-
-  searchButton.addEventListener("click", function(event) {
-      if (window.innerWidth <= 600 && !searchBarContainer.classList.contains("active")) {
-          event.preventDefault(); // Prevent form submission
-          searchBarContainer.classList.toggle("active");
+  handleIntersection(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+        this.observer.unobserve(entry.target);
       }
-  });
-});
-
-function showSearchInput() {
-  const form = document.querySelector('.fo_oc_cnt002');
-  form.classList.toggle('show-input');
-}
-
- const displayDuration = 5000; 
- const statusMessage = document.getElementById('statusMessage');
-
- // Set a timeout to hide the span after the specified duration
- setTimeout(() => {
-     statusMessage.style.display = 'none';
- }, displayDuration);
-
-
-
-
- // Array of image sources and corresponding texts
-const content = [
-  {
-    image: "assets/jap_rep_001.jpg",
-    title: "Professional Manuscript Editing Services",
-    text: "At Hitex Editex, we provide comprehensive manuscript editing services tailored to meet the needs of authors and researchers."
-  },
-  {
-    image: "assets/jap_rep_002.jpg",
-    title: "Expert Proofreading",
-    text: "Our team of experienced editors ensures your manuscript is free from grammatical errors and typos."
-  },
-  {
-    image: "assets/jap_rep_003.jpg",
-    title: "Formatting and Style Guidelines",
-    text: "We help you adhere to specific journal or publication requirements, ensuring your manuscript meets all formatting standards."
+    });
   }
-];
 
-let currentIndex = 0;
+  initializeWhyH1Animations() {
+    document.querySelectorAll('.why-h1-001').forEach(el => {
+      this.observer.observe(el);
+    });
+  }
 
-function changeContent() {
-  const title = document.querySelector('.ger_sd_123');
-  const image = document.getElementById('xso_re_erg_12');
-  const text = document.querySelector('.cole_bugh');
+  initializeViewportCheck() {
+    const element = document.getElementById('o45-001p2');
+    if (!element) return;
 
-  // Update content
-  title.textContent = content[currentIndex].title;
-  image.src = content[currentIndex].image;
-  text.textContent = content[currentIndex].text;
+    const checkViewport = () => {
+      const rect = element.getBoundingClientRect();
+      const isVisible = (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
 
-  // Move to next item, or back to start if at end
-  currentIndex = (currentIndex + 1) % content.length;
+      if (isVisible) {
+        element.classList.add('show');
+      }
+    };
+
+    window.addEventListener('scroll', throttle(checkViewport, 150));
+    checkViewport();
+  }
 }
 
-// Change content every 5 seconds (5000 milliseconds)
-setInterval(changeContent, 5000);
+// Utility functions
+function throttle(func, limit) {
+  let inThrottle;
+  return function(...args) {
+    if (!inThrottle) {
+      func.apply(this, args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, limit);
+    }
+  };
+}
 
-// Initial call to set first content immediately
-changeContent();
-
-
-// image slider//
-
-const navbar = document.querySelector('.alb_pa_001');
+// Initialize everything when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  const header = document.querySelector('.alb_pa_001');
+  const secondaryNav = document.querySelector('.main-nav');
   let lastScrollY = window.scrollY;
+  let ticking = false;
 
-  // Listen for scroll events
-  window.addEventListener('scroll', () => {
-    // Check if scrolling down
-    if (window.scrollY > lastScrollY) {
-      navbar.classList.add('hide');
+  const updateNavbars = () => {
+    const currentScrollY = window.scrollY;
+    
+    if (currentScrollY < 20) {
+      // At the top of the page
+      header.classList.remove('nav-hidden');
+      document.body.classList.remove('nav-scrolled');
+      secondaryNav.style.top = '5.5em';
+    } else if (currentScrollY > lastScrollY) {
+      // Scrolling down - hide header and move secondary nav up
+      header.classList.add('nav-hidden');
+      document.body.classList.add('nav-scrolled');
+      secondaryNav.style.top = '0';
     } else {
-      navbar.classList.remove('hide');
+      // Scrolling up - show header and move secondary nav down
+      header.classList.remove('nav-hidden');
+      document.body.classList.remove('nav-scrolled');
+      secondaryNav.style.top = '5.5em';
     }
-    // Update last scroll position
-    lastScrollY = window.scrollY;
-  });
+    
+    lastScrollY = currentScrollY;
+    ticking = false;
+  };
+
+  // Using requestAnimationFrame for smooth animations
+  const onScroll = () => {
+    if (!ticking) {
+      requestAnimationFrame(updateNavbars);
+      ticking = true;
+    }
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+});
