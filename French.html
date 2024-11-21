@@ -7,6 +7,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link rel="stylesheet" href="fresh.css">  
+<link rel="stylesheet" href="Embednav.css">
+<script src="Embednav.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head> 
@@ -78,43 +80,66 @@
                         <img src="assets/whatsapp-icon.svg" alt="WhatsApp Icon" class="alb-im-001">
                       </a>    
                 </div> 
-        <nav class="pag_2_nav_bar" style="top: 5.5em;"> 
-            <div class="fr_open_01">
-            </div>
-            <input type="checkbox" id="lets_check"> 
-            <label for="lets_check" class="den_Check"><i class="fa fa-bars" aria-hidden="true"></i></label>
-            <ul>
-              <li class="ser_01">
-                <a href="#" class="laterCorrect">À propos de nous<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                <ul class="ser_ul_001">
-                    <li><a href="Vision.html" class="ser-ln-001">Vision</a></li>
-                    <li><a href="Mission.html" class="ser-ln-001">Mission</a></li>
-                    <li><a href="#opa-dnw-oi" class="ser-ln-001">L'équipe</a></li>
-                </ul>
-            </li>
-            <li class="abt-001"><a href="services.html">Services <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-              <ul class="abt-ul-001">
-                  <li><a href="languaged.html" class="abt-ln-001">Édition de langue</a></li>
-                  <li><a href="Scientific.html" class="abt-ln-001">Édition scientifique</a></li>
-                  <li><a href="technichal.html" class="abt-ln-001">Édition technique</a></li>
-              </ul>
-              </li>
-              <li class="cr-ln-001"><a href="car1reers.html">Carrières <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                <ul class="cr-ul-001">
-                    <li><a href="car1reers.html" class="cr-ln-002">Éditeur indépendant</a></li>
-                    <li><a href="In-house.html" class="cr-ln-002">Éditeur interne</a></li>
-                </ul>
-            </li>
-                <li class="ctn-001"><a href="contaUs.html">
-                  Contactez-nous</i></a>
-                </li>
-                <li><a href="Freshtex.html">BLOG</a></li>
-              </ul>  
-              <div class="gro_btu_01">
-              <a href="frevis.html"><button class="fre_qt-pg-001" type="button"> DEMANDER UN DEVIS</button></a>
-                </div>    
-        </nav>
     </nav>
+                <nav class="main-nav" style="top: 5.5em">
+                  <div class="menu-container">
+                    <div class="fr_open_01">
+                    </div> 
+                      <input type="checkbox" id="menu-toggle">
+                      <label for="menu-toggle" class="menu-button">
+                          <i class="fa fa-bars" aria-hidden="true"></i>
+                      </label>
+                      
+                      <ul class="main-menu">
+                          <li class="menu-item has-submenu">
+                              <button class="submenu-toggle" aria-expanded="false">
+                                  À propos de nous
+                                  <i class="fa fa-angle-down" aria-hidden="true"></i>
+                              </button>
+                              <ul class="submenu">
+                                  <li><a href="Vision.html">Vision</a></li>
+                                  <li><a href="Mission.html">Mission</a></li>
+                                  <li><a href="#opa-dnw-oi">L'équipe</a></li>
+                              </ul>
+                          </li>
+                          
+                          <li class="menu-item has-submenu">
+                              <button class="submenu-toggle" aria-expanded="false">
+                                  Services
+                                  <i class="fa fa-angle-down" aria-hidden="true"></i>
+                              </button>
+                              <ul class="submenu">
+                                  <li><a href="languaged.html">Édition de langue</a></li>
+                                  <li><a href="Scientific.html">Édition scientifique</a></li>
+                                  <li><a href="technichal.html">Édition technique</a></li>
+                              </ul>
+                          </li>
+                          
+                          <li class="menu-item has-submenu">
+                              <button class="submenu-toggle" aria-expanded="false">
+                                  Carrières
+                                  <i class="fa fa-angle-down" aria-hidden="true"></i>
+                              </button>
+                              <ul class="submenu">
+                                  <li><a href="car1reers.html">Éditeur indépendant</a></li>
+                                  <li><a href="In-house.html">Éditeur interne</a></li>
+                              </ul>
+                          </li>
+                          
+                          <li class="menu-item">
+                              <a href="contaUs.html">Contactez-nous</a>
+                          </li>
+                          
+                          <li class="menu-item">
+                              <a href="Freshtex.html">BLOG</a>
+                          </li>
+                      </ul>
+                      
+                      <div class="gro_btu_01">
+                          <a href="frevis.html" class="por_qt_pg_001">DEMANDER UN DEVIS</a>
+                      </div>
+                  </div>
+              </nav>
       <div class="pag-2-001">
         <div class="row re_co_bro12_0xa">
             <div class="col-sm-12 per_po_02_re">
@@ -198,19 +223,19 @@
                  <div class="col-sm-12 col-md-12 col-lg-5 Peppres" style="background-color:rgb(249, 255, 253)">
                   <div class="col genContForm">
                      <div class="flex-column inw-091-001"  style="margin-top: -17em; background-color:rgb(25, 11, 80); border-radius: 10px; margin-bottom: 18em;   height: 16em; ">
-                      <div class="phiDemall" id="tr-08-24"  data-target="600">5+</div> 
+                      <div class="phiDemall" id="tr-08-24"  data-target="5">5+</div> 
                       <h3 class="pl-h3-001" id="cnt-h1-09"> Années d'expérience</h3>
                      </div>
                      <div class=" flex-column inw-091-001" style="margin-top: -20em; background-color:rgb(247, 247, 255); border-radius: 10px;    height: 14em;">
-                      <div class="phiDemall" id="pl-h1-101" data-target="15000">1M+</div> 
+                      <div class="phiDemall" id="pl-h1-101" data-target="5000">1M+</div> 
                       <h3 class="pl-h3-001"> manuscrits édités jusqu'à présent</h3>
                      </div>
                      <div class="flex-column inw-091-001" style="margin-top: -16em;  background-color:rgb(165, 29, 29); border-radius: 10px;  height: 14em;">
-                      <div class="phiDemall" data-target="9000" id="ceaseLater">1000+</div> 
+                      <div class="phiDemall" data-target="3000" id="ceaseLater">1000+</div> 
                       <h3 class="pl-h3-001 Underlater">Les revues sont en contact</h3>
                      </div>
                      <div class="flex-column" style="margin-top: -17em;  background-color:rgb(250, 228, 228); border-radius: 10px;    height: 14em;">
-                      <div class="phiDemall" data-target="60000">2000+</div> 
+                      <div class="phiDemall" data-target="20000">2000+</div> 
                       <h3 class="pl-h3-001">Auteurs servis</h3>
                      </div>
                   </div>

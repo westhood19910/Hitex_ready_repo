@@ -1385,23 +1385,11 @@ body {
 }
 
 .spa_re_co_bre_0xa_ {
-  background-image: url(assets/modern-laptop-open-stylish-minimal-abstract-horizontal-scene-place-text-trendy-classic-blue-color-3d-rendering_187882-1070.jpg);
+  background-image: url(assets/spa_bc_004.jpg);
   background-size: cover;
   background-position: center;
-  animation: changespaanim 30s infinite alternate;
 }
 
-@keyframes changespaanim {
-  0% {
-    background-image: url(assets/spa_bc_002.jpg);
-  }
-  50% {
-    background-image: url(assets/spa_bc_004.jpg);
-  }
-  100% {
-    background-image: url(assets/spa_bc_003.jpg);
-  }
-}
 
 .pag_2_nav_bar ul li a {
   color: rgb(12, 21, 74); 

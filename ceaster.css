@@ -113,12 +113,13 @@ body {
     .language-list li a {
         display: block;
         font-family: sans-serif;
-        font-size: 10px;
+        font-size: 11px;
         color: #030202;
         font-weight:bold; 
         position: relative;
         text-decoration: none;
         width: auto;
+        padding: 1.3em 6.2em;
     }
 }
 
