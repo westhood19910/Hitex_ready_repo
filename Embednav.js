@@ -152,3 +152,98 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 250);
     });
 });
+
+
+// AUTO CHANGE OF NUMBERS
+
+document.addEventListener('DOMContentLoaded', function() {
+    const counters = document.querySelectorAll('[data-target]');
+    
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target'));
+        const originalText = counter.textContent;
+        const duration = 6000; // Total animation duration in milliseconds
+        
+        // Adjust increment based on specific targets
+        const increment = target / (duration / 10);
+        
+        let currentCount = 0;
+        
+        const updateCounter = () => {
+            if (currentCount < target) {
+                currentCount += increment;
+                counter.textContent = Math.round(currentCount) + '+';
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.textContent = target + '+';
+                
+                // Restart animation after 2 seconds
+                setTimeout(() => {
+                    // Reset to original text
+                    counter.textContent = originalText;
+                    
+                    // Restart counting
+                    currentCount = 0;
+                    updateCounter();
+                }, 2000);
+            }
+        };
+        
+        // Intersection Observer to start animation when element is in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    updateCounter();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        observer.observe(counter);
+    });
+});
+
+
+function createScrollReveal() {
+    // Select all elements with secepaerate class
+    const elements = document.querySelectorAll('.secepaerate');
+    
+    // Add scroll reveal styles
+    const style = document.createElement('style');
+    style.textContent = `
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s, transform 1s ease-out;
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Intersection Observer for continuous reveal
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            } else {
+                entry.target.classList.remove('visible');
+            }
+        });
+    }, { 
+        threshold: 0.1 // Trigger when 10% of element is visible
+    });
+
+    // Add scroll-reveal class and observe each element
+    elements.forEach(element => {
+        element.classList.add('scroll-reveal');
+        observer.observe(element);
+    });
+}
+
+// Initialize on DOM load
+document.addEventListener('DOMContentLoaded', createScrollReveal);
+
+
