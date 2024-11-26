@@ -7,6 +7,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link rel="stylesheet" href="fresh.css">  
+<link rel="stylesheet" href="Embednav.css">
+<script src="Embednav.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head> 
@@ -14,7 +16,7 @@
     <header class="pag-2-hed-1">
         <div class="lat_clo_001">             
         <a href="Index.html" class="action-home">
-        <img src="assets/home.png" alt="Home button">
+            <i class="fa-solid fa-house"></i>
     </a>
         </div>
         <div class="lat_clo_002">
@@ -30,13 +32,13 @@
                 <a href="Spavis.html" class="language-link" data-lang="spanish">Español</a>
             </li>
             <li>
-                <a href="Japanese.html" class="language-link" data-lang="japanese">日本語</a>
+                <a href="japvis.html" class="language-link" data-lang="japanese">日本語</a>
             </li>
             <li>
                 <a href="aravis.html" class="language-link" data-lang="arabian">عربي</a>
             </li>
             <li>
-                <a href="portuguese.html" class="language-link" data-lang="japanese">Português</a>
+                <a href="porvis.html" class="language-link" data-lang="japanese">Português</a>
             </li>
             <li>
                 <a href="Korean.html" class="language-link" data-lang="japanese">한국어</a>
@@ -80,42 +82,65 @@
           </a>    
     </div> 
 </nav>
-<nav class="pag_2_nav_bar" style="top: 5.5em;"> 
-    <div class="fr_open_01">
-    </div>
-    <input type="checkbox" id="lets_check"> 
-    <label for="lets_check" class="den_Check"><i class="fa fa-bars" aria-hidden="true"></i></label>
-    <ul> 
-        <li class="ser_01">
-            <a href="abbout.html" class="laterCorrect">关于我们<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-            <ul class="ser_ul_001">
-                <li><a href="chivis.html" class="ser-ln-001">愿景</a></li>
-                <li><a href="Visioning.html" class="ser-ln-001">使命</a></li>
-                <li><a href="#opa-dnw-oi" class="ser-ln-001">团队</a></li>
-            </ul>
+<nav class="main-nav" style="top: 5.5em;">
+    <div class="menu-container">
+        <div class="fr_open_01">
+        </div> 
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="menu-button">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </label>
+        
+        <ul class="main-menu">
+            <li class="menu-item has-submenu">
+                <button class="submenu-toggle" aria-expanded="false">
+                    关于我们
+                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                </button>
+                <ul class="submenu">
+                    <li><a href="Vision.html">公司愿景</a></li>
+                    <li><a href="Mission.html">公司使命</a></li>
+                    <li><a href="#opa-dnw-oi">团队介绍</a></li>
+                </ul>
             </li>
-        <li class="abt-001"><a href="services.html">服务 <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-            <ul class="abt-ul-001">
-                <li><a href="languaged.html" class="abt-ln-001">语言编辑</a></li>
-                <li><a href="Scientific.html" class="abt-ln-001">科学编辑</a></li>
-                <li><a href="technichal.html" class="abt-ln-001">技术编辑</a></li>
-            </ul>
-        </li>
-        <li class="cr-ln-001"><a href="car1reers.html">职业生涯 <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-            <ul class="cr-ul-001">
-                <li><a href="car1reers.html" class="cr-ln-002">自由编辑</a></li>
-                <li><a href="In-house.html" class="cr-ln-002">内部编辑</a></li>
-            </ul>
-        </li>
-        <li class="ctn-001"><a href="contaUs.html">联系我们</i></a>
-        </li>
-        <li><a href="Freshtex.html">博客</a></li>
-      </ul>  
-      <div class="gro_btu_01">
-      <a href="quote.html"><button class="chi_qt-pg-001"><marquee>请求报价</marquee></button></a>
-        </div>    
+            
+            <li class="menu-item has-submenu">
+                <button class="submenu-toggle" aria-expanded="false">
+                    服务项目
+                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                </button>
+                <ul class="submenu">
+                    <li><a href="languaged.html">语言编辑</a></li>
+                    <li><a href="Scientific.html">学术编辑</a></li>
+                    <li><a href="technichal.html">技术文档编辑</a></li>
+                </ul>
+            </li>
+            
+            <li class="menu-item has-submenu">
+                <button class="submenu-toggle" aria-expanded="false">
+                    职业机会
+                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                </button>
+                <ul class="submenu">
+                    <li><a href="car1reers.html">自由职业编辑</a></li>
+                    <li><a href="In-house.html">公司内部编辑</a></li>
+                </ul>
+            </li>
+            
+            <li class="menu-item">
+                <a href="Chicont.html">联系我们</a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="Freshtex.html">博客</a>
+            </li>
+        </ul>
+        
+        <div class="gro_btu_01">
+            <a href="frevis.html" class="por_qt_pg_001">申请报价</a>
+        </div>
+    </div>
 </nav>
-
            <div class="vs_pg_001" style="top: 9em; position: relative; margin: 1em 1em;">
                 <div class="row" style="background-color: #ce0a03; border-top-left-radius: 25%; border-top-right-radius:25%;">
                     <div class="col-sm-12 col-md-6 col-lg-6">
@@ -188,95 +213,96 @@
 
             <div class="pag-2-002">  
                 <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12" style="margin-bottom: 0em;"><h1 class="pag_2_h1_1" id="opa-dnw-oi">团队 </h1></div>
+                <div class="col-sm-12 col-md-12 col-lg-12" style="margin-bottom: 0em;"><h1 id="pag_2_h1_1" id="">团队</h1></div>
                 </div>
                 <div class="row jxt_hier_01" style="margin: 4em 0em">
                     <div class="col-sm-12 col-md-6 col-lg-6 fled_schow" style="margin-top: 4em;">
-                        <h2 class="dfo-oun-er">创始人</h2>
                         <div class="cnt_in_fnd">
-                            <img src="assets/alexim.jpg" class="fnt-im-0919" alt="founder img">
+                            <img src="assets/the_te_im_001.png" class="fnt-im-0919" alt="创始人图片">
                         </div>
                     </div>
-                <div class="col-sm-12 col-md-6 col-lg-6 " style="margin-top: 7em;">
+                <div class="col-sm-12 col-md-6 col-lg-6 " style="margin-top: 5em;">
+                    <h2 class="dfo-oun-er">创始人</h2>
                         <div class="fon_cnt_001_001">
-                            <h3 class="fuo-im-23">Dr. Jeffery Ezearn</h3>
+                            <h3 class="fuo-im-23">杰夫里·伊泽恩博士</h3>
                          <span class="fou-h1-0-0">
-                            杰弗里是Hitex Editex的有远见的创始人兼总编辑，拥有逾5年的手稿编辑经验。 凭借对语言的热爱和敏锐的洞察力，杰夫将Hitex Editex团队带领到了卓越和专业化的新高度。
+                            杰夫里是Hitex Editex富有远见的创始人和主编，在手稿编辑领域拥有5年以上的经验。他对语言充满热情，并且注重细节，
+                            杰夫已将Hitex Editex团队带领到卓越和专业的新高度。
                          </span>
-                         <button class="qual-but-0001" type="button">查看更多</button>
+                         <button class="qual-but-0001" type="button">阅读更多</button>
                     </div>
                 </div>
                 </div>  
                 <div class="row jxt_hier_01" style="margin: 4em 0em">
                     <div class="col-sm-12 col-md-6 col-lg-6 fled_schow" style="margin-top: 4em;">
-                        <h2 class="dfo-oun-er"> 首席执行官</h2>
                         <div class="cnt_in_fnd">
-                            <img src="assets/the_te_im_001.png" class="fnt-im-0919 Forpng001" alt="founder img">
+                            <img src="assets/the_te_im_001.png" class="fnt-im-0919 Forpng001" alt="创始人图片">
                         </div>
                     </div>
-                <div class="col-sm-12 col-md-6 col-lg-6" style="margin-top:7em;">
+                <div class="col-sm-12 col-md-6 col-lg-6" style="margin-top:5em;">
+                    <h2 class="dfo-oun-er">首席执行官</h2>
                         <div class="fon_cnt_001_001">
-                            <h3 class="fuo-im-23">Prof. Stephen Opoku</h3>
+                            <h3 class="fuo-im-23">斯蒂芬·奥波库教授</h3>
                          <span class="fou-h1-0-0">
-                            杰弗里是Hitex Editex的有远见的创始人兼总编辑，拥有逾5年的手稿编辑经验。 凭借对语言的热爱和敏锐的洞察力，杰夫将Hitex Editex团队带领到了卓越和专业化的新高度。
+                            斯蒂芬是Hitex Editex富有远见的创始人和主编，在手稿编辑领域拥有5年以上的经验。他对语言充满热情，并且注重细节，
+                            杰夫已将Hitex Editex团队带领到卓越和专业的新高度。
                          </span>
-                         <button class="qual-but-0001" type="button">查看更多</button>
+                         <button class="qual-but-0001" type="button">阅读更多</button>
                     </div>
                 </div>
                 </div>
                 <div class="row jxt_hier_01" style="margin: 4em 0em">
                     <div class="col-sm-12 col-md-6 col-lg-6 fled_schow" style="margin-top: 4em;">
-                        <h2 class="dfo-oun-er">董事长</h2>
                         <div class="cnt_in_fnd">
-                            <img src="assets/the_te_im_001.png" class="fnt-im-0919" alt="founder img">
+                            <img src="assets/the_te_im_001.png" class="fnt-im-0919" alt="创始人图片">
                         </div>
                     </div>
-                <div class="col-sm-12 col-md-6 col-lg-6" style="margin-top: 8em;">
+                <div class="col-sm-12 col-md-6 col-lg-6" style="margin-top: 5em;">
+                    <h2 class="dfo-oun-er">董事会主席</h2>
                         <div class="fon_cnt_001_001">
-                            <h3 class="fuo-im-23">Prof. Isaac Twum</h3>
+                            <h3 class="fuo-im-23">艾萨克·图姆教授</h3>
                          <span class="fou-h1-0-0">
-                            杰弗里是Hitex Editex的有远见的创始人兼总编辑，拥有逾5年的手稿编辑经验。 凭借对语言的热爱和敏锐的洞察力，杰夫将Hitex Editex团队带领到了卓越和专业化的新高度。
+                            艾萨克是Hitex Editex富有远见的创始人和主编，在手稿编辑领域拥有5年以上的经验。他对语言充满热情，并且注重细节，
+                            杰夫已将Hitex Editex团队带领到卓越和专业的新高度。
                          </span>
-                         <button class="qual-but-0001" type="button">查看更多</button>
+                         <button class="qual-but-0001" type="button">阅读更多</button>
                     </div>
                 </div>
                 </div>
                 <div class="row" style="margin: 0em 5em;">   
                     <div class="col-sm-12 col-md-3 col-lg-3" style="margin-top: 2em; position: relative;">
-                      <div class="offiExecu001">
                      <img src="assets/wominred.jpg" class="rest-im-001">
-                           <div class="d-flex flex-column"><span class="rest-sp-001">Ms Adwoa Onoma</span><h3 class="rest-h3-001">Editorial Quality Supervisor</h3></div>
+                           <div class="d-flex flex-column"><span class="rest-sp-001">阿德瓦·奥诺马女士</span><h3 class="rest-h3-001">编辑质量主管</h3></div>
                            <div class="offiexec0012">
-                           <h2 class="officeExp001">Margaret ofosuaa</h2>
-                           <p class="officExspan001">Bio: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et turpis at justo condimentum congue. Duis ultricies semper lacus, vel lacinia felis dapibus at. </p>
-                            </div>
+                           <h2 class="officeExp001">玛格丽特·奥福苏亚</h2>
+                           <p class="officExspan001">简介：Lorem ipsum dolor sit amet，consectetur adipiscing elit。Sed et turpis at justo condimentum congue。Duis ultricies semper lacus，vel lacinia felis dapibus at。</p>
                             </div>
                            <img src="assets/blewom.jpg" class="rest-im-001">
-                            <div class="d-flex flex-column"><span class="rest-sp-001">Ms Angelina Kijoe</span><h3 class="rest-h3-001">Editing services are valuable</h3></div>                               
+                            <div class="d-flex flex-column"><span class="rest-sp-001">安吉丽娜·基乔埃女士</span><h3 class="rest-h3-001">编辑服务很有价值</h3></div>                               
                                     </div>
-
+            
                     <div class="col-sm-12 col-md-3 col-lg-3" style="margin-top: 2em;">
                         <img src="assets/medium-shot-woman-reading-book.jpg" class="rest-im-001">
-                            <div class="d-flex flex-column"><span class="rest-sp-001">Mr Benjamin Apeku</span><h3 class="rest-h3-001">Editorial Support Supervisor</h3></div>
+                            <div class="d-flex flex-column"><span class="rest-sp-001">本杰明·阿佩库先生</span><h3 class="rest-h3-001">编辑支持主管</h3></div>
                            <img src="assets/alexim.jpg" class="rest-im-001">
-                             <div class="d-flex flex-column"><span class="rest-sp-001">Mr Samuel Danso</span><h3 class="rest-h3-001">Editing services are valuable</h3></div>
+                             <div class="d-flex flex-column"><span class="rest-sp-001">塞缪尔·丹索先生</span><h3 class="rest-h3-001">编辑服务很有价值</h3></div>
                                     </div>
-
+            
                                     <div class="col-sm-12 col-md-3 col-lg-3" style="margin-top: 2em;">
                                         <img src="assets/secred.jpg" class="rest-im-001">
-                                            <div class="d-flex flex-column"><span class="rest-sp-001">Mr Anthony Yeboah</span><h3 class="rest-h3-001">Editing services are valuable</h3></div>
+                                            <div class="d-flex flex-column"><span class="rest-sp-001">安东尼·耶博阿先生</span><h3 class="rest-h3-001">编辑服务很有价值</h3></div>
                                            <img src="assets/alexim.jpg" class="rest-im-001">
-                                             <div class="d-flex flex-column"><span class="rest-sp-001">The auditorium</span><h3 class="rest-h3-001">Editing services are valuable</h3></div>
+                                             <div class="d-flex flex-column"><span class="rest-sp-001">礼堂</span><h3 class="rest-h3-001">编辑服务很有价值</h3></div>
                                             
                                                     </div>
                                                     <div class="col-sm-12 col-md-3 col-lg-3" style="margin-top: 2em;">
                                                         <img src="assets/man red.jpg" class="rest-im-001">
-                                                            <div class="d-flex flex-column"><span class="rest-sp-001">Mr Godfred Niamah</span><h3 class="rest-h3-001">Editing services are valuable</h3></div>
+                                                            <div class="d-flex flex-column"><span class="rest-sp-001">戈德弗雷德·尼亚马先生</span><h3 class="rest-h3-001">编辑服务很有价值</h3></div>
                                                            <img src="assets/alexim.jpg" class="rest-im-001">
-                                                             <div class="d-flex flex-column"><span class="rest-sp-001">The auditorium</span><h3 class="rest-h3-001">Editing services are valuable</h3></div>
+                                                             <div class="d-flex flex-column"><span class="rest-sp-001">礼堂</span><h3 class="rest-h3-001">编辑服务很有价值</h3></div>
                                                                     </div>
-                                </div>   
-                            </div>
+                                        </div>   
+                                    </div>
                         </div>
                         
                         <footer class="fot-dow-1">
