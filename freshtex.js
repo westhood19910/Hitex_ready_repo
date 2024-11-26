@@ -1,46 +1,39 @@
-// Configuration object to store all constants
-const CONFIG = {
-  imageSources: ['visa.png', 'master.png', 'paypal-icon.svg'],
-  displayDuration: 5000,
-  slideContent: [
-    {
-      image: "assets/jap_rep_001.jpg",
-      title: "Professional Manuscript Editing Services",
-      text: "At Hitex Editex, we provide comprehensive manuscript editing services tailored to meet the needs of authors and researchers."
-    },
-    // ... other content
-  ]
-};
-
-// Language dropdown handler
 class LanguageDropdown {
-  constructor() {
-    this.languageList = document.getElementById("languagelist");
-    if (!this.languageList) return;
+  constructor(toggleSelector = '.toggle-button-2', listSelector = '#languagelist') {
+    this.toggleButton = document.querySelector(toggleSelector);
+    this.languageList = document.querySelector(listSelector);
+    
+    if (!this.toggleButton || !this.languageList) {
+      console.error('Required dropdown elements not found');
+      return;
+    }
     
     this.init();
   }
 
   init() {
-    // Toggle button handler
-    document.querySelector('.toggle-button-2')?.addEventListener('click', () => {
+    // Toggle button handler with event stopping
+    this.toggleButton.addEventListener('click', (event) => {
+      event.stopPropagation();
       this.toggleLanguageList();
     });
 
-    // Close on outside click
+    // Close on outside click with more precise targeting
     document.addEventListener('click', (event) => {
-      if (!event.target.matches('.toggle-button-2')) {
+      if (!this.languageList.contains(event.target) && 
+          !this.toggleButton.contains(event.target)) {
         this.closeDropdowns();
       }
     });
   }
 
   toggleLanguageList() {
-    this.languageList?.classList.toggle("show");
+    this.languageList.classList.toggle("show");
   }
 
   closeDropdowns() {
-    document.querySelectorAll(".language-list.show").forEach(dropdown => {
+    const openDropdowns = document.querySelectorAll(".language-list.show");
+    openDropdowns.forEach(dropdown => {
       dropdown.classList.remove('show');
     });
   }
