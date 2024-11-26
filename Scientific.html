@@ -5,6 +5,7 @@
 <title>HiTex EdiTex</title> 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link rel="stylesheet" href="fresh.css">  
+<link rel="stylesheet" href="Embednav.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="freshtex.js"> </script>
 </head> 
@@ -12,7 +13,7 @@
   <header class="pag-2-hed-1">
     <div class="lat_clo_001">             
     <a href="Index.html" class="action-home">
-    <img src="home.png" alt="Home button">
+      <i class="fa-solid fa-house"></i>
    </a>  
     </div>  
     <div class="lat_clo_002">
@@ -45,7 +46,7 @@
 </header>
     <nav class="alb_pa_001">
       <div class="un_fr_0oper">
-          <img src="png_20221026_003820_0000.png" alt="" class="kerpa_023_001">
+          <img src="assets/png_20221026_003820_0000.png" alt="" class="kerpa_023_001">
       </div>
           <div class="fo_oc_cnt002">
               <input type="search"  class="lat_but_pla_001" placeholder="search here">
@@ -54,68 +55,142 @@
           <div class="fr_fl_fx_001">
               <div class="kli_002_wer">
                   <a href="https://www.threads.net/@hitexeditex">
-                  <img src="threads-icon.svg" class="alb-im-001">
+                  <img src="assets/threads-icon.svg" class="alb-im-001">
                  </a>
                  </div>
               <div class="kli_002_wer">
           <a href="https://www.linkedin.com/company/hitexeditex/">
-          <img src="linkedin-app-icon.svg" class="alb-im-001">
+          <img src="assets/linkedin-app-icon.svg" class="alb-im-001">
          </a>
          </div>
          <div class="kli_002_wer">
          <a href="https://x.com/HiTexEdiTex" target="_blank">
-          <img src="x-social-media-black-icon.svg" alt="Twitter Icon" class="alb-im-001">
+          <img src="assets/x-social-media-black-icon.svg" alt="Twitter Icon" class="alb-im-001">
         </a>
         </div>  
         <div class="kli_002_wer">
          <a href="https://www.instagram.com/hitexeditex" target="_blank"  >
-          <img src="ig-instagram-icon.svg" class="alb-im-001"></a>
+          <img src="assets/ig-instagram-icon.svg" class="alb-im-001"></a>
           </div>   
           <a href="https://wa.me/233503181696" target="_blank">
-              <img src="whatsapp-icon.svg" alt="WhatsApp Icon" class="alb-im-001">
+              <img src="assets/whatsapp-icon.svg" alt="WhatsApp Icon" class="alb-im-001">
             </a>    
       </div> 
     </nav>
 
-     <nav class="pag_2_nav_bar"> 
-        <div class="fr_open_01">
-        </div> 
-        <input type="checkbox" id="lets_check" checked> 
-        <label for="lets_check" class="den_Check"><i class="fa fa-bars" aria-hidden="true"></i></label>
-        <ul> 
-            <li class="ser_01" id="se_wate_12">
-                <a href="" class="laterCorrect">About Us<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                    <ul class="ser_ul_001"  id="S3_wa_hu">
-                        <li><a href="Vision.html" class="ser-ln-001">Vision</a></li>
-                        <li><a href="Visioning.html" class="ser-ln-001">Misson</a></li>
-                        <li><a href="#opa-dnw-oi" class="ser-ln-001">The team</a></li>
-                    </ul>
-                </li>
-            <li class="abt-001"><a href="services.html">Services <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-            <ul class="abt-ul-001">
-                <li><a href="languaged.html" class="abt-ln-001">Language editing</a></li>
-                <li><a href="Scientific.html" class="abt-ln-001">Scientific editing</a></li>
-                <li><a href="technichal.html" class="abt-ln-001">Technical editing</a></li>
-            </ul>
-            </li>   
-            <li class="cr-ln-001"><a href="car1reers.html">Careers <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                <ul class="cr-ul-001">
-                    <li><a href="car1reers.html" class="cr-ln-002">Freelance editor</a></li>
-                    <li><a href="In-house.html" class="cr-ln-002">In-house editor</a></li>
-                </ul>
-            </li>
-            <li class="ctn-001"><a href="contaUs.html">Contact Us</i></a>
-            </li>
-            <li><a href="Freshtex.html">BLOG</a></li>
-          </ul>  
+    <nav class="main-nav" style="top: 5.5em">
+      <div class="menu-container">
+          <div class="fr_open_01">
+          </div> 
+          <input type="checkbox" id="menu-toggle">
+          <label for="menu-toggle" class="menu-button">
+              <i class="fa fa-bars" aria-hidden="true"></i>
+          </label>
+          
+          <ul class="main-menu">
+              <li class="menu-item has-submenu">
+                  <button class="submenu-toggle" aria-expanded="false">
+                      About Us
+                      <i class="fa fa-angle-down" aria-hidden="true"></i>
+                  </button>
+                  <ul class="submenu">
+                      <li><a href="Vision.html">Vision</a></li>
+                      <li><a href="Mission.html">Mission</a></li>
+                      <li><a href="#opa-dnw-oi">The Team</a></li>
+                  </ul>
+              </li>
+              
+              <li class="menu-item has-submenu">
+                  <button class="submenu-toggle" aria-expanded="false">
+                      Services
+                      <i class="fa fa-angle-down" aria-hidden="true"></i>
+                  </button>
+                  <ul class="submenu">
+                      <li><a href="languaged.html">Language Editing</a></li>
+                      <li><a href="Scientific.html">Scientific Editing</a></li>
+                      <li><a href="technichal.html">Technical Editing</a></li>
+                  </ul>
+              </li>
+              
+              <li class="menu-item has-submenu">
+                  <button class="submenu-toggle" aria-expanded="false">
+                      Careers
+                      <i class="fa fa-angle-down" aria-hidden="true"></i>
+                  </button>
+                  <ul class="submenu">
+                      <li><a href="car1reers.html">Freelance Editor</a></li>
+                      <li><a href="In-house.html">In-house Editor</a></li>
+                  </ul>
+              </li>
+              
+              <li class="menu-item">
+                  <a href="contaUs.html">Contact Us</a>
+              </li>
+              
+              <li class="menu-item">
+                  <a href="Freshtex.html">BLOG</a>
+              </li>
+          </ul>
+          
           <div class="gro_btu_01">
-          <a href="quote.html"><button class="qt-pg-001"> <marquee>REQUEST A QUOTE</marquee></button></a>
-            </div>    
-    </nav>
+              <a href="frevis.html" class="por_qt_pg_001">REQUEST A QUOTE</a>
+          </div>
+      </div>
+  </nav>
+
+  <div class="cnt-lte-001">
+    <div class="row" id="scr-001-112" style="margin-bottom: 3em; border-radius: 10px;">
+      <div class="col-sm-12 col-md-4 col-lg-4" style=" background-color:  #ebf6fd; margin: 0em 0em; border-radius: 5px;">
+          <div class="apts-09-01">
+         <h2 class="m-b4"><i class="fa fa-language" aria-hidden="true"></i>language Editing</h2>
+         <article class="aso-dn-001"> 
+          At Hitex editex, we understand the profound impact that language has on the clarity and effectiveness of your writing. Our specialized language editing services are designed to enhance the quality and readability of your manuscripts, ensuring that your message is conveyed with precision and elegance. Whether you’re an author, researcher, or business professional, 
+          our team of skilled editors is here to help.</article>
+          <ul class="unordered-list1">
+            <li><a href="#" class="copy-link1"><i class="fa fa-check-circle" aria-hidden="true"></i>Copy Editing</a></li>
+            <li><a href="#" class="copy-link1"><i class="fa fa-check-circle" aria-hidden="true"></i>Proofreading</a></li>
+            <li><a href="#" class="copy-link1"><i class="fa fa-check-circle" aria-hidden="true"></i>Content Editing</a></li>
+            <li><a href="#" class="copy-link1"><i class="fa fa-check-circle" aria-hidden="true"></i>Manuscript Evaluation</a></li>
+          </ul>
+          <a class="ico-2" href="languaged.html"><button class="cont-but-2">GO TO LANGUAGE EDITING</button></a>
+           </div>
+      </div>
+      <div class="col-sm-12 col-md-4 col-lg-4" style=" background-color:  #ebf6fd; margin: 0em 0em; border-radius: 5px;" >
+        <div class="apts-09-01">
+        <h2 class="m-b5"><i class="fa fa-flask" aria-hidden="true"></i>Scientific Editing</h2>
+        <article class="aso-dn-001"> 
+          We understand the critical importance of precision and clarity in scientific writing.
+           Our specialized scientific editing services are designed to enhance the quality and impact of your research manuscripts. Whether you’re preparing a paper for submission to a high-impact journal or refining a grant proposal, our team of expert editors, with advanced degrees in various scientific disciplines, is here to help.</article>
+        <ul class="unordered-list1">
+          <li><a href="#" class="copy-link1"><i class="fa fa-check-circle" aria-hidden="true"></i>Copy Editing</a></li>
+          <li><a href="#" class="copy-link1"><i class="fa fa-check-circle" aria-hidden="true"></i></i>Proofreading</a></li>
+          <li><a href="#" class="copy-link1"><i class="fa fa-check-circle" aria-hidden="true"></i>Content Editing</a></li>
+          <li><a href="#" class="copy-link1"><i class="fa fa-check-circle" aria-hidden="true"></i>Manuscript Evaluation</a></li>
+        </ul>
+        <a class="ico-2" href="Scientific.html"><button class="cont-but-2">GO TO SCIENTIFIC EDITING</button></a> 
+      </div>
+      </div>
+      <div class="col-sm-12 col-md-4 col-lg-4" style=" background-color:  #ebf6fd; margin: 0em 0em;border-radius: 5px;">
+        <div class="apts-09-01">
+        <h2 class="m-b6"><i class="fa-solid fa-gears"></i>Technical Editing</h2>
+        <article class="aso-dn-001"> 
+    We recognize the crucial role that precision and clarity play in technical documentation. Our specialized technical editing services are 
+    crafted to enhance the quality and effectiveness of your technical documents. Whether you’re developing user manuals, technical reports, or white papers, our team of experienced editors, with expertise in various technical fields, is dedicated to helping you succeed.</article>
+        <ul class="unordered-list1">
+          <li><a href="#" class="copy-link1"><i class="fa fa-check-circle" aria-hidden="true"></i>Copy Editing</a></li>
+          <li><a href="#" class="copy-link1"><i class="fa fa-check-circle" aria-hidden="true"></i>Proofreading</a></li>
+          <li><a href="#" class="copy-link1"><i class="fa fa-check-circle" aria-hidden="true"></i>Content Editing</a></li>
+          <li><a href="#" class="copy-link1"><i class="fa fa-check-circle" aria-hidden="true"></i>Manuscript Evaluation</a></li>
+        </ul>
+        <a class="ico-2" href="technichal.html"><button class="cont-but-2">GO TO TECHNICAL EDITING</button></a> 
+        </div>
+      </div>
+    </div>
+    </div>
   
-      <div class="fr-cnt-001" style="margin: 7em 0;">
+      <div class="fr-cnt-001" style="margin: 7em 0; position: relative;">
         <div class="row" style="background-color: rgb(255, 255, 255); border-radius: 20px;">  
-         <div class="col-sm-12 col-md-12 col-lg-12" style="background-color: #ffffff; box-shadow: 9px 9px 10px  rgba(54, 84, 167, 0.3); border-radius: 10px; border-radius: 10px;">
+         <div class="col-sm-12 col-md-12 col-lg-12" style="background-color: #062479; box-shadow: 9px 9px 10px  rgba(54, 84, 167, 0.3); border-radius: 10px; border-radius: 10px;">
            <h1 class="wl-h1-001">Welcome to Scientific editing</h1><br>
              <h3 class="wl-h3-001">Crafting Clarity, Precision, and Excellence in the <p> Presentation of Your Scientific Research</h3>
              </p>
@@ -181,7 +256,7 @@
                 <h1 class="tst-h1-002" style="margin-bottom: 2em;">Testimonials From Authors who love <span class="tst-sp-001">Scientific editing </span></h1>
             </div>
             <div class="d-flex td-sp-090" style="margin:10px 0em; border-radius: 10px; box-shadow: 9px 9px 10px rgba(27, 73, 148, 0.3); cursor: pointer;">
-              <img src="alexim.jpg" class="mnn-tst-im-001">
+              <img src="assets/alexim.jpg" class="mnn-tst-im-001">
               <h1 class="tst-h1-001"> Dr. Captain Smart</h1>
               <span class="ab-sp-001-001"><h3 class="ab-h3-001-70">Dr. Emily Rodriguez</h3>
                 "I recently had the pleasure of working with Hitex Editex, and the experience exceeded my expectations in every way. 
@@ -190,7 +265,7 @@
               </span>
           </div>
           <div class="d-flex td-sp-090" style="margin:10px 0em; border-radius: 10px; box-shadow: 9px 9px 10px rgba(27, 73, 148, 0.3); cursor: pointer;">
-            <img src="villagee.jpg" class="mnn-tst-im-001">
+            <img src="assets/villagee.jpg" class="mnn-tst-im-001">
             <h1 class="tst-h1-001">Testimonials From favorite Authors who love Scientific editing</h1>
             <span class="ab-sp-001-001"><h3 class="ab-h3-001-70">Dr. Emily Rodriguez</h3>
               "I recently had the pleasure of working with Hitex Editex, and the experience exceeded my expectations in every way. 
@@ -199,7 +274,7 @@
             </span>
         </div>
         <div class="d-flex td-sp-090" style="margin:10px 0em; border-radius: 10px; box-shadow: 9px 9px 10px rgba(27, 73, 148, 0.3);cursor: pointer;">
-          <img src="surp-girl.jpg" class="mnn-tst-im-001">
+          <img src="assets/surp-girl.jpg" class="mnn-tst-im-001">
           <h1 class="tst-h1-001">Testimonials From favorite Authors who love Scientific editing</h1>
           <span class="ab-sp-001-001"><h3 class="ab-h3-001-70">Dr. Emily Rodriguez</h3>
             "I recently had the pleasure of working with Hitex Editex, and the experience exceeded my expectations in every way. 
@@ -208,7 +283,7 @@
           </span>
       </div>
       <div class="d-flex td-sp-090" style="margin:10px 0em; border-radius: 10px; box-shadow: 9px 9px 10px rgba(27, 73, 148, 0.3); cursor: pointer;">
-        <img src="conf-girl.jpg" class="mnn-tst-im-001">
+        <img src="assets/conf-girl.jpg" class="mnn-tst-im-001">
         <h1 class="tst-h1-001">Testimonials From favorite Authors who love Scientific editing</h1>
         <span class="ab-sp-001-001"><h3 class="ab-h3-001-70">Dr. Emily Rodriguez</h3>
           "I recently had the pleasure of working with Hitex Editex, and the experience exceeded my expectations in every way. 
@@ -217,7 +292,7 @@
         </span>
     </div>
     <div class="d-flex td-sp-090" style="margin:10px 0em; border-radius: 10px; box-shadow: 9px 9px 10px rgba(27, 73, 148, 0.3); cursor: pointer;">
-      <img src="jonas.jpg" class="mnn-tst-im-001">
+      <img src="assets/jonas.jpg" class="mnn-tst-im-001">
       <h1 class="tst-h1-001">Testimonials From favorite Authors who love Scientific editing</h1>
       <span class="ab-sp-001-001"><h3 class="ab-h3-001-70">Dr. Emily Rodriguez</h3>
         "I recently had the pleasure of working with Hitex Editex, and the experience exceeded my expectations in every way. 
@@ -226,7 +301,7 @@
       </span>
   </div>
   <div class="d-flex td-sp-090" style="margin:10px 0em; border-radius: 10px; box-shadow: 9px 9px 10px rgba(27, 73, 148, 0.3); cursor: pointer;">
-    <img src="ashton-bingha.jpg" class="mnn-tst-im-001">
+    <img src="assets/ashton-bingha.jpg" class="mnn-tst-im-001">
     <h1 class="tst-h1-001">Testimonials From favorite Authors who love Scientific editing</h1>
     <span class="ab-sp-001-001"><h3 class="ab-h3-001-70">Dr. Emily Rodriguez</h3>
       "I recently had the pleasure of working with Hitex Editex, and the experience exceeded my expectations in every way. 
@@ -236,7 +311,7 @@
 </div>
 
 <div class="d-flex td-sp-090" style="margin:10px 0em; border-radius: 10px; box-shadow: 9px 9px 10px rgba(27, 73, 148, 0.3); cursor: pointer;">
-  <img src="villagee.jpg" class="mnn-tst-im-001">
+  <img src="assets/villagee.jpg" class="mnn-tst-im-001">
   <h1 class="tst-h1-001">Testimonia</h1>
   <span class="ab-sp-001-001"><h3 class="ab-h3-001-70">Dr. Emily Rodriguez</h3>
     "I recently had the pleasure of working with Hitex Editex, and the experience exceeded my expectations in every way. 
@@ -245,7 +320,7 @@
   </span>
 </div>
 <div class="d-flex td-sp-090" style="margin:10px 0em; border-radius: 10px; box-shadow: 9px 9px 10px rgba(27, 73, 148, 0.3); cursor: pointer;">
-  <img src="little-boy-with-notebooks.jpg" class="mnn-tst-im-001">
+  <img src="assets/little-boy-with-notebooks.jpg" class="mnn-tst-im-001">
   <h1 class="tst-h1-001">Testimonials From favorite Authors who love Scientific editing</h1>
   <span class="ab-sp-001-001"><h3 class="ab-h3-001-70">Dr. Emily Rodriguez</h3>
     "I recently had the pleasure of working with Hitex Editex, and the experience exceeded my expectations in every way. 
@@ -254,7 +329,7 @@
   </span>
 </div>
 <div class="d-flex td-sp-090" style="margin:10px 0em; border-radius: 10px; box-shadow: 9px 9px 10px rgba(27, 73, 148, 0.3); cursor: pointer;">
-  <img src="little-boy-with-notebooks.jpg" class="mnn-tst-im-001">
+  <img src="assets/little-boy-with-notebooks.jpg" class="mnn-tst-im-001">
   <h1 class="tst-h1-001">Testimonials From favorite Authors who love Scientific editing</h1>
   <span class="ab-sp-001-001"><h3 class="ab-h3-001-70">Dr. Emily Rodriguez</h3>
     "I recently had the pleasure of working with Hitex Editex, and the experience exceeded my expectations in every way. 
@@ -269,15 +344,14 @@
      <footer class="fot-dow-1">
       <div class="row justify-content-around align-items-center">
         <div class="col-sm-12 col-md-3 col-lg-3 ColDesghCnt">
-            <h3 class="foot-h3">Contact Center</h3><p>
+            <h3 class="foot-h3">Contact Center</h3>
               <ul class="fot-ul-001">
                   <li><a href="mailto:hitexeditex.com" class="fot-ln-001"> <i class="fa fa-envelope" aria-hidden="true"></i> HiTexediTex.com</a></li>
                   <li><a href="#" class="fot-ln-001"><i class="fa fa-volume-control-phone" aria-hidden="true"></i> 0546525435</a></li>
                   <li><a href="services.html" class="fot-ln-001">Services</a></li>
                   <li><a href="#" class="fot-ln-001">The team</a></li>
-                  <li><a href="#" class="fot-ln-001"><img src="map-pin-icon.svg" class="alb-im-001" style="margin-left: -3em;">Adweso, Koforidua, Ghana</a></li>
+                  <li><a href="#" class="fot-ln-001"><img src="assets/map-pin-icon.svg" class="alb-im-001" style="margin-left: -3em;">Adweso, Koforidua, Ghana</a></li>
               </ul>
-            </p>
         </div>
         <div class="col-sm-12 col-md-3 col-lg-3 ColDesghCnt">
             <h3 class="foot-h3">Find Us</h3>
@@ -286,18 +360,18 @@
           </div>
         </div>
         <div class="col-sm-12 col-md-3 col-lg-3 ColDesghCnt">
-            <h3 class="foot-h3">Contact Us</h3 >
+            <h3 class="foot-h3">Follow Us</h3 >
               <ul class="fot-ul-003">
               <li>
                 <ul class="Obtao_0012">
-                  <li><a href=""><img src="facebook-round-color-icon.svg" class="alb-im-001"></a></li>
-                  <li><a href=""><img src="twitter-icon.svg" class="alb-im-001"></a></li>
-                  <li><a href=""><img src="ig-instagram-icon.svg" class="alb-im-001"></a></li>
-                  <li><a href=""><img src="whatsapp-icon.svg" class="alb-im-001"></a></li>
+                  <li><a href=""><img src="assets/x-social-media-white-icon.svg" class="kil_im_001"></a></li>
+                  <li><a href=""><img src="assets/facebook-app-round-white-icon.svg" class="kil_im_001"></a></li>
+                  <li><a href=""><img src="assets/instagram-white-icon.svg" class="kil_im_001"></a></li>
+                  <li><a href=""><img src="assets/whatsapp-white-icon.svg" class="kil_im_001"></a></li>
                 </ul>
               </li>
-              <li><a href="Copyright.html" class="fot-ln-001"><img src="copyright-icon.svg" class="alb-im-001">Copyright Policy </a></li>
-              <li><a href="Copyright.html" class="fot-ln-001"><img src="copyright-icon.svg" class="alb-im-001">Privacy Policy </a></li>
+              <li><a href="Copyright.html" class="fot-ln-001"><img src="assets/copyright-icon.svg" class="alb-im-001">Copyright Policy </a></li>
+              <li><a href="Copyright.html" class="fot-ln-001"><img src="assets/copyright-icon.svg" class="alb-im-001">Privacy Policy </a></li>
               </ul>
         </div>  
     </div>

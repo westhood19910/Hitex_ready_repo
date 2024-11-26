@@ -389,6 +389,14 @@ margin-left: 2px;
   padding: 20px;
 }
 
+.cnt-lte-001 {
+  margin-top: 11.5em;
+}
+
+.oo0killa {
+  width: 40%;
+}
+
 .m-b4{
   color: #642323;
   font-weight: bold;
@@ -442,7 +450,7 @@ h2 {
   background-color: #ffffff;
   box-shadow: 0px 0px 20px rgb(109, 109, 109, 0.4);
   border-radius: 5px;
-  height: 90vh;
+  height: min-content;
 }
 
 .aso-dn-001{
@@ -1882,7 +1890,7 @@ font-weight: bold;
   color: white;
  }
  
-.pag_2_h1_1{
+#pag_2_h1_1{
   position: relative;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-weight: bolder;
@@ -2729,11 +2737,13 @@ border-radius: 15px 0px 0px 15px;
 
 @media screen  and (max-width: 761px){
   .por_qt_pg_001 {
-    background-color:   #0f155e;
+    background-color:   rgb(169, 26, 26);
     color: #ffffff;
-    padding: 7px 8px;
-    font-size: 12px;
+    padding: 15px 8px;
+    font-size: 11px !important;
+    border-radius: 2px;
     border: none;
+    font-size: 13px;
   }
 }
 
@@ -3158,6 +3168,8 @@ padding: 1em;
   flex-direction: column;
   height: 100%;
   gap: 3em;
+  transition: opacity 0.5s ease-in-out;
+  opacity: 1;
 }
 
 #in_ins_034_fr img {
@@ -4013,10 +4025,9 @@ background-color: rgb(235, 237, 249);
 .wl-h1-001{
   font-size: 40px;
   font-weight: bolder;
-  margin-left: 1.5em;
   text-align: left;
   margin-top: 1em;
-  color: #1369c6;
+  color: #ffffff;
 }
 
 @media screen and (max-width: 890px) {
@@ -4035,10 +4046,8 @@ background-color: rgb(235, 237, 249);
   font-size: 12px;
   text-align: left;
   font-weight: bold;
-  margin-left: 4.6em;
-  margin-right: 49em;
-  color: #0f4a85;
-  border-bottom: 40px solid #251858;
+  color: #ffffff;
+  border-bottom: 4px solid #ffffff;
   border-bottom-left-radius: 20px;
 }
 @media screen and (max-width: 890px) {
@@ -5754,7 +5763,7 @@ margin-left: 1.9em;
   margin-top: 3em;
 }
 
-.op_tu__01{
+#op_tu__01{
   text-align: center;
   font-weight: bold;
   font-size: 55px;
@@ -5762,7 +5771,7 @@ margin-left: 1.9em;
 }
 
 @media screen and (max-width:880px) {
-  .op_tu__01{
+  #op_tu__01{
     font-size: 35px;
   }
 }
