@@ -204,11 +204,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+//ANIMATION OF NUMBERS
+
 function createScrollReveal() {
-    // Select all elements with secepaerate class
     const elements = document.querySelectorAll('.secepaerate');
     
-    // Add scroll reveal styles
     const style = document.createElement('style');
     style.textContent = `
         .scroll-reveal {
@@ -223,7 +223,6 @@ function createScrollReveal() {
     `;
     document.head.appendChild(style);
 
-    // Intersection Observer for continuous reveal
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -233,7 +232,7 @@ function createScrollReveal() {
             }
         });
     }, { 
-        threshold: 0.1 // Trigger when 10% of element is visible
+        threshold: 0.1
     });
 
     // Add scroll-reveal class and observe each element
@@ -247,3 +246,4 @@ function createScrollReveal() {
 document.addEventListener('DOMContentLoaded', createScrollReveal);
 
 
+// IMAGE ROTATER

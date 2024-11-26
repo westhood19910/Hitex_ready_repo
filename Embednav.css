@@ -365,8 +365,8 @@ margin-bottom: 1px;
 @media screen and (max-width: 968px) {
   .menu-button {
       display: block;
+      color: #ffffff;
   }
-
   .main-menu {
       display: none;
       position: absolute;
@@ -411,7 +411,17 @@ margin-bottom: 1px;
       text-align: left;
        color: #ffffff;
        font-size: 16px;
+       border-bottom: 2px solid #6c91f7;
   }
+
+  .menu-item:last-child > a {
+    border: none;
+    text-align: center;
+    font-weight: 900;
+    color: #000000;
+    font-size: 16px;
+    background: #ffffff;
+}
 
   .menu-item > a:hover,
   .submenu-toggle:hover {
@@ -451,6 +461,11 @@ margin-bottom: 1px;
     .fa-angle-down {
       margin-left: 1em;
       transition: transform 0.3s;
+    }
+
+    .menu-container {
+      align-items: center;
+      background-color: #10035a;
     }
 
 }

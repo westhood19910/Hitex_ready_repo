@@ -5,6 +5,8 @@
 <title>HiTex EdiTex</title> 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link rel="stylesheet" href="fresh.css">  
+<link rel="stylesheet" href="Embednav.css">
+<script src="Embednav.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="freshtex.js"> </script>
 </head> 
@@ -12,7 +14,7 @@
   <header class="pag-2-hed-1">
     <div class="lat_clo_001">             
     <a href="landing.html" class="action-home">
-    <img src="assets/home.png" alt="Home button">
+      <i class="fa-solid fa-house"></i>
    </a>  
     </div>  
     <div class="lat_clo_002">
@@ -77,48 +79,126 @@
       </div> 
     </nav>
 
-     <nav class="pag_2_nav_bar"> 
-        <div class="fr_open_01">
-        </div> 
-        <input type="checkbox" id="lets_check" checked> 
-        <label for="lets_check" class="den_Check"><i class="fa fa-bars" aria-hidden="true"></i></label>
-        <ul> 
-            <li class="ser_01" id="se_wate_12">
-                <a href="" class="laterCorrect">회사 소개<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                <ul class="ser_ul_001" id="S3_wa_hu">
-                  <li><a href="Vision.html" class="ser-ln-001">비전</a></li>
-                  <li><a href="Visioning.html" class="ser-ln-001">사명</a></li>
-                  <li><a href="#opa-dnw-oi" class="ser-ln-001">팀</a></li>
-                </ul>
+    <nav class="main-nav" style="top: 5.5em;">
+      <div class="menu-container">
+          <div class="fr_open_01">
+          </div> 
+          <input type="checkbox" id="menu-toggle">
+          <label for="menu-toggle" class="menu-button">
+              <i class="fa fa-bars" aria-hidden="true"></i>
+          </label>
+          
+          <ul class="main-menu">
+              <li class="menu-item has-submenu">
+                  <button class="submenu-toggle" aria-expanded="false">
+                      회사 소개
+                      <i class="fa fa-angle-down" aria-hidden="true"></i>
+                  </button>
+                  <ul class="submenu">
+                      <li><a href="Vision.html">비전</a></li>
+                      <li><a href="Mission.html">미션</a></li>
+                      <li><a href="#opa-dnw-oi">팀 소개</a></li>
+                  </ul>
               </li>
               
-              <li class="abt-001">
-                <a href="services.html">서비스 <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                <ul class="abt-ul-001">
-                  <li><a href="languaged.html" class="abt-ln-001">언어 편집</a></li>
-                  <li><a href="Scientific.html" class="abt-ln-001">과학 편집</a></li>
-                  <li><a href="technichal.html" class="abt-ln-001">기술 편집</a></li>
-                </ul>
-              </li>  
-              
-              <li class="cr-ln-001">
-                <a href="car1reers.html">채용 <i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                <ul class="cr-ul-001">
-                  <li><a href="car1reers.html" class="cr-ln-002">프리랜서 편집자</a></li>
-                  <li><a href="In-house.html" class="cr-ln-002">사내 편집자</a></li>
-                </ul>
+              <li class="menu-item has-submenu">
+                  <button class="submenu-toggle" aria-expanded="false">
+                      서비스
+                      <i class="fa fa-angle-down" aria-hidden="true"></i>
+                  </button>
+                  <ul class="submenu">
+                      <li><a href="languaged.html">언어 교정</a></li>
+                      <li><a href="Scientific.html">학술 교정</a></li>
+                      <li><a href="technichal.html">기술 문서 교정</a></li>
+                  </ul>
               </li>
-              <li class="ctn-001"><a href="contaUs.html">문의하기</a></li>
-              <li><a href="Freshtex.html">블로그</a></li>
-              </ul>  
-              <div class="gro_btu_01">
-                <a href="quote.html"><button class="qt-pg-001"><marquee>견적 요청</marquee></button></a>
-              </div>              
-    </nav>
-  
+              
+              <li class="menu-item has-submenu">
+                  <button class="submenu-toggle" aria-expanded="false">
+                      채용 정보
+                      <i class="fa fa-angle-down" aria-hidden="true"></i>
+                  </button>
+                  <ul class="submenu">
+                      <li><a href="car1reers.html">프리랜서 편집자</a></li>
+                      <li><a href="In-house.html">상근 편집자</a></li>
+                  </ul>
+              </li>
+              
+              <li class="menu-item">
+                  <a href="Korcont.html">문의하기</a>
+              </li>
+              
+              <li class="menu-item">
+                  <a href="Freshtex.html">블로그</a>
+              </li>
+          </ul>
+          
+          <div class="gro_btu_01">
+              <a href="frevis.html" class="por_qt_pg_001">견적 요청</a>
+          </div>
+      </div>
+  </nav>
+
+
+    <div class="cnt-lte-001" style="width: 100%;">
+      <div class="row" id="scr-001-112" style="margin-bottom: 3em; border-radius: 10px;">
+        <div class="col-sm-12 col-md-4 col-lg-4" style=" background-color:  #ebf6fd; margin: 0em 0em; border-radius: 5px;">
+            <div class="apts-09-01">
+           <h2 class="m-b4"><i class="fa fa-language" aria-hidden="true"></i>언어 편집</h2>
+           <article class="aso-dn-001"> 
+            히텍스 에디텍스에서는 언어가 글의 명확성과 효과성에 미치는 깊은 영향을 이해합니다. 
+            우리의 전문 언어 편집 서비스는 원고의 품질과 가독성을 향상시키고, 메시지가 정확하고 우아하게 전달되도록 돕습니다. 
+            저자, 연구자, 또는 비즈니스 전문가라면, 전문 편집 팀이 기꺼이 도움을 드릴 것입니다.
+           </article>
+            <ul class="unordered-list1">
+              <li><a href="#" class="copy-link1"><i class="fa fa-check-circle" aria-hidden="true"></i>텍스트 편집</a></li>
+              <li><a href="#" class="copy-link1"><i class="fa fa-check-circle" aria-hidden="true"></i>교정</a></li>
+              <li><a href="#" class="copy-link1"><i class="fa fa-check-circle" aria-hidden="true"></i>콘텐츠 편집</a></li>
+              <li><a href="#" class="copy-link1"><i class="fa fa-check-circle" aria-hidden="true"></i>원고 평가</a></li>
+            </ul>
+            <a class="ico-2" href="languaged.html"><button class="cont-but-2">언어 편집으로 이동</button></a>
+             </div>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4" style=" background-color:  #ebf6fd; margin: 0em 0em; border-radius: 5px;" >
+          <div class="apts-09-01">
+          <h2 class="m-b5"><i class="fa fa-flask" aria-hidden="true"></i>과학 편집</h2>
+          <article class="aso-dn-001"> 
+            과학 글쓰기에 있어 정확성과 명확성의 중요성을 깊이 이해하고 있습니다. 
+            우리의 전문 과학 편집 서비스는 연구 원고의 품질과 영향력을 향상시키기 위해 설계되었습니다. 
+            고급 학술 저널에 논문을 제출하거나 연구비 신청서를 개선하려는 경우, 다양한 과학 분야에서 높은 학위를 보유한 전문 편집 팀이 도와드립니다.
+          </article>
+          <ul class="unordered-list1">
+            <li><a href="#" class="copy-link1"><i class="fa fa-check-circle" aria-hidden="true"></i>텍스트 편집</a></li>
+            <li><a href="#" class="copy-link1"><i class="fa fa-check-circle" aria-hidden="true"></i>교정</a></li>
+            <li><a href="#" class="copy-link1"><i class="fa fa-check-circle" aria-hidden="true"></i>콘텐츠 편집</a></li>
+            <li><a href="#" class="copy-link1"><i class="fa fa-check-circle" aria-hidden="true"></i>원고 평가</a></li>
+          </ul>
+          <a class="ico-2" href="Scientific.html"><button class="cont-but-2">과학 편집으로 이동</button></a> 
+        </div>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4" style=" background-color:  #ebf6fd; margin: 0em 0em;border-radius: 5px;">
+          <div class="apts-09-01">
+          <h2 class="m-b6"><i class="fa-solid fa-gears"></i>기술 편집</h2>
+          <article class="aso-dn-001"> 
+            기술 문서에서 정확성과 명확성이 얼마나 중요한 역할을 하는지 잘 알고 있습니다. 
+            우리의 전문 기술 편집 서비스는 기술 문서의 품질과 효과를 향상시키기 위해 설계되었습니다. 
+            사용자 매뉴얼, 기술 보고서, 또는 백서를 작성 중이든, 다양한 기술 분야에서 풍부한 경험을 가진 편집 팀이 성공을 지원합니다.
+          </article>
+          <ul class="unordered-list1">
+            <li><a href="#" class="copy-link1"><i class="fa fa-check-circle" aria-hidden="true"></i>텍스트 편집</a></li>
+            <li><a href="#" class="copy-link1"><i class="fa fa-check-circle" aria-hidden="true"></i>교정</a></li>
+            <li><a href="#" class="copy-link1"><i class="fa fa-check-circle" aria-hidden="true"></i>콘텐츠 편집</a></li>
+            <li><a href="#" class="copy-link1"><i class="fa fa-check-circle" aria-hidden="true"></i>원고 평가</a></li>
+          </ul>
+          <a class="ico-2" href="technichal.html"><button class="cont-but-2">기술 편집으로 이동</button></a> 
+          </div>
+        </div>
+      </div>
+    </div>
+    
     <div class="fr-cnt-001" style="margin: 7em 0;">
       <div class="row" style="background-color: rgb(255, 255, 255); border-radius: 20px;">
-        <div class="col-sm-12 col-md-12 col-lg-12" style="background-color: #ffffff; box-shadow: 9px 9px 10px rgba(54, 84, 167, 0.3); border-radius: 10px; border-radius: 10px;">
+        <div class="col-sm-12 col-md-12 col-lg-12" style="background-color: #020f5a; box-shadow: 9px 9px 10px rgba(54, 84, 167, 0.3); border-radius: 10px; border-radius: 10px;">
           <h1 class="wl-h1-001">언어 편집에 오신 것을 환영합니다</h1><br>
           <h3 class="wl-h3-001">과학 연구의 프레젠테이션에서 명확성, 정밀성 및 우수성을 기하는 <p></h3>
           </p>
