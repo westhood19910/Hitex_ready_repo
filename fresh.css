@@ -1,4 +1,4 @@
-body { 
+body, html { 
     margin: 0;
     padding: 0;
     background-color: #ffffff;
@@ -4850,10 +4850,17 @@ transform: scale(1.6);
   }
 }
 
+.lnc-09-54 {
+  margin-top: 3em;
+  width: 100vw;
+}
+
 .ve_98_bhger{
   background-color: #07073f;
-   height: 100vh;
+   height: 100%;
 }
+
+
 
 .gre_eece_02 {
   display: flex;
