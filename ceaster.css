@@ -2,11 +2,28 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow:scroll;
     background-size: cover;
     background-image: url(assets/new_bac6.jpg);
     background-position: 0fr;
 }
+
+body::-webkit-scrollbar {
+    width: 8px; 
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background: #050b42; 
+    border-radius: 6px; 
+  }
+  
+  body::-webkit-scrollbar-track {
+    background: #e3e3e3; 
+  }
+  
+  body::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
 
 .new_int_9234 {
     top: 0;
