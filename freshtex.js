@@ -1,3 +1,7 @@
+document.addEventListener('DOMContentLoaded', () => {
+  new LanguageDropdown(); 
+});
+
 class LanguageDropdown {
   constructor(toggleSelector = '.toggle-button-2', listSelector = '#languagelist') {
     this.toggleButton = document.querySelector(toggleSelector);
