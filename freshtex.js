@@ -185,4 +185,119 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   window.addEventListener('scroll', onScroll, { passive: true });
+
+  
+});
+
+
+// CODE FOR COPYRIGHT
+
+// Interactive section navigation
+document.addEventListener('DOMContentLoaded', () => {
+  const navItems = document.querySelectorAll('.sh-ra-0e-fr');
+  const contentSection = document.getElementById('content-section');
+
+  // Sample content for different sections
+  const sectionContent = {
+      'information-collection': `At Hitex Editex, we collect personal information from you when you voluntarily provide it to us or when you use our services. This information may include your name, email address, phone number, mailing address, academic affiliation, and payment information.`,
+      'use-of-information': `We use the collected information to provide, maintain, and improve our services. This includes processing your requests, communicating with you, personalizing your experience, and analyzing usage of our website.`,
+      'information-sharing': `We do not sell or rent your personal information to third parties. We may share your information with service providers who assist us in operating our website, conducting our business, or servicing you.`,
+      'data-security': `We implement a variety of security measures to maintain the safety of your personal information. Your personal information is contained behind secured networks and is only accessible by a limited number of persons who have special access rights.`
+  };
+
+  navItems.forEach(item => {
+      item.addEventListener('click', () => {
+          // Remove active state from all items
+          navItems.forEach(nav => nav.classList.remove('active'));
+          
+          // Add active state to clicked item
+          item.classList.add('active');
+
+          // Update content
+          const sectionKey = item.getAttribute('data-section');
+          contentSection.textContent = sectionContent[sectionKey];
+      });
+  });
+});
+
+
+// CODE FOR CLOK
+function updateClock() {
+  const now = new Date();
+  const seconds = now.getSeconds();
+  const minutes = now.getMinutes();
+  const hours = now.getHours() % 12;
+
+  const secondDegrees = (seconds / 60) * 360;
+  const minuteDegrees = ((minutes + seconds / 60) / 60) * 360;
+  const hourDegrees = ((hours + minutes / 60) / 12) * 360;
+
+  // Add console logs for debugging
+  console.log(`Seconds: ${seconds}, Degrees: ${secondDegrees}`);
+
+  // Verify element selection
+  const secondHand = document.querySelector('.second-hand');
+  const minuteHand = document.querySelector('.minute-hand');
+  const hourHand = document.querySelector('.hour-hand');
+
+  if (secondHand && minuteHand && hourHand) {
+      secondHand.style.transform = `rotate(${secondDegrees}deg)`;
+      minuteHand.style.transform = `rotate(${minuteDegrees}deg)`;
+      hourHand.style.transform = `rotate(${hourDegrees}deg)`;
+  } else {
+      console.error('One or more clock hand elements not found!');
+  }
+}
+
+// Ensure DOM is fully loaded before running
+document.addEventListener('DOMContentLoaded', () => {
+  // Update clock immediately and then every second
+  updateClock();
+  setInterval(updateClock, 1000);
+});
+
+
+//  CODE FOR SEARCH BAR BEHAVIOR
+
+document.addEventListener('DOMContentLoaded', () => {
+  const searchContainer = document.querySelector('.fo_oc_cnt002');
+  const searchInput = document.querySelector('.lat_but_pla_001');
+  const searchButton = document.querySelector('.se-er-ch-bt-001');
+
+  // Only add click event on smaller screens
+  function addMobileSearchHandler() {
+      if (window.innerWidth <= 768) {
+          searchButton.addEventListener('click', toggleSearch);
+      }
+  }
+
+  function toggleSearch() {
+      searchContainer.classList.toggle('show-input');
+      
+      if (searchContainer.classList.contains('show-input')) {
+          searchInput.focus();
+      }
+  }
+
+  // Add escape key functionality to close search
+  searchInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && window.innerWidth <= 768) {
+          searchContainer.classList.remove('show-input');
+      }
+  });
+
+  // Add click outside to close search
+  document.addEventListener('click', (event) => {
+      if (window.innerWidth <= 768 && 
+          searchContainer.classList.contains('show-input') && 
+          !searchContainer.contains(event.target)) {
+          searchContainer.classList.remove('show-input');
+      }
+  });
+
+  // Add initial mobile handler
+  addMobileSearchHandler();
+
+  // Recheck on window resize
+  window.addEventListener('resize', addMobileSearchHandler);
 });
