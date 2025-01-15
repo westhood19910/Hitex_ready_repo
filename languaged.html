@@ -133,7 +133,7 @@
           </ul>
           
           <div class="gro_btu_01">
-              <a href="frevis.html" class="por_qt_pg_001">REQUEST A QUOTE</a>
+              <a href="#" class="por_qt_pg_001">REQUEST A QUOTE</a>
           </div>
       </div>
   </nav>
@@ -201,21 +201,21 @@
        <div class="col-sm-12 col-md-7 col-lg-7" style="background-color: #ffffff; border-radius: 10px; box-shadow: 9px 9px 10px rgba(27, 73, 148, 0.3)">
                <div class="d-flex flex-column justify-content-center align-items-center"> 
                    <h1 class="fr-h1-000">GET A QUOTE</h1>
-               <form action="/submit_form" method="post"> 
+               <form action="/submit_form" method="post" enctype="multipart/form-data"> 
                  <div class="d-flex">
                    <label for="name-0001" class="lb-fr-001"></label>
-                   <input type="text" id="name-0001" name="name" placeholder="first-name" style="margin-bottom: 1em;" required>
+                   <input type="text" id="name-0001" name="firstname" placeholder="first-name" style="margin-bottom: 1em;" required>
                        <label for="lastName-0001" class="lb-fr-001"></label>
-                       <input type="text" id="lastName-0001" name="name" placeholder="Last-name" style="margin-left: 3em; margin-bottom: 1em;" required>
+                       <input type="text" id="lastName-0001" name="Lastname" placeholder="Last-name" style="margin-left: 1em; margin-bottom: 1em;" required>
                    </div>
                    <div class="d-flex">
                    <label for="em-sp-001" class="lb-fr-001"></label>
                    <input type="email" id="em-sp-001" name="email" placeholder="Email address" class="in-sp-001" required>
                    <label for="phone" class="lb-fr-001"></label>
-                   <input type="tel" id="ph-sp-001" name="phone"  placeholder="Phone Number" style="margin-left: 3em;" required>
+                   <input type="tel" id="ph-sp-001" name="phone"  placeholder="Phone Number" style="margin-left: 1em;" required>
                    </div>  
                    <label class="lb-fr-001">Gender:</label>
-                   <select id="sl-gn-001">        
+                   <select id="sl-gn-001" name="gender">        
                        <option> Male</option>
                        <option> Female</option>
                        <option> Other</option>
