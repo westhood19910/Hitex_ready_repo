@@ -301,3 +301,39 @@ document.addEventListener('DOMContentLoaded', () => {
   // Recheck on window resize
   window.addEventListener('resize', addMobileSearchHandler);
 });
+
+
+//  CODE FOR FAQ
+
+document.addEventListener('DOMContentLoaded', function() {
+  const faqItems = document.querySelectorAll('.est-90-fr-001');
+  
+  faqItems.forEach(item => {
+      item.addEventListener('click', function() {
+          // Toggle active class on the clicked item
+          this.classList.toggle('active');
+          
+          // Find the next span element (answer)
+          const answer = this.nextElementSibling;
+          if (answer && answer.tagName.toLowerCase() === 'span') {
+              answer.classList.toggle('active');
+              
+              // Close other open answers
+              const allAnswers = document.querySelectorAll('#kw-98-001');
+              const allItems = document.querySelectorAll('.est-90-fr-001');
+              
+              allAnswers.forEach(ans => {
+                  if (ans !== answer) {
+                      ans.classList.remove('active');
+                  }
+              });
+              
+              allItems.forEach(itm => {
+                  if (itm !== this) {
+                      itm.classList.remove('active');
+                  }
+              });
+          }
+      });
+  });
+});
