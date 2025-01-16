@@ -25,6 +25,23 @@ body::-webkit-scrollbar {
     background: #555; 
   }
 
+
+  .video-background {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+}
+
+.content-overlay {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, 0.06); /* Semi-transparent overlay */
+}
+
 .new_int_9234 {
     top: 0;
     position: relative;
@@ -33,6 +50,7 @@ body::-webkit-scrollbar {
     align-items: center;
     gap: 3em;
     height: 100vh;
+    padding: 20px;
   }
 
   @media screen and (max-width: 853px) {
@@ -54,9 +72,14 @@ body::-webkit-scrollbar {
     width: auto;
     height: 100%;
     padding: 2em;
-    background-color: rgba(160, 160, 160, 0.693);
+    background-color: rgba(252, 252, 252, 0.693);
     margin-left: 5em;
 }
+
+ .img_above_list {
+            max-width: 200px;
+            margin-bottom: 20px;
+        }
 
 @media screen and (max-width:876px){
     .language_selector {
