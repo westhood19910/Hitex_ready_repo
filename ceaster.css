@@ -4,7 +4,6 @@ body {
     padding: 0;
     overflow:scroll;
     background-size: cover;
-    background-image: url(assets/new_bac6.jpg);
     background-position: 0fr;
 }
 
@@ -25,6 +24,12 @@ body::-webkit-scrollbar {
     background: #555; 
   }
 
+  .video-active {
+    opacity: 1;
+}
+.languageText-hidden {
+    opacity: 0;
+}
 
   .video-background {
     position: fixed;
@@ -33,6 +38,7 @@ body::-webkit-scrollbar {
     min-width: 100%;
     min-height: 100%;
     z-index: -1;
+    transform: scale(1);
 }
 
 .content-overlay {
@@ -72,7 +78,7 @@ body::-webkit-scrollbar {
     width: auto;
     height: 100%;
     padding: 2em;
-    background-color: rgba(252, 252, 252, 0.693);
+    background-color: rgba(117, 117, 117, 0.693);
     margin-left: 5em;
 }
 
@@ -194,12 +200,19 @@ body::-webkit-scrollbar {
 
 .image-container #languageText {
     position: relative;
-    font-size: 34px;
+    font-size: 49px;
     font-weight: bold;
     line-height: 0.95em; 
     text-align: center;
-    color: rgba(255, 246, 246, 0.853);
+    color: rgba(255, 255, 255, 0.853);
     transition: opacity 0.8s ease-in-out; 
+    border-right: 2px solid transparent;
+    animation: blinkCursor 0.7s infinite;
+}
+
+@keyframes blinkCursor {
+    0%, 100% { border-right-color: transparent; }
+    50% { border-right-color: currentColor; }
 }
 
 .languageText-hidden {

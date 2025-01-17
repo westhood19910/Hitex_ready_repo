@@ -4206,11 +4206,54 @@ padding: 1em;
   margin-bottom: 2em;
 }
 
+.jxt_int_tr {
+  position: relative;
+  top: 8em;
+}
+
+.jxt_int_tr h1{
+  text-align: center;
+  font-weight: 900;
+  font-size: 3rem;
+  margin-top: 2em;
+  color: #051363;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 670px) {
+  .jxt_int_tr h1{
+    text-align: center;
+    font-weight: 900;
+    font-size: 1.6rem;
+    margin-top: 2em;
+    color: #051363;
+    text-transform: uppercase;
+  }
+
+  .jxt_int_tr .se_54_fg {
+    text-align: center;
+    font-weight: 800;
+    font-size: 0.85rem !important;
+    margin-top: 0.5em;
+    color: #000000;
+    text-transform: uppercase;
+  }
+  
+}
+
+.jxt_int_tr .se_54_fg {
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.35rem;
+  margin-top: 0.5em;
+  color: #000000;
+  text-transform: uppercase;
+}
+
 .rwa_her_001 {
  display: flex;
-  background-color: rgb(235, 237, 249);
   position: relative;
-  top: 0em;
+  top: em;
   overflow-x: scroll;
   transition: .5s ease-in-out;
 }
@@ -4271,12 +4314,11 @@ background-color: rgb(235, 237, 249);
 
 .ass-h2-001 {
   color: #ffffff; 
-  font-size: 30px;
+  font-size: 2.5rem;
   margin-bottom: 10px; 
   font-weight: bold;
   margin-top: 1em;
-  margin: 10px 4em;
-  text-align: left;
+  text-align: center;
 }
 
 @media screen and (max-width:985px) {
@@ -4353,7 +4395,7 @@ background-color: rgb(235, 237, 249);
 }
 
 .almi-098-001{
-  min-height: 70vh;
+  height: 50vh;
   background-color:  rgb(9, 19, 94);
   margin: 3em 0.4em;
   border-radius: 10px;
@@ -4399,7 +4441,7 @@ border-bottom: 2px solid rgb(255, 255, 255);
 }
 
 #almi-123-001{
-  height: auto;
+  height: 50vh;
   background-color:  rgb(182, 35, 35);;
   margin: 3em 0.3em;
   border-radius: 10px;
@@ -4959,7 +5001,8 @@ input:focus {
   justify-content: space-between;
   align-items: center;
   position: relative;
-  gap: 0.6em;
+  gap: 0.2em;
+  height: 14em;
 }
 
 @media screen and (max-width:876px){
@@ -4988,6 +5031,11 @@ input:focus {
   margin-left: 6px;
   margin-bottom: 1em;
 }
+
+.cr-sp-002 {
+  color: #030202;
+}
+
 @media screen and (max-width:560px) {
   .cr-sp-001 {
   font-size: 18px; }
@@ -5028,6 +5076,10 @@ input:focus {
 
 #forEncode001{
   color: rgb(255, 255, 255);
+}
+
+#ogyam_1 {
+  color: #030202;
 }
 
 .cr-sp1-001 {
@@ -6934,6 +6986,7 @@ margin: 1em 1em;
 /* OTHER CODE HERE*/
 
 .sev-ver-001 {
+  top: 20em;
   display: flex;
   flex-direction: column;
   position: relative;
