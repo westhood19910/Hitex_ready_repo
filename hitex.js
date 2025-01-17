@@ -7,23 +7,48 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let currentIndex = 0;
     const textElement = document.getElementById("languageText");
+    let typingSpeed = 130; // Milliseconds per character
+    let deletingSpeed = 10; // Milliseconds per character
+    let pauseDuration = 4500; // How long to pause
 
-    function changeText() {
-       
-        textElement.classList.add("languageText-hidden");
-
-        setTimeout(function() {
-         
-            textElement.textContent = texts[currentIndex];
-            textElement.classList.remove("languageText-hidden");
-
-            currentIndex = (currentIndex + 1) % texts.length;
-        }, 1000); 
+    function typeText(text) {
+        let charIndex = 0;
+        textElement.textContent = "";
+        
+        function type() {
+            if (charIndex < text.length) {
+                textElement.textContent += text.charAt(charIndex);
+                charIndex++;
+                setTimeout(type, typingSpeed);
+            } else {
+                // Wait before starting to delete
+                setTimeout(deleteText, pauseDuration);
+            }
+        }
+        
+        type();
     }
 
-    changeText();
+    function deleteText() {
+        let text = textElement.textContent;
+        
+        function erase() {
+            if (text.length > 0) {
+                text = text.substring(0, text.length - 1);
+                textElement.textContent = text;
+                setTimeout(erase, deletingSpeed);
+            } else {
+                // Move to next text
+                currentIndex = (currentIndex + 1) % texts.length;
+                setTimeout(() => typeText(texts[currentIndex]), 500);
+            }
+        }
+        
+        erase();
+    }
 
-    setInterval(changeText, 3000);
+    // Start the animation
+    typeText(texts[0]);
 });
 
 // CODE FOR LANGUAGE WELCOME MESSAGE
