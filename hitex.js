@@ -7,9 +7,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let currentIndex = 0;
     const textElement = document.getElementById("languageText");
-    let typingSpeed = 130; // Milliseconds per character
-    let deletingSpeed = 10; // Milliseconds per character
-    let pauseDuration = 4500; // How long to pause
+    let typingSpeed = 51; // m/s per character
+    let deletingSpeed = 10; // m/s per character
+    let pauseDuration = 2000; // How long to pause
 
     function typeText(text) {
         let charIndex = 0;
