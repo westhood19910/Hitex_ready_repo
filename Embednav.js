@@ -246,6 +246,27 @@ function createScrollReveal() {
 document.addEventListener('DOMContentLoaded', createScrollReveal);
 
 
-// LEVELS CODE HERE
+// NEW FAQ CODE HERE
+
+document.addEventListener('DOMContentLoaded', () => {
+    const faqToggle = document.getElementById('faqToggle');
+    const faqContent = document.getElementById('faqContent');
+    const toggleIcon = faqToggle.querySelector('.toggle-icon');
+
+    // Initially hide content
+    faqContent.style.maxHeight = '0';
+
+    faqToggle.addEventListener('click', () => {
+        if (faqContent.classList.contains('active')) {
+            faqContent.classList.remove('active');
+            faqContent.style.maxHeight = '0';
+            toggleIcon.textContent = '▼';
+        } else {
+            faqContent.classList.add('active');
+            faqContent.style.maxHeight = '500px';
+            toggleIcon.textContent = '▲';
+        }
+    });
+});
 
 
