@@ -250,23 +250,48 @@ document.addEventListener('DOMContentLoaded', createScrollReveal);
 
 document.addEventListener('DOMContentLoaded', () => {
     const faqToggle = document.getElementById('faqToggle');
-    const faqContent = document.getElementById('faqContent');
-    const toggleIcon = faqToggle.querySelector('.toggle-icon');
+    const faqQuestions = document.getElementById('faqQuestions');
+    const faqToggleIcon = faqToggle.querySelector('.toggle-icon');
 
-    // Initially hide content
-    faqContent.style.maxHeight = '0';
-
+    // FAQ Header Toggle
     faqToggle.addEventListener('click', () => {
-        if (faqContent.classList.contains('active')) {
-            faqContent.classList.remove('active');
-            faqContent.style.maxHeight = '0';
-            toggleIcon.textContent = '▼';
-        } else {
-            faqContent.classList.add('active');
-            faqContent.style.maxHeight = '500px';
-            toggleIcon.textContent = '▲';
-        }
+        faqQuestions.classList.toggle('active');
+        faqToggleIcon.textContent = faqQuestions.classList.contains('active') ? '▲' : '▼';
+    });
+
+    // Individual Question Toggles
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+            const answer = question.nextElementSibling;
+            const icon = question.querySelector('.toggle-icon');
+
+            // Close all other open answers
+            document.querySelectorAll('.faq-answer').forEach(ans => {
+                if (ans !== answer) {
+                    ans.classList.remove('active');
+                    ans.previousElementSibling.querySelector('.toggle-icon').textContent = '▼';
+                }
+            });
+
+            // Toggle current answer
+            answer.classList.toggle('active');
+            icon.textContent = answer.classList.contains('active') ? '▲' : '▼';
+        });
     });
 });
 
+
+// CODE FOR AUTHOR
+
+document.addEventListener('DOMContentLoaded', () => {
+    const ctaButton = document.querySelector('.cta-button');
+    
+    ctaButton.addEventListener('mouseenter', (e) => {
+        e.target.style.transform = 'translateY(-3px)';
+    });
+
+    ctaButton.addEventListener('mouseleave', (e) => {
+        e.target.style.transform = 'translateY(0)';
+    });
+});
 
