@@ -371,3 +371,27 @@ cards.forEach(card => {
   observer.observe(card);
 });
 
+
+
+// CODE FOR SERVICES PAGE
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Smooth scroll for the comparison section
+  document.querySelector('.scroll-indicator').addEventListener('click', function() {
+      document.querySelector('.comparison-section').scrollIntoView({
+          behavior: 'smooth'
+      });
+  });
+
+  // Add hover effects to service cards
+  const cards = document.querySelectorAll('.service-card');
+  cards.forEach(card => {
+      card.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-5px)';
+      });
+      card.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0)';
+      });
+  });
+});
+
