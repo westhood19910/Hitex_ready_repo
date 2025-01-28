@@ -28,17 +28,7 @@ body::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
 
-.container {
-    display:grid;
-    height: 100vh;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 0.2fr 1.5fr 1.2fr 0.8fr;
-    grid-gap: 0.1rem;
-    grid-template-areas: 'nav nav nav nav'
-     'main main main main' 
-     'content1 content1 content2 content3'
-     'sidebar footer footer footer';
-}
+
 
 nav{
     background: none;
@@ -760,13 +750,6 @@ h2 {
   transform: translateX(5px);
 }
 
-
-.fa {
-  color: #4a90e2;
-  margin-right: 0.5rem;
-  font-size: 1.1rem;
-}
-
 .fot-ul-003 li a {
   text-align: left;
   font-weight: bold;
@@ -1471,7 +1454,7 @@ h2 {
     left:0;
     width: 100%; 
     padding: auto;
-    background-color: #f53838;
+    background-color: #A50104;
     padding: 0px; 
     z-index: 22;
     height: 2.2em;
@@ -1648,13 +1631,9 @@ body {
 }
 
 .re_co_bre_0xa {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
   position: relative;
   background-position: center;
   background-size: cover;
-  min-height: 35em;
   height: 100%;
   animation: BackforChinesepage 70s infinite;
 }
@@ -1771,10 +1750,19 @@ body {
 .per_po_02_re {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
   height: 100vh;
+}
+
+.pag-2-001 {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.7);
+  margin-top: 10em;
 }
 
 .pag_2_nav_bar ul li a:hover {
@@ -1800,7 +1788,6 @@ body {
 }
 
 .gr-ps-tur-001 {
-  display: none;
   width: 100%;
   font-size: 70px;
   color: rgb(255, 255, 255);
@@ -1937,7 +1924,6 @@ body {
 
 
 
-
 /* Style for pag-2-but-1 */
 .pag_2_but_1{ 
   padding: 10px 5px;
@@ -1953,7 +1939,6 @@ body {
   border: none;
   border-radius: 10px; 
   border: 2px solid #c92929;
-  margin-bottom: 1em;
   margin-left: 2em;
   align-self: flex-start;
   transition: .3s ease-in-out;
@@ -2776,6 +2761,55 @@ font-weight: bold;
   transform: translateY(-3px);
 }
 
+
+.signup-button {
+  margin-left: auto; /* Pushes the button to the right */
+  padding: 0.25rem 1.3rem;
+  background-color: #025847; /* Attractive blue color */
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.signup-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+}
+
+/* Icon within sign-up button */
+.signup-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .fr_fl_fx_001 {
+      justify-content: center;
+      gap: 1rem;
+  }
+  
+  .signup-button {
+      margin-left: 0; /* Center button on mobile */
+      margin-top: 1rem; /* Add space above button when wrapped */
+      width: 100%; /* Full width on mobile */
+      justify-content: center;
+  }
+  
+  .alb-im-001 {
+      width: 20px; /* Slightly smaller icons on mobile */
+      height: 20px;
+  }
+}
+
 .fr_fl_fx_001{
   display: flex;
   align-items:center;
@@ -3248,7 +3282,7 @@ color: #000000;
   display: flex;
   justify-content: center;
  border-radius: 4px; 
- height: 9.5em; 
+ height: 152px; 
  display: flex;
  justify-content: center;
  align-items: center;
@@ -3257,7 +3291,7 @@ color: #000000;
 .Peppres .inw-091-003 {
   background-color:rgb(25, 11, 80);
  border-radius: 4px; 
- height: 9.5em; 
+ height: 152px;  
  justify-content: center;
  border-radius: 4px;
  display: flex;
@@ -3268,7 +3302,7 @@ color: #000000;
 .Peppres .inw-091-004 {
   background-color:rgb(25, 11, 80);
  border-radius: 4px; 
- height: 9.5em; 
+ height: 152px; 
  justify-content: center;
  border-radius: 4px; 
  display: flex;
@@ -3476,7 +3510,7 @@ color: #ffffff;
 }
 
 
-.cta-button h3 {
+.setagumh3 {
   font-size: 225px;
 }
 
@@ -3519,7 +3553,7 @@ color: #ffffff;
   width: 100px;
 }
 
-.service-description, .cta-button {
+.service-description, .setagum{
   display: none;
     position: relative;
     top: 0;
@@ -3551,7 +3585,7 @@ color: #ffffff;
   z-index: 37;
 }
 
-.service-card:hover .cta-button {
+.service-card:hover .setagum{
   opacity: 1;
   position: relative;
   top: 40%;
@@ -3572,7 +3606,7 @@ color: #ffffff;
     z-index: 1;
 }
 
-.cta-button {
+.setagum{
   display: none;
   padding: 10px 50px;
   background: #af0404;
@@ -3583,7 +3617,7 @@ color: #ffffff;
   transition: background 0.3s ease;
 }
 
-.cta-button  h3{
+.setagum h3{
 font-size: 14px;
 text-align: center;
 }
@@ -3598,7 +3632,7 @@ text-align: center;
   }
 }
 
-.hover-content .cta-button {
+.hover-content .setagum{
   position: relative;
   display: inline-block;
   margin-top: 20px;
