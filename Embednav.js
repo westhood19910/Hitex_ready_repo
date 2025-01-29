@@ -295,3 +295,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// code for features
+
+const animationController = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = 'running';
+        }
+    });
+}, scrollObserver);
+
+// Observe all research cards
+document.querySelectorAll('.research_card').forEach(card => {
+    card.style.animationPlayState = 'paused';
+    animationController.observe(card);
+});
+
