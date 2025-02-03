@@ -395,3 +395,39 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const xj9km_elements = document.querySelectorAll('.uj6tk_fade');
+  
+  const wd5nt_observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('eq9pm_visible');
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  xj9km_elements.forEach(element => {
+    wd5nt_observer.observe(element);
+  });
+
+  const hg4lp_button = document.querySelector('.fm2ht_trigger');
+  hg4lp_button.addEventListener('click', function() {
+    console.log('Careers section CTA clicked');
+  });
+
+  const mq7jx_photos = document.querySelectorAll('.pq2fs_frame');
+  mq7jx_photos.forEach(photo => {
+    photo.addEventListener('mouseenter', function() {
+      this.style.transform = 'scale(1.02)';
+    });
+    
+    photo.addEventListener('mouseleave', function() {
+      this.style.transform = 'scale(1)';
+    });
+  });
+});
+
