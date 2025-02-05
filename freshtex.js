@@ -396,6 +396,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+// CODE FOR INTERSECTION OBESERVER FOR CARREERS PAGE ON ABOUT US
 
 document.addEventListener('DOMContentLoaded', function() {
   const xj9km_elements = document.querySelectorAll('.uj6tk_fade');
@@ -430,4 +431,58 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+
+// CODE FOR POP UP
+let idleTime = 0;
+let idleInterval;
+let popupShown = false;
+
+// Function to show the popup
+function showPopup() {
+    if (!popupShown) {
+        document.getElementById('idlePopup').classList.add('show');
+        document.getElementById('idlePopupOverlay').classList.add('show');
+        popupShown = true;
+    }
+}
+
+// Function to close the popup
+function closePopup() {
+    document.getElementById('idlePopup').classList.remove('show');
+    document.getElementById('idlePopupOverlay').classList.remove('show');
+    popupShown = false;
+    resetIdleTime(); // Reset the timer when popup is closed
+}
+
+// Function to reset idle time
+function resetIdleTime() {
+    idleTime = 0;
+}
+
+// Function to increment idle time
+function timerIncrement() {
+    idleTime = idleTime + 1;
+    if (idleTime >= 30) { // Show popup after 30 seconds of inactivity
+        showPopup();
+    }
+}
+
+// Set up the idle timer
+document.addEventListener('DOMContentLoaded', function() {
+    // Increment the idle time counter every second
+    idleInterval = setInterval(timerIncrement, 1000);
+
+    // Reset the idle timer on user activity
+    const resetEvents = ['mousemove', 'keypress', 'click', 'touchstart', 'scroll'];
+    resetEvents.forEach(event => {
+        document.addEventListener(event, resetIdleTime, true);
+    });
+
+    // Close popup when clicking outside
+    document.getElementById('idlePopupOverlay').addEventListener('click', closePopup);
+});
+
+
+// ROTATING GLOBE
 

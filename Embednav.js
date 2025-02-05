@@ -311,3 +311,8 @@ document.querySelectorAll('.research_card').forEach(card => {
     animationController.observe(card);
 });
 
+
+// GLOBE CODE
+
+
+
