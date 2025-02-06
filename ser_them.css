@@ -1044,6 +1044,82 @@ color: rgb(255, 255, 255);
     z-index: 1000;
 }
 
+/* CODE INBETWENN FOOTER AND GLOBE*/
+
+.zoopty-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column;
+    max-width: 100%;
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-top: 6em;
+}
+
+.whifflepuff-title {
+    font-size: 2.5rem;
+    color: #7a7a7a;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.squiggly-arrow {
+    position: absolute;
+    left: 50%;
+    transform: translatey(-50%);
+    width: 50px;
+    transform: translatey(-50%) rotate(90deg);
+    height: 50px;
+    top: 40%;
+}
+
+.squiggly-arrow::before {
+    content: '➤';
+    position: absolute;
+    font-size: 40px;
+    color: #e74c3c;
+    animation: bounceDown 1s infinite alternate;
+}
+
+.yonderbloom-button {
+    display: inline-block;
+    margin-top: 80px;
+    padding: 12px 30px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+}
+
+.yonderbloom-button:hover {
+    background-color: #2980b9;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 25px rgba(52, 152, 219, 0.4);
+}
+
+@keyframes bounceDown {
+    0% { transform: translatex(0); }
+    100% { transform: translatex(10px); }
+}
+
+@media (max-width: 600px) {
+    .zoopty-container {
+        margin: 20px;
+        padding: 30px 20px;
+    }
+
+    .whifflepuff-title {
+        font-size: 2rem;
+    }
+}
+
 /* When these classes are added, the elements become visible */
 .show {
     display: block !important;
@@ -1097,10 +1173,19 @@ color: rgb(255, 255, 255);
 
 /* ROTATING GLOBE CODE */
 
+.timo_tihead {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .zxq9w {
     position: relative;
     min-height: 100vh;
-    background: linear-gradient(to right, #03037a 50%, #f3f3f3 50%);
+    width: 95%;
+    background: linear-gradient(to right, #f3f3f3 50%, #03037a 50%);
+    box-shadow: 0px 0px 17px rgba(0, 0, 0, 0.35);
 }
 
 .kj4ds {
@@ -1122,14 +1207,14 @@ color: rgb(255, 255, 255);
 }
 
 .yx5pq {
-    background: rgba(39, 57, 161, 0.9);
+    background: rgba(255, 255, 255, 0.9);
     padding: 30px;
     border-radius: 16px;
     backdrop-filter: blur(10px);
     transition: transform 0.3s ease;
 }
 .yx5pq2 {
-    background: #ffffff;
+    background: #00338b;
     padding: 30px;
     border-radius: 16px;
     backdrop-filter: blur(10px);
@@ -1146,7 +1231,7 @@ color: rgb(255, 255, 255);
 }
 
 .yx5pq h2 {
-    color: #ffffff;
+    color: #b40505;
     font-size: 1.8rem;
     margin-bottom: 10px;
     font-weight: 700;
@@ -1155,7 +1240,7 @@ color: rgb(255, 255, 255);
 }
 
 .yx5pq2 h2 {
-    color: #b40a0a;
+    color: #ffffff;
     font-size: 1.8rem;
     margin-bottom: 10px;
     font-weight: 700;
@@ -1164,14 +1249,14 @@ color: rgb(255, 255, 255);
 }
 
 .yx5pq h3 {
-    color: #a8b2d1;
+    color: #919191;
     font-size: 1.2rem;
     margin-bottom: 15px;
     font-weight: 500;
 }
 
 .yx5pq2 h3 {
-    color: #a8b2d1;
+    color: #d80e0e;
     font-size: 1.2rem;
     margin-bottom: 15px;
     font-weight: 500;
@@ -1186,13 +1271,13 @@ color: rgb(255, 255, 255);
 }
 
 .yx5pq p {
-    color: #e7e7e7;
+    color: #888888;
     font-size: 1rem;
     line-height: 1.7;
 }
 
 .yx5pq2 p {
-    color: #797979;
+    color: #cccccc;
     font-size: 1rem;
     line-height: 1.7;
 }
@@ -1314,11 +1399,10 @@ color: rgb(255, 255, 255);
 }
 
 /* CODE FOR STORY */
-
 .l-page {
     display: flex;
     min-height: 100vh;
-    margin: 8em 0em;
+    margin: 10em 0em;
 }
 
 .l-top-section h3{
@@ -1397,9 +1481,14 @@ color: rgb(255, 255, 255);
 
 /* CODE FOR FOOTER ABOVE FOOTER ON ABOUT PAGE */
 
+.timo_tihead h1{
+  text-align: center;
+  padding: 2rem;
+}
+
 .xk892_wrapper {
     max-width: 100%;
-    margin: 20px auto;
+    margin-top: 9em;
     padding: 40px;
     background-color: #093e80;
 }
@@ -1760,65 +1849,201 @@ color: rgb(255, 255, 255);
 
 /* CODE FOR LEADERSHIP AT THE ABOUT PAGE*/
 
-.qx-wrapper-container {
-    max-width: 1200px;
-    margin: 5em auto;
+.wobbly-wrapper {
+    position: relative;
+    max-width: 100%;
+    margin: 10px auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.zonkers-text-box {
+    background: #ffffff;
+    padding: 20px;
+    margin-top: 100px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    height: 250px;
+    box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.1);
+}
+
+.per_nyin001 {
+color: rgb(214, 47, 47);
+font-weight: 700;
+}
+
+.quibble-image-box {
+    position: relative;
+    top: 100%;
+    width: 900px;
+    height: 250px;
+    padding: 10px;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    padding: 2rem;
-}
-
-.zk-section-header {
-    text-align: center;
-    margin-bottom: 0rem;
-}
-
-.nj-cta-button {
-    display: block;
-    width: 200px;
-    margin: 0.5rem auto;
-    padding: 0.75rem 1.5rem;
-    background-color: none;
-    color: rgb(212, 27, 27);
-    text-align: center;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-}
-
-.yx-grid-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-}
-
-.bm-grid-item {
-    background-color: #f8f9fa;
-    border-radius: 6px;
-    padding: 1rem;
-    text-align: center;
+    z-index: 2;
+    margin-top: -4.4em;
     transition: transform 0.3s ease;
 }
 
-.bm-grid-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+.quibble-image-box img {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
 }
 
-/* Responsive Design */
-@media screen and (max-width: 1024px) {
-    .yx-grid-container {
-        grid-template-columns: repeat(2, 1fr);
+.zonkers-text-box h1 {
+    color: #000000;
+    margin-bottom: 10px;
+    font-size: 2.5em;
+    text-align: center;
+}
+
+.zonkers-text-box p {
+    color: #646464;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    text-align: center;
+    width: 60%;
+    
+}
+
+@media (max-width: 768px) {
+    .zonkers-text-box p {
+        color: #e6e6e6;
+        line-height: 1.6;
+        margin-bottom: 15px;
+        text-align: center;
+        width: 100%;
+        
     }
 }
 
-@media screen and (max-width: 600px) {
-    .yx-grid-container {
-        grid-template-columns: 1fr;
+@media (max-width: 768px) {
+    .wobbly-wrapper {
+        margin: 20px;
+    }
+
+    .quibble-image-box {
+        position: relative;
+        right: auto;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto 20px;
+    }
+
+    .zonkers-text-box {
+        margin-top: 0;
     }
 }
 
+/* CODE FOR GLOBAL OFFICES */
 
+.zoopty-wrapper {
+    max-width: 1300px;
+    margin: 40px auto;
+    display: flex;
+    gap: 40px;
+    min-height: 400px;
+    align-items: center;
+}
+
+.flibber-zone {
+    flex: 2;  /* Changed from 1 to 2 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.quibblenox-zone {
+    flex: 3;  /* Changed from 1 to 3 for wider width */
+    padding: 40px;
+    border-radius: 20px;
+}
+
+.wobbly-text {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: zanzibar 1s ease-out;
+}
+
+.squiggly-link {
+    display: inline-block;
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 12px 24px;
+    border: 2px solid #2c3e50;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+}
+
+.squiggly-link:hover {
+    background: #2c3e50;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.whifflepuff-content {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: #2c3e50;
+    animation: yonderbloom 1s ease-out;
+}
+
+@keyframes zanzibar {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes yonderbloom {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .zoopty-wrapper {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .wobbly-text {
+        font-size: 3rem;
+    }
+
+    .quibblenox-zone {
+        padding: 30px;
+    }
+
+    .whifflepuff-content {
+        font-size: 1.1rem;
+    }
+}
 /* CODE FOR ABOUT US */
 
 .js-hero-container {

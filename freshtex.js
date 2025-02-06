@@ -484,5 +484,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// ROTATING GLOBE
+// LEADERSHIP CODE
+
 
