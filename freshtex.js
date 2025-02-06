@@ -463,7 +463,7 @@ function resetIdleTime() {
 // Function to increment idle time
 function timerIncrement() {
     idleTime = idleTime + 1;
-    if (idleTime >= 30) { // Show popup after 30 seconds of inactivity
+    if (idleTime >= 3100) { // Show popup after 30 seconds of inactivity
         showPopup();
     }
 }
