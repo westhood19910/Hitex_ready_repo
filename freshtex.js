@@ -487,3 +487,24 @@ document.addEventListener('DOMContentLoaded', function() {
 // LEADERSHIP CODE
 
 
+document.addEventListener('DOMContentLoaded', () => {
+  const parallaxSection = document.querySelector('.hk9xm_parallax-section');
+  const body = document.body;
+
+  window.addEventListener('scroll', () => {
+      const sectionTop = parallaxSection.offsetTop;
+      const sectionHeight = parallaxSection.clientHeight;
+      const scrollPosition = window.pageYOffset;
+      const windowHeight = window.innerHeight;
+
+      // Check if the section is in view
+      if (
+          scrollPosition >= sectionTop - windowHeight / 2 && 
+          scrollPosition < sectionTop + sectionHeight - windowHeight / 2
+      ) {
+          body.classList.add('parallax-active');
+      } else {
+          body.classList.remove('parallax-active');
+      }
+  });
+});
