@@ -508,3 +508,87 @@ document.addEventListener('DOMContentLoaded', () => {
       }
   });
 });
+
+
+
+const continents = [
+
+  { 
+    name: 'Asia', 
+    imageUrl: 'assets/asia.png',
+   
+},
+  { 
+      name: 'The Americas', 
+      imageUrl: 'assets/theamericas.png',
+  },
+
+  { 
+      name: 'Europe', 
+      imageUrl: 'assets/europe.png',
+  },
+  { 
+      name: 'Africa', 
+      imageUrl: 'assets/africa.png',
+  },
+  
+];
+
+function createContinentCards() {
+  const continentGrid = document.getElementById('continentGrid');
+  
+  continents.forEach(continent => {
+      const card = document.createElement('div');
+      card.classList.add('continent-card');
+      
+      // Map Image
+      const mapImage = document.createElement('img');
+      mapImage.src = continent.imageUrl;
+      mapImage.alt = `${continent.name} Image`;
+      mapImage.classList.add('continent-map');
+      
+      // Continent Name
+      const name = document.createElement('div');
+      name.textContent = continent.name;
+      name.classList.add('continent-name');
+      
+      // Statistics
+      const stats = document.createElement('div');
+      stats.classList.add('continent-stats');
+      
+      // Create stats items
+      const statsData = [
+          { number: continent.countries, label: '' },
+          { number: continent.offices, label: '' },
+          { number: continent.clients, label: '' }
+      ];
+      
+      statsData.forEach(stat => {
+          const statItem = document.createElement('div');
+          statItem.classList.add('stat-item');
+          
+          const number = document.createElement('div');
+          number.textContent = stat.number;
+          number.classList.add('stat-number');
+          
+          const label = document.createElement('div');
+          label.textContent = stat.label;
+          label.classList.add('stat-label');
+          
+          statItem.appendChild(number);
+          statItem.appendChild(label);
+          stats.appendChild(statItem);
+      });
+      
+      // Assemble card
+      card.appendChild(mapImage);
+      card.appendChild(name);
+      card.appendChild(stats);
+      
+      // Add to grid
+      continentGrid.appendChild(card);
+  });
+}
+
+// Create cards when page loads
+document.addEventListener('DOMContentLoaded', createContinentCards);
