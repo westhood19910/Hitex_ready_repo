@@ -337,3 +337,258 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   });
 });
+
+
+// IMPLEMENTATION CODE
+
+document.querySelectorAll('.cta-button').forEach(button => {
+  button.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = e.target.getAttribute('href');
+      document.querySelector(target).scrollIntoView({
+          behavior: 'smooth'
+      });
+  });
+});
+
+// Add animation when cards come into view
+const cards = document.querySelectorAll('.service-card');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+      if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+      }
+  });
+}, {
+  threshold: 0.1
+});
+
+cards.forEach(card => {
+  card.style.opacity = '0';
+  card.style.transform = 'translateY(20px)';
+  card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(card);
+});
+
+
+
+// CODE FOR SERVICES PAGE
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Smooth scroll for the comparison section
+  document.querySelector('.scroll-indicator').addEventListener('click', function() {
+      document.querySelector('.comparison-section').scrollIntoView({
+          behavior: 'smooth'
+      });
+  });
+
+  // Add hover effects to service cards
+  const cards = document.querySelectorAll('.service-card');
+  cards.forEach(card => {
+      card.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-5px)';
+      });
+      card.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0)';
+      });
+  });
+});
+
+
+// CODE FOR INTERSECTION OBESERVER FOR CARREERS PAGE ON ABOUT US
+
+document.addEventListener('DOMContentLoaded', function() {
+  const xj9km_elements = document.querySelectorAll('.uj6tk_fade');
+  
+  const wd5nt_observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('eq9pm_visible');
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  xj9km_elements.forEach(element => {
+    wd5nt_observer.observe(element);
+  });
+
+  const hg4lp_button = document.querySelector('.fm2ht_trigger');
+  hg4lp_button.addEventListener('click', function() {
+    console.log('Careers section CTA clicked');
+  });
+
+  const mq7jx_photos = document.querySelectorAll('.pq2fs_frame');
+  mq7jx_photos.forEach(photo => {
+    photo.addEventListener('mouseenter', function() {
+      this.style.transform = 'scale(1.02)';
+    });
+    
+    photo.addEventListener('mouseleave', function() {
+      this.style.transform = 'scale(1)';
+    });
+  });
+});
+
+
+// CODE FOR POP UP
+let idleTime = 0;
+let idleInterval;
+let popupShown = false;
+
+// Function to show the popup
+function showPopup() {
+    if (!popupShown) {
+        document.getElementById('idlePopup').classList.add('show');
+        document.getElementById('idlePopupOverlay').classList.add('show');
+        popupShown = true;
+    }
+}
+
+// Function to close the popup
+function closePopup() {
+    document.getElementById('idlePopup').classList.remove('show');
+    document.getElementById('idlePopupOverlay').classList.remove('show');
+    popupShown = false;
+    resetIdleTime(); // Reset the timer when popup is closed
+}
+
+// Function to reset idle time
+function resetIdleTime() {
+    idleTime = 0;
+}
+
+// Function to increment idle time
+function timerIncrement() {
+    idleTime = idleTime + 1;
+    if (idleTime >= 3100) { // Show popup after 30 seconds of inactivity
+        showPopup();
+    }
+}
+
+// Set up the idle timer
+document.addEventListener('DOMContentLoaded', function() {
+    // Increment the idle time counter every second
+    idleInterval = setInterval(timerIncrement, 1000);
+
+    // Reset the idle timer on user activity
+    const resetEvents = ['mousemove', 'keypress', 'click', 'touchstart', 'scroll'];
+    resetEvents.forEach(event => {
+        document.addEventListener(event, resetIdleTime, true);
+    });
+
+    // Close popup when clicking outside
+    document.getElementById('idlePopupOverlay').addEventListener('click', closePopup);
+});
+
+
+// LEADERSHIP CODE
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const parallaxSection = document.querySelector('.hk9xm_parallax-section');
+  const body = document.body;
+
+  window.addEventListener('scroll', () => {
+      const sectionTop = parallaxSection.offsetTop;
+      const sectionHeight = parallaxSection.clientHeight;
+      const scrollPosition = window.pageYOffset;
+      const windowHeight = window.innerHeight;
+
+      // Check if the section is in view
+      if (
+          scrollPosition >= sectionTop - windowHeight / 2 && 
+          scrollPosition < sectionTop + sectionHeight - windowHeight / 2
+      ) {
+          body.classList.add('parallax-active');
+      } else {
+          body.classList.remove('parallax-active');
+      }
+  });
+});
+
+
+
+const continents = [
+
+  { 
+    name: 'Asia', 
+    imageUrl: 'assets/asia.png',
+   
+},
+  { 
+      name: 'The Americas', 
+      imageUrl: 'assets/theamericas.png',
+  },
+
+  { 
+      name: 'Europe', 
+      imageUrl: 'assets/europe.png',
+  },
+  { 
+      name: 'Africa', 
+      imageUrl: 'assets/africa.png',
+  },
+  
+];
+
+function createContinentCards() {
+  const continentGrid = document.getElementById('continentGrid');
+  
+  continents.forEach(continent => {
+      const card = document.createElement('div');
+      card.classList.add('continent-card');
+      
+      // Map Image
+      const mapImage = document.createElement('img');
+      mapImage.src = continent.imageUrl;
+      mapImage.alt = `${continent.name} Image`;
+      mapImage.classList.add('continent-map');
+      
+      // Continent Name
+      const name = document.createElement('div');
+      name.textContent = continent.name;
+      name.classList.add('continent-name');
+      
+      // Statistics
+      const stats = document.createElement('div');
+      stats.classList.add('continent-stats');
+      
+      // Create stats items
+      const statsData = [
+          { number: continent.countries, label: '' },
+          { number: continent.offices, label: '' },
+          { number: continent.clients, label: '' }
+      ];
+      
+      statsData.forEach(stat => {
+          const statItem = document.createElement('div');
+          statItem.classList.add('stat-item');
+          
+          const number = document.createElement('div');
+          number.textContent = stat.number;
+          number.classList.add('stat-number');
+          
+          const label = document.createElement('div');
+          label.textContent = stat.label;
+          label.classList.add('stat-label');
+          
+          statItem.appendChild(number);
+          statItem.appendChild(label);
+          stats.appendChild(statItem);
+      });
+      
+      // Assemble card
+      card.appendChild(mapImage);
+      card.appendChild(name);
+      card.appendChild(stats);
+      
+      // Add to grid
+      continentGrid.appendChild(card);
+  });
+}
+
+// Create cards when page loads
+document.addEventListener('DOMContentLoaded', createContinentCards);

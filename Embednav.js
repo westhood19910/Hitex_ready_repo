@@ -246,4 +246,97 @@ function createScrollReveal() {
 document.addEventListener('DOMContentLoaded', createScrollReveal);
 
 
-// IMAGE ROTATER
+// NEW FAQ CODE HERE
+
+document.addEventListener('DOMContentLoaded', () => {
+    const faqToggle = document.getElementById('faqToggle');
+    const faqQuestions = document.getElementById('faqQuestions');
+    const faqToggleIcon = faqToggle.querySelector('.toggle-icon');
+
+    // FAQ Header Toggle
+    faqToggle.addEventListener('click', () => {
+        faqQuestions.classList.toggle('active');
+        faqToggleIcon.textContent = faqQuestions.classList.contains('active') ? '▲' : '▼';
+    });
+
+    // Individual Question Toggles
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+            const answer = question.nextElementSibling;
+            const icon = question.querySelector('.toggle-icon');
+
+            // Close all other open answers
+            document.querySelectorAll('.faq-answer').forEach(ans => {
+                if (ans !== answer) {
+                    ans.classList.remove('active');
+                    ans.previousElementSibling.querySelector('.toggle-icon').textContent = '▼';
+                }
+            });
+
+            // Toggle current answer
+            answer.classList.toggle('active');
+            icon.textContent = answer.classList.contains('active') ? '▲' : '▼';
+        });
+    });
+});
+
+
+// CODE FOR AUTHOR
+
+document.addEventListener('DOMContentLoaded', () => {
+    const ctaButton = document.querySelector('.cta-button');
+    
+    ctaButton.addEventListener('mouseenter', (e) => {
+        e.target.style.transform = 'translateY(-3px)';
+    });
+
+    ctaButton.addEventListener('mouseleave', (e) => {
+        e.target.style.transform = 'translateY(0)';
+    });
+});
+
+// code for features
+
+const animationController = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = 'running';
+        }
+    });
+}, scrollObserver);
+
+// Observe all research cards
+document.querySelectorAll('.research_card').forEach(card => {
+    card.style.animationPlayState = 'paused';
+    animationController.observe(card);
+});
+
+
+// CODE FOR SPECIAL SCROLL
+
+// JavaScript
+document.addEventListener('scroll', () => {
+    const spotlightCanvas = document.querySelector('.spotlight-canvas');
+    const scrolled = window.scrollY;
+    
+    // Optional: Add parallax effect
+    spotlightCanvas.style.transform = `translateY(${scrolled * 0.5}px)`;
+  });
+  
+  // Optional: Add smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+  });
+
+
+
+//   CODE FOR NEW GLOBAL OFFICES
+
+
+
+
