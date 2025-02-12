@@ -525,11 +525,11 @@ const continents = [
 
   { 
       name: 'Europe', 
-      imageUrl: 'assets/europe.png',
+      imageUrl: 'assets/blueeurope.png',
   },
   { 
       name: 'Africa', 
-      imageUrl: 'assets/africa.png',
+      imageUrl: 'assets/blueafrica.png',
   },
   
 ];
