@@ -592,3 +592,158 @@ function createContinentCards() {
 
 // Create cards when page loads
 document.addEventListener('DOMContentLoaded', createContinentCards);
+
+// CODE FOR NEW CAREERS
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+  
+  // Animate elements on scroll
+  const animateOnScroll = function() {
+    const elements = document.querySelectorAll('.fiddlefaddle-card, .whatchamacallit-perk, .higgledy-table-container');
+    elements.forEach(element => {
+      const elementPosition = element.getBoundingClientRect().top;
+      const screenPosition = window.innerHeight;
+      
+      if(elementPosition < screenPosition - 100) {
+        element.style.opacity = '1';
+        element.style.transform = 'translateY(0)';
+      }
+    });
+  };
+  
+  // Initial style setup
+  const elementsToAnimate = document.querySelectorAll('.fiddlefaddle-card, .whatchamacallit-perk, .higgledy-table-container');
+  elementsToAnimate.forEach(element => {
+    element.style.opacity = '0';
+    element.style.transform = 'translateY(30px)';
+    element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  });
+  
+  // Run on scroll
+  window.addEventListener('scroll', animateOnScroll);
+  // Run once on page load
+  animateOnScroll();
+  
+  // Job listing hover effect
+  const jobRows = document.querySelectorAll('.piggledy-row:not(:first-child)');
+  jobRows.forEach(row => {
+    row.addEventListener('mouseenter', function() {
+      this.style.backgroundColor = '#f0f4fa';
+      this.style.transition = 'background-color 0.3s ease';
+    });
+    row.addEventListener('mouseleave', function() {
+      this.style.backgroundColor = '';
+    });
+  });
+  
+  // Button hover effect
+  const buttons = document.querySelectorAll('.twiddle-apply');
+  buttons.forEach(button => {
+    button.addEventListener('mouseenter', function() {
+      this.style.transform = 'translateY(-2px)';
+      this.style.boxShadow = '0 4px 8px rgba(213,76,76,0.2)';
+      this.style.transition = 'all 0.3s ease';
+    });
+    button.addEventListener('mouseleave', function() {
+      this.style.transform = '';
+      this.style.boxShadow = '';
+    });
+  });
+});
+
+
+// CODE FOR CIRCLE
+document.addEventListener('DOMContentLoaded', function() {
+  // Position the circles around the central point
+  const container = document.querySelector('.circle-container');
+  const centerX = container.offsetWidth / 2;
+  const centerY = container.offsetHeight / 2;
+  const radius = Math.min(centerX, centerY) * 0.7; // 70% of container radius
+  
+  const circles = document.querySelectorAll('.circle');
+  const centerCircle = document.querySelector('.central-circle');
+  const centerRadius = centerCircle.offsetWidth / 2;
+  
+  // Position circles evenly around center
+  circles.forEach((circle, index) => {
+      const angle = (index * (2 * Math.PI / circles.length));
+      const x = centerX + radius * Math.cos(angle) - circle.offsetWidth / 2;
+      const y = centerY + radius * Math.sin(angle) - circle.offsetHeight / 2;
+      
+      circle.style.left = `${x}px`;
+      circle.style.top = `${y}px`;
+      
+      // Create connector
+      const connector = document.createElement('div');
+      connector.className = 'connector';
+      container.insertBefore(connector, container.firstChild); // Add at beginning to be behind circles
+      
+      // Calculate connector start and end points
+      const circleRadius = circle.offsetWidth / 2;
+      const startX = x + circleRadius;
+      const startY = y + circleRadius;
+      
+      // Calculate angle and distance
+      const dx = startX - centerX;
+      const dy = startY - centerY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      const normalizedX = dx / distance;
+      const normalizedY = dy / distance;
+      
+      // Adjust start and end points to be on the edge of circles
+      const adjustedStartX = centerX + normalizedX * centerRadius;
+      const adjustedStartY = centerY + normalizedY * centerRadius;
+      const adjustedEndX = startX - normalizedX * circleRadius;
+      const adjustedEndY = startY - normalizedY * circleRadius;
+      
+      // Calculate connector length and angle
+      const connectorLength = Math.sqrt(
+          Math.pow(adjustedEndX - adjustedStartX, 2) + 
+          Math.pow(adjustedEndY - adjustedStartY, 2)
+      );
+      const connectorAngle = Math.atan2(
+          adjustedEndY - adjustedStartY,
+          adjustedEndX - adjustedStartX
+      );
+      
+      // Set connector style
+      connector.style.width = `${connectorLength}px`;
+      connector.style.height = '2px';
+      connector.style.left = `${adjustedStartX}px`;
+      connector.style.top = `${adjustedStartY}px`;
+      connector.style.transform = `rotate(${connectorAngle}rad)`;
+  });
+  
+  // Make hover effect more interactive
+  circles.forEach(circle => {
+      circle.addEventListener('mouseenter', function() {
+          this.style.zIndex = 20;
+      });
+      
+      circle.addEventListener('mouseleave', function() {
+          this.style.zIndex = 10;
+      });
+  });
+  
+  // Handle window resize
+  window.addEventListener('resize', function() {
+      // Recalculate positions (simplified - a full implementation would
+      // recreate all connectors and reposition all circles)
+      const newCenterX = container.offsetWidth / 2;
+      const newCenterY = container.offsetHeight / 2;
+      centerCircle.style.left = `${newCenterX - centerCircle.offsetWidth / 2}px`;
+      centerCircle.style.top = `${newCenterY - centerCircle.offsetHeight / 2}px`;
+  });
+});
+
+
