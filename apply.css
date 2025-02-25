@@ -1,0 +1,626 @@
+:root {
+    --primary-color: #032672;
+    --primary-dark: #1e40af;
+    --primary-light: #3b82f6;
+    --accent-color: #f97316;
+    --light-color: #f8fafc;
+    --dark-color: #1e293b;
+    --success-color: #10b981;
+    --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    --hover-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+    background: linear-gradient(180deg, rgba(37, 99, 235, 0.5) 0%, rgba(255, 255, 255, 1) 50%);
+    color: var(--dark-color);
+    line-height: 1.6;
+    background-attachment: fixed;
+}
+
+.enge_container {
+    width: 100%;
+}
+
+.enge_header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding-top: 20px;
+    position: relative;
+}
+
+.enge_header::after {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-light), var(--primary-dark));
+    border-radius: 2px;
+}
+
+.enge_logo {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    letter-spacing: -1px;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.enge_subtitle {
+    font-size: 1.3rem;
+    color: var(--dark-color);
+    opacity: 0.8;
+    font-weight: 300;
+}
+
+.enge_job_header {
+    background-color: white;
+    border-radius: 16px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: var(--card-shadow);
+    position: relative;
+    overflow: hidden;
+    border-top: 5px solid var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.enge_job_header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("/api/placeholder/300/100") center/cover no-repeat;
+    opacity: 0.03;
+    z-index: 0;
+}
+
+.enge_job_title {
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    font-weight: 600;
+}
+
+.enge_job_description {
+    color: var(--dark-color);
+    opacity: 0.85;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    font-size: 1.1rem;
+    max-width: 800px;
+}
+
+.enge_form_container {
+    background-color: white;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: var(--card-shadow);
+    position: relative;
+    margin-bottom: 40px;
+    transition: all 0.3s ease;
+}
+
+.enge_form_container:hover, 
+.enge_job_header:hover,
+.enge_process:hover,
+.enge_company_info:hover {
+    box-shadow: var(--hover-shadow);
+    transform: translateY(-5px);
+}
+
+.enge_section_title {
+    font-size: 1.6rem;
+    color: var(--primary-color);
+    margin: 30px 0 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(37, 99, 235, 0.1);
+    position: relative;
+    font-weight: 600;
+}
+
+.enge_section_title::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background-color: var(--primary-color);
+}
+
+.enge_form_group {
+    margin-bottom: 25px;
+}
+
+.enge_label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: var(--dark-color);
+    font-size: 1.05rem;
+}
+
+.enge_required::after {
+    content: "*";
+    color: var(--accent-color);
+    margin-left: 4px;
+}
+
+.enge_input,
+.enge_textarea,
+.enge_select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid rgba(37, 99, 235, 0.2);
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: rgba(248, 250, 252, 0.8);
+}
+
+.enge_input:focus,
+.enge_textarea:focus,
+.enge_select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+    background-color: white;
+}
+
+.enge_textarea {
+    min-height: 180px;
+    resize: vertical;
+}
+
+.enge_file_input {
+    margin-top: 10px;
+}
+
+.enge_file_label {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+    color: white;
+    padding: 12px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+}
+
+.enge_file_label i {
+    margin-right: 10px;
+}
+
+.enge_file_label:hover {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(37, 99, 235, 0.3);
+}
+
+.enge_file_name {
+    margin-left: 15px;
+    font-size: 0.95rem;
+    color: var(--dark-color);
+    opacity: 0.7;
+}
+
+.enge_checkbox_group {
+    margin-top: 20px;
+}
+
+.enge_checkbox_label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.enge_checkbox {
+    margin-right: 12px;
+    width: 20px;
+    height: 20px;
+    accent-color: var(--primary-color);
+}
+
+.enge_btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+    min-width: 180px;
+}
+
+.enge_btn i {
+    margin-right: 10px;
+}
+
+.enge_btn:hover {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(37, 99, 235, 0.3);
+}
+
+.enge_btn_outline {
+    background: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    box-shadow: none;
+    margin-right: 20px;
+}
+
+.enge_btn_outline:hover {
+    background: rgba(37, 99, 235, 0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1);
+}
+
+.enge_btn_container {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.enge_process {
+    background-color: white;
+    border-radius: 16px;
+    padding: 40px;
+    margin: 40px 0;
+    box-shadow: var(--card-shadow);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.enge_step_container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    position: relative;
+}
+
+.enge_step_container::before {
+    content: "";
+    position: absolute;
+    top: 40px;
+    left: 50px;
+    right: 50px;
+    height: 4px;
+    background: linear-gradient(90deg, rgba(37, 99, 235, 0.2), rgba(37, 99, 235, 0.2));
+    border-radius: 2px;
+    z-index: 1;
+}
+
+.enge_step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    flex: 1;
+}
+
+.enge_step_number {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    position: relative;
+    box-shadow: 0 10px 15px rgba(37, 99, 235, 0.2);
+    transition: all 0.3s ease;
+}
+
+.enge_step:hover .enge_step_number {
+    transform: scale(1.1);
+    box-shadow: 0 15px 20px rgba(37, 99, 235, 0.3);
+}
+
+.enge_step_text {
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.1rem;
+    color: var(--primary-dark);
+}
+
+.enge_step_desc {
+    text-align: center;
+    margin-top: 5px;
+    font-size: 0.9rem;
+    color: var(--dark-color);
+    opacity: 0.7;
+    max-width: 150px;
+}
+
+.enge_info_box {
+    background-color: rgba(37, 99, 235, 0.05);
+    border-left: 5px solid var(--primary-color);
+    padding: 25px;
+    border-radius: 10px;
+    margin: 25px 0;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.enge_info_box:hover {
+    background-color: rgba(37, 99, 235, 0.08);
+    transform: translateX(5px);
+}
+
+.enge_info_title {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 1.15rem;
+    display: flex;
+    align-items: center;
+}
+
+.enge_info_title i {
+    margin-right: 10px;
+    font-size: 1.3rem;
+}
+
+.enge_company_section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.enge_company_info {
+    flex: 1;
+    min-width: 300px;
+    background-color: white;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: var(--card-shadow);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.enge_benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.enge_benefit_card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 25px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(37, 99, 235, 0.1);
+}
+
+.enge_benefit_card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08);
+    border-color: rgba(37, 99, 235, 0.3);
+}
+
+.enge_benefit_icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(37, 99, 235, 0.2));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    transition: all 0.3s ease;
+}
+
+.enge_benefit_card:hover .enge_benefit_icon {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(37, 99, 235, 0.3));
+    transform: scale(1.1);
+}
+
+.enge_benefit_title {
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.enge_benefit_desc {
+    font-size: 0.9rem;
+    color: var(--dark-color);
+    opacity: 0.7;
+}
+
+.enge_footer {
+    text-align: center;
+    margin-top: 60px;
+    color: var(--dark-color);
+    opacity: 0.7;
+    font-size: 0.95rem;
+    padding: 30px 0;
+    position: relative;
+}
+
+.enge_footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.5), transparent);
+}
+
+.enge_social_links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.enge_social_link {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.enge_social_link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+    color: white;
+    background-color: var(--primary-color);
+}
+
+/* Animated elements */
+.enge_animated_bg {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+    animation: pulse 10s infinite alternate;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.8); opacity: 0.3; }
+    100% { transform: scale(1.2); opacity: 0.6; }
+}
+
+.enge_floating {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Form field animations */
+.enge_form_group {
+    position: relative;
+}
+
+.enge_form_group::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.enge_form_group:focus-within::after {
+    width: 100%;
+    left: 0;
+}
+
+@media (max-width: 768px) {
+    .enge_step_container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .enge_step_container::before {
+        top: 40px;
+        left: 40px;
+        right: auto;
+        bottom: 40px;
+        width: 4px;
+        height: auto;
+    }
+    
+    .enge_step {
+        flex-direction: row;
+        margin-bottom: 40px;
+        width: 100%;
+    }
+    
+    .enge_step_number {
+        margin-bottom: 0;
+        margin-right: 20px;
+    }
+    
+    .enge_step_text {
+        text-align: left;
+    }
+    
+    .enge_step_desc {
+        text-align: left;
+        max-width: none;
+    }
+    
+    .enge_btn_container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    .enge_btn_outline {
+        margin-right: 0;
+    }
+    
+    .enge_logo {
+        font-size: 2.8rem;
+    }
+    
+    .enge_job_header, 
+    .enge_form_container,
+    .enge_process,
+    .enge_company_info {
+        padding: 25px;
+    }
+}
+
+/* CODE FOR NEW FREELANCE PAGE */

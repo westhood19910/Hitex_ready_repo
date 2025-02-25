@@ -724,10 +724,10 @@ document.addEventListener('DOMContentLoaded', function() {
       connector.style.transform = `rotate(${connectorAngle}rad)`;
   });
   
-  // Make hover effect more interactive
+  // Make hover effect  interactive
   circles.forEach(circle => {
       circle.addEventListener('mouseenter', function() {
-          this.style.zIndex = 20;
+          this.style.zIndex = 50;
       });
       
       circle.addEventListener('mouseleave', function() {
@@ -745,5 +745,151 @@ document.addEventListener('DOMContentLoaded', function() {
       centerCircle.style.top = `${newCenterY - centerCircle.offsetHeight / 2}px`;
   });
 });
+
+
+
+
+// CODE FOR OTHER INHOUSE SECTIONS
+
+document.addEventListener('DOMContentLoaded', function() {
+  const questions = document.querySelectorAll('.enigma-question');
+  
+  questions.forEach(question => {
+      question.addEventListener('click', function() {
+          const answer = this.nextElementSibling;
+          if (answer.style.display === 'block') {
+              answer.style.display = 'none';
+          } else {
+              document.querySelectorAll('.enigma-answer').forEach(a => a.style.display = 'none');
+              answer.style.display = 'block';
+          }
+      });
+  });
+
+  // Hide all answers initially
+  document.querySelectorAll('.enigma-answer').forEach(answer => {
+      answer.style.display = 'none';
+  });
+});
+
+// CODE FOR WHAT TEAM SAYS
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const questions = [
+      "What our Team says…",
+      "HE global family in photos",
+      "Got Questions? We've got you covered!",
+      "I just submitted my application, what can I expect?",
+      "How long does your recruitment process take?",
+      "Will I hear back if I am not moving forward?",
+      "What do we look for in a candidate?",
+      "Will I receive feedback on my application status?",
+      "Can I request feedback on my application?",
+      "I'm interested in number of position on your website, can I apply for multiple position?",
+      "Do you offer internship?",
+      "What makes HiTexEdiTex a great place to work?",
+      "How can I contact the Recruitment Team for further inquiries?",
+      "I'm having trouble submitting an application, what should I do?",
+      "Where do you list all your open positions?",
+      "How does HiTexEdiTex support professional development?",
+      "What can I do to prepare for the interviews?",
+      "What is the company culture like at HiTex EdiTex?",
+      "Can I apply for a position if I don't meet all the listed qualifications?",
+      "Can I refer my friend for a role?",
+      "How long is the probation period?",
+      "What is the performance review period?",
+      "Do you provide medical insurance?"
+  ];
+
+  const queryList = document.getElementById('queryList');
+
+  // Generate FAQ items only if container exists
+  if (queryList) {
+      questions.forEach((question, index) => {
+          const queryItem = document.createElement('div');
+          queryItem.className = 'queryItem';
+          queryItem.innerHTML = `
+              <button class="queryTrigger">
+                  <span class="queryText">${question}</span>
+                  <span class="indicatorBox">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M6 9l6 6 6-6"/>
+                      </svg>
+                  </span>
+              </button>
+              <div class="queryContent">
+                  <p>This is a placeholder answer for "${question}". Replace with actual content.</p>
+              </div>
+          `;
+          queryList.appendChild(queryItem);
+      });
+
+      // Single event delegation for all FAQ items
+      queryList.addEventListener('click', function(event) {
+          const trigger = event.target.closest('.queryTrigger');
+          if (!trigger) return;
+
+          const content = trigger.nextElementSibling;
+          const indicator = trigger.querySelector('.indicatorBox');
+          
+          // Close all other items
+          document.querySelectorAll('.queryContent').forEach(item => {
+              if (item !== content) {
+                  item.classList.remove('visible');
+              }
+          });
+          
+          document.querySelectorAll('.indicatorBox').forEach(ind => {
+              if (ind !== indicator) {
+                  ind.classList.remove('expanded');
+              }
+          });
+
+          // Toggle current item
+          content.classList.toggle('visible');
+          indicator.classList.toggle('expanded');
+      });
+  }
+});
+
+// CODE FOR VIDEO SIDE
+
+const video = document.getElementById('mainVideo');
+const playPauseButton = document.getElementById('playPause');
+const muteButton = document.getElementById('muteButton');
+const progressBar = document.getElementById('progressBar');
+
+// Play/Pause functionality
+playPauseButton.addEventListener('click', () => {
+  if (video.paused) {
+    video.play();
+    playPauseButton.textContent = 'Pause';
+  } else {
+    video.pause();
+    playPauseButton.textContent = 'Play';
+  }
+});
+
+// Mute functionality
+muteButton.addEventListener('click', () => {
+  video.muted = !video.muted;
+  muteButton.textContent = video.muted ? 'Unmute' : 'Mute';
+});
+
+// Update progress bar
+video.addEventListener('timeupdate', () => {
+  const progress = (video.currentTime / video.duration) * 100;
+  progressBar.style.width = progress + '%';
+});
+
+// Click on progress bar to seek
+document.querySelector('.SlodsProgress').addEventListener('click', (e) => {
+  const progressBar = e.currentTarget;
+  const clickPosition = (e.pageX - progressBar.offsetLeft) / progressBar.offsetWidth;
+  video.currentTime = clickPosition * video.duration;
+});
+
+
 
 
