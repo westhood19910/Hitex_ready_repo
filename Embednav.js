@@ -309,3 +309,93 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+
+// CODE FOR WHAT OUR TEAM SAYS
+
+document.addEventListener('DOMContentLoaded', function() {
+    const carouselInner = document.getElementById('carouselInner');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const indicators = document.getElementById('indicators');
+    
+    const testimonials = document.querySelectorAll('.tea_testimonial');
+    let currentIndex = 0;
+    
+    // Create indicators
+    testimonials.forEach((_, index) => {
+      const indicator = document.createElement('div');
+      indicator.classList.add('tea_indicator');
+      if (index === 0) {
+        indicator.classList.add('active');
+      }
+      indicator.addEventListener('click', () => {
+        goToSlide(index);
+      });
+      indicators.appendChild(indicator);
+    });
+    
+    function updateCarousel() {
+      const translateX = -currentIndex * 100;
+      carouselInner.style.transform = `translateX(${translateX}%)`;
+      
+      // Update indicators
+      document.querySelectorAll('.tea_indicator').forEach((indicator, index) => {
+        if (index === currentIndex) {
+          indicator.classList.add('active');
+        } else {
+          indicator.classList.remove('active');
+        }
+      });
+    }
+    
+    function goToSlide(index) {
+      currentIndex = index;
+      updateCarousel();
+    }
+    
+    function goToNext() {
+      currentIndex = (currentIndex + 1) % testimonials.length;
+      updateCarousel();
+    }
+    
+    function goToPrev() {
+      currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+      updateCarousel();
+    }
+    
+    // Event listeners
+    prevBtn.addEventListener('click', goToPrev);
+    nextBtn.addEventListener('click', goToNext);
+    
+    // Optional: Auto-slide
+    let interval = setInterval(goToNext, 7000);
+    
+    // Reset interval on manual navigation
+    document.querySelector('.tea_carousel').addEventListener('click', () => {
+      clearInterval(interval);
+      interval = setInterval(goToNext, 7000);
+    });
+    
+    // Touch events for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    carouselInner.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+    
+    carouselInner.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+    
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      if (touchEndX < touchStartX - swipeThreshold) {
+        goToNext();
+      } else if (touchEndX > touchStartX + swipeThreshold) {
+        goToPrev();
+      }
+    }
+  });
