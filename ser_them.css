@@ -1,12 +1,9 @@
 :root {
-    :root {
-        --primary-red: #D54C4F;
-        --primary-blue: #032672;
-        --light-blue: #D3E5FF;
-        --light-color: #f5f5f5;
-        --dark-color: #333;
-    }
-}
+    --red: #D54C4F;
+    --blue: #032672;
+    --light-blue: #D3E5FF;
+  }
+  
 body {
     font-family: 'Georgia', serif;
     margin: 0;
@@ -2475,7 +2472,7 @@ padding: 2rem;
   .tea_container {
     max-width: 100%;
     margin: 0em auto;
-    padding: 10rem 1rem;
+    padding: 2rem 1rem;
     position: relative;
     z-index: 1;
     color: #fff;
@@ -2904,7 +2901,7 @@ padding: 2rem;
 .dres_sibve {
     width: 100%;
     position: relative;
-    margin: 12em 0em;
+    margin: 7em 0em;
 }
 
 .dres_sibve h1 {
@@ -3578,24 +3575,344 @@ padding: 2rem;
     display: inline-block;
   }
 
+  /* CODE FOR NEW GLOBAL OFFICE*/
+  .gloe_container {
+    max-width: 1400px;
+    margin: 0em auto;
+    padding: 0 20px;
+}
 
-  /* IN-PHOTOS CODE */
+.gloe_site-header {
+    background-color: #0078d4;
+    color: white;
+    padding: 20px 0;
+}
+
+.gloe_hero {
+    margin: 6em auto;
+    background-color: #ffff;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.gloe_hero-title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #032672;
+}
+
+.gloe_hero-description {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    color: rgb(122, 122, 122);
+}
+
+/* Filters section styles */
+.gloe_filters {
+    padding: 30px 0;
+    background-color: #ffffff;
+    border-bottom: 1px solid #eaeaea;
+}
+.gloe_filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+.gloe_filter-button {
+    padding: 10px 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+.gloe_filter-button:hover, .gloe_filter-button.active {
+    background-color: #0078d4;
+    color: white;
+    border-color: #0078d4;
+}
+.gloe_search-form {
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+}
+.gloe_search-input {
+    width: 100%;
+    padding: 15px 20px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    font-size: 1rem;
+}
+.gloe_search-input:focus {
+    outline: none;
+    border-color: #0078d4;
+}
+.gloe_search-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+}
+
+/* Map styles */
+.gloe_map-container {
+    height: 400px;
+    margin: 30px 0;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #eaeaea;
+    background-image: url("assets/alexim.jpg");
+    background-size: cover;
+}
+
+/* Offices grid styles */
+.gloe_offices-section {
+    padding: 50px 0;
+}
+.gloe_offices-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    cursor: pointer;
+}
+.gloe_office-card {
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.gloe_office-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.gloe_office-image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+.gloe_office-info {
+    padding: 20px;
+}
+.gloe_office-title {
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #032672;
+}
+.gloe_office-country {
+    margin-bottom: 15px;
+    color: #666;
+    font-weight: bold;
+}
+.gloe_office-address {
+    margin-bottom: 15px;
+    color: #666;
+}
+.gloe_office-contact {
+    margin-top: 15px;
+}
+.gloe_office-phone, .gloe_office-email {
+    display: block;
+    margin-bottom: 5px;
+    color: #4675b6;
+    text-decoration: none;
+}
+.gloe_office-phone:hover, .gloe_office-email:hover {
+    text-decoration: underline;
+}
+.gloe_view-on-map {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px  20px;
+    background-color: #D54C4F;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #fdfdfd;
+    font-size: 0.7rem;
+    cursor: pointer;
+    border: none;
+    font-weight: 700;
+}
+
+.gloe_view-on-map:hover {
+    background-color: #e0e0e0;
+}
+
+
+.gloe_site-footer {
+    background-color: #333;
+    color: white;
+    padding: 40px 0;
+    text-align: center;
+}
+
+
+.gloe_hidden {
+    display: none;
+}
+
+/* CODE FOR PRE FOOTER */
+
+.sol_d_apply {
+    background-color: var(--light-blue);
+}
+._apply {
+    background-color: var(--light-blue);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 40px;
+    border-radius: 8px;
+    max-width: 90%;
+    margin: 0px auto;
+    gap: 4px; 
+  }
   
+  ._apply-content {
+    flex: 1.5;
+    max-width: 60%; 
+  }
+  
+  ._apply-title {
+    color: var(--blue);
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  ._apply-text {
+    color: var(--blue);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+  }
+  
+  ._apply-cta {
+    display: flex;
+    align-items: center;
+  }
+  
+  ._apply-button {
+    background-color: var(--red);
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 14px 32px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  ._apply-button:hover {
+    background-color: #c03c3f;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(213, 76, 79, 0.3);
+  }
+  
+  ._apply-benefits {
+    margin-left: 20px;
+    color: var(--blue);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  
+  ._apply-graphic-container {
+    flex: 0.5;
+    max-width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+  ._apply-graphic {
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  ._apply-graphic-inner {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--red), var(--blue));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  ._apply-graphic-text {
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 0 10px;
+    transform: rotate(-5deg);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  ._apply-company {
+    display: inline-block;
+    font-weight: bold;
+  }
+  
+  ._apply-company span {
+    color: var(--red);
+  }
+  
+ 
+  @media (max-width: 768px) {
+    ._apply {
+      flex-direction: column;
+      padding: 30px;
+      gap: 30px;
+    }
+    
+    ._apply-content, ._apply-graphic-container {
+      max-width: 100%;
+      text-align: center;
+    }
+    
+    ._apply-cta {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    ._apply-benefits {
+      margin-left: 0;
+      margin-top: 15px;
+    }
+  }
+  /* IN-PHOTOS CODE */
 
 .h1n_hero {
     padding: 8rem 5% 4rem;
     display: flex;
     flex-direction: column;
-
     gap: 4rem;
     max-width: 1400px;
-    margin: 0 auto;
+    margin: 0em auto;
     background-color: white;
 }
 
 .c6v_content {
     
-   
 }
 
 .b5y_grid {
@@ -3914,6 +4231,7 @@ padding: 2rem;
   .jibberish-opportunities {
     background-color: #d3e5ff;
     padding: 120px 0;
+    margin: 2 ;
   }
   
   .razzmatazz-title {
@@ -5076,13 +5394,18 @@ padding: 2rem;
 }
 
 .predu-footer-column {
-    margin-left: 3em;
+    margin-left: 5.2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 
 .predu-footer-column h3 {
     color: #D3E5FF;
-    font-size: 1.2rem;
+    text-align: left;
+    font-size: 1.1rem;
     margin-bottom: 1.5rem;
     font-weight: 600;
     position: relative;
@@ -5101,13 +5424,16 @@ padding: 2rem;
 
 .predu-footer-links {
     list-style: none;
+    padding-left: 0em;
 }
 
 .predu-footer-links li {
     margin-bottom: 0.8rem;
+    text-align: left;
 }
 
 .predu-footer-links a {
+    text-align: left;
     color: white;
     text-decoration: none;
     transition: color 0.3s ease;
@@ -5123,9 +5449,10 @@ padding: 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-    gap: 1rem;
+    gap: 24rem;
+    max-width: 1200px;
 }
 
 .predu-search-bar {
@@ -5186,8 +5513,8 @@ padding: 2rem;
 
 .queryContainer {
     max-width: 1200px;
-    margin: 8em auto;
-    padding: 48px 24px;
+    margin: 7em auto;
+    padding: 30px 24px;
     font-family: system-ui, -apple-system, sans-serif;
     text-align: center;
 }
@@ -5231,12 +5558,7 @@ padding: 2rem;
 .contactBtn:hover {
     background-color: #c72225;  
 }
-.queryList {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    align-items: center;
-}
+
 .queryItem {
     border: 1px solid #eaeaea;
     border-radius: 8px;
@@ -5388,7 +5710,7 @@ padding: 2rem;
 .main_content_v55 {
     max-width: 1400px;
     background-color: #D3e5FF;
-    margin: 10em auto;
+    margin: 7em auto;
     padding: 3rem 5%;
 }
 
@@ -5400,6 +5722,7 @@ padding: 2rem;
     color: #032672;
     font-size: 3rem;
     margin-bottom: 1.5rem;
+    text-align: left;
 }
 
 .desc_n77 {
@@ -5407,6 +5730,7 @@ padding: 2rem;
     max-width: 800px;
     line-height: 1.6;
     margin-bottom: 4rem;
+    text-align: center;
 }
 
 .process_grid_f32 {
@@ -5496,13 +5820,15 @@ padding: 2rem;
 /* CODE FOR VIDEO SIDE */
 
 .SlodsVideoSection {
+    margin: 12em auto;
     position: relative;
     height: 80vh;
-    width: 100%;
+    width: 95%;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 10px;
   }
 
   .SlodsVideoBackground {

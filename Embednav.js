@@ -2,16 +2,11 @@
 const utils = {
     debounce: (func, wait) => {
         let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
+        return function(...args) {
             clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
+            timeout = setTimeout(() => func(...args), wait);
         };
     },
-
     isMobile: () => window.innerWidth <= 768,
     isTablet: () => window.innerWidth <= 968
 };
@@ -30,7 +25,10 @@ class NavigationSystem {
     }
 
     init() {
-        this.setupMobileMenu();
+        if (this.mobileMenuButton && this.navLinks) {
+            this.setupMobileMenu();
+        }
+        
         this.setupDropdowns();
         this.setupSubmenuToggles();
         this.setupOutsideClicks();
@@ -39,14 +37,12 @@ class NavigationSystem {
     }
 
     setupMobileMenu() {
-        if (this.mobileMenuButton && this.navLinks) {
-            this.mobileMenuButton.addEventListener('click', () => {
-                this.navLinks.classList.toggle('show');
-                if (!this.navLinks.classList.contains('show')) {
-                    this.dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
-                }
-            });
-        }
+        this.mobileMenuButton.addEventListener('click', () => {
+            this.navLinks.classList.toggle('show');
+            if (!this.navLinks.classList.contains('show')) {
+                this.dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
+            }
+        });
     }
 
     setupDropdowns() {
@@ -75,7 +71,8 @@ class NavigationSystem {
             } else {
                 this.dropdowns.forEach(d => {
                     d.classList.remove('active');
-                    d.querySelector('.dropdown-menu').style.maxHeight = '0px';
+                    const menu = d.querySelector('.dropdown-menu');
+                    if (menu) menu.style.maxHeight = '0px';
                 });
                 dropdownMenu.style.maxHeight = `${dropdownMenu.scrollHeight}px`;
                 dropdown.classList.add('active');
@@ -104,8 +101,8 @@ class NavigationSystem {
                     toggle.setAttribute('aria-expanded', isExpanded);
                     
                     this.submenuToggles.forEach(otherToggle => {
-                        const otherMenuItem = otherToggle.closest('.menu-item');
-                        if (otherMenuItem !== menuItem) {
+                        if (otherToggle !== toggle) {
+                            const otherMenuItem = otherToggle.closest('.menu-item');
                             otherMenuItem.classList.remove('active');
                             otherToggle.setAttribute('aria-expanded', 'false');
                         }
@@ -210,14 +207,15 @@ class FAQSystem {
     constructor() {
         this.faqToggle = document.getElementById('faqToggle');
         this.faqQuestions = document.getElementById('faqQuestions');
-        this.init();
+        
+        if (this.faqToggle && this.faqQuestions) {
+            this.init();
+        }
     }
 
     init() {
-        if (this.faqToggle && this.faqQuestions) {
-            this.setupFAQToggle();
-            this.setupQuestionToggles();
-        }
+        this.setupFAQToggle();
+        this.setupQuestionToggles();
     }
 
     setupFAQToggle() {
@@ -251,151 +249,390 @@ class FAQSystem {
     }
 }
 
-// Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    new NavigationSystem();
-    new CounterSystem();
-    new FAQSystem();
+// Team Hexagon System
+class HexagonSystem {
+    constructor() {
+        this.items = document.querySelectorAll('.ht_itemBox34');
+        if (this.items.length) {
+            this.init();
+        }
+    }
     
-    // Set up scroll reveal
-    createScrollReveal();
-    
-    // Initialize particle system
-    new SlodsParticleSystem();
-});
-
-
-// LIFE AT HITEX EDITEX
-
-document.addEventListener('DOMContentLoaded', function() {
-    const items = document.querySelectorAll('.ht_itemBox34');
-    
-    // Handle both click and hover events
-    items.forEach(item => {
-        const popup = item.querySelector('.ht_popup');
-        const hexagon = item.querySelector('.ht_polyContainer12');
-        
-        // Click event
-        hexagon.addEventListener('click', () => {
-            // Close all other popups first
-            document.querySelectorAll('.ht_popup.active').forEach(activePopup => {
-                if (activePopup !== popup) {
-                    activePopup.classList.remove('active');
-                }
-            });
+    init() {
+        this.items.forEach(item => {
+            const popup = item.querySelector('.ht_popup');
+            const hexagon = item.querySelector('.ht_polyContainer12');
             
-            // Toggle current popup
-            popup.classList.toggle('active');
-        });
-        
-        // Mouse enter event (hover)
-        hexagon.addEventListener('mouseenter', () => {
-            popup.classList.add('active');
-        });
-        
-        // Mouse leave event
-        item.addEventListener('mouseleave', () => {
-            // Only close if it was opened by hover, not by click
-            if (!popup.classList.contains('clicked')) {
-                popup.classList.remove('active');
+            if (hexagon && popup) {
+                // Click event
+                hexagon.addEventListener('click', () => {
+                    // Close all other popups first
+                    document.querySelectorAll('.ht_popup.active').forEach(activePopup => {
+                        if (activePopup !== popup) {
+                            activePopup.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current popup
+                    popup.classList.toggle('active');
+                });
+                
+                // Mouse enter event (hover)
+                hexagon.addEventListener('mouseenter', () => {
+                    popup.classList.add('active');
+                });
+                
+                // Mouse leave event
+                item.addEventListener('mouseleave', () => {
+                    // Only close if it was opened by hover, not by click
+                    if (!popup.classList.contains('clicked')) {
+                        popup.classList.remove('active');
+                    }
+                });
             }
         });
         
         // Add click event to close popup when clicking outside
         document.addEventListener('click', (e) => {
-            if (!item.contains(e.target)) {
-                popup.classList.remove('active');
+            this.items.forEach(item => {
+                if (!item.contains(e.target)) {
+                    const popup = item.querySelector('.ht_popup');
+                    if (popup) popup.classList.remove('active');
+                }
+            });
+        });
+    }
+}
+
+// Testimonial Carousel System
+class TestimonialCarousel {
+    constructor() {
+        this.carouselInner = document.getElementById('carouselInner');
+        this.prevBtn = document.getElementById('prevBtn');
+        this.nextBtn = document.getElementById('nextBtn');
+        this.indicators = document.getElementById('indicators');
+        this.testimonials = document.querySelectorAll('.tea_testimonial');
+        this.currentIndex = 0;
+        this.interval = null;
+        
+        if (this.carouselInner && this.testimonials.length) {
+            this.init();
+        }
+    }
+    
+    init() {
+        this.createIndicators();
+        this.setupEventListeners();
+        this.startAutoSlide();
+    }
+    
+    createIndicators() {
+        if (!this.indicators) return;
+        
+        this.testimonials.forEach((_, index) => {
+            const indicator = document.createElement('div');
+            indicator.classList.add('tea_indicator');
+            if (index === 0) {
+                indicator.classList.add('active');
+            }
+            indicator.addEventListener('click', () => {
+                this.goToSlide(index);
+            });
+            this.indicators.appendChild(indicator);
+        });
+    }
+    
+    updateCarousel() {
+        if (!this.carouselInner) return;
+        
+        const translateX = -this.currentIndex * 100;
+        this.carouselInner.style.transform = `translateX(${translateX}%)`;
+        
+        // Update indicators
+        document.querySelectorAll('.tea_indicator').forEach((indicator, index) => {
+            if (index === this.currentIndex) {
+                indicator.classList.add('active');
+            } else {
+                indicator.classList.remove('active');
             }
         });
-    });
-});
-
-
-// CODE FOR WHAT OUR TEAM SAYS
-
-document.addEventListener('DOMContentLoaded', function() {
-    const carouselInner = document.getElementById('carouselInner');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const indicators = document.getElementById('indicators');
+    }
     
-    const testimonials = document.querySelectorAll('.tea_testimonial');
-    let currentIndex = 0;
+    goToSlide(index) {
+        this.currentIndex = index;
+        this.updateCarousel();
+    }
     
-    // Create indicators
-    testimonials.forEach((_, index) => {
-      const indicator = document.createElement('div');
-      indicator.classList.add('tea_indicator');
-      if (index === 0) {
-        indicator.classList.add('active');
-      }
-      indicator.addEventListener('click', () => {
-        goToSlide(index);
-      });
-      indicators.appendChild(indicator);
-    });
+    goToNext() {
+        this.currentIndex = (this.currentIndex + 1) % this.testimonials.length;
+        this.updateCarousel();
+    }
     
-    function updateCarousel() {
-      const translateX = -currentIndex * 100;
-      carouselInner.style.transform = `translateX(${translateX}%)`;
-      
-      // Update indicators
-      document.querySelectorAll('.tea_indicator').forEach((indicator, index) => {
-        if (index === currentIndex) {
-          indicator.classList.add('active');
-        } else {
-          indicator.classList.remove('active');
+    goToPrev() {
+        this.currentIndex = (this.currentIndex - 1 + this.testimonials.length) % this.testimonials.length;
+        this.updateCarousel();
+    }
+    
+    startAutoSlide() {
+        this.interval = setInterval(() => this.goToNext(), 7000);
+    }
+    
+    setupEventListeners() {
+        if (this.prevBtn) {
+            this.prevBtn.addEventListener('click', () => this.goToPrev());
         }
-      });
+        
+        if (this.nextBtn) {
+            this.nextBtn.addEventListener('click', () => this.goToNext());
+        }
+        
+        const carousel = document.querySelector('.tea_carousel');
+        if (carousel) {
+            carousel.addEventListener('click', () => {
+                clearInterval(this.interval);
+                this.startAutoSlide();
+            });
+        }
+        
+        // Touch events for mobile
+        if (this.carouselInner) {
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            this.carouselInner.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            
+            this.carouselInner.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                const swipeThreshold = 50;
+                
+                if (touchEndX < touchStartX - swipeThreshold) {
+                    this.goToNext();
+                } else if (touchEndX > touchStartX + swipeThreshold) {
+                    this.goToPrev();
+                }
+            });
+        }
+    }
+}
+
+// Office Location Map System
+class OfficeMapSystem {
+    constructor() {
+        this.map = null;
+        this.markers = [];
+        this.activeInfoWindow = null;
+        this.mapElement = document.getElementById('gloe_map');
+        
+        if (this.mapElement) {
+            this.setupFilterButtons();
+            this.setupSearch();
+        }
     }
     
-    function goToSlide(index) {
-      currentIndex = index;
-      updateCarousel();
+    initMap() {
+        this.map = new google.maps.Map(this.mapElement, {
+            zoom: 2,
+            center: {lat: 20, lng: 0},
+            mapTypeControl: true,
+            streetViewControl: false,
+            fullscreenControl: true
+        });
+        
+        this.createMarkers();
+        this.setupViewOnMapButtons();
     }
     
-    function goToNext() {
-      currentIndex = (currentIndex + 1) % testimonials.length;
-      updateCarousel();
+    createMarkers() {
+        const officeElements = document.querySelectorAll('.gloe_office-card');
+        
+        officeElements.forEach((office, index) => {
+            const lat = parseFloat(office.dataset.lat);
+            const lng = parseFloat(office.dataset.lng);
+            const title = office.querySelector('.gloe_office-title')?.textContent || '';
+            const country = office.querySelector('.gloe_office-country')?.textContent || '';
+            const address = office.querySelector('.gloe_office-address')?.innerHTML || '';
+            const phone = office.querySelector('.gloe_office-phone')?.textContent || '';
+            const email = office.querySelector('.gloe_office-email')?.textContent || '';
+            
+            // Create marker
+            const marker = new google.maps.Marker({
+                position: {lat, lng},
+                map: this.map,
+                title: title,
+                animation: google.maps.Animation.DROP
+            });
+            
+            // Create info window content
+            const contentString = `
+                <div class="gloe_map-info-window">
+                    <h3>${title}</h3>
+                    <p><strong>${country}</strong></p>
+                    <p>${address}</p>
+                    <p><a href="tel:${phone}">${phone}</a></p>
+                    <p><a href="mailto:${email}">${email}</a></p>
+                </div>
+            `;
+            
+            // Create info window
+            const infoWindow = new google.maps.InfoWindow({ content: contentString });
+            
+            // Add click event to marker
+            marker.addListener('click', () => {
+                // Close any open info window
+                if (this.activeInfoWindow) {
+                    this.activeInfoWindow.close();
+                }
+                
+                // Open this info window
+                infoWindow.open(this.map, marker);
+                this.activeInfoWindow = infoWindow;
+                
+                // Pan to marker
+                this.map.panTo(marker.getPosition());
+                this.map.setZoom(12);
+            });
+            
+            // Store marker
+            this.markers.push({marker, infoWindow});
+        });
     }
     
-    function goToPrev() {
-      currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
-      updateCarousel();
+    setupViewOnMapButtons() {
+        document.querySelectorAll('.gloe_view-on-map').forEach(button => {
+            button.addEventListener('click', () => {
+                const index = parseInt(button.dataset.index);
+                if (index >= 0 && index < this.markers.length) {
+                    const {marker, infoWindow} = this.markers[index];
+                    
+                    // Close any open info window
+                    if (this.activeInfoWindow) {
+                        this.activeInfoWindow.close();
+                    }
+                    
+                    // Open info window for this marker
+                    infoWindow.open(this.map, marker);
+                    this.activeInfoWindow = infoWindow;
+                    
+                    // Pan to marker and zoom in
+                    this.map.panTo(marker.getPosition());
+                    this.map.setZoom(12);
+                    
+                    // Scroll to map
+                    this.mapElement.scrollIntoView({behavior: 'smooth'});
+                }
+            });
+        });
     }
     
-    // Event listeners
-    prevBtn.addEventListener('click', goToPrev);
-    nextBtn.addEventListener('click', goToNext);
-    
-    // Optional: Auto-slide
-    let interval = setInterval(goToNext, 7000);
-    
-    // Reset interval on manual navigation
-    document.querySelector('.tea_carousel').addEventListener('click', () => {
-      clearInterval(interval);
-      interval = setInterval(goToNext, 7000);
-    });
-    
-    // Touch events for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-    
-    carouselInner.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    });
-    
-    carouselInner.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    });
-    
-    function handleSwipe() {
-      const swipeThreshold = 50;
-      if (touchEndX < touchStartX - swipeThreshold) {
-        goToNext();
-      } else if (touchEndX > touchStartX + swipeThreshold) {
-        goToPrev();
-      }
+    setupFilterButtons() {
+        document.querySelectorAll('.gloe_filter-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const region = button.dataset.region;
+                
+                // Update active button
+                document.querySelectorAll('.gloe_filter-button').forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.setAttribute('aria-pressed', 'false');
+                });
+                button.classList.add('active');
+                button.setAttribute('aria-pressed', 'true');
+                
+                // Filter offices
+                const offices = document.querySelectorAll('.gloe_office-card');
+                offices.forEach(office => {
+                    if (region === 'all' || office.dataset.region === region) {
+                        office.classList.remove('gloe_hidden');
+                    } else {
+                        office.classList.add('gloe_hidden');
+                    }
+                });
+                
+                this.updateMapMarkers();
+            });
+        });
     }
-  });
+    
+    setupSearch() {
+        const searchInput = document.getElementById('office-search');
+        if (searchInput) {
+            searchInput.addEventListener('input', () => {
+                const query = searchInput.value.toLowerCase();
+                const offices = document.querySelectorAll('.gloe_office-card');
+                
+                offices.forEach(office => {
+                    const city = (office.dataset.city || '').toLowerCase();
+                    const country = (office.dataset.country || '').toLowerCase();
+                    const region = (office.dataset.region || '').toLowerCase();
+                    
+                    if (city.includes(query) || country.includes(query) || region.includes(query)) {
+                        office.classList.remove('gloe_hidden');
+                    } else {
+                        office.classList.add('gloe_hidden');
+                    }
+                });
+                
+                this.updateMapMarkers();
+            });
+        }
+    }
+    
+    updateMapMarkers() {
+        if (!this.map) return;
+        
+        const visibleOffices = Array.from(document.querySelectorAll('.gloe_office-card:not(.gloe_hidden)'));
+        const visibleIndices = visibleOffices.map(office => {
+            const viewOnMapButton = office.querySelector('.gloe_view-on-map');
+            return viewOnMapButton ? parseInt(viewOnMapButton.dataset.index) : -1;
+        }).filter(index => index >= 0);
+        
+        this.markers.forEach((item, index) => {
+            if (visibleIndices.includes(index)) {
+                item.marker.setMap(this.map);
+            } else {
+                item.marker.setMap(null);
+            }
+        });
+        
+        // Fit bounds to visible markers if there are any
+        if (visibleIndices.length > 0) {
+            const bounds = new google.maps.LatLngBounds();
+            visibleIndices.forEach(index => {
+                bounds.extend(this.markers[index].marker.getPosition());
+            });
+            this.map.fitBounds(bounds);
+        }
+    }
+}
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize all systems
+    const navigation = new NavigationSystem();
+    const counter = new CounterSystem();
+    const faq = new FAQSystem();
+    const hexagon = new HexagonSystem();
+    const testimonials = new TestimonialCarousel();
+    
+    // Set up scroll reveal if it exists
+    if (typeof createScrollReveal === 'function') {
+        createScrollReveal();
+    }
+    
+    // Initialize particle system if it exists
+    if (typeof SlodsParticleSystem === 'function') {
+        new SlodsParticleSystem();
+    }
+    
+    // Initialize the map system
+    const officeMap = new OfficeMapSystem();
+    
+    // Check if Google Maps API is loaded
+    if (typeof google !== 'undefined' && google.maps) {
+        officeMap.initMap();
+    } else {
+        // If using a map, you should have a way to call initMap when Google Maps loads
+        window.initMap = () => officeMap.initMap();
+    }
+});
