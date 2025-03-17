@@ -636,3 +636,187 @@ document.addEventListener('DOMContentLoaded', () => {
         window.initMap = () => officeMap.initMap();
     }
 });
+
+
+// // CODE FOR BENEFITES OF WORKING WITH US
+
+document.addEventListener('DOMContentLoaded', function() {
+    const timelineSections = document.querySelectorAll('.jro_e_timeline_section');
+    const timelineDots = document.querySelectorAll('.jro_e_timeline_dot');
+    const progressLine = document.querySelector('.jro_e_timeline_line_progress');
+    const timelineWrapper = document.querySelector('.jro_e_timeline_wrapper');
+    
+    if (!timelineSections.length || !timelineDots.length || !progressLine || !timelineWrapper) {
+      console.error('Timeline elements not found!');
+      return;
+    }
+    
+    let timelineHeight;
+    
+    // Calculate timeline heights
+    function calculateTimelineMetrics() {
+      // Get the full height of the timeline content
+      const wrapperHeight = timelineWrapper.offsetHeight;
+      // Subtract viewport to get scrollable area
+      timelineHeight = wrapperHeight - window.innerHeight;
+      
+      console.log('Timeline wrapper height:', wrapperHeight);
+      console.log('Viewport height:', window.innerHeight);
+      console.log('Scrollable timeline height:', timelineHeight);
+      
+      // Only adjust dot positions on mobile if needed
+      if (window.innerWidth <= 768) {
+        timelineSections.forEach((section, index) => {
+          const sectionTop = section.offsetTop;
+          if (timelineDots[index]) {
+            timelineDots[index].style.top = (sectionTop + 50) + 'px';
+          }
+        });
+      }
+    }
+    
+    function updateTimeline() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const timelineOffset = timelineWrapper.getBoundingClientRect().top + scrollTop;
+      const relativeScroll = Math.max(0, scrollTop - timelineOffset);
+      
+      // Calculate progress percentage (0 to 1)
+      const scrollPercent = Math.min(relativeScroll / timelineHeight, 1);
+      
+      // Update progress line height
+      progressLine.style.height = (scrollPercent * 100) + '%';
+      
+      // Check which sections are in view
+      timelineSections.forEach((section, index) => {
+        const rect = section.getBoundingClientRect();
+        const sectionMiddle = rect.top + rect.height / 2;
+        
+        // Section is in viewport when its middle point is within viewport
+        const isVisible = (sectionMiddle > 0 && sectionMiddle < window.innerHeight);
+        
+        if (isVisible) {
+          section.classList.add('jro_e_active');
+          
+          // Set all previous dots as active
+          timelineDots.forEach((dot, dotIndex) => {
+            if (dotIndex <= index) {
+              dot.classList.add('jro_e_active');
+            } else {
+              dot.classList.remove('jro_e_active');
+            }
+          });
+        }
+      });
+    }
+    
+    // Initialize
+    calculateTimelineMetrics();
+    updateTimeline();
+    
+    // Update on scroll with throttling
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        window.requestAnimationFrame(function() {
+          updateTimeline();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+    
+    // Update on resize with debouncing
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        calculateTimelineMetrics();
+        updateTimeline();
+      }, 250);
+    });
+  });
+
+
+//   CODE FOR TESTIMONIALS
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all testimonial slides
+    const slides = document.querySelectorAll('.veri_fy-testimonial-slide');
+    const indicators = document.querySelectorAll('.veri_fy-indicator');
+    const prevArrow = document.querySelector('.veri_fy-prev');
+    const nextArrow = document.querySelector('.veri_fy-next');
+    let currentSlide = 0;
+    let slideInterval;
+    
+    // Function to show a specific slide
+    function showSlide(slideIndex) {
+      // Make sure slideIndex is within bounds
+      if (slideIndex < 0) {
+        slideIndex = slides.length - 1;
+      } else if (slideIndex >= slides.length) {
+        slideIndex = 0;
+      }
+      
+      // Hide all slides
+      slides.forEach(slide => {
+        slide.classList.remove('active');
+      });
+      
+      // Hide all active indicators
+      indicators.forEach(indicator => {
+        indicator.classList.remove('active');
+      });
+      
+      // Show the current slide
+      slides[slideIndex].classList.add('active');
+      indicators[slideIndex].classList.add('active');
+      
+      // Update current slide
+      currentSlide = slideIndex;
+    }
+    
+    // Function to move to the next slide
+    function nextSlide() {
+      showSlide(currentSlide + 1);
+    }
+    
+    // Function to move to the previous slide
+    function prevSlide() {
+      showSlide(currentSlide - 1);
+    }
+    
+    // Auto rotate slides
+    function startSlideInterval() {
+      slideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+    }
+    
+    // Initialize auto rotation
+    startSlideInterval();
+    
+    // Add click events to indicators
+    indicators.forEach(indicator => {
+      indicator.addEventListener('click', function() {
+        const slideIndex = parseInt(this.getAttribute('data-slide'));
+        
+        // Clear the interval and restart
+        clearInterval(slideInterval);
+        showSlide(slideIndex);
+        startSlideInterval();
+      });
+    });
+    
+    // Add click events to arrows
+    nextArrow.addEventListener('click', function() {
+      clearInterval(slideInterval);
+      nextSlide();
+      startSlideInterval();
+    });
+    
+    prevArrow.addEventListener('click', function() {
+      clearInterval(slideInterval);
+      prevSlide();
+      startSlideInterval();
+    });
+  });
+
+

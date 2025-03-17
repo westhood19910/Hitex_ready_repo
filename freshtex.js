@@ -664,31 +664,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // CODE FOR CIRCLE
 document.addEventListener('DOMContentLoaded', function() {
-  // Position the circles around the central point
+  
   const container = document.querySelector('.circle-container');
   const centerX = container.offsetWidth / 2;
   const centerY = container.offsetHeight / 2;
-  const radius = Math.min(centerX, centerY) * 0.7; // 70% of container radius
+  const radius = Math.min(centerX, centerY) * 0.7; 
   
   const circles = document.querySelectorAll('.circle');
   const centerCircle = document.querySelector('.central-circle');
   const centerRadius = centerCircle.offsetWidth / 2;
   
-  // Position circles evenly around center
+ 
   circles.forEach((circle, index) => {
       const angle = (index * (2 * Math.PI / circles.length));
       const x = centerX + radius * Math.cos(angle) - circle.offsetWidth / 2;
       const y = centerY + radius * Math.sin(angle) - circle.offsetHeight / 2;
-      
       circle.style.left = `${x}px`;
       circle.style.top = `${y}px`;
       
-      // Create connector
+      // Connector
       const connector = document.createElement('div');
       connector.className = 'connector';
-      container.insertBefore(connector, container.firstChild); // Add at beginning to be behind circles
+      container.insertBefore(connector, container.firstChild); 
       
-      // Calculate connector start and end points
+      // Calculate connector 
       const circleRadius = circle.offsetWidth / 2;
       const startX = x + circleRadius;
       const startY = y + circleRadius;
@@ -715,10 +714,9 @@ document.addEventListener('DOMContentLoaded', function() {
           adjustedEndY - adjustedStartY,
           adjustedEndX - adjustedStartX
       );
-      
-      // Set connector style
+     
       connector.style.width = `${connectorLength}px`;
-      connector.style.height = '2px';
+      connector.style.height = '4px';
       connector.style.left = `${adjustedStartX}px`;
       connector.style.top = `${adjustedStartY}px`;
       connector.style.transform = `rotate(${connectorAngle}rad)`;
@@ -735,10 +733,8 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   });
   
-  // Handle window resize
+  
   window.addEventListener('resize', function() {
-      // Recalculate positions (simplified - a full implementation would
-      // recreate all connectors and reposition all circles)
       const newCenterX = container.offsetWidth / 2;
       const newCenterY = container.offsetHeight / 2;
       centerCircle.style.left = `${newCenterX - centerCircle.offsetWidth / 2}px`;
@@ -833,7 +829,7 @@ document.addEventListener('DOMContentLoaded', function() {
           const content = trigger.nextElementSibling;
           const indicator = trigger.querySelector('.indicatorBox');
           
-          // Close all other items
+          
           document.querySelectorAll('.queryContent').forEach(item => {
               if (item !== content) {
                   item.classList.remove('visible');
@@ -846,7 +842,7 @@ document.addEventListener('DOMContentLoaded', function() {
               }
           });
 
-          // Toggle current item
+          
           content.classList.toggle('visible');
           indicator.classList.toggle('expanded');
       });
@@ -860,7 +856,7 @@ const playPauseButton = document.getElementById('playPause');
 const muteButton = document.getElementById('muteButton');
 const progressBar = document.getElementById('progressBar');
 
-// Play/Pause functionality
+
 playPauseButton.addEventListener('click', () => {
   if (video.paused) {
     video.play();
@@ -871,19 +867,19 @@ playPauseButton.addEventListener('click', () => {
   }
 });
 
-// Mute functionality
+
 muteButton.addEventListener('click', () => {
   video.muted = !video.muted;
   muteButton.textContent = video.muted ? 'Unmute' : 'Mute';
 });
 
-// Update progress bar
+
 video.addEventListener('timeupdate', () => {
   const progress = (video.currentTime / video.duration) * 100;
   progressBar.style.width = progress + '%';
 });
 
-// Click on progress bar to seek
+
 document.querySelector('.SlodsProgress').addEventListener('click', (e) => {
   const progressBar = e.currentTarget;
   const clickPosition = (e.pageX - progressBar.offsetLeft) / progressBar.offsetWidth;
@@ -891,6 +887,5 @@ document.querySelector('.SlodsProgress').addEventListener('click', (e) => {
 });
 
 
+// CODE FOR BENEFITES OF WORKING WITH US
 
-
-// 
