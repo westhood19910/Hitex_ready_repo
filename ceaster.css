@@ -31,20 +31,20 @@ body::-webkit-scrollbar {
 }
 
   .video-background {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
-    z-index: -1;
-    transform: scale(1);
+    position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            z-index: -1;
 }
 
 .content-overlay {
     position: relative;
     z-index: 1;
     height: 100%;
-    background: rgba(0, 0, 0, 0.06); /* Semi-transparent overlay */
+    background: rgba(0, 0, 0, 0.06); 
 }
 
 .new_int_9234 {
@@ -145,7 +145,7 @@ body::-webkit-scrollbar {
     font-weight:bold; 
     position: relative;
     text-decoration: none;
-    background-color: rgba(3, 22, 109, 0.953);
+    background-color: rgba(1, 10, 59, 0.753);
     padding: 1.1em 5em;
     text-align: center;
     width: 200px;
@@ -192,7 +192,7 @@ body::-webkit-scrollbar {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    width: 60%;
+    width: 90%;
 }
 
 .image-container h3{
@@ -206,7 +206,7 @@ body::-webkit-scrollbar {
 
 .image-container #languageText {
     position: relative;
-    font-size: 153px;
+    font-size: 150px;
     font-weight: bold;
     line-height: 0.95em; 
     text-align: left;

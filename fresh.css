@@ -1,3 +1,12 @@
+:root {
+  --red: #D54C4F;
+  --blue: #032672;
+  --light-blue: #D3E5FF;
+  --major-heading: 3em;
+  --major-header-font-weight: 800;
+  --sub-head-color: #EBEBEB;
+}
+
 body, html { 
     margin: 0;
     padding: 0;
@@ -770,6 +779,7 @@ h2 {
   margin: 1em 0em;
 }
 
+
 .zom_cnt_09{
  display: flex;
  flex-direction: column;
@@ -782,9 +792,10 @@ h2 {
 
 .m_b8 {
   margin-bottom: 5px; 
-  color: #100163;
-  font-size: 40px;
+  color: var(--blue);
+  font-size: var(--major-heading);
   text-align: center;
+  font-weight: var(--major-header-font-weight);
 }
 
 @media screen and (max-width:898px) {
@@ -843,7 +854,6 @@ h2 {
   border: 2px dott #1c1d2b;
 }
 
-
 .per_dreive{
   background-image: url(assets/On_tp_yue.jpg);
    background-size:cover; 
@@ -900,7 +910,7 @@ h2 {
   transform: translate(-50%, -50%);
   z-index: 10;
   
-  /* Button appearance */
+  
   background-color: rgba(196, 8, 8, 0.9);
   color: #ffffff;
   padding: 12px 30px;
@@ -909,12 +919,9 @@ h2 {
   font-weight: bold;
   cursor: pointer;
   border: none;
-  
-  /* Smooth transitions for hover effects */
   transition: all 0.3s ease;
 }
 
-/* Hover effect */
 .cta-overlay:hover {
   background-color: #000;
   color: #fff;
@@ -1036,9 +1043,9 @@ h2 {
 }
 
 .soi_uy6_08 h1 {
-  font-weight: 700;
+  font-weight: var(--major-header-font-weight);
   text-align: center;
-  font-size: 3rem;
+  font-size: var(--major-heading);
   color: #01035c;
   margin: 0.6em 1em;
 }
@@ -4745,15 +4752,12 @@ text-align: center;
 }
 
 #wh_id_h1 {
-  font-size: 45px;
-  color: #01035c;
+  font-size: var(--major-heading);
+  color: var(--blue);
   position: relative;
-  letter-spacing: 3px;
   animation: gradientFlow 4s ease infinite;
-  background-clip: text;
-  -webkit-background-clip: text;
   transition: all 0.5s ease;
-  font-weight: 800;
+  font-weight: var(--major-header-font-weight);
 }
 
 #wh_id_h1::after {
@@ -4861,66 +4865,6 @@ text-align: center;
   margin-bottom: 2em;
 }
 
-.jxt_int_tr {
-  position: relative;
-  top: 3em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: #f7f7f7;
-  height: max-content;
-}
-
-.th_marg_37 h1{
-  text-align: center;
-  font-weight: 900;
-  font-size: 45px;
-  margin-top: 1em;
-  color: #051363;
-}
-
-.th_marg_37 {
-  min-height: 2em;
-}
-
-@media screen and (max-width: 670px) {
-  .jxt_int_tr h1{
-    text-align: center;
-    font-weight: 900;
-    font-size: 1.6rem;
-    margin-top: 2em;
-    color: #051363;
-  }
-
-  .jxt_int_tr .se_54_fg {
-    text-align: center;
-    font-weight: 800;
-    font-size: 0.85rem !important;
-    margin-top: 0.5em;
-    color: #000000;
-    text-transform: lowercase;
-  }
-  
-}
-
-.jxt_int_tr .se_54_fg {
-  text-align: center;
-  font-size: 21px;
-  margin-top: 0.5em;
-  color: #4d4d4d;
-}
-
-.rwa_her_001 {
- display: flex;
-  position: relative;
-  overflow-x: scroll;
-  transition: .5s ease-in-out;
-}
-
-.rwa_her_001::-webkit-scrollbar {
- display: none;
-}
 
 .den_bws_yrs{
 margin-top: 14em;
@@ -4970,27 +4914,6 @@ background-color: rgb(235, 237, 249);
   text-decoration: none; 
   margin: 5px 30px;
   text-align:center;
-}
-
-.ass-h2-001 {
-  color: #ffffff; 
-  font-size: 2.5rem;
-  margin-bottom: 10px; 
-  font-weight: bold;
-  margin-top: 1em;
-  text-align: center;
-}
-
-@media screen and (max-width:985px) {
-  .ass-h2-001 {
-    color: #ffffff; 
-    font-size: 30px;
-    margin-bottom: 10px; 
-    font-weight: bold;
-    margin-top: 1em;
-    margin: 10px 0em;
-    text-align: center;
-  }
 }
 
 .ass-bt-001 {
@@ -5054,82 +4977,10 @@ background-color: rgb(235, 237, 249);
   color: #ffffff;
 }
 
-.almi-098-001{
-  height: 50vh;
-  background-color:  rgb(9, 19, 94);
-  margin: 3em 0.4em;
-  border-radius: 10px;
-  padding: -10px -10px;
-  max-width: 38em;
-}
-
-@media screen and (max-width: 620px) {  
-  .almi-098-001{
-    min-height: 18em;
-    background-color:  rgb(9, 19, 94);;
-    margin: 3em 0.4em;
-    border-radius: 10px;
-    min-width: 30em;
-  }
-}
-
-@media screen and (max-width: 467px) {  
-  .almi-098-001{
-    min-height: 18em;
-    background-color:  rgb(9, 19, 94);;
-    margin: 3em 0.4em;
-    border-radius: 10px;
-    min-width: 27em;
-  }
-}
-
-@media screen and (max-width: 467px) {  
-  .almi-098-001{
-    min-height: 10em;
-    background-color:  rgb(9, 19, 94);;
-    margin: 3em 0.4em;
-    border-radius: 10px;
-    min-width: 20em;
-  }
-}
-
-
-.or-mia-086{
-  margin: 2em 1em;
-border-bottom: 2px solid rgb(255, 255, 255);
-
-}
-
-#almi-123-001{
-  height: 50vh;
-  background-color:  rgb(182, 35, 35);;
-  margin: 3em 0.3em;
-  border-radius: 10px;
-}
 
 .ass-bt-001:hover {
   background-color: #000000; 
   color: #ffffff;
-}
-
-.tbr-091-001{
-  font-size: 16px;
-  font-weight: bold;
-}
-
-
-
-.fr-091-ojh{
-  display: none;
-  font-size: 15px;
-  font-weight: bold;
-  color: #d7d5d5;
-  text-align: left;
-  margin-left: 2em;
-  margin-right: 2em;
-  margin-bottom: 1em;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #ffffff;
 }
 
 .ur-091-56{
@@ -5177,16 +5028,6 @@ border-bottom: 2px solid rgb(255, 255, 255);
   text-align: left;
   font-size: 15px;
   margin-top: -0.6em;
-}
-
-.ass-p1-001 {
-  color: #f2f2f2; 
-  font-size: 17px; 
-  line-height: 1.4; 
-  margin-bottom: 20px; 
-  text-align: left;
-  margin: 2em 2em;
-  text-align: left;
 }
 
 .why-sp-002{
@@ -7683,8 +7524,8 @@ margin: 1em 1em;
 
 .ju-00po{
   text-align: center;
-  font-weight: bold;
-  font-size: 45px;
+  font-weight: var(--major-header-font-weight);
+  font-size: var(--major-heading);
   margin-top: 1.6em;
   margin-bottom: -0.6em;
 }
@@ -7865,6 +7706,146 @@ margin: 1em 1em;
   color: rgb(214, 31, 31);
 }
 
+/* CODE FOR NEW HITEX ADVANTAGE*/
 
+.pra_j_container {
+  max-width: 1400px;
+  margin: 8em auto;
+  padding: 2rem;
+}
 
+.pra_j_header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
 
+.pra_j_header h1 {
+  font-size: var(--major-heading);
+  font-weight: var(--major-header-font-weight);
+  color: var(--blue);
+  margin-bottom: 0.5rem;
+}
+
+.pra_j_header h2 {
+  font-size: 1.5rem;
+  color: var(--sub-head-color);
+  font-weight: 600;
+}
+
+.pra_j_process_flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.pra_j_process_card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.pra_j_process_card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.pra_j_process_card:nth-child(2) {
+  border-top: 5px solid var(--red);
+}
+
+.pra_j_process_card:nth-child(1) {
+  border-top: 5px solid var(--blue);
+}
+
+.pra_j_process_card:nth-child(3) {
+  border-top: 5px solid #878C8F;
+}
+
+.pra_j_process_content {
+  position: relative;
+  z-index: 2;
+}
+
+.pra_j_process_card h2 {
+  font-size: 1.8rem;
+  color: var(--blue);
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.pra_j_process_card h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: var(--red);
+}
+
+.pra_j_process_card p {
+  margin-bottom: 1.5rem;
+  color: #555;
+  font-size: 1rem;
+}
+
+.pra_j_action_title {
+  font-size: 1.2rem;
+  color: var(--blue);
+  margin-top: 1.5rem;
+  font-weight: 600;
+  padding-left: 1rem;
+  border-left: 3px solid var(--red);
+}
+
+.pra_j_process_card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 150px;
+  background-color: var(--light-blue);
+  opacity: 0.2;
+  border-radius: 0 0 0 150px;
+  z-index: 1;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .pra_j_header h1 {
+      font-size: 2.5em;
+  }
+
+  .pra_j_header h2 {
+      font-size: 1.2rem;
+  }
+
+  .pra_j_process_flow {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .pra_j_process_card {
+      width: 100%;
+      max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .pra_j_header h1 {
+      font-size: 2em;
+  }
+
+  .pra_j_container {
+      padding: 1rem;
+  }
+}
