@@ -207,13 +207,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   navItems.forEach(item => {
       item.addEventListener('click', () => {
-          // Remove active state from all items
+          
           navItems.forEach(nav => nav.classList.remove('active'));
           
-          // Add active state to clicked item
           item.classList.add('active');
-
-          // Update content
           const sectionKey = item.getAttribute('data-section');
           contentSection.textContent = sectionContent[sectionKey];
       });
@@ -232,10 +229,10 @@ function updateClock() {
   const minuteDegrees = ((minutes + seconds / 60) / 60) * 360;
   const hourDegrees = ((hours + minutes / 60) / 12) * 360;
 
-  // Add console logs for debugging
+  
   console.log(`Seconds: ${seconds}, Degrees: ${secondDegrees}`);
 
-  // Verify element selection
+  
   const secondHand = document.querySelector('.second-hand');
   const minuteHand = document.querySelector('.minute-hand');
   const hourHand = document.querySelector('.hour-hand');
