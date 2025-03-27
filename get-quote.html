@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HiTex EdiTex</title>
+<script src="Embednav.js"></script>
+<script src="freshtex.js"></script> 
+<script src="firebase-config.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+<script src="quote-submission.js"></script>
+<link rel="stylesheet" href="ser_them.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" href="fresh.css">  
+<link rel="stylesheet" href="Embednav.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head> 
+<body style="background-color: var(--blue);color: white;">
+    <header class="pag-2-hed-1">
+                <div class="lat_clo_001">              
+                <a href="index.html" class="action-home">
+                  <i class="fa-solid fa-house"></i>
+               </a>  
+                </div>  
+                <div class="lat_clo_002">
+                <button class="toggle-button-2" onclick="toggleLanguageList()">En &#9776;</button> 
+                <ul class="language-list" id="languagelist">
+                    <li>
+                        <a href="Chinese.html" class="language-link" data-lang="chinese">中文</a>
+                    </li>
+                    <li>
+                        <a href="French.html" class="language-link" data-lang="french">Français</a>
+                    </li>
+                    <li>
+                        <a href="Spanish.html" class="language-link" data-lang="spanish">Español</a>
+                    </li>
+                    <li>
+                        <a href="Japanese.html" class="language-link" data-lang="japanese">日本語</a>
+                    </li>
+                    <li>
+                        <a href="Arabic.html" class="language-link" data-lang="arabian">عربي</a>
+                    </li>
+                    <li>
+                        <a href="portuguese.html" class="language-link" data-lang="portuguese">Português</a>
+                    </li>
+                    <li>
+                        <a href="Korean.html" class="language-link" data-lang="japanese">한국어</a>
+                    </li>
+                </ul>
+            </div>
+    </header>
+    
+    <nav class="alb_pa_001">
+                <div class="un_fr_0oper">
+                    <a href="home.html"><img src="assets/png_20221026_003820_0000.png" alt="" class="kerpa_023_001"></a>
+                </div>
+                <div class="fo_oc_cnt002">
+                  <input type="search" class="lat_but_pla_001" placeholder="search here">
+                  <button type="submit" class="se-er-ch-bt-001">
+                      <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+              </div>
+                    <div class="fr_fl_fx_001">
+                      <div class="intbeh_01">
+                        <div class="kli_002_wer">
+                            <a href="https://www.threads.net/@hitexeditex">
+                            <img src="assets/threads-icon.svg" class="alb-im-001">
+                           </a>
+                        </div>
+                           </div>
+                        <div class="kli_002_wer">
+                    <a href="https://www.linkedin.com/company/hitexeditex/">
+                    <img src="assets/linkedin-app-icon.svg" class="alb-im-001">
+                   </a>
+                   </div>
+                   <div class="kli_002_wer">
+                   <a href="https://x.com/HiTexEdiTex" target="_blank">
+                    <img src="assets/x-social-media-black-icon.svg" alt="Twitter Icon" class="alb-im-001">
+                  </a>
+                  </div>  
+                  <div class="kli_002_wer">
+                   <a href="https://www.instagram.com/hitexeditex" target="_blank"  >
+                    <img src="assets/ig-instagram-icon.svg" class="alb-im-001"></a>
+                    </div>   
+                    <a href="https://wa.me/233503181696" target="_blank">
+                        <img src="assets/whatsapp-icon.svg" alt="WhatsApp Icon" class="alb-im-001">
+                      </a>    
+                </div>    
+               </nav> 
+
+               <nav class="main-nav" style="top: 5.5em">
+                <div class="menu-container">
+                    <div class="fr_open_01">
+                    </div> 
+                    <input type="checkbox" id="menu-toggle">
+                    <label for="menu-toggle" class="menu-button">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                    </label>
+                    
+                    <ul class="main-menu">
+                        <li class="menu-item has-submenu">
+                            <button class="submenu-toggle" aria-expanded="false">
+                                About Us
+                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                            </button>
+                            <ul class="submenu">
+                                <li><a href="Vision.html">Vision</a></li>
+                                <li><a href="Vision.html#op_tu__01">Mission</a></li>
+                                <li><a href="Vision.html#pag_2_h1_1">The Team</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li class="menu-item has-submenu">
+                            <button class="submenu-toggle" aria-expanded="false">
+                                Services
+                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                            </button>
+                            <ul class="submenu">
+                                <li><a href="languaged.html">Language Editing</a></li>
+                                <li><a href="Scientific.html">Scientific Editing</a></li>
+                                <li><a href="technichal.html">Technical Editing</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item has-submenu">
+                            <button class="submenu-toggle" aria-expanded="false">
+                                Careers
+                                <i class="fa fa-angle-down" aria-hidden="true"></i>
+                            </button>
+                            <ul class="submenu">
+                                <li><a href="car1reers.html">Freelance Editor</a></li>
+                                <li><a href="In-house.html">In-house Editor</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li class="menu-item">
+                            <a href="contaUs.html">Contact Us</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="Freshtex.html">Helpful Resources</a>
+                        </li>
+                    </ul>
+                    <div class="gro_btu_01">
+                        <a href="languaged.html" class="por_qt_pg_001">INSTANT QUOTE</a>
+                        <a href="#" class="author_login_btn"> CLIENT LOG IN</a>
+                    </div>
+                </div>
+            </nav>
+
+            <style>
+                 .on_lion-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .on_lion-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 2rem;
+        }
+
+        .on_lion-header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--red);
+            border-radius: 2px;
+        }
+
+        .on_lion-logo {
+            margin-bottom: 1.5rem;
+        }
+
+        .on_lion-logo h1 {
+            color: white;
+            font-size: var(--major-heading);
+            font-weight: var(--major-header-font-weight);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .on_lion-logo span {
+            color: var(--red);
+        }
+
+        .on_lion-tagline {
+            color: var(--light-blue);
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .on_lion-nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .on_lion-nav-item {
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .on_lion-nav-item::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--red);
+            transition: all 0.3s ease;
+        }
+
+        .on_lion-nav-item:hover::after,
+        .on_lion-nav-item.active::after {
+            width: 100%;
+        }
+
+        .on_lion-main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .on_lion-form-container {
+            flex: 1;
+            min-width: 300px;
+            max-width: 700px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .on_lion-form-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, var(--red) 0%, var(--light-blue) 100%);
+        }
+
+        .on_lion-form-header {
+            padding: 2rem;
+            background-color: var(--light-blue);
+            text-align: center;
+        }
+
+        .on_lion-form-title {
+            color: var(--blue);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .on_lion-form-subtitle {
+            color: var(--blue);
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .on_lion-form {
+            padding: 2rem;
+        }
+
+        .on_lion-form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            gap: 20px;
+        }
+
+        .on_lion-form-group {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .on_lion-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--blue);
+            font-weight: 600;
+        }
+
+        .on_lion-input,
+        .on_lion-select,
+        .on_lion-textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .on_lion-input:focus,
+        .on_lion-select:focus,
+        .on_lion-textarea:focus {
+            border-color: var(--blue);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(3, 38, 114, 0.1);
+        }
+
+        .on_lion-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .on_lion-button-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .on_lion-button {
+            display: inline-block;
+            background-color: var(--red);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(213, 76, 79, 0.3);
+        }
+
+        .on_lion-button:hover {
+            background-color: #c04143;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(213, 76, 79, 0.4);
+        }
+
+        .on_lion-price-calculator {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+            backdrop-filter: blur(10px);
+            color: white;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .on_lion-calculator-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--light-blue);
+            text-align: center;
+        }
+
+        .on_lion-calculator-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .on_lion-calculator-row:last-child {
+            border-bottom: none;
+        }
+
+        .on_lion-calculator-label {
+            font-weight: 500;
+        }
+
+        .on_lion-calculator-value {
+            font-weight: 700;
+            color: var(--light-blue);
+        }
+
+        .on_lion-calculator-total {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--red);
+            text-align: right;
+        }
+
+        .on_lion-steps {
+            margin: 4rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .on_lion-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            min-width: 200px;
+            max-width: 250px;
+            text-align: center;
+            position: relative;
+        }
+
+        .on_lion-step-number {
+            background: var(--red);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .on_lion-step:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            top: 30px;
+            right: -50%;
+            width: 100%;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.2);
+            z-index: 1;
+        }
+
+        .on_lion-step-title {
+            color: var(--light-blue);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .on_lion-step-desc {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .on_lion-testimonials {
+            margin: 4rem 0;
+        }
+
+        .on_lion-section-title {
+            text-align: center;
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .on_lion-section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--red);
+            border-radius: 3px;
+        }
+
+        .on_lion-testimonial-slider {
+            position: relative;
+            overflow: hidden;
+            padding: 2rem 0;
+        }
+
+        .on_lion-testimonials-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .on_lion-testimonial {
+            flex: 0 0 100%;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            color: white;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 0 1rem;
+            min-width: 300px;
+        }
+
+        .on_lion-testimonial-content {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            position: relative;
+            padding: 0 1.5rem;
+        }
+
+        .on_lion-testimonial-content::before,
+        .on_lion-testimonial-content::after {
+            content: "";
+            font-family: Georgia, serif;
+            font-size: 3rem;
+            color: var(--red);
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            line-height: 1;
+        }
+
+        .on_lion-testimonial-content::after {
+            content: "";
+            left: auto;
+            right: -10px;
+        }
+
+        .on_lion-testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .on_lion-author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--light-blue);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1rem;
+            font-weight: 700;
+            color: var(--blue);
+        }
+
+        .on_lion-author-info h4 {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .on_lion-author-info p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            color: var(--light-blue);
+        }
+
+        .on_lion-slider-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            gap: 10px;
+        }
+
+        .on_lion-slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .on_lion-slider-dot.active {
+            background: var(--red);
+            transform: scale(1.2);
+        }
+
+        .on_lion-faq {
+            margin: 4rem 0;
+        }
+
+        .on_lion-faq-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .on_lion-faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--light-blue);
+            transition: all 0.3s ease;
+        }
+
+        .on_lion-faq-question:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .on_lion-faq-question::after {
+            content: "+";
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .on_lion-faq-item.active .on_lion-faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .on_lion-faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .on_lion-faq-item.active .on_lion-faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+
+        .on_lion-features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 4rem;
+            gap: 30px;
+        }
+
+        .on_lion-feature {
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .on_lion-feature:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .on_lion-feature-icon {
+            background-color: var(--blue);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.2rem;
+            border: 3px solid var(--light-blue);
+        }
+
+        .on_lion-feature-icon svg {
+            fill: var(--light-blue);
+            width: 35px;
+            height: 35px;
+        }
+
+        .on_lion-feature-title {
+            color: var(--light-blue);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .on_lion-feature-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .on_lion-cta {
+            text-align: center;
+            margin: 5rem 0;
+            padding: 3rem;
+            background: linear-gradient(45deg, var(--red), var(--blue));
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .on_lion-cta::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            animation: pulse 5s linear infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.2;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+        }
+
+        .on_lion-cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .on_lion-cta-text {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .on_lion-counter {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 4rem 0;
+            gap: 40px;
+        }
+
+        .on_lion-counter-item {
+            flex: 1;
+            min-width: 200px;
+            max-width: 250px;
+            text-align: center;
+        }
+
+        .on_lion-counter-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--red);
+            margin-bottom: 1rem;
+        }
+
+        .on_lion-counter-title {
+            color: var(--light-blue);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .on_lion-floating-price {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--red);
+            color: white;
+            border-radius: 50px;
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .on_lion-floating-price.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .on_lion-floating-price-icon {
+            margin-right: 10px;
+        }
+
+        .on_lion-success-message {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .on_lion-success-icon {
+            font-size: 5rem;
+            color: var(--light-blue);
+            margin-bottom: 1rem;
+        }
+
+        .on_lion-success-title {
+            font-size: 2rem;
+            color: var(--blue);
+            margin-bottom: 1rem;
+        }
+
+        .on_lion-success-text {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        .on_lion-loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .on_lion-loading-spinner {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(3, 38, 114, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--blue);
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .on_lion-loading-text {
+            font-size: 1.2rem;
+            color: var(--blue);
+        }
+
+        .on_lion-typing-effect::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .on_lion-form-row {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .on_lion-form-group {
+                min-width: 100%;
+            }
+            
+            .on_lion-feature {
+                min-width: 100%;
+            }
+
+            .on_lion-step:not(:last-child)::after {
+                display: none;
+            }
+
+            .on_lion-nav {
+                flex-wrap: wrap;
+            }
+
+            .on_lion-nav-item {
+                margin: 0.5rem;
+            }
+
+            .on_lion-counter-item {
+                min-width: 160px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            :root {
+                --major-heading: 2.5em;
+            }
+
+            .on_lion-form-container {
+                min-width: 100%;
+            }
+
+            .on_lion-cta-title {
+                font-size: 2rem;
+            }
+        }
+
+        .on_lion-file-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: relative;
+}
+
+.on_lion-file-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.on_lion-file-label {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 2px dashed #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    text-align: center;
+    cursor: pointer;
+}
+
+.on_lion-file-icon {
+    margin-right: 10px;
+    font-size: 1.5em;
+}
+
+.on_lion-file-list {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.on_lion-file-list-item {
+    background-color: #e9e9e9;
+    padding: 5px 10px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.on_lion-file-list-item-remove {
+    color: red;
+    cursor: pointer;
+}
+            </style>
+
+            <div class="on_lion-container" style="margin-top: 12em;">
+                <div class="on_lion-main-content">
+                    <div class="on_lion-form-container">
+                        <div class="on_lion-form-header">
+                            <h2 class="on_lion-form-title">Get Your Custom Quote</h2>
+                            <p class="on_lion-form-subtitle">Tell us about your project and we'll provide a personalized quote</p>
+                        </div>
+        
+                        <form id="quoteForm" class="on_lion-form">
+                            <div class="on_lion-form-row">
+                                <div class="on_lion-form-group">
+                                    <label class="on_lion-label" for="name">Full Name</label>
+                                    <input class="on_lion-input" type="text" id="name" placeholder="Your name" required>
+                                </div>
+                                <div class="on_lion-form-group">
+                                    <label class="on_lion-label" for="email">Email Address</label>
+                                    <input class="on_lion-input" type="email" id="email" placeholder="Your email" required>
+                                </div>
+                            </div>
+                        
+                            <div class="on_lion-form-row">
+                                <div class="on_lion-form-group">
+                                    <label class="on_lion-label" for="document-type">Document Type</label>
+                                    <select class="on_lion-select" id="document-type" required>
+                                        <option value="" disabled selected>Select document type</option>
+                                        <option value="academic">Academic Paper</option>
+                                        <option value="book">Book Manuscript</option>
+                                        <option value="thesis">Thesis/Dissertation</option>
+                                        <option value="article">Article/Journal</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="on_lion-form-group">
+                                    <label class="on_lion-label" for="word-count">Word Count</label>
+                                    <input class="on_lion-input" type="number" id="word-count" placeholder="Approximate word count" required>
+                                </div>
+                            </div>
+                        
+                            <div class="on_lion-form-row">
+                                <div class="on_lion-form-group">
+                                    <label class="on_lion-label" for="service-type">Service Needed</label>
+                                    <select class="on_lion-select" id="service-type" required>
+                                        <option value="" disabled selected>Select service type</option>
+                                        <option value="proofreading">Proofreading</option>
+                                        <option value="copyediting">Copyediting</option>
+                                        <option value="developmental">Developmental Editing</option>
+                                        <option value="formatting">Formatting</option>
+                                        <option value="full-package">Full Package</option>
+                                    </select>
+                                </div>
+                                <div class="on_lion-form-group">
+                                    <label class="on_lion-label" for="deadline">Deadline</label>
+                                    <input class="on_lion-input" type="date" id="deadline" required>
+                                </div>
+                            </div>
+                        
+                            <div class="on_lion-form-row">
+                                <div class="on_lion-form-group" style="flex: 100%;">
+                                    <label class="on_lion-label" for="message">Project Details</label>
+                                    <textarea class="on_lion-textarea" id="message" placeholder="Tell us more about your project, requirements, and any specific needs..." required></textarea>
+                                </div>
+                            </div>
+                        
+                            <div class="on_lion-form-row">
+                                <div class="on_lion-form-group" style="flex: 100%;">
+                                    <label class="on_lion-label" for="file-upload">Upload Manuscript</label>
+                                    <div class="on_lion-file-upload">
+                                        <input 
+                                            type="file" 
+                                            id="file-upload" 
+                                            name="file-upload" 
+                                            class="on_lion-file-input" 
+                                            accept=".doc,.docx,.pdf,.txt,.rtf"
+                                            multiple
+                                        >
+                                        <label for="file-upload" class="on_lion-file-label">
+                                            <span class="on_lion-file-icon">📁</span>
+                                            <span class="on_lion-file-text">Choose Files</span>
+                                        </label>
+                                        <div id="file-list" class="on_lion-file-list"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="on_lion-button-container">
+                                <button type="submit" class="on_lion-button">Submit</button>
+                            </div>
+                        </form>
+        
+                        <div class="on_lion-loading">
+                            <div class="on_lion-loading-spinner"></div>
+                            <p class="on_lion-loading-text">Processing your request...</p>
+                        </div>
+        
+                        <div class="on_lion-success-message">
+                            <div class="on_lion-success-icon">✓</div>
+                            <h3 class="on_lion-success-title">Quote Request Received!</h3>
+                            <p class="on_lion-success-text">Thank you for your submission. We'll get back to you with a personalized quote within 24 hours.</p>
+                            <button class="on_lion-button" id="resetForm">Submit Another Request</button>
+                        </div>
+                    </div>
+        
+                    <div class="on_lion-price-calculator">
+                        <h3 class="on_lion-calculator-title">Price Estimate</h3>
+                        <div class="on_lion-calculator-row">
+                            <span class="on_lion-calculator-label">Basic Editing</span>
+                            <span class="on_lion-calculator-value">$0.00</span>
+                        </div>
+                        <div class="on_lion-calculator-row">
+                            <span class="on_lion-calculator-label">Additional Services</span>
+                            <span class="on_lion-calculator-value">$0.00</span>
+                        </div>
+                        <div class="on_lion-calculator-row">
+                            <span class="on_lion-calculator-label">Rush Fee</span>
+                            <span class="on_lion-calculator-value">$0.00</span>
+                        </div>
+                        <div class="on_lion-calculator-total">
+                            <span class="on_lion-calculator-label">Estimated Total</span>
+                            <span class="on_lion-calculator-value" id="estimatedTotal">$0.00</span>
+                        </div>
+                        <p style="font-size: 0.8rem; margin-top: 1rem; text-align: center; opacity: 0.7; color: #ffff;">
+                            This is just an estimate. Your final quote may vary based on the specific requirements of your project.
+                        </p>
+                    </div>
+                </div>
+        
+                <div class="on_lion-counter">
+                    <div class="on_lion-counter-item">
+                        <div class="on_lion-counter-value" data-count="1500">0</div>
+                        <div class="on_lion-counter-title">Projects Completed</div>
+                    </div>
+                    <div class="on_lion-counter-item">
+                        <div class="on_lion-counter-value" data-count="98">0</div>
+                        <div class="on_lion-counter-title">Client Satisfaction %</div>
+                    </div>
+                    <div class="on_lion-counter-item">
+                        <div class="on_lion-counter-value" data-count="45">0</div>
+                        <div class="on_lion-counter-title">Expert Editors</div>
+                    </div>
+                    <div class="on_lion-counter-item">
+                        <div class="on_lion-counter-value" data-count="24">0</div>
+                        <div class="on_lion-counter-title">Hour Turnaround</div>
+                    </div>
+                </div>
+        
+                <div class="on_lion-steps">
+                    <div class="on_lion-step">
+                        <div class="on_lion-step-number">1</div>
+                        <h3 class="on_lion-step-title">Submit Request</h3>
+                        <p class="on_lion-step-desc">Fill out our simple form with your project details to get started</p>
+                    </div>
+                    <div class="on_lion-step">
+                        <div class="on_lion-step-number">2</div>
+                        <h3 class="on_lion-step-title">Receive Quote</h3>
+                        <p class="on_lion-step-desc">We'll review your details and provide a custom quote within 24 hours</p>
+                    </div>
+                    <div class="on_lion-step">
+                        <div class="on_lion-step-number">3</div>
+                        <h3 class="on_lion-step-title">Editing Process</h3>
+                        <p class="on_lion-step-desc">Our expert editors work on your manuscript with precision and care</p>
+                    </div>
+                    <div class="on_lion-step">
+                        <div class="on_lion-step-number">4</div>
+                        <h3 class="on_lion-step-title">Final Delivery</h3>
+                        <p class="on_lion-step-desc">Receive your professionally edited document ready for publication</p>
+                    </div>
+                </div>
+        
+                <div class="on_lion-testimonials">
+                    <h2 class="on_lion-section-title">What Our Clients Say</h2>
+                    <div class="on_lion-testimonial-slider">
+                        <div class="on_lion-testimonials-container">
+                            <div class="on_lion-testimonial">
+                                <div class="on_lion-testimonial-content">
+                                    HiTex EdiTex helped me polish my doctoral thesis to perfection. Their attention to detail and subject matter expertise was incredible. I couldn't be happier with the results.
+                                </div>
+                                <div class="on_lion-testimonial-author">
+                                    <div class="on_lion-author-avatar">JD</div>
+                                    <div class="on_lion-author-info">
+                                        <h4>Bernar Asamoah</h4>
+                                        <p>Biochemistry Researcher</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="on_lion-testimonial">
+                                <div class="on_lion-testimonial-content">
+                                    As a non-native English speaker, I was concerned about my manuscript's language quality. The team at HiTex EdiTex transformed my paper while preserving my unique voice. Highly recommended!
+                                </div>
+                                <div class="on_lion-testimonial-author">
+                                    <div class="on_lion-author-avatar">MS</div>
+                                    <div class="on_lion-author-info">
+                                        <h4>Alberta Konadu</h4>
+                                        <p>Published Author</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="on_lion-testimonial">
+                                <div class="on_lion-testimonial-content">
+                                    I've used several editing services, but none compare to HiTex EdiTex. Their developmental editing suggestions took my book to another level. Deadline was tight but they delivered ahead of schedule!
+                                </div>
+                                <div class="on_lion-testimonial-author">
+                                    <div class="on_lion-author-avatar">RK</div>
+                                    <div class="on_lion-author-info">
+                                        <h4>Robert Kim</h4>
+                                        <p>Fiction Writer</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="on_lion-slider-controls">
+                            <div class="on_lion-slider-dot active" data-index="0"></div>
+                            <div class="on_lion-slider-dot" data-index="1"></div>
+                            <div class="on_lion-slider-dot" data-index="2"></div>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="on_lion-features">
+                    <div class="on_lion-feature">
+                        <div class="on_lion-feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path d="M256 56c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m0-48C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 168c-44.183 0-80 35.817-80 80s35.817 80 80 80 80-35.817 80-80-35.817-80-80-80z"/>
+                            </svg>
+                        </div>
+                        <h3 class="on_lion-feature-title">Precision Editing</h3>
+                        <p class="on_lion-feature-text">Our editors focus on every detail, ensuring error-free documents with perfect grammar, spelling, and punctuation.</p>
+                    </div>
+                    <div class="on_lion-feature">
+                        <div class="on_lion-feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path d="M313.6 304c-28.7 0-42.5 16-89.6 16-47.1 0-60.8-16-89.6-16C60.2 304 0 364.2 0 438.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-25.6c0-74.2-60.2-134.4-134.4-134.4zM400 464H48v-25.6c0-47.6 38.8-86.4 86.4-86.4 14.6 0 38.3 16 89.6 16 51.7 0 74.9-16 89.6-16 47.6 0 86.4 38.8 86.4 86.4V464zM224 288c79.5 0 144-64.5 144-144S303.5 0 224 0 80 64.5 80 144s64.5 144 144 144zm0-240c52.9 0 96 43.1 96 96s-43.1 96-96 96-96-43.1-96-96 43.1-96 96-96z"/>
+                            </svg>
+                        </div>
+                        <h3 class="on_lion-feature-title">Expert Editors</h3>
+                        <p class="on_lion-feature-text">Our team consists of PhD-level experts in various fields ensuring subject-matter expertise for your document.</p>
+                    </div>
+                    <div class="on_lion-feature">
+                        <div class="on_lion-feature-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/>
+                            </svg>
+                        </div>
+                        <h3 class="on_lion-feature-title">Fast Turnaround</h3>
+                        <p class="on_lion-feature-text">We value your time and offer quick turnaround options without compromising on quality or accuracy.</p>
+                    </div>
+                </div>
+        
+                <div class="on_lion-faq">
+                    <h2 class="on_lion-section-title">Frequently Asked Questions</h2>
+                    <div class="on_lion-faq-item">
+                        <div class="on_lion-faq-question">What editing services do you offer?</div>
+                        <div class="on_lion-faq-answer">
+                            We offer a comprehensive range of editing services including proofreading, copyediting, developmental editing, formatting, and complete publication packages. Our services can be customized based on your specific needs.
+                        </div>
+                    </div>
+                    <div class="on_lion-faq-item">
+                        <div class="on_lion-faq-question">How are your prices calculated?</div>
+                        <div class="on_lion-faq-answer">
+                            Our pricing is based on several factors including word count, document type, service level, turnaround time, and technical complexity. We provide transparent pricing with no hidden fees.
+                        </div>
+                    </div>
+                    <div class="on_lion-faq-item">
+                        <div class="on_lion-faq-question">What is your typical turnaround time?</div>
+                        <div class="on_lion-faq-answer">
+                            Our standard turnaround time is 5-7 business days for documents under 10,000 words. Rush services are available for projects with tight deadlines, starting with 24-hour turnaround for shorter documents.
+                        </div>
+                    </div>
+                    <div class="on_lion-faq-item">
+                        <div class="on_lion-faq-question">Do you work with specific citation styles?</div>
+                        <div class="on_lion-faq-answer">
+                            Yes, our editors are experienced with all major citation styles including APA, MLA, Chicago, Harvard, IEEE, and more. We ensure your references are formatted correctly according to your required style guide.
+                        </div>
+                    </div>
+                    <div class="on_lion-faq-item">
+                        <div class="on_lion-faq-question">Are your editors subject matter experts?</div>
+                        <div class="on_lion-faq-answer">
+                            Absolutely. We have a diverse team of editors with advanced degrees (MA, PhD) across various disciplines including sciences, humanities, medicine, law, engineering, and business. We match your document with an editor who has expertise in your field.
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="on_lion-cta">
+                    <h2 class="on_lion-cta-title">Ready to Perfect Your Manuscript?</h2>
+                    <p class="on_lion-cta-text">Join thousands of satisfied authors, researchers, and professionals who trust HiTex EdiTex with their most important documents.</p>
+                    <button class="on_lion-button" id="scrollToForm">Get Started Today</button>
+                </div>
+            </div>
+        
+            <div class="on_lion-floating-price" id="floatingPrice">
+                <div class="on_lion-floating-price-icon">💰</div>
+                <span>Get Your Quote Now</span>
+            </div>
+        
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Form handling
+                    const quoteForm = document.getElementById('quoteForm');
+                    const loadingElement = document.querySelector('.on_lion-loading');
+                    const successMessage = document.querySelector('.on_lion-success-message');
+                    const resetButton = document.getElementById('resetForm');
+                    
+                    quoteForm.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        
+                        // Show loading state
+                        quoteForm.style.display = 'none';
+                        loadingElement.style.display = 'block';
+                        
+                        // Simulate form submission
+                        setTimeout(function() {
+                            loadingElement.style.display = 'none';
+                            successMessage.style.display = 'block';
+                        }, 2000);
+                    });
+                    
+                    resetButton.addEventListener('click', function() {
+                        successMessage.style.display = 'none';
+                        quoteForm.reset();
+                        quoteForm.style.display = 'block';
+                    });
+                    
+                    // Price calculator
+                    const wordCountInput = document.getElementById('word-count');
+                    const serviceTypeSelect = document.getElementById('service-type');
+                    const deadlineInput = document.getElementById('deadline');
+                    const estimatedTotal = document.getElementById('estimatedTotal');
+                    
+                    const calculatePrice = function() {
+                        let basePrice = 0;
+                        let additionalPrice = 0;
+                        let rushFee = 0;
+                        
+                        // Get word count
+                        const wordCount = parseInt(wordCountInput.value) || 0;
+                        
+                        if (wordCount > 0) {
+                            // Base price calculation (example: $0.02 per word)
+                            basePrice = wordCount * 0.02;
+                            
+                            // Service type multiplier
+                            const service = serviceTypeSelect.value;
+                            if (service === 'proofreading') {
+                                // No additional cost for basic proofreading
+                            } else if (service === 'copyediting') {
+                                additionalPrice = wordCount * 0.01;
+                            } else if (service === 'developmental') {
+                                additionalPrice = wordCount * 0.03;
+                            } else if (service === 'formatting') {
+                                additionalPrice = 50; // Flat fee
+                            } else if (service === 'full-package') {
+                                additionalPrice = wordCount * 0.04 + 50;
+                            }
+                            
+                            // Rush fee calculation
+                            if (deadlineInput.value) {
+                                const deadline = new Date(deadlineInput.value);
+                                const today = new Date();
+                                const diffTime = Math.abs(deadline - today);
+                                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                                
+                                if (diffDays <= 2) {
+                                    rushFee = (basePrice + additionalPrice) * 0.5; // 50% rush fee
+                                } else if (diffDays <= 5) {
+                                    rushFee = (basePrice + additionalPrice) * 0.25; // 25% rush fee
+                                }
+                            }
+                        }
+                        
+                        // Update calculator values
+                        document.querySelectorAll('.on_lion-calculator-value')[0].textContent = '$' + basePrice.toFixed(2);
+                        document.querySelectorAll('.on_lion-calculator-value')[1].textContent = '$' + additionalPrice.toFixed(2);
+                        document.querySelectorAll('.on_lion-calculator-value')[2].textContent = '$' + rushFee.toFixed(2);
+                        
+                        // Update total
+                        const total = basePrice + additionalPrice + rushFee;
+                        estimatedTotal.textContent = '$' + total.toFixed(2);
+                    };
+                    
+                    // Add event listeners to form inputs for calculator
+                    wordCountInput.addEventListener('input', calculatePrice);
+                    serviceTypeSelect.addEventListener('change', calculatePrice);
+                    deadlineInput.addEventListener('change', calculatePrice);
+                    
+                    // FAQ toggle
+                    const faqQuestions = document.querySelectorAll('.on_lion-faq-question');
+                    
+                    faqQuestions.forEach(question => {
+                        question.addEventListener('click', function() {
+                            const faqItem = this.parentNode;
+                            faqItem.classList.toggle('active');
+                        });
+                    });
+                    
+                    // Testimonial slider
+                    const testimonialsContainer = document.querySelector('.on_lion-testimonials-container');
+                    const sliderDots = document.querySelectorAll('.on_lion-slider-dot');
+                    const testimonialWidth = document.querySelector('.on_lion-testimonial').offsetWidth + 32; // width + margin
+                    
+                    sliderDots.forEach(dot => {
+                        dot.addEventListener('click', function() {
+                            const index = parseInt(this.getAttribute('data-index'));
+                            testimonialsContainer.style.transform = `translateX(-${index * testimonialWidth}px)`;
+                            
+                            // Update active dot
+                            document.querySelector('.on_lion-slider-dot.active').classList.remove('active');
+                            this.classList.add('active');
+                        });
+                    });
+                    
+                    // Automatic counter animation
+                    const counters = document.querySelectorAll('.on_lion-counter-value');
+                    const counterSpeed = 200; // Lower is faster
+                    
+                    const startCounters = function() {
+                        counters.forEach(counter => {
+                            const target = parseInt(counter.getAttribute('data-count'));
+                            const count = +counter.innerText;
+                            const increment = target / counterSpeed;
+                            
+                            if (count < target) {
+                                counter.innerText = Math.ceil(count + increment);
+                                setTimeout(startCounters, 1);
+                            } else {
+                                counter.innerText = target;
+                            }
+                        });
+                    };
+                    
+                    // Start counters when they come into view
+                    const counterSection = document.querySelector('.on_lion-counter');
+                    const options = {
+                        root: null,
+                        threshold: 0.5,
+                        rootMargin: "0px"
+                    };
+                    
+                    const observer = new IntersectionObserver(function(entries) {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                startCounters();
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    }, options);
+                    
+                    observer.observe(counterSection);
+                    
+                    // Floating price button
+                    const floatingPrice = document.getElementById('floatingPrice');
+                    const scrollToFormButton = document.getElementById('scrollToForm');
+                    const formContainer = document.querySelector('.on_lion-form-container');
+                    
+                    // Show floating button after scrolling down
+                    window.addEventListener('scroll', function() {
+                        if (window.scrollY > 500) {
+                            floatingPrice.classList.add('show');
+                        } else {
+                            floatingPrice.classList.remove('show');
+                        }
+                    });
+                    
+                    // Scroll to form functionality
+                    floatingPrice.addEventListener('click', function() {
+                        formContainer.scrollIntoView({ behavior: 'smooth' });
+                    });
+                    
+                    scrollToFormButton.addEventListener('click', function() {
+                        formContainer.scrollIntoView({ behavior: 'smooth' });
+                    });
+                    
+                    // Set minimum date for deadline input
+                    const tomorrow = new Date();
+                    tomorrow.setDate(tomorrow.getDate() + 1);
+                    deadlineInput.min = tomorrow.toISOString().split('T')[0];
+                });
+
+                document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('file-upload');
+    const fileList = document.getElementById('file-list');
+
+    fileInput.addEventListener('change', function(event) {
+        fileList.innerHTML = ''; // Clear previous files
+        
+        Array.from(this.files).forEach(file => {
+            const fileItem = document.createElement('div');
+            fileItem.classList.add('on_lion-file-list-item');
+            
+            const fileName = document.createElement('span');
+            fileName.textContent = file.name;
+            
+            const removeButton = document.createElement('span');
+            removeButton.textContent = '✖️';
+            removeButton.classList.add('on_lion-file-list-item-remove');
+            
+            removeButton.addEventListener('click', function() {
+                // Remove this specific file from the FileList
+                const updatedFiles = Array.from(fileInput.files).filter(f => f.name !== file.name);
+                const dataTransfer = new DataTransfer();
+                updatedFiles.forEach(f => dataTransfer.items.add(f));
+                fileInput.files = dataTransfer.files;
+                
+                // Remove the file item from the list
+                fileItem.remove();
+            });
+            
+            fileItem.appendChild(fileName);
+            fileItem.appendChild(removeButton);
+            fileList.appendChild(fileItem);
+        });
+    });
+});
+            </script>
+
+           
+        
+      <footer class="fot-dow-1">
+        <div class="row justify-content-around align-items-center">
+          <div class="col-sm-12 col-md-3 col-lg-3 ColDesghCnt">
+              <h3 class="foot-h3">Contact Center</h3>
+                <ul class="fot-ul-001">
+                    <li><a href="mailto:hitexeditex.com" class="fot-ln-001"> <i class="fa fa-envelope" aria-hidden="true"></i> HiTexediTex.com</a></li>
+                    <li><a href="#" class="fot-ln-001"><i class="fa fa-volume-control-phone" aria-hidden="true"></i> 0546525435</a></li>
+                    <li><a href="services.html" class="fot-ln-001">Services</a></li>
+                    <li><a href="#" class="fot-ln-001">The team</a></li>
+                    <li><a href="#" class="fot-ln-001"><img src="assets/alexim.jpg" class="alb-im-001" style="margin-left: -3em;">Adweso, Koforidua, Ghana</a></li>
+                </ul>
+          </div>
+          <div class="col-sm-12 col-md-3 col-lg-3 ColDesghCnt">
+              <h3 class="foot-h3">Find Us</h3>
+              <div class="gps_code_002">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15877.202531816156!2d-0.250482!3d6.069084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTrCsDUzJzMwLjgiTiAwwrAwNic0Mi4zIlc!5e0!3m2!1sen!2sus!4v1645841132286!5m2!1sen!2sus" width="300" height="170" style="border:0;" allowfullscreen="" loading="lazy" class="gog-901-uy"></iframe>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-3 col-lg-3 ColDesghCnt">
+              <h3 class="foot-h3">Follow Us</h3 >
+                <ul class="fot-ul-003">
+                <li>
+                  <ul class="Obtao_0012">
+                    <li><a href=""><img src="assets/x-social-media-white-icon.svg" class="kil_im_001"></a></li>
+                    <li><a href=""><img src="assets/facebook-app-round-white-icon.svg" class="kil_im_001"></a></li>
+                    <li><a href=""><img src="assets/instagram-white-icon.svg" class="kil_im_001"></a></li>
+                    <li><a href=""><img src="assets/whatsapp-white-icon.svg" class="kil_im_001"></a></li>
+                  </ul>
+                </li>
+                <li><a href="Copyright.html" class="fot-ln-001"><img src="assets/copyright-icon.svg" class="alb-im-001">Copyright Policy </a></li>
+                <li><a href="privacy.html" class="fot-ln-001"><img src="assets/copyright-icon.svg" class="alb-im-001">Privacy Policy </a></li>
+                </ul>
+          </div>  
+      </div>
+</footer>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+</body>
+</html>
