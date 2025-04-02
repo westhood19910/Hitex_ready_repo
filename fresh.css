@@ -2771,13 +2771,13 @@ font-weight: bold;
 .signup-button {
   margin-left: auto;
   padding: 0.45rem 1.3rem;
-  background-color: var(--blue); 
-  color: white;
+  background-color: none; 
+  color: var(--red);
   font-weight: 600;
   border: none;
   border-radius: 5px;
-  font-size: 0.7rem;
-  font-weight: 500;
+  font-size: 0.8rem;
+  font-weight: 700;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -2786,9 +2786,8 @@ font-weight: bold;
 }
 
 .signup-button:hover {
-  background-color: #0056b3;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+  border: none;
 }
 
 /* Icon within sign-up button */
@@ -2822,6 +2821,10 @@ font-weight: bold;
   align-items:center;
   position: relative;
   right: px;
+}
+
+.fr_fl_fx_001 a {
+
 }
 
 .kli_002_wer{
