@@ -763,6 +763,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
       
       // Hide all active indicators
+      
       indicators.forEach(indicator => {
         indicator.classList.remove('active');
       });
