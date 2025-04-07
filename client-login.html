@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head> 
-<body>
+<body style="background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 50%, rgba(3, 38, 114, 1) 50%);">
     <header class="pag-2-hed-1">
                 <div class="lat_clo_001">              
                 <a href="index.html" class="action-home">
@@ -149,58 +149,57 @@
                 </div>
             </nav>
 
-    <div class="log_er_h-container" style="margin-top: 12em;">
-        <div class="log_er_h-header">
-            <h1><span class="log_er_h-logo-text">HiTex <span class="log_er_h-highlight">EdiTex</span></span></h1>
-            <p>Client Log-in Portal</p>
-        </div>
+            <div class="log_er_h-container" style="margin-top: 12em;">
+                <div class="log_er_h-header">
+                    <h1><span class="log_er_h-logo-text">HiTex <span class="log_er_h-highlight">EdiTex</span></span></h1>
+                    <p>Client Log-in Portal</p>
+                </div>
+                
+                <div class="log_er_h-form-container">
+                    <form id="loginForm" action="https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/formResponse" method="POST">
+                        <div class="log_er_h-form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="entry.EMAIL_FIELD_ID" required placeholder="your@email.com">
+                        </div>
+                        
+                        <div class="log_er_h-form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="entry.PASSWORD_FIELD_ID" required placeholder="Enter your password">
+                        </div>
+                        
+                        <div class="log_er_h-form-group">
+                            <button type="submit">Log In</button>
+                        </div>
+                        
+                        <div class="log_er_h-forgot-password">
+                            <a href="#">Forgot password?</a>
+                        </div>
+                        
+                        <div class="log_er_h-separator">OR</div>
+                        
+                        <div class="log_er_h-form-group">
+                            <a class="log_er_h-new-account-btn" href="client-sign-up.html">New Client Registration</a>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="log_er_h-footer">
+                    <p>&copy; 2025 HiTex EdiTex. All rights reserved.</p>
+                </div>
+            </div>
         
-        <div class="log_er_h-form-container">
-            <form id="loginForm" action="https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/formResponse" method="POST" target="_self">
-                <div class="log_er_h-form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="entry.EMAIL_FIELD_ID" required placeholder="your@email.com">
-                </div>
-                
-                <div class="log_er_h-form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="entry.PASSWORD_FIELD_ID" required placeholder="Enter your password">
-                </div>
-                
-                <div class="log_er_h-form-group">
-                    <button type="submit">Log In</button>
-                </div>
-                
-                <div class="log_er_h-forgot-password">
-                    <a href="#">Forgot password?</a>
-                </div>
-                
-                <div class="log_er_h-separator">OR</div>
-                
-                <div class="log_er_h-form-group">
-                    <a  class="log_er_h-new-account-btn" href="client-sign-up.html">New Client Registration</a>
-                </div>
-            </form>
-        </div>
-        
-        <div class="log_er_h-footer">
-            <p>&copy; 2025 HiTex EdiTex. All rights reserved.</p>
-        </div>
-    </div>
-
-    <script>
-        document.getElementById("loginForm").addEventListener("submit", function(event) {
-            // You can add validation here if needed
-            console.log("Form submitted");
-            
-            // If you want to redirect after submission:
-            // event.preventDefault();
-            // setTimeout(function() {
-            //     window.location.href = "dashboard.html";
-            // }, 1000);
-        });
-    </script>
-
+            <script>
+                document.getElementById("loginForm").addEventListener("submit", function(event) {
+                    // You can add validation here if needed
+                    console.log("Form submitted");
+                    
+                    // If you want to redirect after submission:
+                    // event.preventDefault();
+                    // setTimeout(function() {
+                    //     window.location.href = "dashboard.html";
+                    // }, 1000);
+                });
+            </script>
 
     
 

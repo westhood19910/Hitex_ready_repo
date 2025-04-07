@@ -5,13 +5,6 @@
 <title>HiTex EdiTex</title>
 <script src="Embednav.js"></script>
 <script src="freshtex.js"></script> 
-<script src="firebase-config.js"></script>
-<script src="sign-up.js"></script>
-<script type="module" src="firebase-config.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"></script>
-<link rel="stylesheet" href="ser_them.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link rel="stylesheet" href="fresh.css">  
@@ -19,7 +12,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head> 
-<body style="background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 50%, rgba(3, 38, 114, 1) 50%);">
+<body>
     <header class="pag-2-hed-1">
                 <div class="lat_clo_001">              
                 <a href="index.html" class="action-home">
@@ -56,7 +49,7 @@
     
     <nav class="alb_pa_001">
                 <div class="un_fr_0oper">
-                    <a href="home.html"><img src="assets/png_20221026_003820_0000.png" alt="" class="kerpa_023_001"></a>
+                    <img src="assets/png_20221026_003820_0000.png" alt="" class="kerpa_023_001">
                 </div>
                 <div class="fo_oc_cnt002">
                   <input type="search" class="lat_but_pla_001" placeholder="search here">
@@ -65,6 +58,9 @@
                   </button>
               </div>
                     <div class="fr_fl_fx_001">
+                      <a href="client-sign-up.html" class="signup-button">
+                        Sign Up
+                    </a>
                       <div class="intbeh_01">
                         <div class="kli_002_wer">
                             <a href="https://www.threads.net/@hitexeditex">
@@ -108,9 +104,11 @@
                                 <i class="fa fa-angle-down" aria-hidden="true"></i>
                             </button>
                             <ul class="submenu">
-                                <li><a href="Vision.html">Vision</a></li>
-                                <li><a href="Vision.html#op_tu__01">Mission</a></li>
-                                <li><a href="Vision.html#pag_2_h1_1">The Team</a></li>
+                                <li><a href="about.html">About Hitex EdiTex</a></li>
+                                <li><a href="leadership.html">Leadership</a></li>
+                                <li><a href="Vision.html#pag_2_h1_1">Offices</a></li>
+                                <li><a href="Vision.html#pag_2_h1_1">Testimonials</a></li>
+                                <li><a href="Vision.html#pag_2_h1_1">Impact</a></li>
                             </ul>
                         </li>
                         
@@ -120,156 +118,89 @@
                                 <i class="fa fa-angle-down" aria-hidden="true"></i>
                             </button>
                             <ul class="submenu">
-                                <li><a href="languaged.html">Language Editing</a></li>
+                                <li><a href="language-editng.html">Language Editing</a></li>
                                 <li><a href="Scientific.html">Scientific Editing</a></li>
                                 <li><a href="technichal.html">Technical Editing</a></li>
+                                <li><a href="technichal.html">Translation Services</a></li>
+                                <li><a href="technichal.html">Service Levels</a></li>
+                                <li><a href="technichal.html">Pricing</a></li>
                             </ul>
                         </li>
+                        <li class="menu_sep9_1">
+                          <a href="auhtoredy.html">Authoredly</a>
+                          <img src="assets/corTM.svg" alt="" class="one_authre">
+                      </li>
+                       
                         <li class="menu-item has-submenu">
                             <button class="submenu-toggle" aria-expanded="false">
                                 Careers
                                 <i class="fa fa-angle-down" aria-hidden="true"></i>
                             </button>
                             <ul class="submenu">
-                                <li><a href="car1reers.html">Freelance Editor</a></li>
-                                <li><a href="In-house.html">In-house Editor</a></li>
+                                <li><a href="car1reers.html">Life at HiTex EdiTex</a></li>
+                                <li><a href="Careerss.html">In-house</a></li>
+                                <li><a href="freelance.html">Freelance</a></li>
                             </ul>
-                        </li>
-                        
-                        <li class="menu-item">
-                            <a href="contaUs.html">Contact Us</a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="Freshtex.html">Helpful Resources</a>
-                        </li>
+                        </li>  
+                      <li class="menu-item">
+                        <a href="contact.html">Contact Us</a>
+                    </li>
+                    <li class="menu-item has-submenu">
+                      <button class="submenu-toggle" aria-expanded="false">
+                          Helpful Resources
+                          <i class="fa fa-angle-down" aria-hidden="true"></i>
+                      </button>
+                      <ul class="submenu">
+                          <li><a href="resources.html">Support and FAQs</a></li>
+                          <li><a href="Scientific.html">Editing tips</a></li>
+                          <li><a href="newsroom.html">Newsroom</a></li>
+                      </ul>
+                  </li>
                     </ul>
+                    
                     <div class="gro_btu_01">
-                        <a href="languaged.html" class="por_qt_pg_001">INSTANT QUOTE</a>
-                        <a href="#" class="author_login_btn"> CLIENT LOG IN</a>
+                        <a href="get-quote.html" class="por_qt_pg_001">INSTANT QUOTE</a>
+                        <a href="client-login.html" class="author_login_btn"> CLIENT LOG IN</a>
                     </div>
                 </div>
             </nav>
-
-            
-  
-        <div class="unl_live-signup-container" style="margin-top: 10em;">
-            <h1 class="unl_live-main-heading">HiTex <span style="color: var(--red);">EDiTex</span> </h1>
-            
-            <form id="signupForm" class="unl_live-signup-form">
-                <div class="unl_live-input-group">
-                    <label for="name" class="unl_live-label">Full Name</label>
-                    <div class="unl_live-input-wrapper">
-                        <i class="fa fa-user"></i>
-                        <input 
-                            type="text" 
-                            id="name" 
-                            class="unl_live-input" 
-                            placeholder="Enter your full name" 
-                            required
-                        >
-                    </div>
-                </div>
-    
-                <div class="unl_live-input-group">
-                    <label for="email" class="unl_live-label">Email Address</label>
-                    <div class="unl_live-input-wrapper">
-                        <i class="fa fa-envelope"></i>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            class="unl_live-input" 
-                            placeholder="Enter your email" 
-                            required
-                        >
-                    </div>
-                </div>
-    
-                <div class="unl_live-input-group">
-                    <label for="password" class="unl_live-label">Password</label>
-                    <div class="unl_live-input-wrapper">
-                        <i class="fa fa-lock"></i>
-                        <input 
-                            type="password" 
-                            id="password" 
-                            class="unl_live-input" 
-                            placeholder="Create a strong password" 
-                            required
-                        >
-                    </div>
-                </div>
-    
-                <div class="unl_live-input-group">
-                    <label for="manuscriptType" class="unl_live-label">Manuscript Type</label>
-                    <div class="unl_live-input-wrapper">
-                        <i class="fa fa-file-text"></i>
-                        <select 
-                            id="manuscriptType" 
-                            class="unl_live-select" 
-                            required
-                        >
-                            <option value="">Select Manuscript Type</option>
-                            <option value="academic">Academic Paper</option>
-                            <option value="novel">Novel</option>
-                            <option value="thesis">Thesis</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                </div>
-    
-                <button 
-                    type="submit" 
-                    class="unl_live-submit-button"
-                >
-                    Sign Up
-                </button>
-            </form>
-    
-            <p class="unl_live-login-redirect">
-                Already have an account? 
-                <a href="client-login.html" class="unl_live-login-link">Log In</a>
-            </p>
-        </div>
-    
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var signupForm = document.getElementById('signupForm');
-                
-                signupForm.addEventListener('submit', function(event) {
-                    event.preventDefault();
-                    
-                    var name = document.getElementById('name').value;
-                    var email = document.getElementById('email').value;
-                    var password = document.getElementById('password').value;
-                    var manuscriptType = document.getElementById('manuscriptType').value;
-    
-                    // Basic validation
-                    if (!name || !email || !password || !manuscriptType) {
-                        alert('Please fill out all fields');
-                        return;
-                    }
-    
-                    // Prepare form data object
-                    var formData = {
-                        name: name,
-                        email: email,
-                        password: password,
-                        manuscriptType: manuscriptType
-                    };
-    
-                    // Simulated submission
-                    console.log('Signup Data:', formData);
-                    alert('Signup Successful! (Simulated)');
-                });
-            });
-        </script>
-
-    
-
-              
-
-     
+        
+      
+      <footer class="fot-dow-1">
+        <div class="row justify-content-around align-items-center">
+          <div class="col-sm-12 col-md-3 col-lg-3 ColDesghCnt">
+              <h3 class="foot-h3">Contact Center</h3>
+                <ul class="fot-ul-001">
+                    <li><a href="mailto:hitexeditex.com" class="fot-ln-001"> <i class="fa fa-envelope" aria-hidden="true"></i> HiTexediTex.com</a></li>
+                    <li><a href="#" class="fot-ln-001"><i class="fa fa-volume-control-phone" aria-hidden="true"></i> 0546525435</a></li>
+                    <li><a href="services.html" class="fot-ln-001">Services</a></li>
+                    <li><a href="#" class="fot-ln-001">The team</a></li>
+                    <li><a href="#" class="fot-ln-001"><img src="assets/map-pin-icon.svg" class="alb-im-001" style="margin-left: -3em;">Adweso, Koforidua, Ghana</a></li>
+                </ul>
+          </div>
+          <div class="col-sm-12 col-md-3 col-lg-3 ColDesghCnt">
+              <h3 class="foot-h3">Find Us</h3>
+              <div class="gps_code_002">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15877.202531816156!2d-0.250482!3d6.069084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTrCsDUzJzMwLjgiTiAwwrAwNic0Mi4zIlc!5e0!3m2!1sen!2sus!4v1645841132286!5m2!1sen!2sus" width="300" height="170" style="border:0;" allowfullscreen="" loading="lazy" class="gog-901-uy"></iframe>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-3 col-lg-3 ColDesghCnt">
+              <h3 class="foot-h3">Follow Us</h3 >
+                <ul class="fot-ul-003">
+                <li>
+                  <ul class="Obtao_0012">
+                    <li><a href=""><img src="assets/x-social-media-white-icon.svg" class="kil_im_001"></a></li>
+                    <li><a href=""><img src="assets/facebook-app-round-white-icon.svg" class="kil_im_001"></a></li>
+                    <li><a href=""><img src="assets/instagram-white-icon.svg" class="kil_im_001"></a></li>
+                    <li><a href=""><img src="assets/whatsapp-white-icon.svg" class="kil_im_001"></a></li>
+                  </ul>
+                </li>
+                <li><a href="Copyright.html" class="fot-ln-001"><img src="assets/copyright-icon.svg" class="alb-im-001">Copyright Policy </a></li>
+                <li><a href="privacy.html" class="fot-ln-001"><img src="assets/copyright-icon.svg" class="alb-im-001">Privacy Policy </a></li>
+                </ul>
+          </div>  
+      </div>
+</footer>
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
