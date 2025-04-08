@@ -56,31 +56,32 @@ body::-webkit-scrollbar-thumb:hover {
     justify-content: center;
     align-items: center;
     gap: 3%;
-    width: 90%;
+    width: 85%; /* Reduced from 90% to provide more space around content */
     height: 100%;
     max-height: 100vh;
     padding: 1rem;
 }
 
-/* Language selector panel - NO SCROLLING */
+/* Language selector panel - WITH PROPER SPACING */
 .language_selector {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     align-items: center;
-    width: 40%;
-    max-width: 350px;
+    width: 35%; /* Reduced from 40% to create more space around it */
+    max-width: 320px;
     height: auto;
     background-color: rgba(255, 255, 255, 0.95);
-    padding: 2rem 2rem;
+    padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
+    margin: 0 2%; /* Added horizontal margin */
 }
 
 .img_above_list {
-    width: 80%;
-    max-width: 180px;
+    width: 75%;
+    max-width: 160px;
     height: auto;
     object-fit: contain;
     margin-bottom: 1.5rem;
@@ -105,12 +106,12 @@ body::-webkit-scrollbar-thumb:hover {
 .language-list li a {
     display: block;
     font-family: sans-serif;
-    font-size: 16px;
+    font-size: 15px;
     color: #ffffff;
     font-weight: bold; 
     text-decoration: none;
     background-color: rgba(1, 10, 59, 0.9);
-    padding: 0.8em 0;
+    padding: 0.7em 0;
     text-align: center;
     border-radius: 6px;
     transition: all 0.3s ease;
@@ -156,12 +157,12 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .image-container #languageText {
-    font-size: 6rem;
+    font-size: 4.5rem;
     font-weight: bold;
     line-height: 1.1; 
     color: rgb(255, 255, 255);
     transition: opacity 0.5s ease-in-out, transform 0.3s ease; 
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
     display: inline-block;
     max-width: 100%;
     word-wrap: break-word;
@@ -170,7 +171,7 @@ body::-webkit-scrollbar-thumb:hover {
 #cursor {
     display: inline-block;
     width: 3px;
-    height: 5rem;
+    height: 4.5rem;
     background-color: white;
     margin-left: 0.3rem;
     animation: blinkCursor 0.7s infinite;
@@ -195,11 +196,11 @@ body::-webkit-scrollbar-thumb:hover {
 /* Responsive design for different screen sizes */
 @media screen and (max-width: 1400px) {
     .image-container #languageText {
-        font-size: 4.5rem;
+        font-size: 4rem;
     }
     
     #cursor {
-        height: 4.5rem;
+        height: 4rem;
     }
     
     .image-container h3 {
@@ -207,18 +208,18 @@ body::-webkit-scrollbar-thumb:hover {
     }
 
     .language-list li a {
-        font-size: 15px;
-        padding: 0.75em 0;
+        font-size: 14px;
+        padding: 0.7em 0;
     }
 }
 
 @media screen and (max-width: 1200px) {
     .image-container #languageText {
-        font-size: 4rem;
+        font-size: 3.5rem;
     }
     
     #cursor {
-        height: 4rem;
+        height: 3.5rem;
     }
     
     .language_selector {
@@ -227,7 +228,7 @@ body::-webkit-scrollbar-thumb:hover {
     
     .language-list li a {
         font-size: 14px;
-        padding: 0.7em 0;
+        padding: 0.65em 0;
     }
 
     .language-list {
@@ -237,21 +238,21 @@ body::-webkit-scrollbar-thumb:hover {
 
 @media screen and (max-width: 992px) {
     .new_int_9234 {
-        width: 95%;
+        width: 90%;
         gap: 2%;
     }
     
     .language_selector {
-        width: 42%;
+        width: 38%;
         padding: 1.25rem;
     }
     
     .image-container #languageText {
-        font-size: 3.5rem;
+        font-size: 3rem;
     }
     
     #cursor {
-        height: 3.5rem;
+        height: 3rem;
         width: 2px;
     }
     
@@ -265,7 +266,7 @@ body::-webkit-scrollbar-thumb:hover {
 
     .language-list li a {
         font-size: 13px;
-        padding: 0.65em 0;
+        padding: 0.6em 0;
     }
 }
 
@@ -273,28 +274,29 @@ body::-webkit-scrollbar-thumb:hover {
     .new_int_9234 {
         flex-direction: column;
         justify-content: center;
-        gap: 3%;
+        gap: 4%; /* Increased gap between elements */
         height: 100%;
-        padding: 2rem 1rem;
+        padding: 2rem;
+        width: 100%;
     }
     
     .language_selector {
-        width: 90%;
-        max-width: 400px;
+        width: 80%; /* Reduced width to create space around */
+        max-width: 360px;
         height: auto;
         padding: 1.5rem;
         margin-bottom: 2rem;
     }
     
     .img_above_list {
-        max-width: 130px;
+        max-width: 120px;
         margin-bottom: 1rem;
     }
     
     .language-list {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 0.75rem;
+        gap: 0.75rem 0.85rem; /* Added more horizontal gap between columns */
         width: 100%;
     }
     
@@ -303,28 +305,28 @@ body::-webkit-scrollbar-thumb:hover {
     }
     
     .language-list li a {
-        padding: 0.7em 0;
-        font-size: 14px;
+        padding: 0.65em 0;
+        font-size: 13px;
     }
     
     .image-container {
-        width: 100%;
+        width: 85%; /* Reduced width to create space around */
         padding-left: 0;
         align-items: center;
         text-align: center;
     }
     
     .image-container #languageText {
-        font-size: 3rem;
+        font-size: 2.8rem;
         text-align: center;
     }
     
     #cursor {
-        height: 3rem;
+        height: 2.8rem;
     }
     
     .image-container h3 {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
         text-align: center;
         margin-top: 0.5rem;
         max-width: 100%;
@@ -332,87 +334,116 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 @media screen and (max-width: 576px) {
+    .new_int_9234 {
+        padding: 1.5rem;
+    }
+    
     .language_selector {
-        padding: 1.25rem 1rem;
-        width: 95%;
+        padding: 1.25rem 1.1rem;
+        width: 75%; /* Further reduced width */
+        max-width: 320px;
     }
     
     .language-list {
-        gap: 0.65rem;
+        gap: 0.65rem 0.8rem;
     }
     
     .language-list li a {
         padding: 0.6em 0;
-        font-size: 13px;
+        font-size: 12px;
+        border-radius: 5px;
+    }
+    
+    .image-container {
+        width: 80%;
     }
     
     .image-container #languageText {
-        font-size: 2.5rem;
+        font-size: 2.3rem;
     }
     
     #cursor {
-        height: 2.5rem;
+        height: 2.3rem;
     }
     
     .image-container h3 {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 }
 
 @media screen and (max-width: 480px) {
+    .new_int_9234 {
+        padding: 1.2rem;
+    }
+    
     .language_selector {
-        padding: 1rem 0.75rem;
+        padding: 1rem 0.9rem;
+        width: 70%; /* Further reduced width */
     }
 
     .img_above_list {
-        max-width: 110px;
+        max-width: 100px;
         margin-bottom: 0.75rem;
     }
 
     .language-list {
-        gap: 0.5rem;
+        gap: 0.5rem 0.7rem;
     }
 
     .language-list li a {
-        font-size: 12px;
+        font-size: 11px;
         padding: 0.55em 0;
+    }
+    
+    .image-container {
+        width: 75%;
+    }
+    
+    .image-container #languageText {
+        font-size: 2rem;
+    }
+    
+    #cursor {
+        height: 2rem;
     }
 }
 
 @media screen and (max-width: 375px) {
     .new_int_9234 {
-        padding: 1rem 0.5rem;
+        padding: 1rem;
     }
 
     .language_selector {
-        padding: 0.85rem 0.7rem;
+        padding: 0.85rem 0.8rem;
+        width: 65%; /* Further reduced width */
     }
     
     .img_above_list {
-        max-width: 100px;
+        max-width: 90px;
         margin-bottom: 0.6rem;
     }
 
     .language-list {
-        gap: 0.45rem;
+        gap: 0.45rem 0.6rem;
     }
     
     .language-list li a {
-        font-size: 11px;
+        font-size: 10px;
         padding: 0.5em 0;
+        border-radius: 4px;
     }
     
     .image-container #languageText {
-        font-size: 1.8rem;
+        font-size: 1.75rem;
     }
     
     #cursor {
-        height: 1.8rem;
+        height: 1.75rem;
         width: 2px;
     }
     
     .image-container h3 {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
 }
 
@@ -422,24 +453,26 @@ body::-webkit-scrollbar-thumb:hover {
         flex-direction: row;
         align-items: center;
         height: 100%;
-        padding: 0.5rem;
+        padding: 0.5rem 1rem;
+        width: 95%;
     }
     
     .language_selector {
         height: auto;
         padding: 0.75rem;
-        width: 45%;
+        width: 40%;
+        max-width: 300px;
     }
     
     .img_above_list {
-        max-width: 80px;
+        max-width: 70px;
         margin-bottom: 0.5rem;
     }
     
     .language-list {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 0.4rem;
+        gap: 0.4rem 0.6rem;
     }
     
     .language-list li {
@@ -452,22 +485,22 @@ body::-webkit-scrollbar-thumb:hover {
     }
     
     .image-container {
-        width: 50%;
+        width: 45%;
         align-items: flex-start;
         text-align: left;
     }
     
     .image-container #languageText {
-        font-size: 2.2rem;
+        font-size: 2rem;
         text-align: left;
     }
     
     #cursor {
-        height: 2.2rem;
+        height: 2rem;
     }
     
     .image-container h3 {
-        font-size: 1rem;
+        font-size: 0.9rem;
         text-align: left;
         margin-top: 0.25rem;
     }
@@ -475,30 +508,31 @@ body::-webkit-scrollbar-thumb:hover {
 
 /* Handle very small screens */
 @media (max-width: 320px) {
-    .image-container #languageText {
-        font-size: 1.6rem;
-    }
-    
-    #cursor {
-        height: 1.6rem;
-        width: 2px;
-    }
-    
     .language_selector {
-        padding: 0.7rem 0.5rem;
+        width: 65%;
+        padding: 0.7rem 0.6rem;
     }
     
     .img_above_list {
-        max-width: 90px;
+        max-width: 80px;
         margin-bottom: 0.5rem;
     }
 
     .language-list {
-        gap: 0.4rem;
+        gap: 0.4rem 0.5rem;
     }
 
     .language-list li a {
-        font-size: 10px;
+        font-size: 9px;
         padding: 0.45em 0;
+    }
+    
+    .image-container #languageText {
+        font-size: 1.5rem;
+    }
+    
+    #cursor {
+        height: 1.5rem;
+        width: 1px;
     }
 }
