@@ -821,3 +821,209 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 
+//CODE FOR PRIVACY PAGE
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Set up section toggling
+    const sections = document.querySelectorAll('.pri_po_section');
+    
+    // Initially hide all content except for the active section
+    sections.forEach(section => {
+        if (!section.classList.contains('pri_po_active')) {
+            const content = section.querySelector('.pri_po_content');
+            if (content) {
+                content.style.display = 'none';
+            }
+        }
+    });
+    
+    // Add click events to all section titles
+    const sectionTitles = document.querySelectorAll('.pri_po_section_title');
+    sectionTitles.forEach(title => {
+        title.addEventListener('click', function() {
+            const section = this.parentElement;
+            const content = section.querySelector('.pri_po_content');
+            
+            if (section.classList.contains('pri_po_active')) {
+                section.classList.remove('pri_po_active');
+                content.style.display = 'none';
+            } else {
+                section.classList.add('pri_po_active');
+                content.style.display = 'block';
+            }
+        });
+    });
+
+    // Back to top button functionality
+    const backToTopButton = document.getElementById('backToTop');
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('pri_po_visible');
+        } else {
+            backToTopButton.classList.remove('pri_po_visible');
+        }
+    });
+    
+    backToTopButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Create navigation if not already present
+    setupNavigation();
+
+    // Cookie banner functionality
+    setupCookieBanner();
+    
+    // Mobile menu toggle
+    setupMobileMenu();
+});
+
+function setupNavigation() {
+    // Check if navigation container exists, if not create it
+    let navigation = document.querySelector('.pri_po_navigation');
+    
+    if (!navigation) {
+        // Create navigation container if it doesn't exist
+        const container = document.querySelector('.pri_po_container') || document.body;
+        navigation = document.createElement('div');
+        navigation.className = 'pri_po_navigation';
+        
+        const navTitle = document.createElement('h3');
+        navTitle.className = 'pri_po_nav_title';
+        navTitle.textContent = 'Table of Contents';
+        navigation.appendChild(navTitle);
+        
+        const navList = document.createElement('ul');
+        navList.className = 'pri_po_nav_list';
+        navigation.appendChild(navList);
+        
+        // Insert after header if exists, otherwise at the beginning of container
+        const header = document.querySelector('.pri_po_header');
+        if (header && header.nextElementSibling) {
+            container.insertBefore(navigation, header.nextElementSibling);
+        } else {
+            const main = document.querySelector('.pri_po_main');
+            if (main) {
+                container.insertBefore(navigation, main);
+            } else {
+                container.prepend(navigation);
+            }
+        }
+    }
+    
+    // Get or create navigation list
+    let navList = navigation.querySelector('.pri_po_nav_list');
+    if (!navList) {
+        navList = document.createElement('ul');
+        navList.className = 'pri_po_nav_list';
+        navigation.appendChild(navList);
+    }
+    
+    // Clear existing links if we're rebuilding
+    navList.innerHTML = '';
+    
+    // Add links for each section
+    const sections = document.querySelectorAll('.pri_po_section');
+    sections.forEach(section => {
+        // Make sure section has an ID
+        if (!section.id) {
+            const title = section.querySelector('.pri_po_section_title');
+            if (title) {
+                // Generate ID from title text
+                let id = title.textContent.trim().toLowerCase().replace(/\s+/g, '-');
+                id = id.replace(/[^\w-]/g, ''); // Remove special characters
+                section.id = id;
+            }
+        }
+        
+        if (section.id) {
+            const title = section.querySelector('.pri_po_section_title');
+            if (title) {
+                // Create navigation item
+                const navItem = document.createElement('li');
+                navItem.className = 'pri_po_nav_item';
+                
+                const navLink = document.createElement('a');
+                navLink.className = 'pri_po_nav_link';
+                navLink.href = '#' + section.id;
+                navLink.textContent = title.textContent.trim();
+                
+                navItem.appendChild(navLink);
+                navList.appendChild(navItem);
+                
+                // Add click event
+                navLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Open the section
+                    section.classList.add('pri_po_active');
+                    const content = section.querySelector('.pri_po_content');
+                    if (content) {
+                        content.style.display = 'block';
+                    }
+                    
+                    // Scroll to it
+                    window.scrollTo({
+                        top: section.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        }
+    });
+}
+
+function setupCookieBanner() {
+    const cookieBanner = document.getElementById('cookieBanner');
+    if (!cookieBanner) return;
+    
+    const acceptCookiesBtn = document.getElementById('acceptCookies');
+    const cookieSettingsBtn = document.getElementById('cookieSettings');
+    
+    // Show banner if cookies not accepted yet
+    if (!localStorage.getItem('cookiesAccepted')) {
+        setTimeout(function() {
+            cookieBanner.classList.add('pri_po_show');
+        }, 1000);
+    }
+    
+    if (acceptCookiesBtn) {
+        acceptCookiesBtn.addEventListener('click', function() {
+            localStorage.setItem('cookiesAccepted', 'true');
+            cookieBanner.classList.remove('pri_po_show');
+        });
+    }
+    
+    if (cookieSettingsBtn) {
+        cookieSettingsBtn.addEventListener('click', function() {
+            alert("Cookie settings would open here");
+            localStorage.setItem('cookiesAccepted', 'true');
+            cookieBanner.classList.remove('pri_po_show');
+        });
+    }
+}
+
+function setupMobileMenu() {
+    const navigation = document.querySelector('.pri_po_navigation');
+    if (!navigation) return;
+    
+    // Check if toggle already exists
+    let mobileToggle = document.querySelector('.pri_po_mobile_menu_toggle');
+    
+    if (!mobileToggle) {
+        mobileToggle = document.createElement('button');
+        mobileToggle.className = 'pri_po_mobile_menu_toggle';
+        mobileToggle.textContent = 'Table of Contents';
+        navigation.parentNode.insertBefore(mobileToggle, navigation);
+    }
+    
+    mobileToggle.addEventListener('click', function() {
+        navigation.classList.toggle('pri_po_mobile_open');
+        this.textContent = navigation.classList.contains('pri_po_mobile_open') ? 
+            'Hide Table of Contents' : 'Table of Contents';
+    });
+}
