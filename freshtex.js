@@ -191,33 +191,93 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // CODE FOR COPYRIGHT
-
-// Interactive section navigation
 document.addEventListener('DOMContentLoaded', () => {
-  const navItems = document.querySelectorAll('.sh-ra-0e-fr');
-  const contentSection = document.getElementById('content-section');
-
-  // Sample content for different sections
+  // Cache DOM elements
+  const navItems = document.querySelectorAll('.cop_ryt_nav_item');
+  const contentSection = document.getElementById('cop_ryt_content_section');
+  
+  // Section content data with improved formatting
   const sectionContent = {
-      'information-collection': `At Hitex Editex, we collect personal information from you when you voluntarily provide it to us or when you use our services. This information may include your name, email address, phone number, mailing address, academic affiliation, and payment information.`,
-      'use-of-information': `We use the collected information to provide, maintain, and improve our services. This includes processing your requests, communicating with you, personalizing your experience, and analyzing usage of our website.`,
-      'information-sharing': `We do not sell or rent your personal information to third parties. We may share your information with service providers who assist us in operating our website, conducting our business, or servicing you.`,
-      'data-security': `We implement a variety of security measures to maintain the safety of your personal information. Your personal information is contained behind secured networks and is only accessible by a limited number of persons who have special access rights.`
+    'information-collection': `
+      At Hitex Editex, we collect personal information from you when you voluntarily provide it to us or when you use our services. 
+      This information may include your name, email address, phone number, mailing address, academic affiliation, and payment information.
+      We collect this information through various means, including when you fill out forms on our website, communicate with us via email or phone,
+      or engage with our services.
+      
+      <br><br>
+      
+      We also collect certain information automatically when you visit our website. This information may include your IP address, browser type,
+      operating system, referral URLs, and other standard server log information. We use cookies and similar technologies to collect this information
+      and enhance your experience on our website.
+    `,
+    'use-of-information': `
+      We use the collected information to provide, maintain, and improve our services. This includes processing your requests, 
+      communicating with you, personalizing your experience, and analyzing usage of our website.
+      
+      <br><br>
+      
+      The information helps us understand how our users interact with our website and services, allowing us to make data-driven decisions
+      to enhance user experience. We may use your email address to send you important updates about our services, policy changes,
+      or promotional materials (if you've opted in for marketing communications).
+      
+      <br><br>
+      
+      We retain your information for as long as necessary to fulfill the purposes outlined in this policy, unless a longer retention
+      period is required or permitted by law.
+    `,
+    'information-sharing': `
+      We do not sell or rent your personal information to third parties. We may share your information with service providers 
+      who assist us in operating our website, conducting our business, or servicing you.
+      
+      <br><br>
+      
+      These third-party service providers are bound by contractual obligations to keep personal information confidential and use it only
+      for the purposes for which we disclose it to them. We may also disclose your information when we believe release is appropriate
+      to comply with the law, enforce our site policies, or protect our or others' rights, property, or safety.
+      
+      <br><br>
+      
+      In the event of a business transition, such as a merger, acquisition, or asset sale, your personal information may be among the
+      assets transferred. You will be notified via email and/or a prominent notice on our website of any change in ownership or uses of
+      your personal information.
+    `,
+    'data-security': `
+      We implement a variety of security measures to maintain the safety of your personal information. Your personal information 
+      is contained behind secured networks and is only accessible by a limited number of persons who have special access rights.
+      
+      <br><br>
+      
+      All sensitive information you provide is encrypted via Secure Socket Layer (SSL) technology. We implement various security measures
+      when a user places an order, enters, submits, or accesses their information to protect your personal information.
+      
+      <br><br>
+      
+      Despite our best efforts, no method of transmission over the Internet or electronic storage is 100% secure. Therefore, while we
+      strive to use commercially acceptable means to protect your personal information, we cannot guarantee its absolute security.
+    `
   };
-
+  
+  // Handle navigation click events with smooth transition
   navItems.forEach(item => {
-      item.addEventListener('click', () => {
-          
-          navItems.forEach(nav => nav.classList.remove('active'));
-          
-          item.classList.add('active');
-          const sectionKey = item.getAttribute('data-section');
-          contentSection.textContent = sectionContent[sectionKey];
-      });
+    item.addEventListener('click', () => {
+      // Update active state
+      navItems.forEach(nav => nav.classList.remove('active'));
+      item.classList.add('active');
+      
+      // Update content with fade effect
+      contentSection.style.opacity = '0';
+      contentSection.style.transform = 'translateY(10px)';
+      
+      setTimeout(() => {
+        const sectionKey = item.getAttribute('data-section');
+        contentSection.innerHTML = sectionContent[sectionKey];
+        
+        contentSection.style.opacity = '1';
+        contentSection.style.transform = 'translateY(0)';
+      }, 300);
+    });
   });
 });
-
-
 // CODE FOR CLOK
 function updateClock() {
   const now = new Date();
@@ -884,5 +944,7 @@ document.querySelector('.SlodsProgress').addEventListener('click', (e) => {
 });
 
 
-// CODE FOR BENEFITES OF WORKING WITH US
+// CODE FOR PRIVACY POLICY PAGE
+
+
 

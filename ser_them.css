@@ -230,20 +230,6 @@ body {
     width: 100%;
 }
 
-
-header {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    margin-bottom: 3rem;
-    align-items: center;
-    flex-direction: column;
-}
-
-header p{
-    max-width: 80%;
-}
-
 h1 {
     font-size: 2.8rem;
     color: var(--dark);
@@ -3232,7 +3218,6 @@ padding: 2rem;
 /* CODE FOR ABOUT US */
 
 .js-hero-container {
-    margin-top: 9.5em;
     background: linear-gradient(135deg, #eb2525, #af1e1e);;
     background-image: url(assets/redabout.jpg);
     position: relative;
@@ -9796,12 +9781,23 @@ glow-base {
                 box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             }
     
-            .unl_live-main-heading {
+            .unl_live-main-heading a{
                 color: var(--blue);
                 text-align: center;
-                font-size: var(--major-heading);
+                font-size: 2.7rem;
                 font-weight: var(--major-header-font-weight);
                 margin-bottom: 30px;
+            }
+
+            @media screen and (max-width:400px){
+              .unl_live-main-heading a{
+                color: var(--blue);
+                text-align: center;
+                font-size: 2rem;
+                font-weight: var(--major-header-font-weight);
+                margin-bottom: 30px;
+            }
+
             }
     
             .unl_live-input-group {
@@ -9879,6 +9875,7 @@ glow-base {
 
 /* CODE FOR CLIENT LOG IN PAGE*/
 .log_er_h-container {
+  position: relative;
   width: 100%;
   max-width: 420px;
   background-color: white;
