@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service Comparison</title>
+  <style>
+    :root {
+      --red: #D54C4F;
+      --blue: #032672;
+      --light-blue: #D3E5FF;
+      --major-heading: 3em;
+      --major-header-font-weight: 800;
+      --sub-head-color: #EBEBEB;
+      --gradient-bg: linear-gradient(135deg, var(--blue) 0%, #0D47A1 100%);
+      --red-gradient: linear-gradient(135deg, var(--red) 0%, #F06292 100%);
+      --card-shadow: 0 10px 30px rgba(3, 38, 114, 0.1);
+      --text-color: #2C3E50;
+      --accent-color: #4A90E2;
+      --double-gradient: linear-gradient(135deg, rgba(3, 38, 114, 0.9) 0%, rgba(213, 76, 79, 0.8) 100%);
+      --button-background: linear-gradient(135deg, #eb2525, #af1e1e);
+      --check-color: #22c55e;
+      --cross-color: var(--red);
+      --border-color: #e2e8f0;
+      --bg-light: #f8fafc;
+      --category-bg: #edf2f7;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background-color: #f5f7fa;
+      color: var(--text-color);
+    }
+
+    .ta__ble__e-comparison-section {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    .ta__ble__e-section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .ta__ble__e-section-header h2 {
+      font-size: var(--major-heading);
+      color: var(--blue);
+      margin-bottom: 1rem;
+      font-weight: var(--major-header-font-weight);
+    }
+
+    .ta__ble__e-section-header p {
+      color: var(--text-color);
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .ta__ble__e-comparison-grid {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(3, 1fr);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      background: white;
+    }
+
+    .ta__ble__e-feature-column {
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--border-color);
+      position: relative;
+    }
+
+    .ta__ble__e-feature-column:last-child {
+      border-right: none;
+    }
+
+    .ta__ble__e-column-header {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      background: var(--gradient-bg);
+      color: white;
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    .ta__ble__e-features-header {
+      font-weight: bold;
+      padding: 1.5rem 1rem;
+      background: var(--gradient-bg);
+      color: white;
+      font-size: 1.4rem;
+    }
+
+    .ta__ble__e-service-category {
+      padding: 1rem;
+      background-color: var(--bg-light);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .ta__ble__e-category-title {
+      font-weight: 600;
+      color: var(--blue);
+    }
+
+    .ta__ble__e-category {
+      background-color: var(--category-bg);
+      font-weight: 600;
+      color: var(--blue);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem;
+    }
+
+    .ta__ble__e-feature-item {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 60px;
+    }
+
+    .ta__ble__e-feature-column:first-child .ta__ble__e-feature-item {
+      justify-content: flex-start;
+      padding-left: 1.5rem;
+    }
+
+    .ta__ble__e-check {
+      color: var(--check-color);
+      font-size: 1.2rem;
+    }
+
+    .ta__ble__e-cross {
+      color: var(--cross-color);
+      font-size: 1.2rem;
+    }
+
+    .ta__ble__e-service-note {
+      padding: 0.5rem 1rem;
+    }
+
+    .ta__ble__e-service-note ul {
+      list-style-type: none;
+      text-align: center;
+    }
+
+    .ta__ble__e-service-note li {
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+      color: var(--text-color);
+    }
+
+    .ta__ble__e-btn {
+      display: inline-block;
+      background: var(--button-background);
+      color: white;
+      text-decoration: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 500;
+      margin: 1rem auto;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      width: 80%;
+    }
+
+    .ta__ble__e-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .ta__ble__e-btn-container {
+      display: flex;
+      justify-content: center;
+      padding: 1rem 0;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 992px) {
+      .ta__ble__e-comparison-grid {
+        grid-template-columns: 1fr;
+        box-shadow: none;
+      }
+
+      .ta__ble__e-feature-column {
+        margin-bottom: 2rem;
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+      }
+
+      .ta__ble__e-feature-column:first-child {
+        display: none;
+      }
+
+      .ta__ble__e-feature-item {
+        position: relative;
+        padding-top: 2.5rem;
+      }
+
+      .ta__ble__e-feature-item::before {
+        content: attr(data-label);
+        position: absolute;
+        top: 0.5rem;
+        left: 0;
+        right: 0;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: var(--blue);
+        text-align: center;
+      }
+
+      .ta__ble__e-category {
+        text-align: center;
+      }
+      
+      .ta__ble__e-section-header h2 {
+        font-size: 2rem;
+      }
+    }
+
+    .ta__ble__e-comparison9-section {
+      background: url('https://img.freepik.com/free-photo/business-team-watching-discussing-project-presentation_74855-1500.jpg?t=st=1744882751~exp=1744886351~hmac=fe83c32f0d2964516ba4bdc121c7ca56d7849a5df85f2b214c286d7f8021ec6d&w=2000') center center;
+      background-attachment: fixed;
+      background-size: cover;
+      position: relative;
+      padding: 4rem 0;
+      display: flex;
+      justify-content: center;
+      min-height: 50vh;
+      margin: 10em auto;
+      align-items: center;
+      z-index: 1;
+    }
+
+    .ta__ble__e-comparison9-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--double-gradient);
+      z-index: -1;
+    }
+
+    .ta__ble__e-quote-buttons {
+      max-width: 90%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .ta__ble__e-quote-btn {
+      display: inline-block;
+      background: #ffff;
+      color: var(--blue);
+      text-decoration: none;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+      min-width: 220px;
+      text-align: center;
+    }
+
+    .ta__ble__e-quote-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.9), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .ta__ble__e-quote-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      color: var(--blue);
+    }
+
+    .ta__ble__e-quote-btn:hover::before {
+      left: 100%;
+    }
+
+    .ta__ble__e-arrow-icon {
+      display: inline-block;
+      margin-left: 5px;
+      transition: transform 0.3s ease;
+    }
+
+    .ta__ble__e-quote-btn:hover .ta__ble__e-arrow-icon {
+      transform: translateX(5px);
+    }
+
+    .fas {
+      display: inline-block;
+      font-style: normal;
+      font-variant: normal;
+      text-rendering: auto;
+      line-height: 1;
+    }
+
+    .fa-check:before {
+      content: "✓";
+    }
+
+    .fa-times:before {
+      content: "✕";
+    }
+
+    @media (min-width: 768px) {
+      .ta__ble__e-quote-buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="ta__ble__e-comparison-section">
+    <div class="ta__ble__e-section-header">
+      <h2>Service Comparison</h2>
+      <p>Choose the editing package that best fits your academic and publishing needs</p>
+    </div>
+    
+    <div class="ta__ble__e-comparison-grid">
+      <!-- First column - Features -->
+      <div class="ta__ble__e-feature-column">
+        <div class="ta__ble__e-features-header">Features</div>
+        <div class="ta__ble__e-service-category">
+          <div class="ta__ble__e-category-title">Service Availability</div>
+        </div>
+        
+        <!-- Basic editing Component -->
+        <div class="ta__ble__e-category">Basic editing Component</div>
+        <div class="ta__ble__e-feature-item">Language and Grammar Check</div>
+        <div class="ta__ble__e-feature-item">Technical Accuracy</div>
+        <div class="ta__ble__e-feature-item">Writing Style Consistency</div>
+        <div class="ta__ble__e-feature-item">Logical Flow Check</div>
+        <div class="ta__ble__e-feature-item">Content Enhancement</div>
+        <div class="ta__ble__e-feature-item">Word Count Reduction</div>
+        <div class="ta__ble__e-feature-item">Plagiarism Check</div>
+        
+        <!-- Journal and publication support -->
+        <div class="ta__ble__e-category">Journal and publication support</div>
+        <div class="ta__ble__e-feature-item">Certificate of Editing</div>
+        <div class="ta__ble__e-feature-item">Manuscript Formatting</div>
+        <div class="ta__ble__e-feature-item">Graphics Support</div>
+        <div class="ta__ble__e-feature-item">Cover Letter</div>
+        <div class="ta__ble__e-feature-item">Scientific Review Report</div>
+        <div class="ta__ble__e-feature-item">Reviewer Response Letter</div>
+        <div class="ta__ble__e-feature-item">Letter for Editor</div>
+        
+        <!-- Premium Support -->
+        <div class="ta__ble__e-category">Premium Support</div>
+        <div class="ta__ble__e-feature-item">Grant Writing</div>
+        <div class="ta__ble__e-feature-item">Abstract Writing</div>
+        <div class="ta__ble__e-feature-item">Statistical Analysis</div>
+        
+        <!-- After Sales Support -->
+        <div class="ta__ble__e-category">After Sales Support</div>
+        <div class="ta__ble__e-feature-item">Rejection Shield</div>
+        <div class="ta__ble__e-feature-item">Unlimited Editor Q&A</div>
+      </div>
+      
+      <!-- Second column - Standard Editing -->
+      <div class="ta__ble__e-feature-column">
+        <div class="ta__ble__e-column-header">Standard Editing</div>
+        <div class="ta__ble__e-btn-container">
+          <a href="get-quote.html" class="ta__ble__e-btn">Get Quote</a>
+        </div>
+        <div class="ta__ble__e-service-category ta__ble__e-service-note">
+          <ul>
+            <li>Language Editing</li>
+            <li>Translation Services</li>
+          </ul>
+        </div>
+        
+        <!-- Basic editing Component -->
+        <div class="ta__ble__e-category">Basic editing Component</div>
+        <div class="ta__ble__e-feature-item" data-label="Language and Grammar Check"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Technical Accuracy"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Writing Style Consistency"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Logical Flow Check"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Content Enhancement"><i class="fas fa-times ta__ble__e-cross"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Word Count Reduction">Not available</div>
+        <div class="ta__ble__e-feature-item" data-label="Plagiarism Check"><i class="fas fa-check ta__ble__e-check"></i></div>
+        
+        <!-- Journal and publication support -->
+        <div class="ta__ble__e-category">Journal and publication support</div>
+        <div class="ta__ble__e-feature-item" data-label="Certificate of Editing"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Manuscript Formatting"><i class="fas fa-times ta__ble__e-cross"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Graphics Support"><i class="fas fa-times ta__ble__e-cross"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Cover Letter"><i class="fas fa-times ta__ble__e-cross"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Scientific Review Report"><i class="fas fa-times ta__ble__e-cross"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Reviewer Response Letter"><i class="fas fa-times ta__ble__e-cross"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Letter for Editor"><i class="fas fa-times ta__ble__e-cross"></i></div>
+        
+        <!-- Premium Support -->
+        <div class="ta__ble__e-category">Premium Support</div>
+        <div class="ta__ble__e-feature-item" data-label="Grant Writing"><i class="fas fa-times ta__ble__e-cross"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Abstract Writing"><i class="fas fa-times ta__ble__e-cross"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Statistical Analysis"><i class="fas fa-times ta__ble__e-cross"></i></div>
+        
+        <!-- After Sales Support -->
+        <div class="ta__ble__e-category">After Sales Support</div>
+        <div class="ta__ble__e-feature-item" data-label="Rejection Shield"><i class="fas fa-times ta__ble__e-cross"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Unlimited Editor Q&A"><i class="fas fa-check ta__ble__e-check"></i></div>
+        
+        <div class="ta__ble__e-btn-container">
+          <a href="get-quote.html" class="ta__ble__e-btn">Get Quote</a>
+        </div>
+      </div>
+    
+      <!-- Third column - Premium Editing -->
+      <div class="ta__ble__e-feature-column">
+        <div class="ta__ble__e-column-header">Premium Editing</div>
+        <div class="ta__ble__e-btn-container">
+          <a href="get-quote.html" class="ta__ble__e-btn">Get Quote</a>
+        </div>
+        <div class="ta__ble__e-service-category ta__ble__e-service-note">
+          <ul>
+            <li>Scientific Editing</li>
+            <li>Technical Editing</li>
+            <li>Translation services</li>
+          </ul>
+        </div>
+        
+        <!-- Basic editing Component -->
+        <div class="ta__ble__e-category">Basic editing Component</div>
+        <div class="ta__ble__e-feature-item" data-label="Language and Grammar Check"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Technical Accuracy"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Writing Style Consistency"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Logical Flow Check"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Content Enhancement"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Word Count Reduction">Up to 20%</div>
+        <div class="ta__ble__e-feature-item" data-label="Plagiarism Check"><i class="fas fa-check ta__ble__e-check"></i></div>
+        
+        <!-- Journal and publication support -->
+        <div class="ta__ble__e-category">Journal and publication support</div>
+        <div class="ta__ble__e-feature-item" data-label="Certificate of Editing"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Manuscript Formatting"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Graphics Support"><i class="fas fa-times ta__ble__e-cross"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Cover Letter">Additional purchase</div>
+        <div class="ta__ble__e-feature-item" data-label="Scientific Review Report"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Reviewer Response Letter">Additional purchase</div>
+        <div class="ta__ble__e-feature-item" data-label="Letter for Editor"><i class="fas fa-check ta__ble__e-check"></i></div>
+        
+        <!-- Premium Support -->
+        <div class="ta__ble__e-category">Premium Support</div>
+        <div class="ta__ble__e-feature-item" data-label="Grant Writing"><i class="fas fa-times ta__ble__e-cross"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Abstract Writing"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Statistical Analysis"><i class="fas fa-times ta__ble__e-cross"></i></div>
+        
+        <!-- After Sales Support -->
+        <div class="ta__ble__e-category">After Sales Support</div>
+        <div class="ta__ble__e-feature-item" data-label="Rejection Shield">Valid for 6 months</div>
+        <div class="ta__ble__e-feature-item" data-label="Unlimited Editor Q&A"><i class="fas fa-check ta__ble__e-check"></i></div>
+        
+        <div class="ta__ble__e-btn-container">
+          <a href="get-quote.html" class="ta__ble__e-btn">Get Quote</a>
+        </div>
+      </div>
+    
+      <!-- Fourth column - Advanced Editing -->
+      <div class="ta__ble__e-feature-column">
+        <div class="ta__ble__e-column-header">Advanced Editing</div>
+        <div class="ta__ble__e-btn-container">
+          <a href="get-quote.html" class="ta__ble__e-btn">Get Quote</a>
+        </div>
+        <div class="ta__ble__e-service-category ta__ble__e-service-note">
+          <ul>
+            <li>Scientific Editing</li>
+            <li>Technical Editing</li>
+            <li>Translation services</li>
+          </ul>
+        </div>
+        
+        <!-- Basic editing Component -->
+        <div class="ta__ble__e-category">Basic editing Component</div>
+        <div class="ta__ble__e-feature-item" data-label="Language and Grammar Check"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Technical Accuracy"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Writing Style Consistency"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Logical Flow Check"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Content Enhancement"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Word Count Reduction">Up to 30%</div>
+        <div class="ta__ble__e-feature-item" data-label="Plagiarism Check"><i class="fas fa-check ta__ble__e-check"></i></div>
+        
+        <!-- Journal and publication support -->
+        <div class="ta__ble__e-category">Journal and publication support</div>
+        <div class="ta__ble__e-feature-item" data-label="Certificate of Editing"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Manuscript Formatting"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Graphics Support"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Cover Letter"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Scientific Review Report"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Reviewer Response Letter"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Letter for Editor"><i class="fas fa-check ta__ble__e-check"></i></div>
+        
+        <!-- Premium Support -->
+        <div class="ta__ble__e-category">Premium Support</div>
+        <div class="ta__ble__e-feature-item" data-label="Grant Writing"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Abstract Writing"><i class="fas fa-check ta__ble__e-check"></i></div>
+        <div class="ta__ble__e-feature-item" data-label="Statistical Analysis"><i class="fas fa-check ta__ble__e-check"></i></div>
+        
+        <!-- After Sales Support -->
+        <div class="ta__ble__e-category">After Sales Support</div>
+        <div class="ta__ble__e-feature-item" data-label="Rejection Shield">Valid for 1 year</div>
+        <div class="ta__ble__e-feature-item" data-label="Unlimited Editor Q&A"><i class="fas fa-check ta__ble__e-check"></i></div>
+        
+        <div class="ta__ble__e-btn-container">
+          <a href="get-quote.html" class="ta__ble__e-btn">Get Quote</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ta__ble__e-comparison9-section">
+    <div class="ta__ble__e-quote-buttons">
+      <a href="get-quote.html" class="ta__ble__e-quote-btn">Get Started Today <span class="ta__ble__e-arrow-icon">→</span></a>
+      <a href="contact.html" class="ta__ble__e-quote-btn">Contact Our Experts <span class="ta__ble__e-arrow-icon">→</span></a>
+    </div>
+  </div>
+</body>
+</html>
