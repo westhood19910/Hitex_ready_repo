@@ -47,10 +47,7 @@
             </div>
     </header>
     
-    <nav class="alb_pa_001">
-                <div class="un_fr_0oper">
-                    <img src="assets/png_20221026_003820_0000.png" alt="" class="kerpa_023_001">
-                </div>
+    <nav class="alb_pa_001" style="display: none;">
                 <div class="fo_oc_cnt002">
                   <input type="search" class="lat_but_pla_001" placeholder="search here">
                   <button type="submit" class="se-er-ch-bt-001">
@@ -88,82 +85,68 @@
                 </div>    
                </nav> 
 
-               <nav class="main-nav">
-                <div class="menu-container">
-                    <div class="fr_open_01">
-                    </div> 
-                    <input type="checkbox" id="menu-toggle">
-                    <label for="menu-toggle" class="menu-button">
-                        <i class="fa fa-bars" aria-hidden="true"></i>
-                    </label>
-                    
-                    <ul class="main-menu">
-                        <li class="menu-item has-submenu">
-                            <button class="submenu-toggle" aria-expanded="false">
-                                About Us
-                                <i class="fa fa-angle-down" aria-hidden="true"></i>
-                            </button>
-                            <ul class="submenu">
-                                <li><a href="about.html">About Hitex EdiTex</a></li>
-                                <li><a href="leadership.html">Leadership</a></li>
-                                <li><a href="our-offices.html">Offices</a></li>
-                                <li><a href="Vision.html#pag_2_h1_1">Testimonials</a></li>
-                                <li><a href="Vision.html#pag_2_h1_1">Impact</a></li>
-                            </ul>
-                        </li>
-                        
-                        <li class="menu-item has-submenu">
-                            <button class="submenu-toggle" aria-expanded="false">
-                                Services
-                                <i class="fa fa-angle-down" aria-hidden="true"></i>
-                            </button>
-                            <ul class="submenu">
-                                <li><a href="language-editng.html">Language Editing</a></li>
-                                <li><a href="Scientific.html">Scientific Editing</a></li>
-                                <li><a href="technichal.html">Technical Editing</a></li>
-                                <li><a href="technichal.html">Translation Services</a></li>
-                                <li><a href="technichal.html">Service Levels</a></li>
-                                <li><a href="technichal.html">Pricing</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu_sep9_1">
-                          <a href="auhtoredy.html">Authoredly</a>
-                          <img src="assets/corTM.svg" alt="" class="one_authre">
-                      </li>
-                       
-                        <li class="menu-item has-submenu">
-                            <button class="submenu-toggle" aria-expanded="false">
-                                Careers
-                                <i class="fa fa-angle-down" aria-hidden="true"></i>
-                            </button>
-                            <ul class="submenu">
-                                <li><a href="hitex-life.html">Life at HiTex EdiTex</a></li>
-                                <li><a href="Careerss.html">In-house</a></li>
-                                <li><a href="freelance.html">Freelance</a></li>
-                            </ul>
-                        </li>  
-                      <li class="menu-item">
-                        <a href="contact.html">Contact Us</a>
-                    </li>
-                    <li class="menu-item has-submenu">
-                      <button class="submenu-toggle" aria-expanded="false">
-                          Helpful Resources
-                          <i class="fa fa-angle-down" aria-hidden="true"></i>
-                      </button>
-                      <ul class="submenu">
-                          <li><a href="resources.html">Support and FAQs</a></li>
-                          <li><a href="editing-tips.html">The Hitex Hub</a></li>
-                          <li><a href="newsroom.html">Newsroom</a></li>
-                      </ul>
-                  </li>
-                    </ul>
-                    
-                    <div class="gro_btu_01">
-                        <a href="get-quote.html" class="por_qt_pg_001">CLIENT SIGN-UP</a>
-                        <a href="client-login.html" class="author_login_btn"> CLIENT LOG IN</a>
-                    </div>
+               <nav class="nav__bar_oi" style="margin-top: 2.5em;">
+                <div class="nav__bar_oi-logo">
+                  <img src="assets/png_20221026_003820_0000.png" alt="HiTex EdiTex Logo">
                 </div>
-            </nav>
+                
+                <button class="nav__bar_oi-toggle" id="navToggle">
+                  <span class="nav__bar_oi-toggle-line"></span>
+                  <span class="nav__bar_oi-toggle-line"></span>
+                  <span class="nav__bar_oi-toggle-line"></span>
+                </button>
+                
+                <ul class="nav__bar_oi-menu" id="navMenu">
+                  <li class="nav__bar_oi-menu-item">
+                    <a href="#about" class="nav__bar_oi-menu-link">About Us</a>
+                    <div class="nav__bar_oi-dropdown">
+                      <a href="#about-hitex" class="nav__bar_oi-dropdown-item">About Hitex EdiTex</a>
+                      <a href="#leadership" class="nav__bar_oi-dropdown-item">Leadership</a>
+                      <a href="#offices" class="nav__bar_oi-dropdown-item">Offices</a>
+                      <a href="#testimonials" class="nav__bar_oi-dropdown-item">Testimonials</a>
+                      <a href="#impact" class="nav__bar_oi-dropdown-item">Impact</a>
+                    </div>
+                  </li>
+                  <li class="nav__bar_oi-menu-item">
+                    <a href="#services" class="nav__bar_oi-menu-link">Services</a>
+                    <div class="nav__bar_oi-dropdown">
+                      <a href="#language-editing" class="nav__bar_oi-dropdown-item">Language Editing</a>
+                      <a href="#scientific-editing" class="nav__bar_oi-dropdown-item">Scientific Editing</a>
+                      <a href="#technical-editing" class="nav__bar_oi-dropdown-item">Technical Editing</a>
+                      <a href="#translation" class="nav__bar_oi-dropdown-item">Translation Services</a>
+                      <a href="#service-levels" class="nav__bar_oi-dropdown-item">Service Levels</a>
+                      <a href="#pricing" class="nav__bar_oi-dropdown-item">Pricing</a>
+                      <a href="#authoredly" class="nav__bar_oi-dropdown-item">Authoredly</a>
+                    </div>
+                  </li>
+                  <li class="nav__bar_oi-menu-item">
+                    <a href="#careers" class="nav__bar_oi-menu-link">Careers</a>
+                    <div class="nav__bar_oi-dropdown">
+                      <a href="#life-at-hitex" class="nav__bar_oi-dropdown-item">Life at HiTex EdiTex</a>
+                      <a href="#in-house" class="nav__bar_oi-dropdown-item">In-house</a>
+                      <a href="#freelance" class="nav__bar_oi-dropdown-item">Freelance</a>
+                    </div>
+                  </li>
+                  <li class="nav__bar_oi-menu-item">
+                    <a href="#contact" class="nav__bar_oi-menu-link">Contact Us</a>
+                  </li>
+                  <li class="nav__bar_oi-menu-item">
+                    <a href="#resources" class="nav__bar_oi-menu-link">Helpful Resources</a>
+                    <div class="nav__bar_oi-dropdown">
+                      <a href="#support" class="nav__bar_oi-dropdown-item">Support and FAQs</a>
+                      <a href="#hub" class="nav__bar_oi-dropdown-item">The Hitex Hub</a>
+                      <a href="#newsroom" class="nav__bar_oi-dropdown-item">Newsroom</a>
+                    </div>
+                  </li>
+                  
+                  <div class="nav__bar_oi-actions">
+                    <button class="nav__bar_oi-button nav__bar_oi-button-signup">CLIENT SIGN-UP</button>
+                    <button class="nav__bar_oi-button nav__bar_oi-button-login">CLIENT LOG IN</button>
+                  </div>
+                </ul>
+                
+                <div class="nav__bar_oi-overlay" id="navOverlay"></div>
+              </nav>
         
         <div class="pag-2-001">
           <div class="numv_vid9">

@@ -151,7 +151,7 @@ class NavigationSystem {
     }
 }
 
-// Counter Animation System
+// COUNTER ANIMATION SYSTEM
 class CounterSystem {
     constructor() {
         this.counters = document.querySelectorAll('[data-target]');
@@ -201,6 +201,118 @@ class CounterSystem {
         observer.observe(counter);
     }
 }
+
+
+// CODE FOR NEW NAV BAR
+
+document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.getElementById('navToggle');
+    const navMenu = document.getElementById('navMenu');
+    const navOverlay = document.getElementById('navOverlay');
+    const menuItems = document.querySelectorAll('.nav__bar_oi-menu-item');
+    
+    // Toggle navigation sidebar
+    function toggleNav() {
+      navToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+      navOverlay.classList.toggle('active');
+      document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+    }
+    
+    navToggle.addEventListener('click', toggleNav);
+    
+    // Close navigation when clicking overlay
+    navOverlay.addEventListener('click', function() {
+      navToggle.classList.remove('active');
+      navMenu.classList.remove('active');
+      navOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+    
+    // Set up dropdown toggles for mobile view
+    function setupMobileMenu() {
+      // Clear previous event listeners first
+      menuItems.forEach(item => {
+        const link = item.querySelector('.nav__bar_oi-menu-link');
+        if (link && link.clickListenerAdded) {
+          link.removeEventListener('click', link.clickListener);
+          link.clickListenerAdded = false;
+        }
+      });
+      
+      // Add event listeners based on current screen size
+      menuItems.forEach(item => {
+        const link = item.querySelector('.nav__bar_oi-menu-link');
+        const dropdown = item.querySelector('.nav__bar_oi-dropdown');
+        
+        if (link && dropdown) {
+          // Create the click listener function
+          link.clickListener = function(e) {
+            // Only handle dropdown toggle in mobile view
+            if (window.innerWidth <= 1024) {
+              e.preventDefault();
+              item.classList.toggle('active');
+              
+              // Close other dropdowns
+              menuItems.forEach(otherItem => {
+                if (otherItem !== item && otherItem.classList.contains('active')) {
+                  otherItem.classList.remove('active');
+                }
+              });
+            }
+          };
+          
+          // Add the event listener
+          link.addEventListener('click', link.clickListener);
+          link.clickListenerAdded = true;
+        }
+      });
+    }
+    
+    // Initial setup
+    setupMobileMenu();
+    
+    // Handle window resize
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 1024) {
+        // Close mobile navigation if open
+        navToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+        navOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+        
+        // Reset active states on menu items
+        menuItems.forEach(item => {
+          item.classList.remove('active');
+        });
+      }
+      
+      // Always re-setup mobile menu when resizing to ensure proper behavior
+      setupMobileMenu();
+    });
+    
+    // Handle all navigation links
+    const navLinks = document.querySelectorAll('.nav__bar_oi-dropdown-item');
+    
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        
+        // Close mobile menu if it's open
+        if (window.innerWidth <= 1024 && navMenu.classList.contains('active')) {
+          navToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+          navOverlay.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+        
+        // Implement smooth scroll (would work with actual sections)
+        console.log('Navigating to ' + targetId);
+      });
+    });
+  });
 
 // FAQ System
 class FAQSystem {

@@ -133,62 +133,6 @@ class ScrollAnimationHandler {
   }
 }
 
-// Utility functions
-function throttle(func, limit) {
-  let inThrottle;
-  return function(...args) {
-    if (!inThrottle) {
-      func.apply(this, args);
-      inThrottle = true;
-      setTimeout(() => inThrottle = false, limit);
-    }
-  };
-}
-
-// Initialize everything when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-  const header = document.querySelector('.alb_pa_001');
-  const secondaryNav = document.querySelector('.main-nav');
-  let lastScrollY = window.scrollY;
-  let ticking = false;
-
-  const updateNavbars = () => {
-    const currentScrollY = window.scrollY;
-    
-    if (currentScrollY < 20) {
-      // At the top of the page
-      header.classList.remove('nav-hidden');
-      document.body.classList.remove('nav-scrolled');
-      secondaryNav.style.top = '5.5em';
-    } else if (currentScrollY > lastScrollY) {
-      // Scrolling down - hide header and move secondary nav up
-      header.classList.add('nav-hidden');
-      document.body.classList.add('nav-scrolled');
-      secondaryNav.style.top = '0';
-    } else {
-      // Scrolling up - show header and move secondary nav down
-      header.classList.remove('nav-hidden');
-      document.body.classList.remove('nav-scrolled');
-      secondaryNav.style.top = '5.5em';
-    }
-    
-    lastScrollY = currentScrollY;
-    ticking = false;
-  };
-
-  // Using requestAnimationFrame for smooth animations
-  const onScroll = () => {
-    if (!ticking) {
-      requestAnimationFrame(updateNavbars);
-      ticking = true;
-    }
-  };
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-
-  
-});
-
 
 // CODE FOR COPYRIGHT
 document.addEventListener('DOMContentLoaded', () => {
@@ -449,43 +393,6 @@ document.addEventListener('DOMContentLoaded', function() {
       card.addEventListener('mouseleave', function() {
           this.style.transform = 'translateY(0)';
       });
-  });
-});
-
-
-// CODE FOR INTERSECTION OBESERVER FOR CARREERS PAGE ON ABOUT US
-
-document.addEventListener('DOMContentLoaded', function() {
-  const xj9km_elements = document.querySelectorAll('.uj6tk_fade');
-  
-  const wd5nt_observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('eq9pm_visible');
-      }
-    });
-  }, {
-    threshold: 0.1
-  });
-
-  xj9km_elements.forEach(element => {
-    wd5nt_observer.observe(element);
-  });
-
-  const hg4lp_button = document.querySelector('.fm2ht_trigger');
-  hg4lp_button.addEventListener('click', function() {
-    console.log('Careers section CTA clicked');
-  });
-
-  const mq7jx_photos = document.querySelectorAll('.pq2fs_frame');
-  mq7jx_photos.forEach(photo => {
-    photo.addEventListener('mouseenter', function() {
-      this.style.transform = 'scale(1.02)';
-    });
-    
-    photo.addEventListener('mouseleave', function() {
-      this.style.transform = 'scale(1)';
-    });
   });
 });
 
@@ -929,6 +836,7 @@ muteButton.addEventListener('click', () => {
   video.muted = !video.muted;
   muteButton.textContent = video.muted ? 'Unmute' : 'Mute';
 });
+
 
 
 video.addEventListener('timeupdate', () => {
