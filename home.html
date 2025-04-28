@@ -5,6 +5,7 @@
 <title>HiTex EdiTex</title>
 <script src="Embednav.js"></script>
 <script src="freshtex.js"></script> 
+<link rel="stylesheet" href="ser_them.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link rel="stylesheet" href="fresh.css">  
@@ -83,70 +84,111 @@
                         <img src="assets/whatsapp-icon.svg" alt="WhatsApp Icon" class="alb-im-001">
                       </a>    
                 </div>    
-               </nav> 
+               </nav>
 
-               <nav class="nav__bar_oi" style="margin-top: 2.5em;">
-                <div class="nav__bar_oi-logo">
-                  <img src="assets/png_20221026_003820_0000.png" alt="HiTex EdiTex Logo">
-                </div>
-                
-                <button class="nav__bar_oi-toggle" id="navToggle">
-                  <span class="nav__bar_oi-toggle-line"></span>
-                  <span class="nav__bar_oi-toggle-line"></span>
-                  <span class="nav__bar_oi-toggle-line"></span>
-                </button>
-                
-                <ul class="nav__bar_oi-menu" id="navMenu">
-                  <li class="nav__bar_oi-menu-item">
-                    <a href="#about" class="nav__bar_oi-menu-link">About Us</a>
-                    <div class="nav__bar_oi-dropdown">
-                      <a href="#about-hitex" class="nav__bar_oi-dropdown-item">About Hitex EdiTex</a>
-                      <a href="#leadership" class="nav__bar_oi-dropdown-item">Leadership</a>
-                      <a href="#offices" class="nav__bar_oi-dropdown-item">Offices</a>
-                      <a href="#testimonials" class="nav__bar_oi-dropdown-item">Testimonials</a>
-                      <a href="#impact" class="nav__bar_oi-dropdown-item">Impact</a>
-                    </div>
-                  </li>
-                  <li class="nav__bar_oi-menu-item">
-                    <a href="#services" class="nav__bar_oi-menu-link">Services</a>
-                    <div class="nav__bar_oi-dropdown">
-                      <a href="#language-editing" class="nav__bar_oi-dropdown-item">Language Editing</a>
-                      <a href="#scientific-editing" class="nav__bar_oi-dropdown-item">Scientific Editing</a>
-                      <a href="#technical-editing" class="nav__bar_oi-dropdown-item">Technical Editing</a>
-                      <a href="#translation" class="nav__bar_oi-dropdown-item">Translation Services</a>
-                      <a href="#service-levels" class="nav__bar_oi-dropdown-item">Service Levels</a>
-                      <a href="#pricing" class="nav__bar_oi-dropdown-item">Pricing</a>
-                      <a href="#authoredly" class="nav__bar_oi-dropdown-item">Authoredly</a>
-                    </div>
-                  </li>
-                  <li class="nav__bar_oi-menu-item">
-                    <a href="#careers" class="nav__bar_oi-menu-link">Careers</a>
-                    <div class="nav__bar_oi-dropdown">
-                      <a href="#life-at-hitex" class="nav__bar_oi-dropdown-item">Life at HiTex EdiTex</a>
-                      <a href="#in-house" class="nav__bar_oi-dropdown-item">In-house</a>
-                      <a href="#freelance" class="nav__bar_oi-dropdown-item">Freelance</a>
-                    </div>
-                  </li>
-                  <li class="nav__bar_oi-menu-item">
-                    <a href="#contact" class="nav__bar_oi-menu-link">Contact Us</a>
-                  </li>
-                  <li class="nav__bar_oi-menu-item">
-                    <a href="#resources" class="nav__bar_oi-menu-link">Helpful Resources</a>
-                    <div class="nav__bar_oi-dropdown">
-                      <a href="#support" class="nav__bar_oi-dropdown-item">Support and FAQs</a>
-                      <a href="#hub" class="nav__bar_oi-dropdown-item">The Hitex Hub</a>
-                      <a href="#newsroom" class="nav__bar_oi-dropdown-item">Newsroom</a>
-                    </div>
-                  </li>
-                  
-                  <div class="nav__bar_oi-actions">
-                    <button class="nav__bar_oi-button nav__bar_oi-button-signup">CLIENT SIGN-UP</button>
-                    <button class="nav__bar_oi-button nav__bar_oi-button-login">CLIENT LOG IN</button>
-                  </div>
-                </ul>
-                
-                <div class="nav__bar_oi-overlay" id="navOverlay"></div>
-              </nav>
+              <!-- Modified Navigation HTML -->
+<nav class="nav__bar_oi" style="margin-top: 2em;">
+  <div class="nav__bar_oi-logo">
+    <img src="assets/png_20221026_003820_0000.png" alt="HiTex EdiTex Logo">
+  </div>
+  
+  <button class="nav__bar_oi-toggle" id="navToggle">
+    <span class="nav__bar_oi-toggle-line"></span>
+    <span class="nav__bar_oi-toggle-line"></span>
+    <span class="nav__bar_oi-toggle-line"></span>
+  </button>
+  
+  <ul class="nav__bar_oi-menu" id="navMenu">
+    <li class="nav__bar_oi-menu-item">
+      <a class="nav__bar_oi-menu-link">About Us</a>
+      <div class="nav__bar_oi-dropdown">
+        <a href="about.html" class="nav__bar_oi-dropdown-item">About Hitex EdiTex</a>
+        <a href="leadership.html" class="nav__bar_oi-dropdown-item">Leadership</a>
+        <a href="#offices" class="nav__bar_oi-dropdown-item">Offices</a>
+        <a href="#testimonials" class="nav__bar_oi-dropdown-item">Testimonials</a>
+        <a href="#impact" class="nav__bar_oi-dropdown-item">Impact</a>
+      </div>
+    </li>
+    <li class="nav__bar_oi-menu-item">
+      <a href="#services" class="nav__bar_oi-menu-link">Services</a>
+      <div class="nav__bar_oi-dropdown">
+        <a href="#language-editing" class="nav__bar_oi-dropdown-item">Language Editing</a>
+        <a href="#scientific-editing" class="nav__bar_oi-dropdown-item">Scientific Editing</a>
+        <a href="#technical-editing" class="nav__bar_oi-dropdown-item">Technical Editing</a>
+        <a href="#translation" class="nav__bar_oi-dropdown-item">Translation Services</a>
+        <a href="#service-levels" class="nav__bar_oi-dropdown-item">Service Levels</a>
+        <a href="pricing.html" class="nav__bar_oi-dropdown-item">Pricing</a>
+        <a href="#authoredly" class="nav__bar_oi-dropdown-item">Authoredly</a>
+      </div>
+    </li>
+    <li class="nav__bar_oi-menu-item">
+      <a href="#careers" class="nav__bar_oi-menu-link">Careers</a>
+      <div class="nav__bar_oi-dropdown">
+        <a href="#life-at-hitex" class="nav__bar_oi-dropdown-item">Life at HiTex EdiTex</a>
+        <a href="#in-house" class="nav__bar_oi-dropdown-item">In-house</a>
+        <a href="#freelance" class="nav__bar_oi-dropdown-item">Freelance</a>
+      </div>
+    </li>
+    <li class="nav__bar_oi-menu-item">
+      <a href="#contact" class="nav__bar_oi-menu-link">Contact Us</a>
+    </li>
+    <li class="nav__bar_oi-menu-item">
+      <a href="#resources" class="nav__bar_oi-menu-link">Helpful Resources</a>
+      <div class="nav__bar_oi-dropdown">
+        <a href="#support" class="nav__bar_oi-dropdown-item">Support and FAQs</a>
+        <a href="#hub" class="nav__bar_oi-dropdown-item">The Hitex Hub</a>
+        <a href="#newsroom" class="nav__bar_oi-dropdown-item">Newsroom</a>
+      </div>
+    </li>
+    
+    <div class="nav__bar_oi-actions">
+      <button class="nav__bar_oi-button nav__bar_oi-button-signup">CLIENT SIGN-UP</button>
+      <button class="nav__bar_oi-button nav__bar_oi-button-login">CLIENT LOG IN</button>
+    </div>
+  </ul>
+  
+  <!-- Search bar and social media icons -->
+  <div class="nav__bar_oi-utility">
+    <div class="nav__bar_oi-search">
+      <button class="nav__bar_oi-search-icon" id="searchToggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+      <div class="nav__bar_oi-search-container" id="searchContainer">
+        <input type="text" class="nav__bar_oi-search-input" placeholder="Search..." aria-label="Search">
+        <button class="nav__bar_oi-search-close" id="searchClose">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="nav__bar_oi-social">
+      <a href="#" class="nav__bar_oi-social-icon" aria-label="Facebook">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+        </svg>
+      </a>
+      <a href="#" class="nav__bar_oi-social-icon" aria-label="Twitter">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+        </svg>
+      </a>
+      <a href="#" class="nav__bar_oi-social-icon" aria-label="LinkedIn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+          <rect x="2" y="9" width="4" height="12"></rect>
+          <circle cx="4" cy="4" r="2"></circle>
+        </svg>
+      </a>
+    </div>
+  </div>
+  
+  <div class="nav__bar_oi-overlay" id="navOverlay"></div>
+</nav>
         
         <div class="pag-2-001">
           <div class="numv_vid9">
@@ -252,8 +294,6 @@
           </div>
         </div>
         
-      
-
             <div class="ser_contan">
               <div class="edi_level_5"> <h1> Services Levels </h1>
               <h3>Each editing level is designed for your success.</h3>
@@ -633,41 +673,88 @@
             
       </div>
       </div>
-      <footer class="fot-dow-1">
-        <div class="row justify-content-around align-items-center">
-          <div class="col-sm-12 col-md-3 col-lg-3 ColDesghCnt">
-              <h3 class="foot-h3">Contact Center</h3>
-                <ul class="fot-ul-001">
-                    <li><a href="mailto:hitexeditex.com" class="fot-ln-001"> <i class="fa fa-envelope" aria-hidden="true"></i> HiTexediTex.com</a></li>
-                    <li><a href="#" class="fot-ln-001"><i class="fa fa-volume-control-phone" aria-hidden="true"></i> 0546525435</a></li>
-                    <li><a href="services.html" class="fot-ln-001">Services</a></li>
-                    <li><a href="#" class="fot-ln-001">The team</a></li>
-                    <li><a href="#" class="fot-ln-001"><img src="assets/map-pin-icon.svg" class="alb-im-001" style="margin-left: -3em;">Adweso, Koforidua, Ghana</a></li>
-                </ul>
-          </div>
-          <div class="col-sm-12 col-md-3 col-lg-3 ColDesghCnt">
-              <h3 class="foot-h3">Find Us</h3>
-              <div class="gps_code_002">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15877.202531816156!2d-0.250482!3d6.069084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTrCsDUzJzMwLjgiTiAwwrAwNic0Mi4zIlc!5e0!3m2!1sen!2sus!4v1645841132286!5m2!1sen!2sus" width="300" height="170" style="border:0;" allowfullscreen="" loading="lazy" class="gog-901-uy"></iframe>
+      <footer class="xyz789">
+        <div class="qwerty123">
+          <div class="kappa445">         
+            <div class="lambda123">
+              <h3 class="beta12">Newsletter</h3>
+              <p class="gamma89">Sign up to receive the resources that matters most to you. You can update your preferences or unsubscribe any time.</p>
+              <form class="delta34">
+                <input type="email" placeholder="Enter your email" class="epsilon78"/>
+                <button type="submit" class="zeta99">Subscribe</button>
+              </form>
+            </div>
+      
+            <div class="lambda1234">
+              <h3 class="beta12">About HiTex EdiTex</h3>
+              <ul class="omega678">
+                <li class="phi234"><a href="#" class="psi567">Company Overview</a></li>
+                <li class="phi234"><a href="#" class="psi567">Leadership Team</a></li>
+                <li class="phi234"><a href="#" class="psi567">Global Offices</a></li>
+                <li class="phi234"><a href="#" class="psi567">Careers</a></li>
+                <li class="phi234"><a href="#" class="psi567">Testimonials</a></li>
+                <li class="phi234"><a href="#" class="psi567">Social Impact</a></li>
+                <li class="phi234"><a href="#" class="psi567">Security Practices</a></li>
+              </ul>
+            </div>
+      
+            <div class="lambda12345">
+              <h3 class="beta12">Resources</h3>
+              <ul class="omega678">
+                <li class="phi234"><a href="#" class="psi567">The HiTex Hub</a></li>
+                <li class="phi234"><a href="#" class="psi567">Journal Selector tool</a></li>
+                <li class="phi234"><a href="#" class="psi567">For Researchers</a></li>
+                <li class="phi234"><a href="auhtoredy.html" class="psi567">For Authors</a></li>
+                <li class="phi234"><a href="#" class="psi567">For Academics and Students</a></li>
+                <li class="phi234"><a href="newsroom.html" class="psi567">Newsroom</a></li>
+              </ul>
+            </div>
+      
+            <!-- Help Column -->
+            <div class="lambda123456">
+              <h3 class="beta12">Help and Support</h3>
+              <ul class="omega678">
+                <li class="phi234"><a href="contact.html" class="psi567">Contact Us</a></li>
+                <li class="phi234"><a href="Copyright.html" class="psi567">Copyright Policy</a></li>
+                
+              </ul>
             </div>
           </div>
-          <div class="col-sm-12 col-md-3 col-lg-3 ColDesghCnt">
-              <h3 class="foot-h3">Follow Us</h3 >
-                <ul class="fot-ul-003">
-                <li>
-                  <ul class="Obtao_0012">
-                    <li><a href=""><img src="assets/x-social-media-white-icon.svg" class="kil_im_001"></a></li>
-                    <li><a href=""><img src="assets/facebook-app-round-white-icon.svg" class="kil_im_001"></a></li>
-                    <li><a href=""><img src="assets/instagram-white-icon.svg" class="kil_im_001"></a></li>
-                    <li><a href=""><img src="assets/whatsapp-white-icon.svg" class="kil_im_001"></a></li>
-                  </ul>
-                </li>
-                <li><a href="Copyright.html" class="fot-ln-001"><img src="assets/copyright-icon.svg" class="alb-im-001">Copyright Policy </a></li>
-                <li><a href="privacy.html" class="fot-ln-001"><img src="assets/copyright-icon.svg" class="alb-im-001">Privacy Policy </a></li>
-                </ul>
-          </div>  
-      </div>
-</footer>
+      
+          <!-- Bottom Bar -->
+          <div class="theta890">
+            
+            <div class="iota777">
+                <div class="mu456">
+                    <p class="nu789">© 2025 HiTexEdiTex</p>
+                  </div>
+              <div class="xi123">
+                <a href="privacy.html" class="psi567">Privacy Policy |</a>
+                <a href="terms-of-use.html" class="psi567">Term of use |</a>
+              
+                <a href="cookie-policy.html" class="psi567">Cookie Policy |</a>
+                <a href="compliance-policy.html" class="psi567">Compliance  </a>
+              </div>
+              <div class="rho444">
+                <a href="https://www.instagram.com/hitexeditex" target="_blank"  >
+                    <img src="assets/ig-instagram-icon.svg" class="alb-im-001"></a>
+                    <a href="https://www.threads.net/@hitexeditex">
+                        <img src="assets/threads-icon.svg" class="alb-im-001">
+                       </a>
+                       <a href="https://www.linkedin.com/company/hitexeditex/">
+                        <img src="assets/linkedin-app-icon.svg" class="alb-im-001">
+                       </a>
+                       <a href="https://x.com/HiTexEdiTex" target="_blank">
+                        <img src="assets/x-social-media-black-icon.svg" alt="Twitter Icon" class="alb-im-001">
+                      </a>
+                      <a href="https://wa.me/233503181696" target="_blank">
+                        <img src="assets/whatsapp-icon.svg" alt="WhatsApp Icon" class="alb-im-001">
+                      </a> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 

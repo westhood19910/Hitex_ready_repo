@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HiTex EdiTex Pricing</title>
+    <style>
+        :root {
+            --primary: #1a5db4;
+            --primary-light: #e8f1fd;
+            --primary-dark: #0c3b80;
+            --accent: #ff6b35;
+            --accent-light: #fff0eb;
+            --grey-light: #f7f9fc;
+            --grey: #e5e9f2;
+            --grey-dark: #8492a6;
+            --text: #2c3e50;
+            --text-light: #7e8c9a;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --radius: 12px;
+            --radius-sm: 6px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            color: var(--text);
+            background-color: var(--grey-light);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 16px;
+            letter-spacing: -0.025em;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-light);
+        }
+
+        .service-levels {
+            background-color: var(--white);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .service-levels h2 {
+            margin-bottom: 20px;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .service-levels .service-types {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .service-levels .service-type {
+            padding: 20px;
+            background-color: var(--grey-light);
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            color: var(--primary);
+            min-width: 220px;
+        }
+
+        .alert-box {
+            background-color: var(--primary-light);
+            padding: 20px;
+            border-radius: var(--radius-sm);
+            margin: 30px auto;
+            max-width: 800px;
+            text-align: left;
+            border-left: 4px solid var(--primary);
+        }
+
+        .alert-box.warning {
+            background-color: var(--accent-light);
+            border-left: 4px solid var(--accent);
+        }
+
+        .alert-box p {
+            margin: 0;
+        }
+
+        .alert-box strong {
+            color: var(--primary);
+        }
+
+        .turnaround-container {
+            background-color: var(--white);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .turnaround-container h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        .timeline-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-bottom: 20px;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+        }
+
+        .timeline-table th, 
+        .timeline-table td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--grey);
+        }
+
+        .timeline-table th {
+            background-color: var(--primary);
+            color: var(--white);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .timeline-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .timeline-table tr:hover td {
+            background-color: var(--grey-light);
+        }
+
+        .turnaround-text {
+            background-color: var(--accent-light);
+            padding: 20px;
+            border-radius: var(--radius-sm);
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .rush-fee {
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .tabs-container {
+            margin-bottom: 40px;
+        }
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 0;
+            border-bottom: 1px solid var(--grey);
+            padding-bottom: 1px;
+        }
+
+        .tab {
+            padding: 16px 24px;
+            background-color: var(--grey-light);
+            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid transparent;
+            border-bottom: none;
+            position: relative;
+            top: 1px;
+        }
+
+        .tab:hover {
+            background-color: var(--white);
+            color: var(--primary);
+        }
+
+        .tab.active {
+            background-color: var(--white);
+            color: var(--primary);
+            border-color: var(--grey);
+            border-bottom-color: var(--white);
+        }
+
+        .pricing-section {
+            display: none;
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 0 var(--radius) var(--radius) var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .pricing-section.active {
+            display: block;
+            animation: fadeIn 0.4s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pricing-section h2 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .pricing-container {
+            display: flex;
+            gap: 40px;
+        }
+
+        .pricing-table-container {
+            flex: 1;
+        }
+
+        .pricing-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .pricing-table th, 
+        .pricing-table td {
+            padding: 18px 15px;
+            text-align: center;
+            border-bottom: 1px solid var(--grey);
+        }
+
+        .pricing-table th {
+            background-color: var(--primary);
+            color: var(--white);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        .pricing-table th:first-child {
+            text-align: left;
+        }
+
+        .pricing-table td:first-child {
+            text-align: left;
+            font-weight: 500;
+        }
+
+        .pricing-table tr:hover td {
+            background-color: var(--grey-light);
+        }
+
+        .pricing-table .price-cell {
+            transition: var(--transition);
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .pricing-table .price-cell.active {
+            background-color: var(--primary-light) !important;
+            transform: scale(1.05);
+            box-shadow: var(--shadow);
+            z-index: 10;
+            position: relative;
+            color: var(--primary-dark);
+        }
+
+        .pricing-table .not-applicable {
+            color: var(--grey-dark);
+            font-style: italic;
+        }
+
+        .calculator-container {
+            width: 360px;
+            background-color: var(--grey-light);
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 20px;
+        }
+
+        .calculator-container h3 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.4rem;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--grey);
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(26, 93, 180, 0.1);
+        }
+
+        .custom-quote-note {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .result-container {
+            background-color: var(--white);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            margin-top: 30px;
+        }
+
+        .pricing-result {
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .pricing-time {
+            text-align: center;
+            font-weight: 500;
+            font-size: 1rem;
+            color: var(--text);
+        }
+
+        .pricing-time .rush-fee {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 900px) {
+            .pricing-container {
+                flex-direction: column;
+            }
+
+            .calculator-container {
+                width: 100%;
+                margin-top: 30px;
+                position: static;
+            }
+
+            .service-levels .service-types {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .service-levels .service-type {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .tabs {
+                flex-direction: column;
+                border-bottom: none;
+                gap: 8px;
+            }
+            
+            .tab {
+                border-radius: var(--radius-sm);
+                text-align: center;
+                border: 1px solid var(--grey);
+            }
+            
+            .tab.active {
+                border-color: var(--primary);
+                border-bottom-color: var(--primary);
+            }
+            
+            .pricing-section {
+                border-radius: var(--radius);
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Pricing</h1>
+       
+        </div>
+
+        <div class="service-levels">
+            <h2>Our Service Levels</h2>
+            <p>Choose from our three service levels to match your specific editing requirements:</p>
+            
+            <div class="service-types">
+                <div class="service-type">Standard Editing Service</div>
+                <div class="service-type">Advanced Editing Service</div>
+                <div class="service-type">Premium Editing Service</div>
+            </div>
+            
+            <div class="alert-box warning">
+                <p><strong>Please note:</strong> Advanced and Premium Editing Service levels are not available for our Language Editing and Translation services.</p>
+            </div>
+            
+            <p>The following tables provide detailed pricing for each of our editing services. Pricing is subject to change without prior notice.</p>
+        </div>
+
+        <div class="turnaround-container">
+            <h2>Standard Turnaround Times</h2>
+            <table class="timeline-table">
+                <thead>
+                    <tr>
+                        <th>Document Word Count</th>
+                        <th>Minimum Duration</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Up to 3,000 words</td>
+                        <td>24 working hours</td>
+                    </tr>
+                    <tr>
+                        <td>3,000-6,000 words</td>
+                        <td>48 working hours</td>
+                    </tr>
+                    <tr>
+                        <td>6,000-9,000 words</td>
+                        <td>72 working hours</td>
+                    </tr>
+                    <tr>
+                        <td>9,000-12,000 words</td>
+                        <td>96 working hours</td>
+                    </tr>
+                    <tr>
+                        <td>More than 12,000 words</td>
+                        <td>More than 96 working hours</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="turnaround-text">
+                <p>Need it faster? Specify your preferred turnaround time for expedited service.</p>
+                <p><span class="rush-fee">Rush fees: +25% for 12 hours early, +50% for 24+ hours early</span></p>
+            </div>
+        </div>
+
+        <div class="tabs-container">
+            <div class="tabs">
+                <div class="tab active" data-target="language-editing">Language Editing</div>
+                <div class="tab" data-target="scientific-editing">Scientific Editing</div>
+                <div class="tab" data-target="technical-editing">Technical Editing</div>
+                <div class="tab" data-target="translation">Translation</div>
+            </div>
+
+            <!-- Language Editing Section -->
+            <div class="pricing-section active" id="language-editing">
+                <h2>Language Editing Service</h2>
+                <div class="pricing-container">
+                    <div class="pricing-table-container">
+                        <table class="pricing-table" id="language-editing-table">
+                            <thead>
+                                <tr>
+                                    <th>Submission Type</th>
+                                    <th>Standard Editing</th>
+                                    <th>Advanced Editing</th>
+                                    <th>Premium Editing</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Original Submission</strong><br>(USD per 1,000 words)</td>
+                                    <td id="language-original-standard" class="price-cell">$80.00</td>
+                                    <td class="not-applicable">Not Available</td>
+                                    <td class="not-applicable">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Revised Submission</strong><br>(USD per 1,000 words)</td>
+                                    <td id="language-revised-standard" class="price-cell">$48.00</td>
+                                    <td class="not-applicable">Not Available</td>
+                                    <td class="not-applicable">Not Available</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="calculator-container">
+                        <h3>Calculate Your Price</h3>
+                        <div class="form-group">
+                            <label for="language-word-count">Word Count:</label>
+                            <input type="number" id="language-word-count" min="1" value="1000">
+                            <p class="custom-quote-note">For manuscripts over 12,000 words, please contact customer service at request@hitexeditex.com for a customized quotation.</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="language-submission-type">Submission Type:</label>
+                            <select id="language-submission-type">
+                                <option value="original">Original Submission</option>
+                                <option value="revised">Revised Submission</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="language-turnaround">Turnaround Time (hours):</label>
+                            <input type="number" id="language-turnaround" min="1" value="24">
+                        </div>
+                        <div class="result-container">
+                            <div class="pricing-result" id="language-price-display">
+                                $80.00
+                            </div>
+                            <div class="pricing-time" id="language-time-display">
+                                Standard Time: 24 hours
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scientific Editing Section -->
+            <div class="pricing-section" id="scientific-editing">
+                <h2>Scientific Editing Service</h2>
+                <div class="pricing-container">
+                    <div class="pricing-table-container">
+                        <table class="pricing-table" id="scientific-editing-table">
+                            <thead>
+                                <tr>
+                                    <th>Submission Type</th>
+                                    <th>Standard Editing</th>
+                                    <th>Advanced Editing</th>
+                                    <th>Premium Editing</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Original Submission</strong><br>(USD per 1,000 words)</td>
+                                    <td id="scientific-original-standard" class="price-cell">$100.00</td>
+                                    <td id="scientific-original-advanced" class="price-cell">$140.00</td>
+                                    <td id="scientific-original-premium" class="price-cell">$180.00</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Revised Submission</strong><br>(USD per 1,000 words)</td>
+                                    <td id="scientific-revised-standard" class="price-cell">$60.00</td>
+                                    <td id="scientific-revised-advanced" class="price-cell">$84.00</td>
+                                    <td id="scientific-revised-premium" class="price-cell">$108.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="calculator-container">
+                        <h3>Calculate Your Price</h3>
+                        <div class="form-group">
+                            <label for="scientific-word-count">Word Count:</label>
+                            <input type="number" id="scientific-word-count" min="1" value="1000">
+                            <p class="custom-quote-note">For manuscripts over 12,000 words, please contact customer service at request@hitexeditex.com for a customized quotation.</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="scientific-service-level">Service Level:</label>
+                            <select id="scientific-service-level">
+                                <option value="standard">Standard Editing</option>
+                                <option value="advanced">Advanced Editing</option>
+                                <option value="premium">Premium Editing</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="scientific-submission-type">Submission Type:</label>
+                            <select id="scientific-submission-type">
+                                <option value="original">Original Submission</option>
+                                <option value="revised">Revised Submission</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="scientific-turnaround">Turnaround Time (hours):</label>
+                            <input type="number" id="scientific-turnaround" min="1" value="24">
+                        </div>
+                        <div class="result-container">
+                            <div class="pricing-result" id="scientific-price-display">
+                                $100.00
+                            </div>
+                            <div class="pricing-time" id="scientific-time-display">
+                                Standard Time: 24 hours
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Editing Section -->
+            <div class="pricing-section" id="technical-editing">
+                <h2>Technical Editing Service</h2>
+                <div class="pricing-container">
+                    <div class="pricing-table-container">
+                        <table class="pricing-table" id="technical-editing-table">
+                            <thead>
+                                <tr>
+                                    <th>Submission Type</th>
+                                    <th>Standard Editing</th>
+                                    <th>Advanced Editing</th>
+                                    <th>Premium Editing</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Original Submission</strong><br>(USD per 1,000 words)</td>
+                                    <td id="technical-original-standard" class="price-cell">$120.00</td>
+                                    <td id="technical-original-advanced" class="price-cell">$160.00</td>
+                                    <td id="technical-original-premium" class="price-cell">$200.00</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Revised Submission</strong><br>(USD per 1,000 words)</td>
+                                    <td id="technical-revised-standard" class="price-cell">$70.00</td>
+                                    <td id="technical-revised-advanced" class="price-cell">$94.00</td>
+                                    <td id="technical-revised-premium" class="price-cell">$118.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="calculator-container">
+                        <h3>Calculate Your Price</h3>
+                        <div class="form-group">
+                            <label for="technical-word-count">Word Count:</label>
+                            <input type="number" id="technical-word-count" min="1" value="1000">
+                            <p class="custom-quote-note">For manuscripts over 12,000 words, please contact customer service at request@hitexeditex.com for a customized quotation.</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="technical-service-level">Service Level:</label>
+                            <select id="technical-service-level">
+                                <option value="standard">Standard Editing</option>
+                                <option value="advanced">Advanced Editing</option>
+                                <option value="premium">Premium Editing</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="technical-submission-type">Submission Type:</label>
+                            <select id="technical-submission-type">
+                                <option value="original">Original Submission</option>
+                                <option value="revised">Revised Submission</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="technical-turnaround">Turnaround Time (hours):</label>
+                            <input type="number" id="technical-turnaround" min="1" value="24">
+                        </div>
+                        <div class="result-container">
+                            <div class="pricing-result" id="technical-price-display">
+                                $120.00
+                            </div>
+                            <div class="pricing-time" id="technical-time-display">
+                                Standard Time: 24 hours
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Translation Section -->
+            <div class="pricing-section" id="translation">
+                <h2>Translation Service</h2>
+                <div class="pricing-container">
+                    <div class="pricing-table-container">
+                        <table class="pricing-table" id="translation-table">
+                            <thead>
+                                <tr>
+                                    <th>Submission Type</th>
+                                    <th>Standard Editing</th>
+                                    <th>Advanced Editing</th>
+                                    <th>Premium Editing</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Original Submission</strong><br>(USD per 1,000 words)</td>
+                                    <td id="translation-original-standard" class="price-cell">$80.00</td>
+                                    <td class="not-applicable">Not Available</td>
+                                    <td class="not-applicable">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Revised Submission</strong><br>(USD per 1,000 words)</td>
+                                    <td id="translation-revised-standard" class="price-cell">$48.00</td>
+                                    <td class="not-applicable">Not Available</td>
+                                    <td class="not-applicable">Not Available</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="calculator-container">
+                        <h3>Calculate Your Price</h3>
+                        <div class="form-group">
+                            <label for="translation-word-count">Word Count:</label>
+                            <input type="number" id="translation-word-count" min="1" value="1000">
+                            <p class="custom-quote-note">For manuscripts over 12,000 words, please contact customer service at request@hitexeditex.com for a customized quotation.</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="translation-submission-type">Submission Type:</label>
+                            <select id="translation-submission-type">
+                                <option value="original">Original Submission</option>
+                                <option value="revised">Revised Submission</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="translation-turnaround">Turnaround Time (hours):</label>
+                            <input type="number" id="translation-turnaround" min="1" value="24">
+                        </div>
+                        <div class="result-container">
+                            <div class="pricing-result" id="translation-price-display">
+                                $80.00
+                            </div>
+                            <div class="pricing-time" id="translation-time-display">
+                                Standard Time: 24 hours
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all tab elements
+    const tabs = document.querySelectorAll('.tab');
+    
+    // Add click event listener to each tab
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            // Remove active class from all tabs
+            tabs.forEach(t => t.classList.remove('active'));
+            
+            // Add active class to clicked tab
+            this.classList.add('active');
+            
+            // Hide all pricing sections
+            const pricingSections = document.querySelectorAll('.pricing-section');
+            pricingSections.forEach(section => section.classList.remove('active'));
+            
+            // Show the corresponding pricing section
+            const targetId = this.getAttribute('data-target');
+            document.getElementById(targetId).classList.add('active');
+        });
+    });
+    
+    // Initialize calculators
+    initializeLanguageCalculator();
+    initializeScientificCalculator();
+    initializeTechnicalCalculator();
+    initializeTranslationCalculator();
+});
+
+/**
+ * Calculates standard turnaround time based on word count
+ * @param {number} wordCount - The number of words in the document
+ * @returns {number} - Standard turnaround time in hours
+ */
+function calculateStandardTime(wordCount) {
+    if (wordCount <= 3000) {
+        return 24;
+    } else if (wordCount <= 6000) {
+        return 48;
+    } else if (wordCount <= 9000) {
+        return 72;
+    } else if (wordCount <= 12000) {
+        return 96;
+    } else {
+        return 120; // Default for documents over 12,000 words
+    }
+}
+
+/**
+ * Calculates rush fee multiplier based on requested time vs standard time
+ * @param {number} requestedTime - Requested turnaround time in hours
+ * @param {number} standardTime - Standard turnaround time in hours
+ * @returns {number} - Rush fee multiplier
+ */
+function calculateRushFee(requestedTime, standardTime) {
+    if (requestedTime >= standardTime) {
+        return 1.0; // No rush fee
+    } else if (standardTime - requestedTime >= 24) {
+        return 1.5; // 50% rush fee for 24+ hours early
+    } else if (standardTime - requestedTime >= 12) {
+        return 1.25; // 25% rush fee for 12+ hours early
+    } else {
+        return 1.0; // No rush fee for less than 12 hours early
+    }
+}
+
+/**
+ * Resets highlighting of all cells in pricing tables
+ */
+function resetHighlighting() {
+    const activeCells = document.querySelectorAll('.price-cell.active');
+    activeCells.forEach(cell => cell.classList.remove('active'));
+}
+
+/**
+ * Initializes the Language Editing Calculator
+ */
+function initializeLanguageCalculator() {
+    const wordCountInput = document.getElementById('language-word-count');
+    const submissionTypeSelect = document.getElementById('language-submission-type');
+    const turnaroundInput = document.getElementById('language-turnaround');
+    const priceDisplay = document.getElementById('language-price-display');
+    const timeDisplay = document.getElementById('language-time-display');
+    
+    // Set base rates
+    const rates = {
+        original: {
+            standard: 80.00
+        },
+        revised: {
+            standard: 48.00
+        }
+    };
+    
+    // Update price when any input changes
+    [wordCountInput, submissionTypeSelect, turnaroundInput].forEach(element => {
+        element.addEventListener('input', updateLanguagePrice);
+    });
+    
+    // Initial calculation
+    updateLanguagePrice();
+    
+    function updateLanguagePrice() {
+        // Get input values
+        const wordCount = parseInt(wordCountInput.value) || 0;
+        const submissionType = submissionTypeSelect.value;
+        const requestedTime = parseInt(turnaroundInput.value) || 24;
+        
+        // Calculate standard turnaround time
+        const standardTime = calculateStandardTime(wordCount);
+        
+        // Calculate rush fee if applicable
+        const rushFeeMultiplier = calculateRushFee(requestedTime, standardTime);
+        
+        // Get the base rate
+        const baseRate = rates[submissionType].standard;
+        
+        // Calculate price: (rate per 1000 words * word count / 1000) * rush fee
+        const price = (baseRate * wordCount / 1000) * rushFeeMultiplier;
+        
+        // Update price display
+        priceDisplay.textContent = '$' + price.toFixed(2);
+        
+        // Update time display
+        timeDisplay.textContent = 'Standard Time: ' + standardTime + ' hours';
+        
+        // Show rush fee if applicable
+        if (rushFeeMultiplier > 1) {
+            const rushPercentage = ((rushFeeMultiplier - 1) * 100).toFixed(0);
+            const rushFeeElement = document.createElement('span');
+            rushFeeElement.className = 'rush-fee';
+            rushFeeElement.textContent = `Rush Fee: +${rushPercentage}%`;
+            
+            // Remove any existing rush fee element first
+            const existingRushFee = timeDisplay.querySelector('.rush-fee');
+            if (existingRushFee) {
+                timeDisplay.removeChild(existingRushFee);
+            }
+            
+            timeDisplay.appendChild(rushFeeElement);
+        } else {
+            // Remove rush fee element if no rush fee
+            const existingRushFee = timeDisplay.querySelector('.rush-fee');
+            if (existingRushFee) {
+                timeDisplay.removeChild(existingRushFee);
+            }
+        }
+        
+        // Highlight the corresponding cell in the table
+        highlightLanguageCell(submissionType, 'standard');
+    }
+    
+    function highlightLanguageCell(submissionType, serviceLevel) {
+        // Reset highlighting first
+        resetHighlighting();
+        
+        // Highlight the corresponding cell
+        const cellId = `language-${submissionType}-${serviceLevel}`;
+        const cell = document.getElementById(cellId);
+        if (cell) {
+            cell.classList.add('active');
+        }
+    }
+}
+
+/**
+ * Initializes the Scientific Editing Calculator
+ */
+function initializeScientificCalculator() {
+    const wordCountInput = document.getElementById('scientific-word-count');
+    const serviceLevelSelect = document.getElementById('scientific-service-level');
+    const submissionTypeSelect = document.getElementById('scientific-submission-type');
+    const turnaroundInput = document.getElementById('scientific-turnaround');
+    const priceDisplay = document.getElementById('scientific-price-display');
+    const timeDisplay = document.getElementById('scientific-time-display');
+    
+    // Set base rates
+    const rates = {
+        original: {
+            standard: 100.00,
+            advanced: 140.00,
+            premium: 180.00
+        },
+        revised: {
+            standard: 60.00,
+            advanced: 84.00,
+            premium: 108.00
+        }
+    };
+    
+    // Update price when any input changes
+    [wordCountInput, serviceLevelSelect, submissionTypeSelect, turnaroundInput].forEach(element => {
+        element.addEventListener('input', updateScientificPrice);
+    });
+    
+    // Initial calculation
+    updateScientificPrice();
+    
+    function updateScientificPrice() {
+        // Get input values
+        const wordCount = parseInt(wordCountInput.value) || 0;
+        const serviceLevel = serviceLevelSelect.value;
+        const submissionType = submissionTypeSelect.value;
+        const requestedTime = parseInt(turnaroundInput.value) || 24;
+        
+        // Calculate standard turnaround time
+        const standardTime = calculateStandardTime(wordCount);
+        
+        // Calculate rush fee if applicable
+        const rushFeeMultiplier = calculateRushFee(requestedTime, standardTime);
+        
+        // Get the base rate
+        const baseRate = rates[submissionType][serviceLevel];
+        
+        // Calculate price: (rate per 1000 words * word count / 1000) * rush fee
+        const price = (baseRate * wordCount / 1000) * rushFeeMultiplier;
+        
+        // Update price display
+        priceDisplay.textContent = '$' + price.toFixed(2);
+        
+        // Update time display
+        timeDisplay.textContent = 'Standard Time: ' + standardTime + ' hours';
+        
+        // Show rush fee if applicable
+        if (rushFeeMultiplier > 1) {
+            const rushPercentage = ((rushFeeMultiplier - 1) * 100).toFixed(0);
+            const rushFeeElement = document.createElement('span');
+            rushFeeElement.className = 'rush-fee';
+            rushFeeElement.textContent = `Rush Fee: +${rushPercentage}%`;
+            
+            // Remove any existing rush fee element first
+            const existingRushFee = timeDisplay.querySelector('.rush-fee');
+            if (existingRushFee) {
+                timeDisplay.removeChild(existingRushFee);
+            }
+            
+            timeDisplay.appendChild(rushFeeElement);
+        } else {
+            // Remove rush fee element if no rush fee
+            const existingRushFee = timeDisplay.querySelector('.rush-fee');
+            if (existingRushFee) {
+                timeDisplay.removeChild(existingRushFee);
+            }
+        }
+        
+        // Highlight the corresponding cell in the table
+        highlightScientificCell(submissionType, serviceLevel);
+    }
+    
+    function highlightScientificCell(submissionType, serviceLevel) {
+        // Reset highlighting first
+        resetHighlighting();
+        
+        // Highlight the corresponding cell
+        const cellId = `scientific-${submissionType}-${serviceLevel}`;
+        const cell = document.getElementById(cellId);
+        if (cell) {
+            cell.classList.add('active');
+        }
+    }
+}
+
+/**
+ * Initializes the Technical Editing Calculator
+ */
+function initializeTechnicalCalculator() {
+    const wordCountInput = document.getElementById('technical-word-count');
+    const serviceLevelSelect = document.getElementById('technical-service-level');
+    const submissionTypeSelect = document.getElementById('technical-submission-type');
+    const turnaroundInput = document.getElementById('technical-turnaround');
+    const priceDisplay = document.getElementById('technical-price-display');
+    const timeDisplay = document.getElementById('technical-time-display');
+    
+    // Set base rates
+    const rates = {
+        original: {
+            standard: 120.00,
+            advanced: 160.00,
+            premium: 200.00
+        },
+        revised: {
+            standard: 70.00,
+            advanced: 94.00,
+            premium: 118.00
+        }
+    };
+    
+    // Update price when any input changes
+    [wordCountInput, serviceLevelSelect, submissionTypeSelect, turnaroundInput].forEach(element => {
+        element.addEventListener('input', updateTechnicalPrice);
+    });
+    
+    // Initial calculation
+    updateTechnicalPrice();
+    
+    function updateTechnicalPrice() {
+        // Get input values
+        const wordCount = parseInt(wordCountInput.value) || 0;
+        const serviceLevel = serviceLevelSelect.value;
+        const submissionType = submissionTypeSelect.value;
+        const requestedTime = parseInt(turnaroundInput.value) || 24;
+        
+        // Calculate standard turnaround time
+        const standardTime = calculateStandardTime(wordCount);
+        
+        // Calculate rush fee if applicable
+        const rushFeeMultiplier = calculateRushFee(requestedTime, standardTime);
+        
+        // Get the base rate
+        const baseRate = rates[submissionType][serviceLevel];
+        
+        // Calculate price: (rate per 1000 words * word count / 1000) * rush fee
+        const price = (baseRate * wordCount / 1000) * rushFeeMultiplier;
+        
+        // Update price display
+        priceDisplay.textContent = '$' + price.toFixed(2);
+        
+        // Update time display
+        timeDisplay.textContent = 'Standard Time: ' + standardTime + ' hours';
+        
+        // Show rush fee if applicable
+        if (rushFeeMultiplier > 1) {
+            const rushPercentage = ((rushFeeMultiplier - 1) * 100).toFixed(0);
+            const rushFeeElement = document.createElement('span');
+            rushFeeElement.className = 'rush-fee';
+            rushFeeElement.textContent = `Rush Fee: +${rushPercentage}%`;
+            
+            // Remove any existing rush fee element first
+            const existingRushFee = timeDisplay.querySelector('.rush-fee');
+            if (existingRushFee) {
+                timeDisplay.removeChild(existingRushFee);
+            }
+            
+            timeDisplay.appendChild(rushFeeElement);
+        } else {
+            // Remove rush fee element if no rush fee
+            const existingRushFee = timeDisplay.querySelector('.rush-fee');
+            if (existingRushFee) {
+                timeDisplay.removeChild(existingRushFee);
+            }
+        }
+        
+        // Highlight the corresponding cell in the table
+        highlightTechnicalCell(submissionType, serviceLevel);
+    }
+    
+    function highlightTechnicalCell(submissionType, serviceLevel) {
+        // Reset highlighting first
+        resetHighlighting();
+        
+        // Highlight the corresponding cell
+        const cellId = `technical-${submissionType}-${serviceLevel}`;
+        const cell = document.getElementById(cellId);
+        if (cell) {
+            cell.classList.add('active');
+        }
+    }
+}
+
+/**
+ * Initializes the Translation Calculator
+ */
+function initializeTranslationCalculator() {
+    const wordCountInput = document.getElementById('translation-word-count');
+    const submissionTypeSelect = document.getElementById('translation-submission-type');
+    const turnaroundInput = document.getElementById('translation-turnaround');
+    const priceDisplay = document.getElementById('translation-price-display');
+    const timeDisplay = document.getElementById('translation-time-display');
+    
+    // Set base rates
+    const rates = {
+        original: {
+            standard: 80.00
+        },
+        revised: {
+            standard: 48.00
+        }
+    };
+    
+    // Update price when any input changes
+    [wordCountInput, submissionTypeSelect, turnaroundInput].forEach(element => {
+        element.addEventListener('input', updateTranslationPrice);
+    });
+    
+    // Initial calculation
+    updateTranslationPrice();
+    
+    function updateTranslationPrice() {
+        // Get input values
+        const wordCount = parseInt(wordCountInput.value) || 0;
+        const submissionType = submissionTypeSelect.value;
+        const requestedTime = parseInt(turnaroundInput.value) || 24;
+        
+        // Calculate standard turnaround time
+        const standardTime = calculateStandardTime(wordCount);
+        
+        // Calculate rush fee if applicable
+        const rushFeeMultiplier = calculateRushFee(requestedTime, standardTime);
+        
+        // Get the base rate
+        const baseRate = rates[submissionType].standard;
+        
+        // Calculate price: (rate per 1000 words * word count / 1000) * rush fee
+        const price = (baseRate * wordCount / 1000) * rushFeeMultiplier;
+        
+        // Update price display
+        priceDisplay.textContent = '$' + price.toFixed(2);
+        
+        // Update time display
+        timeDisplay.textContent = 'Standard Time: ' + standardTime + ' hours';
+        
+        // Show rush fee if applicable
+        if (rushFeeMultiplier > 1) {
+            const rushPercentage = ((rushFeeMultiplier - 1) * 100).toFixed(0);
+            const rushFeeElement = document.createElement('span');
+            rushFeeElement.className = 'rush-fee';
+            rushFeeElement.textContent = `Rush Fee: +${rushPercentage}%`;
+            
+            // Remove any existing rush fee element first
+            const existingRushFee = timeDisplay.querySelector('.rush-fee');
+            if (existingRushFee) {
+                timeDisplay.removeChild(existingRushFee);
+            }
+            
+            timeDisplay.appendChild(rushFeeElement);
+        } else {
+            // Remove rush fee element if no rush fee
+            const existingRushFee = timeDisplay.querySelector('.rush-fee');
+            if (existingRushFee) {
+                timeDisplay.removeChild(existingRushFee);
+            }
+        }
+        
+        // Highlight the corresponding cell in the table
+        highlightTranslationCell(submissionType, 'standard');
+    }
+    
+    function highlightTranslationCell(submissionType, serviceLevel) {
+        // Reset highlighting first
+        resetHighlighting();
+        
+        // Highlight the corresponding cell
+        const cellId = `translation-${submissionType}-${serviceLevel}`;
+        const cell = document.getElementById(cellId);
+        if (cell) {
+            cell.classList.add('active');
+        }
+    }
+}
+    </script>
+      
