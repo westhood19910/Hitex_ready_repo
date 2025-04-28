@@ -204,12 +204,48 @@ class CounterSystem {
 
 
 // CODE FOR NEW NAV BAR
-
 document.addEventListener('DOMContentLoaded', function() {
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');
     const navOverlay = document.getElementById('navOverlay');
     const menuItems = document.querySelectorAll('.nav__bar_oi-menu-item');
+    
+    // Search functionality
+    const searchToggle = document.getElementById('searchToggle');
+    const searchContainer = document.getElementById('searchContainer');
+    const searchClose = document.getElementById('searchClose');
+    const searchInput = document.querySelector('.nav__bar_oi-search-input');
+    
+    // Toggle search bar
+    searchToggle.addEventListener('click', function() {
+        searchContainer.classList.add('active');
+        searchInput.focus();
+    });
+    
+    // Close search bar
+    searchClose.addEventListener('click', function() {
+        searchContainer.classList.remove('active');
+    });
+    
+    // Close search when clicking outside
+    document.addEventListener('click', function(event) {
+        const isClickInsideSearch = searchToggle.contains(event.target) || 
+                                   searchContainer.contains(event.target);
+        
+        if (!isClickInsideSearch && searchContainer.classList.contains('active')) {
+            searchContainer.classList.remove('active');
+        }
+    });
+    
+    // Handle search form submission
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            console.log('Searching for: ' + searchInput.value);
+            // Implement search functionality here
+            searchContainer.classList.remove('active');
+        }
+    });
     
     // Toggle navigation sidebar
     function toggleNav() {
@@ -217,6 +253,19 @@ document.addEventListener('DOMContentLoaded', function() {
       navMenu.classList.toggle('active');
       navOverlay.classList.toggle('active');
       document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+      
+      // Add mobile social icons to menu if on small screen
+      if (window.innerWidth <= 480) {
+        let mobileSocial = document.querySelector('.nav__bar_oi-mobile-social');
+        if (!mobileSocial && navMenu.classList.contains('active')) {
+          // Clone social icons for mobile menu
+          const socialIcons = document.querySelector('.nav__bar_oi-social').cloneNode(true);
+          mobileSocial = document.createElement('div');
+          mobileSocial.className = 'nav__bar_oi-mobile-social';
+          mobileSocial.appendChild(socialIcons);
+          navMenu.appendChild(mobileSocial);
+        }
+      }
     }
     
     navToggle.addEventListener('click', toggleNav);
@@ -285,35 +334,43 @@ document.addEventListener('DOMContentLoaded', function() {
         menuItems.forEach(item => {
           item.classList.remove('active');
         });
+        
+        // Remove mobile social icons if they exist
+        const mobileSocial = document.querySelector('.nav__bar_oi-mobile-social');
+        if (mobileSocial) {
+          mobileSocial.remove();
+        }
       }
       
       // Always re-setup mobile menu when resizing to ensure proper behavior
       setupMobileMenu();
     });
     
-    // Handle all navigation links
+    // Handle navigation links - MODIFIED to only prevent default for in-page navigation
     const navLinks = document.querySelectorAll('.nav__bar_oi-dropdown-item');
     
     navLinks.forEach(link => {
       link.addEventListener('click', function(e) {
-        e.preventDefault();
+        const targetHref = this.getAttribute('href');
         
-        const targetId = this.getAttribute('href');
+        // Only prevent default for in-page links that start with #
+        if (targetHref && targetHref.startsWith('#')) {
+          e.preventDefault();
+          console.log('Navigating to ' + targetHref);
+          
+          // Add smooth scroll implementation here if needed
+        }
         
-        // Close mobile menu if it's open
+        // Always close mobile menu if it's open, regardless of link type
         if (window.innerWidth <= 1024 && navMenu.classList.contains('active')) {
           navToggle.classList.remove('active');
           navMenu.classList.remove('active');
           navOverlay.classList.remove('active');
           document.body.style.overflow = '';
         }
-        
-        // Implement smooth scroll (would work with actual sections)
-        console.log('Navigating to ' + targetId);
       });
     });
-  });
-
+});
 // FAQ System
 class FAQSystem {
     constructor() {

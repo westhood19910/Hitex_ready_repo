@@ -25,7 +25,7 @@ body {
     padding: 0;
     color: var(--charcoal);
     line-height: 1.6;
-    background-color: #fffffd;
+    background-color: #fffcf6;
 }
 
 
@@ -4038,148 +4038,6 @@ padding: 2rem;
     display: none;
 }
 
-/* CODE FOR PRE FOOTER */
-
-.sol_d_apply {
-    background-color: var(--light-blue);
-}
-._apply {
-    background-color: var(--light-blue);
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 40px;
-    border-radius: 8px;
-    max-width: 90%;
-    margin: 0px auto;
-    gap: 4px; 
-  }
-  
-  ._apply-content {
-    flex: 1.5;
-    max-width: 60%; 
-  }
-  
-  ._apply-title {
-    color: var(--blue);
-    font-size: 2.2rem;
-    font-weight: bold;
-    margin-bottom: 15px;
-  }
-  
-  ._apply-text {
-    color: var(--blue);
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 25px;
-  }
-  
-  ._apply-cta {
-    display: flex;
-    align-items: center;
-  }
-  
-  ._apply-button {
-    background: linear-gradient(135deg, #eb2525, #af1e1e);
-    color: white;
-    font-weight: bold;
-    font-size: 1.1rem;
-    padding: 14px 32px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  
-  ._apply-button:hover {
-    background-color: #c03c3f;
-    transform: translateY(-2px);
-    color: rgb(245, 220, 220);
-  }
-  
-  ._apply-benefits {
-    margin-left: 20px;
-    color: var(--blue);
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
-  
-  ._apply-graphic-container {
-    flex: 0.5;
-    max-width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-  }
-  
-  ._apply-graphic {
-    width: 200px;
-    height: 200px;
-    background-color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  ._apply-graphic-inner {
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    background: linear-gradient(45deg, var(--red), var(--blue));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  ._apply-graphic-text {
-    color: white;
-    font-weight: bold;
-    font-size: 1.2rem;
-    text-align: center;
-    padding: 0 10px;
-    transform: rotate(-5deg);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-  }
-  
-  ._apply-company {
-    display: inline-block;
-    font-weight: bold;
-  }
-  
-  ._apply-company span {
-    color: var(--red);
-  }
-  
- 
-  @media (max-width: 768px) {
-    ._apply {
-      flex-direction: column;
-      padding: 30px;
-      gap: 30px;
-    }
-    
-    ._apply-content, ._apply-graphic-container {
-      max-width: 100%;
-      text-align: center;
-    }
-    
-    ._apply-cta {
-      flex-direction: column;
-      align-items: center;
-    }
-    
-    ._apply-benefits {
-      margin-left: 0;
-      margin-top: 15px;
-    }
-  }
   /* IN-PHOTOS CODE */
 
 .h1n_hero {
@@ -9831,8 +9689,6 @@ glow-base {
   padding: 6rem 2rem;
   position: relative;
   overflow: hidden;
-  border-bottom-left-radius: 50px;
-  border-bottom-right-radius: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9957,7 +9813,7 @@ glow-base {
 .oiu_po-leader-image-container {
   width: 220px;
   height: 220px;
-  border-radius: 50%;
+  border-radius: 20%;
   overflow: hidden;
   margin-bottom: 1.5rem;
 }
