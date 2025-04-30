@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HiTex EdiTex Pricing</title>
+    <style>
+:root {
+    --primary: #1a5db4;
+    --primary-light: #e8f1fd;
+    --primary-dark: #0c3b80;
+    --accent: #ff6b35;
+    --accent-light: #fff0eb;
+    --grey-light: #f7f9fc;
+    --grey: #e5e9f2;
+    --grey-dark: #8492a6;
+    --text: #2c3e50;
+    --text-light: #7e8c9a;
+    --white: #ffffff;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --radius: 12px;
+    --radius-sm: 6px;
+    --transition: all 0.3s ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: var(--text);
+    background-color: var(--grey-light);
+    line-height: 1.6;
+}
+
+/* Header and Container */
+.pri__gonk-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.pri__gonk-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.pri__gonk-header h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 16px;
+    letter-spacing: -0.025em;
+}
+
+/* Service Levels */
+.pri__gonk-service-levels {
+    background-color: var(--white);
+    border-radius: var(--radius);
+    padding: 30px;
+    box-shadow: var(--shadow);
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.pri__gonk-service-levels h2 {
+    margin-bottom: 20px;
+    color: var(--primary);
+    font-size: 1.8rem;
+}
+
+.pri__gonk-service-types {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 30px 0;
+}
+
+.pri__gonk-service-type {
+    padding: 20px;
+    background-color: var(--grey-light);
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    color: var(--primary);
+    min-width: 220px;
+}
+
+/* Alert Box */
+.pri__gonk-alert-box {
+    background-color: var(--primary-light);
+    padding: 20px;
+    border-radius: var(--radius-sm);
+    margin: 30px auto;
+    max-width: 800px;
+    text-align: left;
+    border-left: 4px solid var(--primary);
+}
+
+.pri__gonk-alert-box.pri__gonk-warning {
+    background-color: var(--accent-light);
+    border-left: 4px solid var(--accent);
+}
+
+.pri__gonk-alert-box p {
+    margin: 0;
+}
+
+.pri__gonk-alert-box strong {
+    color: var(--primary);
+}
+
+/* Tabs */
+.pri__gonk-tabs-container {
+    margin-bottom: 40px;
+}
+
+.pri__gonk-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--grey);
+    padding-bottom: 1px;
+}
+
+.pri__gonk-tab {
+    padding: 16px 24px;
+    background-color: var(--grey-light);
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    font-weight: 600;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1px solid transparent;
+    border-bottom: none;
+    position: relative;
+    top: 1px;
+}
+
+.pri__gonk-tab:hover {
+    background-color: var(--white);
+    color: var(--primary);
+}
+
+.pri__gonk-tab.pri__gonk-active {
+    background-color: var(--white);
+    color: var(--primary);
+    border-color: var(--grey);
+    border-bottom-color: var(--white);
+}
+
+/* Pricing Sections */
+.pri__gonk-pricing-section {
+    display: none;
+    background-color: var(--white);
+    padding: 40px;
+    border-radius: 0 var(--radius) var(--radius) var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.pri__gonk-pricing-section.pri__gonk-active {
+    display: block;
+    animation: fadeIn 0.4s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.pri__gonk-pricing-section h2 {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Pricing Container */
+.pri__gonk-pricing-container {
+    display: flex;
+    gap: 40px;
+}
+
+.pri__gonk-pricing-table-container {
+    flex: 1;
+}
+
+/* Pricing Tables */
+.pri__gonk-pricing-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.pri__gonk-pricing-table th, 
+.pri__gonk-pricing-table td {
+    padding: 18px 15px;
+    text-align: center;
+    border-bottom: 1px solid var(--grey);
+}
+
+.pri__gonk-pricing-table th {
+    background-color: var(--primary);
+    color: var(--white);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.pri__gonk-pricing-table th:first-child {
+    text-align: left;
+}
+
+.pri__gonk-pricing-table td:first-child {
+    text-align: left;
+    font-weight: 500;
+}
+
+.pri__gonk-pricing-table tr:hover td {
+    background-color: var(--grey-light);
+}
+
+.pri__gonk-price-cell {
+    transition: var(--transition);
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.pri__gonk-price-cell.pri__gonk-active {
+    background-color: var(--primary-light) !important;
+    transform: scale(1.05);
+    box-shadow: var(--shadow);
+    z-index: 10;
+    position: relative;
+    color: var(--primary-dark);
+}
+
+.pri__gonk-not-applicable {
+    color: var(--grey-dark);
+    font-style: italic;
+}
+
+/* Calculator */
+.pri__gonk-calculator-container {
+    width: 360px;
+    background-color: var(--grey-light);
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 20px;
+}
+
+.pri__gonk-calculator-container h3 {
+    margin-top: 0;
+    color: var(--primary);
+    font-size: 1.4rem;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.pri__gonk-form-group {
+    margin-bottom: 20px;
+}
+
+.pri__gonk-form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.pri__gonk-form-group input,
+.pri__gonk-form-group select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--grey);
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.pri__gonk-form-group input:focus,
+.pri__gonk-form-group select:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(26, 93, 180, 0.1);
+}
+
+.pri__gonk-custom-quote-note {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 8px;
+    font-style: italic;
+}
+
+/* Price Result */
+.pri__gonk-price-result {
+    background-color: var(--white);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    margin-top: 30px;
+    text-align: center;
+}
+
+.pri__gonk-price {
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.pri__gonk-time {
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--text);
+}
+
+.pri__gonk-rush-fee {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--accent);
+}
+
+/* Turnaround Section */
+.pri__gonk-turnaround-container {
+    background-color: var(--white);
+    border-radius: var(--radius);
+    padding: 30px;
+    box-shadow: var(--shadow);
+    margin-bottom: 40px;
+}
+
+.pri__gonk-turnaround-container h2 {
+    color: var(--primary);
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.pri__gonk-timeline-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 20px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+.pri__gonk-timeline-table th, 
+.pri__gonk-timeline-table td {
+    padding: 16px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--grey);
+}
+
+.pri__gonk-timeline-table th {
+    background-color: var(--primary);
+    color: var(--white);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.pri__gonk-timeline-table tr:last-child td {
+    border-bottom: none;
+}
+
+.pri__gonk-timeline-table tr:hover td {
+    background-color: var(--grey-light);
+}
+
+.pri__gonk-turnaround-text {
+    background-color: var(--accent-light);
+    padding: 20px;
+    border-radius: var(--radius-sm);
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Responsive Styles */
+@media (max-width: 900px) {
+    .pri__gonk-pricing-container {
+        flex-direction: column;
+    }
+
+    .pri__gonk-calculator-container {
+        width: 100%;
+        margin-top: 30px;
+        position: static;
+    }
+
+    .pri__gonk-service-types {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .pri__gonk-service-type {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .pri__gonk-tabs {
+        flex-direction: column;
+        border-bottom: none;
+        gap: 8px;
+    }
+    
+    .pri__gonk-tab {
+        border-radius: var(--radius-sm);
+        text-align: center;
+        border: 1px solid var(--grey);
+    }
+    
+    .pri__gonk-tab.pri__gonk-active {
+        border-color: var(--primary);
+        border-bottom-color: var(--primary);
+    }
+    
+    .pri__gonk-pricing-section {
+        border-radius: var(--radius);
+        padding: 25px 20px;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="pri__gonk-container">
+        <div class="pri__gonk-header">
+            <h1>Pricing</h1>
+        </div>
+    
+        <div class="pri__gonk-service-levels">
+            <h2>Our Service Levels</h2>
+            <p>We offer three service levels for our editing services</p>
+            
+            <div class="pri__gonk-service-types">
+                <div class="pri__gonk-service-type">Standard Editing Service</div>
+                <div class="pri__gonk-service-type">Advanced Editing Service</div>
+                <div class="pri__gonk-service-type">Premium Editing Service</div>
+            </div>
+            
+            <div class="pri__gonk-alert-box pri__gonk-warning">
+                <p><strong>Please note:</strong> Advanced and Premium Editing Service levels are not available for our Language Editing and Translation services.</p>
+            </div>
+        </div>
+    
+        <div class="pri__gonk-tabs-container">
+            <div class="pri__gonk-tabs">
+                <div class="pri__gonk-tab pri__gonk-active" data-target="language-editing">Language Editing</div>
+                <div class="pri__gonk-tab" data-target="scientific-editing">Scientific Editing</div>
+                <div class="pri__gonk-tab" data-target="technical-editing">Technical Editing</div>
+                <div class="pri__gonk-tab" data-target="translation">Translation</div>
+            </div>
+    
+            <!-- Language Editing Section -->
+            <div class="pri__gonk-pricing-section pri__gonk-active" id="language-editing">
+                <h2>Language Editing Service</h2>
+                <div class="pri__gonk-pricing-container">
+                    <div class="pri__gonk-pricing-table-container">
+                        <table class="pri__gonk-pricing-table" id="pri__gonk-language-editing-table">
+                            <thead>
+                                <tr>
+                                    <th>Submission Type</th>
+                                    <th>Standard Editing</th>
+                                    <th>Advanced Editing</th>
+                                    <th>Premium Editing</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Original Submission</strong><br></td>
+                                    <td id="pri__gonk-language-original-standard" class="pri__gonk-price-cell">$80.00</td>
+                                    <td class="pri__gonk-not-applicable">Not Available</td>
+                                    <td class="pri__gonk-not-applicable">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Revised Submission</strong><br></td>
+                                    <td id="pri__gonk-language-revised-standard" class="pri__gonk-price-cell">$48.00</td>
+                                    <td class="pri__gonk-not-applicable">Not Available</td>
+                                    <td class="pri__gonk-not-applicable">Not Available</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pri__gonk-calculator-container">
+                        <h3>Price Calculator</h3>
+                        <div class="pri__gonk-form-group">
+                            <label for="pri__gonk-language-word-count">Word Count:</label>
+                            <input type="number" id="pri__gonk-language-word-count" min="1" value="1000">
+                            <p class="pri__gonk-custom-quote-note">For manuscripts over 12,000 words, please contact customer service at request@hitexeditex.com for a customized quotation.</p>
+                        </div>
+                        <div class="pri__gonk-form-group">
+                            <label for="pri__gonk-language-submission-type">Submission Type:</label>
+                            <select id="pri__gonk-language-submission-type">
+                                <option value="original">Original Submission</option>
+                                <option value="revised">Revised Submission</option>
+                            </select>
+                        </div>
+                        <div class="pri__gonk-form-group">
+                            <label for="pri__gonk-language-turnaround">Turnaround Time (hours):</label>
+                            <input type="number" id="pri__gonk-language-turnaround" min="1" value="24">
+                        </div>
+                        <div class="pri__gonk-price-result">
+                            <div id="pri__gonk-language-price-display" class="pri__gonk-price">$80.00</div>
+                            <div id="pri__gonk-language-time-display" class="pri__gonk-time">Standard Time: 24 hours</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Scientific Editing Section -->
+            <div class="pri__gonk-pricing-section" id="scientific-editing">
+                <h2>Scientific Editing Service</h2>
+                <div class="pri__gonk-pricing-container">
+                    <div class="pri__gonk-pricing-table-container">
+                        <table class="pri__gonk-pricing-table" id="pri__gonk-scientific-editing-table">
+                            <thead>
+                                <tr>
+                                    <th>Submission Type</th>
+                                    <th>Standard Editing</th>
+                                    <th>Advanced Editing</th>
+                                    <th>Premium Editing</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Original Submission</strong></td>
+                                    <td id="pri__gonk-scientific-original-standard" class="pri__gonk-price-cell">$100.00</td>
+                                    <td id="pri__gonk-scientific-original-advanced" class="pri__gonk-price-cell">$140.00</td>
+                                    <td id="pri__gonk-scientific-original-premium" class="pri__gonk-price-cell">$180.00</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Revised Submission</strong><br></td>
+                                    <td id="pri__gonk-scientific-revised-standard" class="pri__gonk-price-cell">$60.00</td>
+                                    <td id="pri__gonk-scientific-revised-advanced" class="pri__gonk-price-cell">$84.00</td>
+                                    <td id="pri__gonk-scientific-revised-premium" class="pri__gonk-price-cell">$108.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pri__gonk-calculator-container">
+                        <h3>Price Calculator</h3>
+                        <div class="pri__gonk-form-group">
+                            <label for="pri__gonk-scientific-word-count">Word Count:</label>
+                            <input type="number" id="pri__gonk-scientific-word-count" min="1" value="1000">
+                            <p class="pri__gonk-custom-quote-note">For manuscripts over 12,000 words, please contact customer service at request@hitexeditex.com for a customized quotation.</p>
+                        </div>
+                        <div class="pri__gonk-form-group">
+                            <label for="pri__gonk-scientific-submission-type">Submission Type:</label>
+                            <select id="pri__gonk-scientific-submission-type">
+                                <option value="original">Original Submission</option>
+                                <option value="revised">Revised Submission</option>
+                            </select>
+                        </div>
+                        <div class="pri__gonk-form-group">
+                            <label for="pri__gonk-scientific-service-level">Service Level:</label>
+                            <select id="pri__gonk-scientific-service-level">
+                                <option value="standard">Standard Editing</option>
+                                <option value="advanced">Advanced Editing</option>
+                                <option value="premium">Premium Editing</option>
+                            </select>
+                        </div>
+                        <div class="pri__gonk-form-group">
+                            <label for="pri__gonk-scientific-turnaround">Turnaround Time (hours):</label>
+                            <input type="number" id="pri__gonk-scientific-turnaround" min="1" value="24">
+                        </div>
+                        <div class="pri__gonk-price-result">
+                            <div id="pri__gonk-scientific-price-display" class="pri__gonk-price">$100.00</div>
+                            <div id="pri__gonk-scientific-time-display" class="pri__gonk-time">Standard Time: 24 hours</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Technical Editing Section -->
+            <div class="pri__gonk-pricing-section" id="technical-editing">
+                <h2>Technical Editing Service</h2>
+                <div class="pri__gonk-pricing-container">
+                    <div class="pri__gonk-pricing-table-container">
+                        <table class="pri__gonk-pricing-table" id="pri__gonk-technical-editing-table">
+                            <thead>
+                                <tr>
+                                    <th>Submission Type</th>
+                                    <th>Standard Editing</th>
+                                    <th>Advanced Editing</th>
+                                    <th>Premium Editing</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Original Submission</strong><br></td>
+                                    <td id="pri__gonk-technical-original-standard" class="pri__gonk-price-cell">$120.00</td>
+                                    <td id="pri__gonk-technical-original-advanced" class="pri__gonk-price-cell">$160.00</td>
+                                    <td id="pri__gonk-technical-original-premium" class="pri__gonk-price-cell">$200.00</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Revised Submission</strong><br></td>
+                                    <td id="pri__gonk-technical-revised-standard" class="pri__gonk-price-cell">$70.00</td>
+                                    <td id="pri__gonk-technical-revised-advanced" class="pri__gonk-price-cell">$94.00</td>
+                                    <td id="pri__gonk-technical-revised-premium" class="pri__gonk-price-cell">$118.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pri__gonk-calculator-container">
+                        <h3>Price Calculator</h3>
+                        <div class="pri__gonk-form-group">
+                            <label for="pri__gonk-technical-word-count">Word Count:</label>
+                            <input type="number" id="pri__gonk-technical-word-count" min="1" value="1000">
+                            <p class="pri__gonk-custom-quote-note">For manuscripts over 12,000 words, please contact customer service at request@hitexeditex.com for a customized quotation.</p>
+                        </div>
+                        <div class="pri__gonk-form-group">
+                            <label for="pri__gonk-technical-submission-type">Submission Type:</label>
+                            <select id="pri__gonk-technical-submission-type">
+                                <option value="original">Original Submission</option>
+                                <option value="revised">Revised Submission</option>
+                            </select>
+                        </div>
+                        <div class="pri__gonk-form-group">
+                            <label for="pri__gonk-technical-service-level">Service Level:</label>
+                            <select id="pri__gonk-technical-service-level">
+                                <option value="standard">Standard Editing</option>
+                                <option value="advanced">Advanced Editing</option>
+                                <option value="premium">Premium Editing</option>
+                            </select>
+                        </div>
+                        <div class="pri__gonk-form-group">
+                            <label for="pri__gonk-technical-turnaround">Turnaround Time (hours):</label>
+                            <input type="number" id="pri__gonk-technical-turnaround" min="1" value="24">
+                        </div>
+                        <div class="pri__gonk-price-result">
+                            <div id="pri__gonk-technical-price-display" class="pri__gonk-price">$120.00</div>
+                            <div id="pri__gonk-technical-time-display" class="pri__gonk-time">Standard Time: 24 hours</div>
+                        </div>
+                    </div>
+                    <!-- Translation Section -->
+<div class="pri__gonk-pricing-section" id="translation">
+    <h2>Translation Service</h2>
+    <div class="pri__gonk-pricing-container">
+        <div class="pri__gonk-pricing-table-container">
+            <table class="pri__gonk-pricing-table" id="pri__gonk-translation-table">
+                <thead>
+                    <tr>
+                        <th>Submission Type</th>
+                        <th>Standard Editing</th>
+                        <th>Advanced Editing</th>
+                        <th>Premium Editing</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Original Submission</strong><br></td>
+                        <td id="pri__gonk-translation-original-standard" class="pri__gonk-price-cell">$80.00</td>
+                        <td class="pri__gonk-not-applicable">Not Available</td>
+                        <td class="pri__gonk-not-applicable">Not Available</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Revised Submission</strong><br></td>
+                        <td id="pri__gonk-translation-revised-standard" class="pri__gonk-price-cell">$48.00</td>
+                        <td class="pri__gonk-not-applicable">Not Available</td>
+                        <td class="pri__gonk-not-applicable">Not Available</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pri__gonk-calculator-container">
+            <h3>Price Calculator</h3>
+            <div class="pri__gonk-form-group">
+                <label for="pri__gonk-translation-word-count">Word Count:</label>
+                <input type="number" id="pri__gonk-translation-word-count" min="1" value="1000">
+                <p class="pri__gonk-custom-quote-note">For manuscripts over 12,000 words, please contact customer service at request@hitexeditex.com for a customized quotation.</p>
+            </div>
+            <div class="pri__gonk-form-group">
+                <label for="pri__gonk-translation-submission-type">Submission Type:</label>
+                <select id="pri__gonk-translation-submission-type">
+                    <option value="original">Original Submission</option>
+                    <option value="revised">Revised Submission</option>
+                </select>
+            </div>
+            <div class="pri__gonk-form-group">
+                <label for="pri__gonk-translation-turnaround">Turnaround Time (hours):</label>
+                <input type="number" id="pri__gonk-translation-turnaround" min="1" value="24">
+            </div>
+            <div class="pri__gonk-price-result">
+                <div id="pri__gonk-translation-price-display" class="pri__gonk-price">$80.00</div>
+                <div id="pri__gonk-translation-time-display" class="pri__gonk-time">Standard Time: 24 hours</div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="pri__gonk-turnaround-container">
+    <h2>Standard Turnaround Times</h2>
+    <table class="pri__gonk-timeline-table">
+        <thead>
+            <tr>
+                <th>Document Word Count</th>
+                <th>Minimum Duration</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Up to 3,000 words</td>
+                <td>24 working hours</td>
+            </tr>
+            <tr>
+                <td>3,000-6,000 words</td>
+                <td>48 working hours</td>
+            </tr>
+            <tr>
+                <td>6,000-9,000 words</td>
+                <td>72 working hours</td>
+            </tr>
+            <tr>
+                <td>9,000-12,000 words</td>
+                <td>96 working hours</td>
+            </tr>
+            <tr>
+                <td>More than 12,000 words</td>
+                <td>More than 96 working hours</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="pri__gonk-turnaround-text">
+        <p>Need it faster? Specify your preferred turnaround time for expedited service.</p>
+    </div>
+</div>
+
+    <script>
+        // Tab switching functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all tab elements
+    const tabs = document.querySelectorAll('.pri__gonk-tab');
+    
+    // Add click event listener to each tab
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            // Remove active class from all tabs
+            tabs.forEach(t => t.classList.remove('pri__gonk-active'));
+            
+            // Add active class to clicked tab
+            this.classList.add('pri__gonk-active');
+            
+            // Hide all pricing sections
+            const pricingSections = document.querySelectorAll('.pri__gonk-pricing-section');
+            pricingSections.forEach(section => section.classList.remove('pri__gonk-active'));
+            
+            // Show the corresponding pricing section
+            const targetId = this.getAttribute('data-target');
+            document.getElementById(targetId).classList.add('pri__gonk-active');
+        });
+    });
+    
+    // Initialize calculators
+    initializeLanguageCalculator();
+    initializeScientificCalculator();
+    initializeTechnicalCalculator();
+    initializeTranslationCalculator();
+});
+
+/**
+ * Calculates standard turnaround time based on word count
+ * @param {number} wordCount - The number of words in the document
+ * @returns {number} - Standard turnaround time in hours
+ */
+function calculateStandardTime(wordCount) {
+    if (wordCount <= 3000) {
+        return 24;
+    } else if (wordCount <= 6000) {
+        return 48;
+    } else if (wordCount <= 9000) {
+        return 72;
+    } else if (wordCount <= 12000) {
+        return 96;
+    } else {
+        return 120; // Default for documents over 12,000 words
+    }
+}
+
+/**
+ * Calculates rush fee multiplier based on requested time vs standard time
+ * @param {number} requestedTime - Requested turnaround time in hours
+ * @param {number} standardTime - Standard turnaround time in hours
+ * @returns {number} - Rush fee multiplier
+ */
+function calculateRushFee(requestedTime, standardTime) {
+    if (requestedTime >= standardTime) {
+        return 1.0; // No rush fee
+    } else if (standardTime - requestedTime >= 24) {
+        return 1.5; // 50% rush fee for 24+ hours early
+    } else if (standardTime - requestedTime >= 12) {
+        return 1.25; // 25% rush fee for 12+ hours early
+    } else {
+        return 1.0; // No rush fee for less than 12 hours early
+    }
+}
+
+/**
+ * Resets highlighting of all cells in pricing tables
+ */
+function resetHighlighting() {
+    const activeCells = document.querySelectorAll('.pri__gonk-price-cell.pri__gonk-active');
+    activeCells.forEach(cell => cell.classList.remove('pri__gonk-active'));
+}
+
+/**
+ * Initializes the Language Editing Calculator
+ */
+function initializeLanguageCalculator() {
+    const wordCountInput = document.getElementById('pri__gonk-language-word-count');
+    const submissionTypeSelect = document.getElementById('pri__gonk-language-submission-type');
+    const turnaroundInput = document.getElementById('pri__gonk-language-turnaround');
+    const priceDisplay = document.getElementById('pri__gonk-language-price-display');
+    const timeDisplay = document.getElementById('pri__gonk-language-time-display');
+    
+    // Set base rates
+    const rates = {
+        original: {
+            standard: 80.00
+        },
+        revised: {
+            standard: 48.00
+        }
+    };
+    
+    // Update price when any input changes
+    [wordCountInput, submissionTypeSelect, turnaroundInput].forEach(element => {
+        element.addEventListener('input', updateLanguagePrice);
+    });
+    
+    // Initial calculation
+    updateLanguagePrice();
+    
+    function updateLanguagePrice() {
+        // Get input values
+        const wordCount = parseInt(wordCountInput.value) || 0;
+        const submissionType = submissionTypeSelect.value;
+        const requestedTime = parseInt(turnaroundInput.value) || 24;
+        
+        // Calculate standard turnaround time
+        const standardTime = calculateStandardTime(wordCount);
+        
+        // Calculate rush fee if applicable
+        const rushFeeMultiplier = calculateRushFee(requestedTime, standardTime);
+        
+        // Get the base rate
+        const baseRate = rates[submissionType].standard;
+        
+        // Calculate price: (rate per 1000 words * word count / 1000) * rush fee
+        const price = (baseRate * wordCount / 1000) * rushFeeMultiplier;
+        
+        // Update price display
+        priceDisplay.textContent = '$' + price.toFixed(2);
+        
+        // Update time display
+        timeDisplay.textContent = 'Standard Time: ' + standardTime + ' hours';
+        
+        // Show rush fee if applicable
+        if (rushFeeMultiplier > 1) {
+            const rushPercentage = ((rushFeeMultiplier - 1) * 100).toFixed(0);
+            const rushFeeElement = document.createElement('span');
+            rushFeeElement.className = 'pri__gonk-rush-fee';
+            rushFeeElement.textContent = `Rush Fee: +${rushPercentage}%`;
+            
+            // Remove any existing rush fee element first
+            const existingRushFee = timeDisplay.querySelector('.pri__gonk-rush-fee');
+            if (existingRushFee) {
+                timeDisplay.removeChild(existingRushFee);
+            }
+            
+            timeDisplay.appendChild(rushFeeElement);
+        } else {
+            // Remove rush fee element if no rush fee
+            const existingRushFee = timeDisplay.querySelector('.pri__gonk-rush-fee');
+            if (existingRushFee) {
+                timeDisplay.removeChild(existingRushFee);
+            }
+        }
+        
+        // Highlight the corresponding cell in the table
+        highlightLanguageCell(submissionType, 'standard');
+    }
+    
+    function highlightLanguageCell(submissionType, serviceLevel) {
+        // Reset highlighting first
+        resetHighlighting();
+        
+        // Highlight the corresponding cell
+        const cellId = `pri__gonk-language-${submissionType}-${serviceLevel}`;
+        const cell = document.getElementById(cellId);
+        if (cell) {
+            cell.classList.add('pri__gonk-active');
+        }
+    }
+}
+
+/**
+ * Initializes the Scientific Editing Calculator
+ */
+function initializeScientificCalculator() {
+    const wordCountInput = document.getElementById('pri__gonk-scientific-word-count');
+    const serviceLevelSelect = document.getElementById('pri__gonk-scientific-service-level');
+    const submissionTypeSelect = document.getElementById('pri__gonk-scientific-submission-type');
+    const turnaroundInput = document.getElementById('pri__gonk-scientific-turnaround');
+    const priceDisplay = document.getElementById('pri__gonk-scientific-price-display');
+    const timeDisplay = document.getElementById('pri__gonk-scientific-time-display');
+    
+    // Set base rates
+    const rates = {
+        original: {
+            standard: 100.00,
+            advanced: 140.00,
+            premium: 180.00
+        },
+        revised: {
+            standard: 60.00,
+            advanced: 84.00,
+            premium: 108.00
+        }
+    };
+    
+    // Update price when any input changes
+    [wordCountInput, serviceLevelSelect, submissionTypeSelect, turnaroundInput].forEach(element => {
+        element.addEventListener('input', updateScientificPrice);
+    });
+    
+    // Initial calculation
+    updateScientificPrice();
+    
+    function updateScientificPrice() {
+        // Get input values
+        const wordCount = parseInt(wordCountInput.value) || 0;
+        const serviceLevel = serviceLevelSelect.value;
+        const submissionType = submissionTypeSelect.value;
+        const requestedTime = parseInt(turnaroundInput.value) || 24;
+        
+        // Calculate standard turnaround time
+        const standardTime = calculateStandardTime(wordCount);
+        
+        // Calculate rush fee if applicable
+        const rushFeeMultiplier = calculateRushFee(requestedTime, standardTime);
+        
+        // Get the base rate
+        const baseRate = rates[submissionType][serviceLevel];
+        
+        // Calculate price: (rate per 1000 words * word count / 1000) * rush fee
+        const price = (baseRate * wordCount / 1000) * rushFeeMultiplier;
+        
+        // Update price display
+        priceDisplay.textContent = '$' + price.toFixed(2);
+        
+        // Update time display
+        timeDisplay.textContent = 'Standard Time: ' + standardTime + ' hours';
+        
+        // Show rush fee if applicable
+        if (rushFeeMultiplier > 1) {
+            const rushPercentage = ((rushFeeMultiplier - 1) * 100).toFixed(0);
+            const rushFeeElement = document.createElement('span');
+            rushFeeElement.className = 'pri__gonk-rush-fee';
+            rushFeeElement.textContent = `Rush Fee: +${rushPercentage}%`;
+            
+            // Remove any existing rush fee element first
+            const existingRushFee = timeDisplay.querySelector('.pri__gonk-rush-fee');
+            if (existingRushFee) {
+                timeDisplay.removeChild(existingRushFee);
+            }
+            
+            timeDisplay.appendChild(rushFeeElement);
+        } else {
+            // Remove rush fee element if no rush fee
+            const existingRushFee = timeDisplay.querySelector('.pri__gonk-rush-fee');
+            if (existingRushFee) {
+                timeDisplay.removeChild(existingRushFee);
+            }
+        }
+        
+        // Highlight the corresponding cell in the table
+        highlightScientificCell(submissionType, serviceLevel);
+    }
+    
+    function highlightScientificCell(submissionType, serviceLevel) {
+        // Reset highlighting first
+        resetHighlighting();
+        
+        // Highlight the corresponding cell
+        const cellId = `pri__gonk-scientific-${submissionType}-${serviceLevel}`;
+        const cell = document.getElementById(cellId);
+        if (cell) {
+            cell.classList.add('pri__gonk-active');
+        }
+    }
+}
+
+/**
+ * Initializes the Technical Editing Calculator
+ */
+function initializeTechnicalCalculator() {
+    const wordCountInput = document.getElementById('pri__gonk-technical-word-count');
+    const serviceLevelSelect = document.getElementById('pri__gonk-technical-service-level');
+    const submissionTypeSelect = document.getElementById('pri__gonk-technical-submission-type');
+    const turnaroundInput = document.getElementById('pri__gonk-technical-turnaround');
+    const priceDisplay = document.getElementById('pri__gonk-technical-price-display');
+    const timeDisplay = document.getElementById('pri__gonk-technical-time-display');
+    
+    // Set base rates
+    const rates = {
+        original: {
+            standard: 120.00,
+            advanced: 160.00,
+            premium: 200.00
+        },
+        revised: {
+            standard: 70.00,
+            advanced: 94.00,
+            premium: 118.00
+        }
+    };
+    
+    // Update price when any input changes
+    [wordCountInput, serviceLevelSelect, submissionTypeSelect, turnaroundInput].forEach(element => {
+        element.addEventListener('input', updateTechnicalPrice);
+    });
+    
+    // Initial calculation
+    updateTechnicalPrice();
+    
+    function updateTechnicalPrice() {
+        // Get input values
+        const wordCount = parseInt(wordCountInput.value) || 0;
+        const serviceLevel = serviceLevelSelect.value;
+        const submissionType = submissionTypeSelect.value;
+        const requestedTime = parseInt(turnaroundInput.value) || 24;
+        
+        // Calculate standard turnaround time
+        const standardTime = calculateStandardTime(wordCount);
+        
+        // Calculate rush fee if applicable
+        const rushFeeMultiplier = calculateRushFee(requestedTime, standardTime);
+        
+        // Get the base rate
+        const baseRate = rates[submissionType][serviceLevel];
+        
+        // Calculate price: (rate per 1000 words * word count / 1000) * rush fee
+        const price = (baseRate * wordCount / 1000) * rushFeeMultiplier;
+        
+        // Update price display
+        priceDisplay.textContent = '$' + price.toFixed(2);
+        
+        // Update time display
+        timeDisplay.textContent = 'Standard Time: ' + standardTime + ' hours';
+        
+        // Show rush fee if applicable
+        if (rushFeeMultiplier > 1) {
+            const rushPercentage = ((rushFeeMultiplier - 1) * 100).toFixed(0);
+            const rushFeeElement = document.createElement('span');
+            rushFeeElement.className = 'pri__gonk-rush-fee';
+            rushFeeElement.textContent = `Rush Fee: +${rushPercentage}%`;
+            
+            // Remove any existing rush fee element first
+            const existingRushFee = timeDisplay.querySelector('.pri__gonk-rush-fee');
+            if (existingRushFee) {
+                timeDisplay.removeChild(existingRushFee);
+            }
+            
+            timeDisplay.appendChild(rushFeeElement);
+        } else {
+            // Remove rush fee element if no rush fee
+            const existingRushFee = timeDisplay.querySelector('.pri__gonk-rush-fee');
+            if (existingRushFee) {
+                timeDisplay.removeChild(existingRushFee);
+            }
+        }
+        
+        // Highlight the corresponding cell in the table
+        highlightTechnicalCell(submissionType, serviceLevel);
+    }
+    
+    function highlightTechnicalCell(submissionType, serviceLevel) {
+        // Reset highlighting first
+        resetHighlighting();
+        
+        // Highlight the corresponding cell
+        const cellId = `pri__gonk-technical-${submissionType}-${serviceLevel}`;
+        const cell = document.getElementById(cellId);
+        if (cell) {
+            cell.classList.add('pri__gonk-active');
+        }
+    }
+}
+
+/**
+ * Initializes the Translation Calculator
+ */
+function initializeTranslationCalculator() {
+    const wordCountInput = document.getElementById('pri__gonk-translation-word-count');
+    const submissionTypeSelect = document.getElementById('pri__gonk-translation-submission-type');
+    const turnaroundInput = document.getElementById('pri__gonk-translation-turnaround');
+    const priceDisplay = document.getElementById('pri__gonk-translation-price-display');
+    const timeDisplay = document.getElementById('pri__gonk-translation-time-display');
+    
+    // Set base rates
+    const rates = {
+        original: {
+            standard: 80.00
+        },
+        revised: {
+            standard: 48.00
+        }
+    };
+    
+    // Update price when any input changes
+    [wordCountInput, submissionTypeSelect, turnaroundInput].forEach(element => {
+        element.addEventListener('input', updateTranslationPrice);
+    });
+    
+    // Initial calculation
+    updateTranslationPrice();
+    
+    function updateTranslationPrice() {
+        // Get input values
+        const wordCount = parseInt(wordCountInput.value) || 0;
+        const submissionType = submissionTypeSelect.value;
+        const requestedTime = parseInt(turnaroundInput.value) || 24;
+        
+        // Calculate standard turnaround time
+        const standardTime = calculateStandardTime(wordCount);
+        
+        // Calculate rush fee if applicable
+        const rushFeeMultiplier = calculateRushFee(requestedTime, standardTime);
+        
+        // Get the base rate
+        const baseRate = rates[submissionType].standard;
+        
+        // Calculate price: (rate per 1000 words * word count / 1000) * rush fee
+        const price = (baseRate * wordCount / 1000) * rushFeeMultiplier;
+        
+        // Update price display
+        priceDisplay.textContent = '$' + price.toFixed(2);
+        
+        // Update time display
+        timeDisplay.textContent = 'Standard Time: ' + standardTime + ' hours';
+        
+        // Show rush fee if applicable
+        if (rushFeeMultiplier > 1) {
+            const rushPercentage = ((rushFeeMultiplier - 1) * 100).toFixed(0);
+            const rushFeeElement = document.createElement('span');
+            rushFeeElement.className = 'pri__gonk-rush-fee';
+            rushFeeElement.textContent = `Rush Fee: +${rushPercentage}%`;
+            
+            // Remove any existing rush fee element first
+            const existingRushFee = timeDisplay.querySelector('.pri__gonk-rush-fee');
+            if (existingRushFee) {
+                timeDisplay.removeChild(existingRushFee);
+            }
+            
+            timeDisplay.appendChild(rushFeeElement);
+        } else {
+            // Remove rush fee element if no rush fee
+            const existingRushFee = timeDisplay.querySelector('.pri__gonk-rush-fee');
+            if (existingRushFee) {
+                timeDisplay.removeChild(existingRushFee);
+            }
+        }
+        
+        // Highlight the corresponding cell in the table
+        highlightTranslationCell(submissionType, 'standard');
+    }
+    
+    function highlightTranslationCell(submissionType, serviceLevel) {
+        // Reset highlighting first
+        resetHighlighting();
+        
+        // Highlight the corresponding cell
+        const cellId = `pri__gonk-translation-${submissionType}-${serviceLevel}`;
+        const cell = document.getElementById(cellId);
+        if (cell) {
+            cell.classList.add('pri__gonk-active');
+        }
+    }
+}
+    </script>
+      

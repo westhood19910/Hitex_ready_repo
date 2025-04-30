@@ -9,7 +9,7 @@
             --primary: #1a5db4;
             --primary-light: #e8f1fd;
             --primary-dark: #0c3b80;
-            --accent: #ff6b35;
+            --accent: #D54C4F;
             --accent-light: #fff0eb;
             --grey-light: #f7f9fc;
             --grey: #e5e9f2;
@@ -22,6 +22,18 @@
             --radius: 12px;
             --radius-sm: 6px;
             --transition: all 0.3s ease;
+            --red: #D54C4F;
+            --blue: #032672;
+            --light-blue: #D3E5FF;
+            --major-heading: 3em;
+            --major-header-font-weight: 800;
+            --sub-head-color: #EBEBEB;
+            --button-background:linear-gradient(135deg, #eb2525, #af1e1e);
+            --smaller-major-head: 1.5em;
+            --smaller-sub-heading: 1rem;
+            --text-color: #333;
+            --transition-speed: 0.3s;
+            --white: #ffffff;
         }
 
         * {
@@ -70,6 +82,7 @@
             box-shadow: var(--shadow);
             margin-bottom: 40px;
             text-align: center;
+            margin-bottom: 12em;
         }
 
         .service-levels h2 {
@@ -117,14 +130,14 @@
         .alert-box strong {
             color: var(--primary);
         }
-
         .turnaround-container {
-            background-color: var(--white);
-            border-radius: var(--radius);
-            padding: 30px;
-            box-shadow: var(--shadow);
-            margin-bottom: 40px;
-        }
+    background-color: var(--white);
+    border-radius: var(--radius);
+    padding: 30px;
+    box-shadow: var(--shadow);
+    max-width: 1150px;
+    margin: 7em auto 0 auto; /* top: 4em, horizontal: auto, bottom: 0 */
+}
 
         .turnaround-container h2 {
             color: var(--primary);
@@ -288,8 +301,9 @@
 
         .pricing-table .price-cell {
             transition: var(--transition);
-            font-weight: 600;
+            font-weight: 800;
             color: var(--primary);
+            font-size: 25px;
         }
 
         .pricing-table .price-cell.active {
@@ -432,18 +446,458 @@
                 padding: 25px 20px;
             }
         }
+
+        /* CODE FOR INCENTIVES */
+
+    .pri__centv-container {
+      width: 100%;
+      padding: 60px 20px;
+      background-image: url('assets/alexim.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      position: relative;
+      margin-top: 8em;
+    }
+
+    .pri__centv-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(3, 38, 114, 0.75);
+      z-index: 1;
+    }
+
+    .pri__centv-heading {
+      text-align: center;
+      font-size: var(--major-heading);
+      font-weight: var(--major-header-font-weight);
+      color: var(--white);
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .pri__centv-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .pri__centv-card {
+      flex: 1 1 250px;
+      max-width: 280px;
+      background-color: var(--white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+      display: flex;
+      flex-direction: column;
+      height: 460px; /* Fixed height for all cards */
+    }
+
+    .pri__centv-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .pri__centv-card-header {
+      background-color: var(--blue);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .pri__centv-icon {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .pri__centv-title {
+      color: var(--white);
+      font-size: var(--smaller-major-head);
+      font-weight: 700;
+      margin-bottom: 10px;
+      height: 3.5rem; /* Fixed height for title */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pri__centv-divider {
+      width: 60px;
+      height: 3px;
+      background-color: var(--red);
+      margin: 0 auto;
+    }
+
+    .pri__centv-content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .pri__centv-description {
+      color: var(--text-color);
+      font-size: var(--smaller-sub-heading);
+      margin-bottom: 20px;
+      line-height: 1.5;
+      flex: 1; /* Take up available space */
+    }
+
+    .pri__centv-button-wrapper {
+      margin-top: auto; /* Push button to bottom */
+    }
+
+    .pri__centv-button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      background: var(--button-background);
+      color: var(--white);
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      transition: opacity var(--transition-speed);
+      text-decoration: none;
+    }
+
+    .pri__centv-button:hover {
+      opacity: 0.9;
+    }
+
+    @media (max-width: 768px) {
+      .pri__centv-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .pri__centv-card {
+        max-width: 100%;
+        width: 100%;
+        height: auto; /* Allow height to adjust on mobile */
+      }
+      
+      .pri__centv-heading {
+        font-size: calc(var(--major-heading) * 0.7);
+      }
+    }
+
+    /* CODE FOR  PAYMENT TERMS */
+
+    .mp_871_ty {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            line-height: 1.5;
+            position: relative;
+            margin: 8em auto;
+        }
+        
+        .mp_871_ty h1 {
+            color: var(--blue);
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 70px;
+            font-size: var(--major-heading);
+            font-weight: var(--major-header-font-weight);
+        }
+        
+        .mp_871_ty p {
+            margin-bottom: 2px;
+            font-size: 17px;
+        }
+        
+        .mp_871_ty h2 {
+            color: var(--red);
+            font-size: 1.3rem;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        
+        .mp_871_ty .icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+            background-color: var(--light-blue);
+            border: 1px solid #d0e3f7;
+            border-radius: 5px;
+            color: var(--red);
+        }
+        
+        .mp_871_ty ul {
+            list-style-type: disc;
+            padding-left: 25px;
+            margin-bottom: 15px;
+            margin-left: 55px;
+        }
+        
+        .mp_871_ty li {
+            margin-bottom: 8px;
+            font-size: 15;
+        }
+        
+        .mp_871_ty strong {
+            font-weight: bold;
+        }
+        
+        .mp_871_ty .highlight {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 15px 0;
+        }
+        
+        /* Layout styles like AJE website */
+        .content-wrapper {
+            display: flex;
+            position: relative;
+        }
+        
+        .content-container {
+            width: 60%;
+            padding-right: 40px;
+        }
+        
+        .image-container {
+            width: 40%;
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            max-height: 100%;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            
+            .content-container {
+                width: 100%;
+                padding-right: 0;
+            }
+            
+            .image-container {
+                position: relative;
+                width: 100%;
+                margin: 30px 0;
+                height: auto;
+                justify-content: center;
+            }
+            
+            .image-container img {
+                max-width: 80%;
+            }
+            
+            .mp_871_ty ul {
+                margin-left: 25px;
+            }
+        }
+
+        /* CODE FOR CHAT SECTION */
+
+.kir_09Ui_container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    border-top: 2px dashed #0c3b80;
+    
+}
+
+.kir_09Ui_heading {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.kir_09Ui_title {
+    color: var(--blue);
+    font-size: 32px;
+    margin-bottom: 10px;
+    font-size: var(--major-heading);
+    font-weight: var(--major-header-font-weight);
+
+}
+
+.kir_09Ui_subtitle {
+    font-size: 22px;
+    color: #555;
+    margin-bottom: 50px;
+}
+
+.kir_09Ui_cards_container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.kir_09Ui_card {
+    background: white;
+    border-radius: 12px;
+    padding: 40px 30px;
+    width: 320px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.kir_09Ui_card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.kir_09Ui_icon_container {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.kir_09Ui_icon_phone {
+    background-color: rgba(255, 206, 86, 0.2);
+}
+
+.kir_09Ui_icon_chat {
+    background-color: rgba(116, 90, 242, 0.2);
+}
+
+.kir_09Ui_icon_email {
+    background-color: rgba(75, 192, 192, 0.2);
+}
+
+.kir_09Ui_icon {
+    font-size: 28px;
+}
+
+.kir_09Ui_icon_phone .kir_09Ui_icon {
+    color: #ff07b5;
+}
+
+.kir_09Ui_icon_chat .kir_09Ui_icon {
+    color: #745af2;
+}
+
+.kir_09Ui_icon_email .kir_09Ui_icon {
+    color: #4bc0c0;
+}
+
+.kir_09Ui_card_title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--blue);
+}
+
+.kir_09Ui_card_text {
+    font-size: 15px;
+    color: #818181;
+    margin-bottom: 20px;
+    line-height: 1.5;
+    font-weight: 550;
+}
+
+.kir_09Ui_link {
+    display: inline-block;
+    color: var(--red);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.kir_09Ui_link:hover {
+    color: #3040c4;
+    text-decoration: underline;
+}
+
+.kir_09Ui_footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+}
+
+.kir_09Ui_whatsapp {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: #25d366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    font-size: 30px;
+    box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
+    transition: transform 0.3s;
+}
+
+.kir_09Ui_whatsapp:hover {
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .kir_09Ui_cards_container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .kir_09Ui_card {
+        width: 100%;
+        max-width: 350px;
+    }
+}
+
+        
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Pricing</h1>
-       
-        </div>
 
+    <div class="container">
+        <div class="tabs" style="background-color: var(--light-blue);">
+            <div class="tab active" data-target="language-editing" style="background-color: var(--light-blue);">Language Editing</div>
+            <div class="tab" data-target="scientific-editing" style="background-color: var(--light-blue);">Scientific Editing</div>
+            <div class="tab" data-target="technical-editing" style="background-color: var(--light-blue);">Technical Editing</div>
+            <div class="tab" data-target="translation" style="background-color: var(--light-blue);">Translation</div>
+        </div>
         <div class="service-levels">
             <h2>Our Service Levels</h2>
-            <p>Choose from our three service levels to match your specific editing requirements:</p>
+            <p>We offer three service levels for our editing services</p>
             
             <div class="service-types">
                 <div class="service-type">Standard Editing Service</div>
@@ -454,11 +908,207 @@
             <div class="alert-box warning">
                 <p><strong>Please note:</strong> Advanced and Premium Editing Service levels are not available for our Language Editing and Translation services.</p>
             </div>
-            
-            <p>The following tables provide detailed pricing for each of our editing services. Pricing is subject to change without prior notice.</p>
         </div>
+        <div class="tabs-container">
+            <div class="tabs">
+                <div class="tab active" data-target="language-editing">Language Editing</div>
+                <div class="tab" data-target="scientific-editing">Scientific Editing</div>
+                <div class="tab" data-target="technical-editing">Technical Editing</div>
+                <div class="tab" data-target="translation">Translation</div>
+            </div>
 
-        <div class="turnaround-container">
+            <!-- Language Editing Section -->
+            <div class="pricing-section active" id="language-editing">
+                <h2>Language Editing Service</h2>
+                <div class="pricing-container">
+                    <div class="pricing-table-container">
+                        <table class="pricing-table" id="language-editing-table">
+                            <thead>
+                                <tr>
+                                    <th>Submission Type</th>
+                                    <th>Standard Editing</th>
+                                    <th>Advanced Editing</th>
+                                    <th>Premium Editing</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Original Submission</strong><br></td>
+                                    <td id="language-original-standard" class="price-cell">$80.00</td>
+                                    <td class="not-applicable">Not Available</td>
+                                    <td class="not-applicable">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Revised Submission</strong><br></td>
+                                    <td id="language-revised-standard" class="price-cell">$48.00</td>
+                                    <td class="not-applicable">Not Available</td>
+                                    <td class="not-applicable">Not Available</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="calculator-container">
+                        <h3>Calculate Your Price</h3>
+                        <div class="form-group">
+                            <label for="language-word-count">Word Count:</label>
+                            <input type="number" id="language-word-count" min="1" value="1000">
+                            <p class="custom-quote-note">For manuscripts over 12,000 words, please contact customer service at request@hitexeditex.com for a customized quotation.</p>
+                        </div>
+                       
+                        <div class="form-group">
+                            <label for="language-turnaround">Turnaround Time (hours):</label>
+                            <input type="number" id="language-turnaround" min="1" value="24">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scientific Editing Section -->
+            <div class="pricing-section" id="scientific-editing">
+                <h2>Scientific Editing Service</h2>
+                <div class="pricing-container">
+                    <div class="pricing-table-container">
+                        <table class="pricing-table" id="scientific-editing-table">
+                            <thead>
+                                <tr>
+                                    <th>Submission Type</th>
+                                    <th>Standard Editing</th>
+                                    <th>Advanced Editing</th>
+                                    <th>Premium Editing</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Original Submission</strong></td>
+                                    <td id="scientific-original-standard" class="price-cell">$100.00</td>
+                                    <td id="scientific-original-advanced" class="price-cell">$140.00</td>
+                                    <td id="scientific-original-premium" class="price-cell">$180.00</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Revised Submission</strong><br></td>
+                                    <td id="scientific-revised-standard" class="price-cell">$60.00</td>
+                                    <td id="scientific-revised-advanced" class="price-cell">$84.00</td>
+                                    <td id="scientific-revised-premium" class="price-cell">$108.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="calculator-container">
+                        <h3>Calculate Your Price</h3>
+                        <div class="form-group">
+                            <label for="scientific-word-count">Word Count:</label>
+                            <input type="number" id="scientific-word-count" min="1" value="1000">
+                            <p class="custom-quote-note">For manuscripts over 12,000 words, please contact customer service at request@hitexeditex.com for a customized quotation.</p>
+                        </div>
+                       
+                       
+                        <div class="form-group">
+                            <label for="scientific-turnaround">Turnaround Time (hours):</label>
+                            <input type="number" id="scientific-turnaround" min="1" value="24">
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Editing Section -->
+            <div class="pricing-section" id="technical-editing">
+                <h2>Technical Editing Service</h2>
+                <div class="pricing-container">
+                    <div class="pricing-table-container">
+                        <table class="pricing-table" id="technical-editing-table">
+                            <thead>
+                                <tr>
+                                    <th>Submission Type</th>
+                                    <th>Standard Editing</th>
+                                    <th>Advanced Editing</th>
+                                    <th>Premium Editing</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Original Submission</strong><br></td>
+                                    <td id="technical-original-standard" class="price-cell">$120.00</td>
+                                    <td id="technical-original-advanced" class="price-cell">$160.00</td>
+                                    <td id="technical-original-premium" class="price-cell">$200.00</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Revised Submission</strong><br></td>
+                                    <td id="technical-revised-standard" class="price-cell">$70.00</td>
+                                    <td id="technical-revised-advanced" class="price-cell">$94.00</td>
+                                    <td id="technical-revised-premium" class="price-cell">$118.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="calculator-container">
+                        <h3>Price Calculator</h3>
+                        <div class="form-group">
+                            <label for="technical-word-count">Word Count:</label>
+                            <input type="number" id="technical-word-count" min="1" value="1000">
+                            <p class="custom-quote-note">For manuscripts over 12,000 words, please contact customer service at request@hitexeditex.com for a customized quotation.</p>
+                        </div>
+                     
+                      
+                        <div class="form-group">
+                            <label for="technical-turnaround">Turnaround Time (hours):</label>
+                            <input type="number" id="technical-turnaround" min="1" value="24">
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+
+            <!-- Translation Section -->
+            <div class="pricing-section" id="translation">
+                <h2>Translation Service</h2>
+                <div class="pricing-container">
+                    <div class="pricing-table-container">
+                        <table class="pricing-table" id="translation-table">
+                            <thead>
+                                <tr>
+                                    <th>Submission Type</th>
+                                    <th>Standard Editing</th>
+                                    <th>Advanced Editing</th>
+                                    <th>Premium Editing</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Original Submission</strong><br></td>
+                                    <td id="translation-original-standard" class="price-cell">$80.00</td>
+                                    <td class="not-applicable">Not Available</td>
+                                    <td class="not-applicable">Not Available</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Revised Submission</strong><br></td>
+                                    <td id="translation-revised-standard" class="price-cell">$48.00</td>
+                                    <td class="not-applicable">Not Available</td>
+                                    <td class="not-applicable">Not Available</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="calculator-container">
+                        <h3>Calculate Your Price</h3>
+                        <div class="form-group">
+                            <label for="translation-word-count">Word Count:</label>
+                            <input type="number" id="translation-word-count" min="1" value="1000">
+                            <p class="custom-quote-note">For manuscripts over 12,000 words, please contact customer service at request@hitexeditex.com for a customized quotation.</p>
+                        </div>
+                       
+                        <div class="form-group">
+                            <label for="translation-turnaround">Turnaround Time (hours):</label>
+                            <input type="number" id="translation-turnaround" min="1" value="24">
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <div class="turnaround-container">
             <h2>Standard Turnaround Times</h2>
             <table class="timeline-table">
                 <thead>
@@ -493,275 +1143,171 @@
             
             <div class="turnaround-text">
                 <p>Need it faster? Specify your preferred turnaround time for expedited service.</p>
-                <p><span class="rush-fee">Rush fees: +25% for 12 hours early, +50% for 24+ hours early</span></p>
             </div>
         </div>
 
-        <div class="tabs-container">
-            <div class="tabs">
-                <div class="tab active" data-target="language-editing">Language Editing</div>
-                <div class="tab" data-target="scientific-editing">Scientific Editing</div>
-                <div class="tab" data-target="technical-editing">Technical Editing</div>
-                <div class="tab" data-target="translation">Translation</div>
-            </div>
+        <!-- CODE FOR  INCENTIVES-->
 
-            <!-- Language Editing Section -->
-            <div class="pricing-section active" id="language-editing">
-                <h2>Language Editing Service</h2>
-                <div class="pricing-container">
-                    <div class="pricing-table-container">
-                        <table class="pricing-table" id="language-editing-table">
-                            <thead>
-                                <tr>
-                                    <th>Submission Type</th>
-                                    <th>Standard Editing</th>
-                                    <th>Advanced Editing</th>
-                                    <th>Premium Editing</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Original Submission</strong><br>(USD per 1,000 words)</td>
-                                    <td id="language-original-standard" class="price-cell">$80.00</td>
-                                    <td class="not-applicable">Not Available</td>
-                                    <td class="not-applicable">Not Available</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Revised Submission</strong><br>(USD per 1,000 words)</td>
-                                    <td id="language-revised-standard" class="price-cell">$48.00</td>
-                                    <td class="not-applicable">Not Available</td>
-                                    <td class="not-applicable">Not Available</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="calculator-container">
-                        <h3>Calculate Your Price</h3>
-                        <div class="form-group">
-                            <label for="language-word-count">Word Count:</label>
-                            <input type="number" id="language-word-count" min="1" value="1000">
-                            <p class="custom-quote-note">For manuscripts over 12,000 words, please contact customer service at request@hitexeditex.com for a customized quotation.</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="language-submission-type">Submission Type:</label>
-                            <select id="language-submission-type">
-                                <option value="original">Original Submission</option>
-                                <option value="revised">Revised Submission</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="language-turnaround">Turnaround Time (hours):</label>
-                            <input type="number" id="language-turnaround" min="1" value="24">
-                        </div>
-                        <div class="result-container">
-                            <div class="pricing-result" id="language-price-display">
-                                $80.00
-                            </div>
-                            <div class="pricing-time" id="language-time-display">
-                                Standard Time: 24 hours
-                            </div>
-                        </div>
-                    </div>
+        <div class="pri__centv-container">
+            <h2 class="pri__centv-heading">Pricing Incentives</h2>
+            
+            <div class="pri__centv-grid">
+              <!-- Volume Discount -->
+              <div class="pri__centv-card">
+                <div class="pri__centv-card-header">
+                  <div class="pri__centv-icon">📚</div>
+                  <h3 class="pri__centv-title">Volume Discount</h3>
+                  <div class="pri__centv-divider"></div>
+                </div>
+                <div class="pri__centv-content">
+                  <p class="pri__centv-description">
+                    <em>Get more, pay less.</em> Receive progressive discounts based on total word count or the number of documents submitted in a single order.
+                  </p>
+                  <a href="get-quote.html" class="pri__centv-button">Get Started</a>
+                </div>
+              </div>
+              
+              <!-- First-Time Author Offer -->
+              <div class="pri__centv-card">
+                <div class="pri__centv-card-header">
+                  <div class="pri__centv-icon">🌟</div>
+                  <h3 class="pri__centv-title">First-Time Author Offer</h3>
+                  <div class="pri__centv-divider"></div>
+                </div>
+                <div class="pri__centv-content">
+                  <p class="pri__centv-description">
+                    <em>Welcome discount for new clients.</em> Enjoy a special reduced rate on your first manuscript editing or formatting service with HiTex EdiTex.
+                  </p>
+                  <a href="get-quote.html" class="pri__centv-button">Get Started</a>
+                </div>
+              </div>
+              
+              <!-- Loyalty Savings -->
+              <div class="pri__centv-card">
+                <div class="pri__centv-card-header">
+                  <div class="pri__centv-icon">🏆</div>
+                  <h3 class="pri__centv-title">Loyalty Savings</h3>
+                  <div class="pri__centv-divider"></div>
+                </div>
+                <div class="pri__centv-content">
+                  <p class="pri__centv-description">
+                    <em>Rewarding our regular clients.</em> Frequent users receive exclusive discounts and priority services as part of our loyalty reward program.
+                  </p>
+                  <a href="get-quote.html" class="pri__centv-button">Get Started</a>
+                </div>
+              </div>
+              
+              <!-- Referral Bonus -->
+              <div class="pri__centv-card">
+                <div class="pri__centv-card-header">
+                  <div class="pri__centv-icon">🤝</div>
+                  <h3 class="pri__centv-title">Referral Bonus</h3>
+                  <div class="pri__centv-divider"></div>
+                </div>
+                <div class="pri__centv-content">
+                  <p class="pri__centv-description">
+                    <em>Share and save together.</em> Refer colleagues or friends and receive a discount on your next order once their first project is successfully completed.
+                  </p>
+                  <a href="get-quote.html" class="pri__centv-button">Get Started</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CODE FOR PAYMENT TERMS -->
+
+          <div class="mp_871_ty">
+            <h1>Payment Terms</h1>
+            
+            <div class="content-wrapper">
+                <div class="content-container">
+                    <h2><div class="icon">💳</div>1. Accepted Payment Methods</h2>
+                    <p>We accept a variety of secure and convenient payment options, including:</p>
+                    <ul>
+                        <li>Credit and debit cards (Visa, MasterCard, American Express)</li>
+                        <li>PayPal</li>
+                        <li>Bank transfers (details provided upon request)</li>
+                        <li>International payment services (such as Wise and Stripe)</li>
+                    </ul>
+                    
+                    <h2><div class="icon">📅</div>2. Payment Schedule</h2>
+                    <p>To ensure smooth service delivery, the following payment schedule applies:</p>
+                    <ul>
+                        <li><strong>Standard Orders</strong>: Full payment is required before editing work begins.</li>
+                        <li><strong>High-Value Orders (USD 300 and above)</strong>: A 50% deposit may be accepted, with the remaining balance due upon final delivery.</li>
+                        <li><strong>Institutional Clients</strong>: We offer invoice-based payment options for universities, research centers, and corporate clients, payable within 15 days of the invoice date.</li>
+                    </ul>
+                    
+                    <h2><div class="icon">↩️</div>3. Refund and Cancellation Policy</h2>
+                    <ul>
+                        <li>If a project is canceled <strong>before</strong> editing work has commenced, a full refund will be issued.</li>
+                        <li>If work has already begun, a <strong>partial refund</strong> will be calculated based on the proportion of work completed.</li>
+                        <li>All approved refunds will be processed within <strong>7 business days</strong> through the original payment method.</li>
+                    </ul>
+                    
+                    <h2><div class="icon">⏰</div>4. Late Payment and Non-Payment</h2>
+                    <ul>
+                        <li>Delayed payments may result in the <strong>suspension of services</strong> or delay in delivery.</li>
+                        <li>Persistent non-payment may result in cancellation of ongoing services and <strong>legal action</strong> if necessary.</li>
+                    </ul>
+                    
+                    <h2><div class="icon">💱</div>5. Currency and Taxes</h2>
+                    <ul>
+                        <li>All pricing is listed in <strong>U.S. Dollars (USD)</strong> unless otherwise stated.</li>
+                        <li>Clients are responsible for any applicable local taxes, bank fees, or transaction charges incurred during payment.</li>
+                    </ul>
+                </div>
+                
+                <div class="image-container">
+                    <img src="https://cdn.pixabay.com/photo/2019/12/15/13/12/hand-4697071_1280.png" alt="Payment illustration" />
                 </div>
             </div>
+        </div>
 
-            <!-- Scientific Editing Section -->
-            <div class="pricing-section" id="scientific-editing">
-                <h2>Scientific Editing Service</h2>
-                <div class="pricing-container">
-                    <div class="pricing-table-container">
-                        <table class="pricing-table" id="scientific-editing-table">
-                            <thead>
-                                <tr>
-                                    <th>Submission Type</th>
-                                    <th>Standard Editing</th>
-                                    <th>Advanced Editing</th>
-                                    <th>Premium Editing</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Original Submission</strong><br>(USD per 1,000 words)</td>
-                                    <td id="scientific-original-standard" class="price-cell">$100.00</td>
-                                    <td id="scientific-original-advanced" class="price-cell">$140.00</td>
-                                    <td id="scientific-original-premium" class="price-cell">$180.00</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Revised Submission</strong><br>(USD per 1,000 words)</td>
-                                    <td id="scientific-revised-standard" class="price-cell">$60.00</td>
-                                    <td id="scientific-revised-advanced" class="price-cell">$84.00</td>
-                                    <td id="scientific-revised-premium" class="price-cell">$108.00</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="calculator-container">
-                        <h3>Calculate Your Price</h3>
-                        <div class="form-group">
-                            <label for="scientific-word-count">Word Count:</label>
-                            <input type="number" id="scientific-word-count" min="1" value="1000">
-                            <p class="custom-quote-note">For manuscripts over 12,000 words, please contact customer service at request@hitexeditex.com for a customized quotation.</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="scientific-service-level">Service Level:</label>
-                            <select id="scientific-service-level">
-                                <option value="standard">Standard Editing</option>
-                                <option value="advanced">Advanced Editing</option>
-                                <option value="premium">Premium Editing</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="scientific-submission-type">Submission Type:</label>
-                            <select id="scientific-submission-type">
-                                <option value="original">Original Submission</option>
-                                <option value="revised">Revised Submission</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="scientific-turnaround">Turnaround Time (hours):</label>
-                            <input type="number" id="scientific-turnaround" min="1" value="24">
-                        </div>
-                        <div class="result-container">
-                            <div class="pricing-result" id="scientific-price-display">
-                                $100.00
-                            </div>
-                            <div class="pricing-time" id="scientific-time-display">
-                                Standard Time: 24 hours
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- CONTACT US SECTION -->
 
-            <!-- Technical Editing Section -->
-            <div class="pricing-section" id="technical-editing">
-                <h2>Technical Editing Service</h2>
-                <div class="pricing-container">
-                    <div class="pricing-table-container">
-                        <table class="pricing-table" id="technical-editing-table">
-                            <thead>
-                                <tr>
-                                    <th>Submission Type</th>
-                                    <th>Standard Editing</th>
-                                    <th>Advanced Editing</th>
-                                    <th>Premium Editing</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Original Submission</strong><br>(USD per 1,000 words)</td>
-                                    <td id="technical-original-standard" class="price-cell">$120.00</td>
-                                    <td id="technical-original-advanced" class="price-cell">$160.00</td>
-                                    <td id="technical-original-premium" class="price-cell">$200.00</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Revised Submission</strong><br>(USD per 1,000 words)</td>
-                                    <td id="technical-revised-standard" class="price-cell">$70.00</td>
-                                    <td id="technical-revised-advanced" class="price-cell">$94.00</td>
-                                    <td id="technical-revised-premium" class="price-cell">$118.00</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="calculator-container">
-                        <h3>Calculate Your Price</h3>
-                        <div class="form-group">
-                            <label for="technical-word-count">Word Count:</label>
-                            <input type="number" id="technical-word-count" min="1" value="1000">
-                            <p class="custom-quote-note">For manuscripts over 12,000 words, please contact customer service at request@hitexeditex.com for a customized quotation.</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="technical-service-level">Service Level:</label>
-                            <select id="technical-service-level">
-                                <option value="standard">Standard Editing</option>
-                                <option value="advanced">Advanced Editing</option>
-                                <option value="premium">Premium Editing</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="technical-submission-type">Submission Type:</label>
-                            <select id="technical-submission-type">
-                                <option value="original">Original Submission</option>
-                                <option value="revised">Revised Submission</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="technical-turnaround">Turnaround Time (hours):</label>
-                            <input type="number" id="technical-turnaround" min="1" value="24">
-                        </div>
-                        <div class="result-container">
-                            <div class="pricing-result" id="technical-price-display">
-                                $120.00
-                            </div>
-                            <div class="pricing-time" id="technical-time-display">
-                                Standard Time: 24 hours
-                            </div>
-                        </div>
-                    </div>
-                </div>
+ <div class="kir_09Ui_container">
+    <div class="kir_09Ui_heading">
+        <h2 class="kir_09Ui_title">Unable to make a decision yet?</h2>
+        <p class="kir_09Ui_subtitle">Let us help you...</p>
+    </div>
+    
+    <div class="kir_09Ui_cards_container">
+        <!-- Call Card -->
+        <div class="kir_09Ui_card">
+            <div class="kir_09Ui_icon_container kir_09Ui_icon_phone">
+                <span class="kir_09Ui_icon">📞</span>
             </div>
-
-            <!-- Translation Section -->
-            <div class="pricing-section" id="translation">
-                <h2>Translation Service</h2>
-                <div class="pricing-container">
-                    <div class="pricing-table-container">
-                        <table class="pricing-table" id="translation-table">
-                            <thead>
-                                <tr>
-                                    <th>Submission Type</th>
-                                    <th>Standard Editing</th>
-                                    <th>Advanced Editing</th>
-                                    <th>Premium Editing</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Original Submission</strong><br>(USD per 1,000 words)</td>
-                                    <td id="translation-original-standard" class="price-cell">$80.00</td>
-                                    <td class="not-applicable">Not Available</td>
-                                    <td class="not-applicable">Not Available</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Revised Submission</strong><br>(USD per 1,000 words)</td>
-                                    <td id="translation-revised-standard" class="price-cell">$48.00</td>
-                                    <td class="not-applicable">Not Available</td>
-                                    <td class="not-applicable">Not Available</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="calculator-container">
-                        <h3>Calculate Your Price</h3>
-                        <div class="form-group">
-                            <label for="translation-word-count">Word Count:</label>
-                            <input type="number" id="translation-word-count" min="1" value="1000">
-                            <p class="custom-quote-note">For manuscripts over 12,000 words, please contact customer service at request@hitexeditex.com for a customized quotation.</p>
-                        </div>
-                        <div class="form-group">
-                            <label for="translation-submission-type">Submission Type:</label>
-                            <select id="translation-submission-type">
-                                <option value="original">Original Submission</option>
-                                <option value="revised">Revised Submission</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="translation-turnaround">Turnaround Time (hours):</label>
-                            <input type="number" id="translation-turnaround" min="1" value="24">
-                        </div>
-                        <div class="result-container">
-                            <div class="pricing-result" id="translation-price-display">
-                                $80.00
-                            </div>
-                            <div class="pricing-time" id="translation-time-display">
-                                Standard Time: 24 hours
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <h3 class="kir_09Ui_card_title">Call</h3>
+            <p class="kir_09Ui_card_text">Speak to a client manager. Call us on</p>
+            <a href="tel:+16692721214" class="kir_09Ui_link">+1 (669) 272-1214</a>
+        </div>
+        
+        <!-- Chat Card -->
+        <div class="kir_09Ui_card">
+            <div class="kir_09Ui_icon_container kir_09Ui_icon_chat">
+                <span class="kir_09Ui_icon">💬</span>
             </div>
+            <h3 class="kir_09Ui_card_title">Chat</h3>
+            <p class="kir_09Ui_card_text">Chat with a client manager for instant answers</p>
+            <a href="https://wa.me/233546525435" class="kir_09Ui_link" target="_blank">Start Chat</a>
+        </div>
+        
+        <!-- Email Card -->
+        <div class="kir_09Ui_card">
+            <div class="kir_09Ui_icon_container kir_09Ui_icon_email">
+                <span class="kir_09Ui_icon">✉️</span>
+            </div>
+            <h3 class="kir_09Ui_card_title">Email</h3>
+            <p class="kir_09Ui_card_text">Send in your queries to</p>
+            <a href="mailto:request@example.com" class="kir_09Ui_link">request@example.com</a>
         </div>
     </div>
+    
+    <div class="kir_09Ui_footer">
+        <p>All information provided is secure and confidential. We typically respond within 24 hours.</p>
+    </div>
+</div>
 
     <script>
         // Tab switching functionality
