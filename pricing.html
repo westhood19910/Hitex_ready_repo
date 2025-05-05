@@ -111,7 +111,7 @@
         .alert-box {
             background-color: var(--primary-light);
             padding: 20px;
-            border-radius: var(--radius-sm);
+            
             margin: 30px auto;
             max-width: 800px;
             text-align: left;
@@ -119,7 +119,7 @@
         }
 
         .alert-box.warning {
-            background-color: var(--accent-light);
+           
             border-left: 4px solid var(--accent);
         }
 
@@ -131,12 +131,13 @@
             color: var(--primary);
         }
         .turnaround-container {
-    background-color: var(--white);
-    border-radius: var(--radius);
-    padding: 30px;
-    box-shadow: var(--shadow);
-    max-width: 1150px;
-    margin: 7em auto 0 auto; /* top: 4em, horizontal: auto, bottom: 0 */
+
+        background-color: var(--white);
+        border-radius: var(--radius);
+        padding: 30px;
+        box-shadow: var(--shadow);
+        max-width: 1150px;
+        margin: 7em auto 0 auto; /* top: 4em, horizontal: auto, bottom: 0 */
 }
 
         .turnaround-container h2 {
@@ -449,336 +450,316 @@
 
         /* CODE FOR INCENTIVES */
 
-    .pri__centv-container {
-      width: 100%;
-      padding: 60px 20px;
-      background-image: url('assets/alexim.jpg');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      position: relative;
-      margin-top: 8em;
-    }
-
-    .pri__centv-container::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(3, 38, 114, 0.75);
-      z-index: 1;
-    }
-
-    .pri__centv-heading {
-      text-align: center;
-      font-size: var(--major-heading);
-      font-weight: var(--major-header-font-weight);
-      color: var(--white);
-      margin-bottom: 40px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .pri__centv-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      max-width: 1200px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 2;
-    }
-
-    .pri__centv-card {
-      flex: 1 1 250px;
-      max-width: 280px;
-      background-color: var(--white);
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-      display: flex;
-      flex-direction: column;
-      height: 460px; /* Fixed height for all cards */
-    }
-
-    .pri__centv-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-    }
-
-    .pri__centv-card-header {
-      background-color: var(--blue);
-      padding: 20px;
-      text-align: center;
-    }
-
-    .pri__centv-icon {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
-
-    .pri__centv-title {
-      color: var(--white);
-      font-size: var(--smaller-major-head);
-      font-weight: 700;
-      margin-bottom: 10px;
-      height: 3.5rem; /* Fixed height for title */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .pri__centv-divider {
-      width: 60px;
-      height: 3px;
-      background-color: var(--red);
-      margin: 0 auto;
-    }
-
-    .pri__centv-content {
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .pri__centv-description {
-      color: var(--text-color);
-      font-size: var(--smaller-sub-heading);
-      margin-bottom: 20px;
-      line-height: 1.5;
-      flex: 1; /* Take up available space */
-    }
-
-    .pri__centv-button-wrapper {
-      margin-top: auto; /* Push button to bottom */
-    }
-
-    .pri__centv-button {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 5px;
-      background: var(--button-background);
-      color: var(--white);
-      font-weight: 600;
-      text-align: center;
-      cursor: pointer;
-      transition: opacity var(--transition-speed);
-      text-decoration: none;
-    }
-
-    .pri__centv-button:hover {
-      opacity: 0.9;
-    }
-
-    @media (max-width: 768px) {
-      .pri__centv-grid {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .pri__centv-card {
-        max-width: 100%;
-        width: 100%;
-        height: auto; /* Allow height to adjust on mobile */
-      }
-      
-      .pri__centv-heading {
-        font-size: calc(var(--major-heading) * 0.7);
-      }
-    }
+        .pri__centv-container {
+  width: 90%; /* Reduced from 100% */
+  padding: 40px 15px; /* Reduced from 60px 20px */
+  background-image: url('assets/alexim.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+  margin: 6em auto 0; /* Changed margin-top to margin and added auto for centering */
+  border-radius: 8px; /* Added border radius for contained look */
+}
+.pri__centv-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(3, 38, 114, 0.75);
+  z-index: 1;
+  border-radius: 8px; /* Match container border radius */
+}
+.pri__centv-heading {
+  text-align: center;
+  font-size: calc(var(--major-heading) * 0.85); /* 15% smaller */
+  font-weight: var(--major-header-font-weight);
+  color: var(--white);
+  margin-bottom: 30px; /* Reduced from 40px */
+  position: relative;
+  z-index: 2;
+}
+.pri__centv-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* Reduced from 30px */
+  max-width: 1000px; /* Reduced from 1200px */
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+.pri__centv-card {
+  flex: 1 1 220px; /* Reduced from 250px */
+  max-width: 240px; /* Reduced from 280px */
+  background-color: var(--white);
+  border-radius: 6px; /* Reduced from 8px */
+  overflow: hidden;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1); /* Reduced shadow */
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+  display: flex;
+  flex-direction: column;
+  height: 400px; /* Reduced from 460px */
+}
+.pri__centv-card:hover {
+  transform: translateY(-8px); /* Reduced from -10px */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Reduced shadow */
+}
+.pri__centv-card-header {
+  background-color: var(--blue);
+  padding: 16px; /* Reduced from 20px */
+  text-align: center;
+}
+.pri__centv-icon {
+  font-size: 2.2rem; /* Reduced from 2.5rem */
+  margin-bottom: 8px; /* Reduced from 10px */
+}
+.pri__centv-title {
+  color: var(--white);
+  font-size: calc(var(--smaller-major-head) * 0.9); /* 10% smaller */
+  font-weight: 700;
+  margin-bottom: 8px; /* Reduced from 10px */
+  height: 3.2rem; /* Reduced from 3.5rem */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pri__centv-divider {
+  width: 50px; /* Reduced from 60px */
+  height: 2px; /* Reduced from 3px */
+  background-color: var(--red);
+  margin: 0 auto;
+}
+.pri__centv-content {
+  padding: 16px; /* Reduced from 20px */
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.pri__centv-description {
+  color: var(--text-color);
+  font-size: calc(var(--smaller-sub-heading) * 0.9); /* 10% smaller */
+  margin-bottom: 16px; /* Reduced from 20px */
+  line-height: 1.4; /* Reduced from 1.5 */
+  flex: 1; /* Take up available space */
+}
+.pri__centv-button-wrapper {
+  margin-top: auto; /* Push button to bottom */
+}
+.pri__centv-button {
+  display: block;
+  width: 100%;
+  padding: 10px; /* Reduced from 12px */
+  border: none;
+  border-radius: 4px; /* Reduced from 5px */
+  background: var(--button-background);
+  color: var(--white);
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: opacity var(--transition-speed);
+  text-decoration: none;
+  font-size: 0.95em; /* Slightly smaller font */
+}
+.pri__centv-button:hover {
+  opacity: 0.9;
+}
+@media (max-width: 768px) {
+  .pri__centv-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .pri__centv-card {
+    max-width: 100%;
+    width: 100%;
+    height: auto; /* Allow height to adjust on mobile */
+  }
+  
+  .pri__centv-heading {
+    font-size: calc(var(--major-heading) * 0.65); /* Further reduced for mobile */
+  }
+  
+  .pri__centv-container {
+    width: 95%; /* Slightly wider on mobile */
+    padding: 30px 12px; /* Further reduced padding on mobile */
+  }
+}
 
     /* CODE FOR  PAYMENT TERMS */
 
     .mp_871_ty {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            color: #333;
-            line-height: 1.5;
-            position: relative;
-            margin: 8em auto;
-        }
-        
-        .mp_871_ty h1 {
-            color: var(--blue);
-            font-size: 2rem;
-            text-align: center;
-            margin-bottom: 70px;
-            font-size: var(--major-heading);
-            font-weight: var(--major-header-font-weight);
-        }
-        
-        .mp_871_ty p {
-            margin-bottom: 2px;
-            font-size: 17px;
-        }
-        
-        .mp_871_ty h2 {
-            color: var(--red);
-            font-size: 1.3rem;
-            margin-top: 25px;
-            margin-bottom: 10px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-        }
-        
-        .mp_871_ty .icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            margin-right: 15px;
-            background-color: var(--light-blue);
-            border: 1px solid #d0e3f7;
-            border-radius: 5px;
-            color: var(--red);
-        }
-        
-        .mp_871_ty ul {
-            list-style-type: disc;
-            padding-left: 25px;
-            margin-bottom: 15px;
-            margin-left: 55px;
-        }
-        
-        .mp_871_ty li {
-            margin-bottom: 8px;
-            font-size: 15;
-        }
-        
-        .mp_871_ty strong {
-            font-weight: bold;
-        }
-        
-        .mp_871_ty .highlight {
-            background-color: #f5f5f5;
-            padding: 15px;
-            border-radius: 4px;
-            margin: 15px 0;
-        }
-        
-        /* Layout styles like AJE website */
-        .content-wrapper {
-            display: flex;
-            position: relative;
-        }
-        
-        .content-container {
-            width: 60%;
-            padding-right: 40px;
-        }
-        
-        .image-container {
-            width: 40%;
-            position: absolute;
-            right: 0;
-            top: 0;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-        }
-        
-        .image-container img {
-            max-width: 100%;
-            height: auto;
-            max-height: 100%;
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 900px) {
-            .content-wrapper {
-                flex-direction: column;
-            }
-            
-            .content-container {
-                width: 100%;
-                padding-right: 0;
-            }
-            
-            .image-container {
-                position: relative;
-                width: 100%;
-                margin: 30px 0;
-                height: auto;
-                justify-content: center;
-            }
-            
-            .image-container img {
-                max-width: 80%;
-            }
-            
-            .mp_871_ty ul {
-                margin-left: 25px;
-            }
-        }
+    max-width: 1000px; /* Reduced from 1200px */
+    margin: 6em auto; /* Reduced from 8em */
+    padding: 15px; /* Reduced from 20px */
+    color: #333;
+    line-height: 1.4; /* Slightly reduced from 1.5 */
+    position: relative;
+}
 
+.mp_871_ty h1 {
+    color: var(--blue);
+    font-size: calc(var(--major-heading) * 0.85); /* 15% smaller */
+    font-weight: var(--major-header-font-weight);
+    text-align: center;
+    margin-bottom: 25px; /* Reduced from 30px */
+}
+
+.mp_871_ty_image_top {
+    text-align: center;
+    margin-bottom: 30px; /* Reduced from 40px */
+}
+
+.mp_871_ty_image_top img {
+    max-width: 50%; /* Reduced from 60% */
+    height: auto;
+}
+
+.mp_871_ty p {
+    margin-bottom: 2px;
+    font-size: 15px; /* Reduced from 17px */
+}
+
+.mp_871_ty h2 {
+    color: var(--red);
+    font-size: 1.2rem; /* Reduced from 1.3rem */
+    margin-top: 20px; /* Reduced from 25px */
+    margin-bottom: 8px; /* Reduced from 10px */
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.mp_871_ty_icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px; /* Reduced from 40px */
+    height: 35px; /* Reduced from 40px */
+    margin-right: 12px; /* Reduced from 15px */
+    background-color: var(--light-blue);
+    border: 1px solid #d0e3f7;
+    border-radius: 4px; /* Reduced from 5px */
+    color: var(--red);
+    font-size: 0.9em; /* Added smaller font size for icons */
+}
+
+.mp_871_ty ul {
+    list-style-type: disc;
+    padding-left: 20px; /* Reduced from 25px */
+    margin-bottom: 12px; /* Reduced from 15px */
+    margin-left: 47px; /* Reduced from 55px */
+}
+
+.mp_871_ty li {
+    margin-bottom: 6px; /* Reduced from 8px */
+    font-size: 14px; /* Reduced from 15px */
+}
+
+.mp_871_ty strong {
+    font-weight: bold;
+}
+
+.mp_871_ty .mp_871_ty_highlight {
+    background-color: #f5f5f5;
+    padding: 12px; /* Reduced from 15px */
+    border-radius: 3px; /* Reduced from 4px */
+    margin: 12px 0; /* Reduced from 15px 0 */
+}
+
+/* Two-column layout */
+.mp_871_ty_content_wrapper {
+    display: flex;
+    gap: 30px; /* Reduced from 40px */
+}
+
+.mp_871_ty_column {
+    width: 50%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .mp_871_ty_content_wrapper {
+        flex-direction: column;
+    }
+    
+    .mp_871_ty_column {
+        width: 100%;
+    }
+    
+    .mp_871_ty_image_top img {
+        max-width: 70%; /* Reduced from 80% */
+    }
+    
+    .mp_871_ty ul {
+        margin-left: 20px; /* Reduced from 25px */
+    }
+    
+    .mp_871_ty {
+        margin: 4em auto; /* Further reduced for mobile */
+        padding: 12px; /* Further reduced for mobile */
+    }
+    
+    .mp_871_ty h1 {
+        font-size: calc(var(--major-heading) * 0.75); /* Further reduced for mobile */
+    }
+}
         /* CODE FOR CHAT SECTION */
 
-.kir_09Ui_container {
-    max-width: 1200px;
+        .kir_09Ui_container {
+    max-width: 800px; /* Further reduced from 1000px */
     margin: 0 auto;
-    padding: 40px 20px;
-    border-top: 2px dashed #0c3b80;
-    
+    padding: 20px 10px; /* Further reduced from 30px 15px */
+    border-top: 1px dotted #0c3b80; /* Changed to dotted for lighter appearance */
 }
 
 .kir_09Ui_heading {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 25px; /* Reduced from 30px */
 }
 
 .kir_09Ui_title {
     color: var(--blue);
-    font-size: 32px;
-    margin-bottom: 10px;
-    font-size: var(--major-heading);
+    font-size: calc(var(--major-heading) * 0.65); /* Further reduced from 85% */
+    margin-bottom: 5px; /* Further reduced from 8px */
     font-weight: var(--major-header-font-weight);
-
 }
 
 .kir_09Ui_subtitle {
-    font-size: 22px;
+    font-size: 15px; /* Further reduced from 18px */
     color: #555;
-    margin-bottom: 50px;
+    margin-bottom: 25px; /* Further reduced from 40px */
 }
 
 .kir_09Ui_cards_container {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 20px; /* Reduced from 30px */
     flex-wrap: wrap;
 }
 
 .kir_09Ui_card {
     background: white;
-    border-radius: 12px;
-    padding: 40px 30px;
-    width: 320px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 8px; /* Further reduced from 10px */
+    padding: 20px 15px; /* Further reduced from 30px 25px */
+    width: 220px; /* Further reduced from 280px */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* Further reduced shadow */
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .kir_09Ui_card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px); /* Reduced from -5px */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Reduced shadow */
 }
 
 .kir_09Ui_icon_container {
-    width: 70px;
-    height: 70px;
+    width: 60px; /* Reduced from 70px */
+    height: 60px; /* Reduced from 70px */
     border-radius: 50%;
-    margin: 0 auto 20px;
+    margin: 0 auto 15px; /* Reduced bottom margin from 20px */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -797,7 +778,7 @@
 }
 
 .kir_09Ui_icon {
-    font-size: 28px;
+    font-size: 24px; /* Reduced from 28px */
 }
 
 .kir_09Ui_icon_phone .kir_09Ui_icon {
@@ -813,17 +794,17 @@
 }
 
 .kir_09Ui_card_title {
-    font-size: 24px;
+    font-size: 20px; /* Reduced from 24px */
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 15px; /* Reduced from 20px */
     color: var(--blue);
 }
 
 .kir_09Ui_card_text {
-    font-size: 15px;
+    font-size: 14px; /* Reduced from 15px */
     color: #818181;
-    margin-bottom: 20px;
-    line-height: 1.5;
+    margin-bottom: 15px; /* Reduced from 20px */
+    line-height: 1.4; /* Reduced from 1.5 */
     font-weight: 550;
 }
 
@@ -833,6 +814,7 @@
     font-weight: 500;
     text-decoration: none;
     transition: color 0.3s;
+    font-size: 14px; /* Added smaller font size */
 }
 
 .kir_09Ui_link:hover {
@@ -841,20 +823,20 @@
 }
 
 .kir_09Ui_footer {
-    margin-top: 60px;
-    padding-top: 20px;
+    margin-top: 45px; /* Reduced from 60px */
+    padding-top: 15px; /* Reduced from 20px */
     border-top: 1px solid #eee;
     text-align: center;
-    font-size: 12px;
+    font-size: 11px; /* Reduced from 12px */
     color: #888;
 }
 
 .kir_09Ui_whatsapp {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
+    bottom: 25px; /* Reduced from 30px */
+    right: 25px; /* Reduced from 30px */
+    width: 50px; /* Reduced from 60px */
+    height: 50px; /* Reduced from 60px */
     background: #25d366;
     border-radius: 50%;
     display: flex;
@@ -862,13 +844,13 @@
     justify-content: center;
     color: white;
     text-decoration: none;
-    font-size: 30px;
-    box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
+    font-size: 25px; /* Reduced from 30px */
+    box-shadow: 0 3px 8px rgba(37, 211, 102, 0.4); /* Reduced shadow */
     transition: transform 0.3s;
 }
 
 .kir_09Ui_whatsapp:hover {
-    transform: scale(1.1);
+    transform: scale(1.08); /* Reduced from 1.1 */
 }
 
 @media (max-width: 768px) {
@@ -879,14 +861,432 @@
     
     .kir_09Ui_card {
         width: 100%;
-        max-width: 350px;
+        max-width: 300px; /* Reduced from 350px */
+        padding: 25px 20px; /* Further reduced for mobile */
+    }
+    
+    .kir_09Ui_title {
+        font-size: calc(var(--major-heading) * 0.75); /* Further reduced for mobile */
+    }
+    
+    .kir_09Ui_subtitle {
+        font-size: 16px; /* Further reduced for mobile */
     }
 }
 
+/* CODE FOR PRICING HEADER*/
+
+.hd_uCtae {
+      width: 100%;
+      background-color: var(--blue);
+      height: 10vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-size: cover;
+      padding: 1rem;
+    }
+    
+    .hd_uCtae h1 {
+      font-size: 2.2rem;
+      font-weight: bold;
+      font-weight: var(--major-header-font-weight);
+      letter-spacing: 2px;
+      text-align: center;
+      color: #ffffff;
+    }
+   
+    @media screen and (max-width: 768px) {
+      .hd_uCtae {
+        height: 20vh;
+      }
+    }
+    
+    @media screen and (max-width: 480px) {
+      .hd_uCtae {
+        min-height: 120px;
+      }
+    }
+
+    /* CODE FOR PAYMENT METHODS */
+.ho_ver_123-payment-container {
+  width: 90%; /* Reduced from 100% */
+  max-width: 1000px; /* Reduced from 1200px */
+  margin: 2.5rem auto; /* Reduced from 3rem */
+  padding: 0 15px; /* Reduced from 20px */
+}
+/* Payment section styling */
+.ho_ver_123-payment-section {
+  background-color: var(--white);
+  border-radius: 14px; /* Reduced from 16px */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07); /* Reduced shadow */
+  padding: 2.5rem; /* Reduced from 3rem */
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.ho_ver_123-payment-section:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 5px; /* Reduced from 6px */
+  width: 100%;
+  background: linear-gradient(90deg, var(--red), var(--blue));
+}
+.ho_ver_123-payment-section h2 {
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem); /* Reduced from 1.8rem, 4vw, 2.5rem */
+  font-weight: var(--major-header-font-weight);
+  color: var(--blue);
+  margin-bottom: 1.2rem; /* Reduced from 1.5rem */
+  position: relative;
+  display: inline-block;
+}
+.ho_ver_123-payment-section h2:after {
+  content: '';
+  position: absolute;
+  bottom: -7px; /* Reduced from -8px */
+  left: 0;
+  width: 50px; /* Reduced from 60px */
+  height: 3px; /* Reduced from 4px */
+  background-color: var(--red);
+  border-radius: 2px;
+}
+.ho_ver_123-payment-intro {
+  font-size: clamp(0.9rem, 1.8vw, 1.1rem); /* Reduced from 1rem, 2vw, 1.2rem */
+  line-height: 1.6; /* Reduced from 1.7 */
+  color: var(--text-color);
+  margin-bottom: 2rem; /* Reduced from 2.5rem */
+  max-width: 85%; /* Reduced from 90% */
+}
+/* Cards grid styling */
+.ho_ver_123-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Reduced from 130px */
+  gap: 20px; /* Reduced from 24px */
+  margin-top: 1.8rem; /* Reduced from 2rem */
+}
+.ho_ver_123-card-item {
+  background: var(--white);
+  border-radius: 10px; /* Reduced from 12px */
+  padding: 1.3rem; /* Reduced from 1.5rem */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04); /* Reduced shadow */
+  transition: var(--transition);
+  height: 90px; /* Reduced from 100px */
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+.ho_ver_123-card-item:hover {
+  transform: translateY(-4px); /* Reduced from -5px */
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.08); /* Reduced shadow */
+  border-color: var(--light-blue);
+}
+.ho_ver_123-card-logo {
+  max-width: 90%; /* Added to make logos slightly smaller */
+  max-height: 55px; /* Reduced from 60px */
+  object-fit: contain;
+}
+/* Responsive adjustments */
+@media screen and (max-width: 992px) {
+  .ho_ver_123-payment-section {
+    padding: 2.2rem; /* Reduced from 2.5rem */
+  }
+  
+  .ho_ver_123-payment-intro {
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .ho_ver_123-payment-section {
+    padding: 1.8rem; /* Reduced from 2rem */
+  }
+  
+  .ho_ver_123-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media screen and (max-width: 576px) {
+  .ho_ver_123-payment-container {
+    margin: 1.8rem auto; /* Reduced from 2rem */
+  }
+  
+  .ho_ver_123-payment-section {
+    padding: 1.3rem; /* Reduced from 1.5rem */
+    border-radius: 10px; /* Reduced from 12px */
+  }
+  
+  .ho_ver_123-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px; /* Reduced from 16px */
+  }
+  
+  .ho_ver_123-card-item {
+    height: 70px; /* Reduced from 80px */
+    padding: 0.9rem; /* Reduced from 1rem */
+  }
+}
+
+    /* CODE FOR CURRENCY CONVERTER */
+
+    .the_conve_float_button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--blue);
+            color: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: var(--box-shadow);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .the_conve_float_button:hover {
+            transform: scale(1.05);
+            background-color: #04387c;
+        }
+
+        .the_conve_float_button i {
+            font-size: 24px;
+        }
+
+        .the_conve_overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .the_conve_container {
+            max-width: 500px;
+            width: 90%;
+            padding: 30px;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .the_conve_container.active {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .the_conve_close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 20px;
+            color: var(--dark-gray);
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            transition: background-color 0.3s ease;
+        }
+
+        .the_conve_close:hover {
+            background-color: #e0e0e0;
+        }
+
+        .the_conve_header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .the_conve_title {
+            color: var(--blue);
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .the_conve_subtitle {
+            color: var(--dark-gray);
+            font-size: 14px;
+        }
+
+        .the_conve_form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .the_conve_input_group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .the_conve_label {
+            font-size: 14px;
+            color: var(--dark-gray);
+            font-weight: 600;
+        }
+
+        .the_conve_input {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s ease;
+        }
+
+        .the_conve_input:focus {
+            border: 1px solid var(--blue);
+            outline: none;
+        }
+
+        .the_conve_currency_row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .the_conve_currency_input {
+            flex: 2;
+        }
+
+        .the_conve_select {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: var(--white);
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .the_conve_select:focus {
+            border: 1px solid var(--blue);
+            outline: none;
+        }
+
+        .the_conve_button {
+            background-color: var(--blue);
+            color: var(--white);
+            border: none;
+            padding: 14px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .the_conve_button:hover {
+            background-color: #04387c;
+        }
+
+        .the_conve_results {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: var(--light-gray);
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+
+        .the_conve_result_text {
+            font-size: 18px;
+            color: var(--dark-gray);
+        }
+
+        .the_conve_result_amount {
+            font-size: 24px;
+            color: var(--red);
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .the_conve_swap_btn {
+            align-self: center;
+            background-color: var(--light-gray);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .the_conve_swap_btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        .the_conve_error {
+            color: var(--red);
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* Float button icon */
+        .the_conve_float_icon {
+            display: inline-block;
+            position: relative;
+            width: 24px;
+            height: 24px;
+        }
+
+        .the_conve_float_icon::before {
+            content: "$";
+            font-size: 24px;
+            font-weight: bold;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Animation for opening/closing */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        .fadeIn {
+            animation: fadeIn 0.3s forwards;
+        }
+
+        .fadeOut {
+            animation: fadeOut 0.3s forwards;
+        }
         
     </style>
 </head>
 <body>
+
+    <header class="hd_uCtae">
+        <h1>PRICING</h1>
+      </header>
 
     <div class="container">
         <div class="tabs" style="background-color: var(--light-blue);">
@@ -896,13 +1296,13 @@
             <div class="tab" data-target="translation" style="background-color: var(--light-blue);">Translation</div>
         </div>
         <div class="service-levels">
-            <h2>Our Service Levels</h2>
+            
             <p>We offer three service levels for our editing services</p>
             
             <div class="service-types">
-                <div class="service-type">Standard Editing Service</div>
-                <div class="service-type">Advanced Editing Service</div>
-                <div class="service-type">Premium Editing Service</div>
+                <div class="service-type">Standard Editing Level</div>
+                <div class="service-type">Advanced Editing Level</div>
+                <div class="service-type">Premium Editing Level</div>
             </div>
             
             <div class="alert-box warning">
@@ -910,16 +1310,10 @@
             </div>
         </div>
         <div class="tabs-container">
-            <div class="tabs">
-                <div class="tab active" data-target="language-editing">Language Editing</div>
-                <div class="tab" data-target="scientific-editing">Scientific Editing</div>
-                <div class="tab" data-target="technical-editing">Technical Editing</div>
-                <div class="tab" data-target="translation">Translation</div>
-            </div>
-
+           
             <!-- Language Editing Section -->
             <div class="pricing-section active" id="language-editing">
-                <h2>Language Editing Service</h2>
+                <h2>Language Editing Pricing</h2>
                 <div class="pricing-container">
                     <div class="pricing-table-container">
                         <table class="pricing-table" id="language-editing-table">
@@ -965,7 +1359,7 @@
 
             <!-- Scientific Editing Section -->
             <div class="pricing-section" id="scientific-editing">
-                <h2>Scientific Editing Service</h2>
+                <h2>Scientific Editing Pricing</h2>
                 <div class="pricing-container">
                     <div class="pricing-table-container">
                         <table class="pricing-table" id="scientific-editing-table">
@@ -1013,7 +1407,7 @@
 
             <!-- Technical Editing Section -->
             <div class="pricing-section" id="technical-editing">
-                <h2>Technical Editing Service</h2>
+                <h2>Technical Editing Pricing</h2>
                 <div class="pricing-container">
                     <div class="pricing-table-container">
                         <table class="pricing-table" id="technical-editing-table">
@@ -1109,7 +1503,7 @@
     </div>
 
      <div class="turnaround-container">
-            <h2>Standard Turnaround Times</h2>
+            <h2>Our Turnaround Times</h2>
             <table class="timeline-table">
                 <thead>
                     <tr>
@@ -1156,14 +1550,14 @@
               <div class="pri__centv-card">
                 <div class="pri__centv-card-header">
                   <div class="pri__centv-icon">📚</div>
-                  <h3 class="pri__centv-title">Volume Discount</h3>
+                  <h3 class="pri__centv-title">First-Time Customer Discount</h3>
                   <div class="pri__centv-divider"></div>
                 </div>
                 <div class="pri__centv-content">
                   <p class="pri__centv-description">
-                    <em>Get more, pay less.</em> Receive progressive discounts based on total word count or the number of documents submitted in a single order.
+                    <em>Enjoy a 5% </em> discount on your first manuscript with us.
                   </p>
-                  <a href="get-quote.html" class="pri__centv-button">Get Started</a>
+       
                 </div>
               </div>
               
@@ -1171,14 +1565,14 @@
               <div class="pri__centv-card">
                 <div class="pri__centv-card-header">
                   <div class="pri__centv-icon">🌟</div>
-                  <h3 class="pri__centv-title">First-Time Author Offer</h3>
+                  <h3 class="pri__centv-title">Loyalty Rewards</h3>
                   <div class="pri__centv-divider"></div>
                 </div>
                 <div class="pri__centv-content">
                   <p class="pri__centv-description">
-                    <em>Welcome discount for new clients.</em> Enjoy a special reduced rate on your first manuscript editing or formatting service with HiTex EdiTex.
+                    <em>After every 5th order</em>, you will receive a 10% discount on your next manuscript.
                   </p>
-                  <a href="get-quote.html" class="pri__centv-button">Get Started</a>
+                
                 </div>
               </div>
               
@@ -1186,14 +1580,14 @@
               <div class="pri__centv-card">
                 <div class="pri__centv-card-header">
                   <div class="pri__centv-icon">🏆</div>
-                  <h3 class="pri__centv-title">Loyalty Savings</h3>
+                  <h3 class="pri__centv-title">Referral Program</h3>
                   <div class="pri__centv-divider"></div>
                 </div>
                 <div class="pri__centv-content">
                   <p class="pri__centv-description">
-                    <em>Rewarding our regular clients.</em> Frequent users receive exclusive discounts and priority services as part of our loyalty reward program.
+                    <em> Share our services with your colleagues,</em> and you’ll receive a 15% discount on your next order when they submit a manuscript. For each additional referral, you’ll earn an extra 10% discount (up to 20% for a single order). Any remaining discounts will be applied to future orders.
                   </p>
-                  <a href="get-quote.html" class="pri__centv-button">Get Started</a>
+   
                 </div>
               </div>
               
@@ -1201,14 +1595,14 @@
               <div class="pri__centv-card">
                 <div class="pri__centv-card-header">
                   <div class="pri__centv-icon">🤝</div>
-                  <h3 class="pri__centv-title">Referral Bonus</h3>
+                  <h3 class="pri__centv-title">Group Discount Offers</h3>
                   <div class="pri__centv-divider"></div>
                 </div>
                 <div class="pri__centv-content">
                   <p class="pri__centv-description">
-                    <em>Share and save together.</em> Refer colleagues or friends and receive a discount on your next order once their first project is successfully completed.
+                    <em>Groups, such as laboratories, departments, or institutions,</em>
+                     that submit multiple manuscripts are eligible for special discounted rates. Please contact us for more information.
                   </p>
-                  <a href="get-quote.html" class="pri__centv-button">Get Started</a>
                 </div>
               </div>
             </div>
@@ -1219,9 +1613,13 @@
           <div class="mp_871_ty">
             <h1>Payment Terms</h1>
             
-            <div class="content-wrapper">
-                <div class="content-container">
-                    <h2><div class="icon">💳</div>1. Accepted Payment Methods</h2>
+            <div class="mp_871_ty_image_top">
+                <img src="https://cdn.pixabay.com/photo/2019/12/15/13/12/hand-4697071_1280.png" alt="Payment illustration" />
+            </div>
+            
+            <div class="mp_871_ty_content_wrapper">
+                <div class="mp_871_ty_column mp_871_ty_column_left">
+                    <h2><div class="mp_871_ty_icon">💳</div>1. Accepted Payment Methods</h2>
                     <p>We accept a variety of secure and convenient payment options, including:</p>
                     <ul>
                         <li>Credit and debit cards (Visa, MasterCard, American Express)</li>
@@ -1230,39 +1628,69 @@
                         <li>International payment services (such as Wise and Stripe)</li>
                     </ul>
                     
-                    <h2><div class="icon">📅</div>2. Payment Schedule</h2>
+                    <h2><div class="mp_871_ty_icon">📅</div>2. Payment Schedule</h2>
                     <p>To ensure smooth service delivery, the following payment schedule applies:</p>
                     <ul>
                         <li><strong>Standard Orders</strong>: Full payment is required before editing work begins.</li>
                         <li><strong>High-Value Orders (USD 300 and above)</strong>: A 50% deposit may be accepted, with the remaining balance due upon final delivery.</li>
                         <li><strong>Institutional Clients</strong>: We offer invoice-based payment options for universities, research centers, and corporate clients, payable within 15 days of the invoice date.</li>
                     </ul>
-                    
-                    <h2><div class="icon">↩️</div>3. Refund and Cancellation Policy</h2>
+                </div>
+                
+                <div class="mp_871_ty_column mp_871_ty_column_right">
+                    <h2><div class="mp_871_ty_icon">↩️</div>3. Refund and Cancellation Policy</h2>
                     <ul>
                         <li>If a project is canceled <strong>before</strong> editing work has commenced, a full refund will be issued.</li>
                         <li>If work has already begun, a <strong>partial refund</strong> will be calculated based on the proportion of work completed.</li>
                         <li>All approved refunds will be processed within <strong>7 business days</strong> through the original payment method.</li>
                     </ul>
                     
-                    <h2><div class="icon">⏰</div>4. Late Payment and Non-Payment</h2>
+                    <h2><div class="mp_871_ty_icon">⏰</div>4. Late Payment and Non-Payment</h2>
                     <ul>
                         <li>Delayed payments may result in the <strong>suspension of services</strong> or delay in delivery.</li>
                         <li>Persistent non-payment may result in cancellation of ongoing services and <strong>legal action</strong> if necessary.</li>
                     </ul>
                     
-                    <h2><div class="icon">💱</div>5. Currency and Taxes</h2>
+                    <h2><div class="mp_871_ty_icon">💱</div>5. Currency and Taxes</h2>
                     <ul>
                         <li>All pricing is listed in <strong>U.S. Dollars (USD)</strong> unless otherwise stated.</li>
                         <li>Clients are responsible for any applicable local taxes, bank fees, or transaction charges incurred during payment.</li>
                     </ul>
                 </div>
-                
-                <div class="image-container">
-                    <img src="https://cdn.pixabay.com/photo/2019/12/15/13/12/hand-4697071_1280.png" alt="Payment illustration" />
-                </div>
             </div>
         </div>
+
+        <!-- CODE FOR PAYMENT -->
+
+        <div class="ho_ver_123-payment-container">
+            <div class="ho_ver_123-payment-section">
+              <h2>Payment Options</h2>
+              <p class="ho_ver_123-payment-intro">We offer a variety of payment options to ensure convenience and 
+                  flexibility for our customers. You can pay using major credit or debit cards, 
+                  including Visa, MasterCard, American Express, and Discover. For those who prefer online payment platforms, we accept PayPal, Stripe, Google Pay, and Apple Pay. Bank transfers are also available 
+                  for direct payments to our business account.</p>
+              <div class="ho_ver_123-cards-grid">
+                <div class="ho_ver_123-card-item">
+                  <img src="assets/visapay.svg" alt="Visa" class="ho_ver_123-card-logo">
+                </div>
+                <div class="ho_ver_123-card-item">
+                  <img src="assets/masterpay.svg" alt="MasterCard" class="ho_ver_123-card-logo">
+                </div>
+                <div class="ho_ver_123-card-item">
+                  <img src="assets/american-express.svg" alt="American Express" class="ho_ver_123-card-logo">
+                </div>
+                <div class="ho_ver_123-card-item">
+                  <img src="assets/diners-club.svg" alt="Diners Club" class="ho_ver_123-card-logo">
+                </div>
+                <div class="ho_ver_123-card-item">
+                  <img src="assets/google-pay.svg" alt="Google Pay" class="ho_ver_123-card-logo">
+                </div>
+                <div class="ho_ver_123-card-item">
+                  <img src="assets/paypal.svg" alt="PayPal" class="ho_ver_123-card-logo">
+                </div>
+              </div>
+            </div>
+          </div>
 
         <!-- CONTACT US SECTION -->
 
@@ -1306,6 +1734,78 @@
     
     <div class="kir_09Ui_footer">
         <p>All information provided is secure and confidential. We typically respond within 24 hours.</p>
+    </div>
+</div>
+
+<!-- CODE FOR CURRENCY CONVERTER -->
+
+<div class="the_conve_float_button" id="the_conve_float_button">
+    <span class="the_conve_float_icon"></span>
+</div>
+
+<!-- Overlay -->
+<div class="the_conve_overlay" id="the_conve_overlay">
+    <div class="the_conve_container" id="the_conve_container">
+        <div class="the_conve_close" id="the_conve_close">×</div>
+        <div class="the_conve_header">
+            <h1 class="the_conve_title">Currency Converter</h1>
+            <p class="the_conve_subtitle">Convert between currencies with live exchange rates</p>
+        </div>
+        
+        <div class="the_conve_form">
+            <div class="the_conve_input_group">
+                <label class="the_conve_label">Amount</label>
+                <input type="number" id="the_conve_amount" class="the_conve_input" placeholder="Enter amount" min="0" step="0.01">
+                <span id="the_conve_amount_error" class="the_conve_error">Please enter a valid amount</span>
+            </div>
+            
+            <div class="the_conve_input_group">
+                <label class="the_conve_label">From</label>
+                <div class="the_conve_currency_row">
+                    <input type="text" id="the_conve_from_value" class="the_conve_input the_conve_currency_input" placeholder="Amount" readonly>
+                    <select id="the_conve_from_currency" class="the_conve_select">
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
+                        <option value="GBP">GBP</option>
+                        <option value="JPY">JPY</option>
+                        <option value="CAD">CAD</option>
+                        <option value="AUD">AUD</option>
+                        <option value="CHF">CHF</option>
+                        <option value="CNY">CNY</option>
+                        <option value="INR">INR</option>
+                        <option value="MXN">MXN</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button class="the_conve_swap_btn" id="the_conve_swap">↑↓</button>
+            
+            <div class="the_conve_input_group">
+                <label class="the_conve_label">To</label>
+                <div class="the_conve_currency_row">
+                    <input type="text" id="the_conve_to_value" class="the_conve_input the_conve_currency_input" placeholder="Converted amount" readonly>
+                    <select id="the_conve_to_currency" class="the_conve_select">
+                        <option value="EUR">EUR</option>
+                        <option value="USD">USD</option>
+                        <option value="GBP">GBP</option>
+                        <option value="JPY">JPY</option>
+                        <option value="CAD">CAD</option>
+                        <option value="AUD">AUD</option>
+                        <option value="CHF">CHF</option>
+                        <option value="CNY">CNY</option>
+                        <option value="INR">INR</option>
+                        <option value="MXN">MXN</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button id="the_conve_convert_btn" class="the_conve_button">Convert</button>
+            
+            <div id="the_conve_results" class="the_conve_results">
+                <p class="the_conve_result_text">Converted Amount:</p>
+                <p id="the_conve_result_amount" class="the_conve_result_amount">€0.00</p>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -1761,5 +2261,257 @@ function initializeTranslationCalculator() {
         }
     }
 }
+
+//     <!-- CODE FOR CURRENCY CONVERTER -->
+
+ const exchangeRates = {
+            USD: {
+                EUR: 0.91,
+                GBP: 0.78,
+                JPY: 112.65,
+                CAD: 1.32,
+                AUD: 1.47,
+                CHF: 0.86,
+                CNY: 6.94,
+                INR: 83.25,
+                MXN: 19.87
+            },
+            EUR: {
+                USD: 1.10,
+                GBP: 0.86,
+                JPY: 123.84,
+                CAD: 1.45,
+                AUD: 1.62,
+                CHF: 0.94,
+                CNY: 7.63,
+                INR: 91.48,
+                MXN: 21.84
+            },
+            GBP: {
+                USD: 1.28,
+                EUR: 1.16,
+                JPY: 143.77,
+                CAD: 1.68,
+                AUD: 1.88,
+                CHF: 1.09,
+                CNY: 8.86,
+                INR: 106.21,
+                MXN: 25.35
+            },
+            JPY: {
+                USD: 0.0089,
+                EUR: 0.0081,
+                GBP: 0.0070,
+                CAD: 0.0117,
+                AUD: 0.0131,
+                CHF: 0.0076,
+                CNY: 0.0616,
+                INR: 0.7389,
+                MXN: 0.1764
+            },
+            CAD: {
+                USD: 0.76,
+                EUR: 0.69,
+                GBP: 0.59,
+                JPY: 85.34,
+                AUD: 1.11,
+                CHF: 0.65,
+                CNY: 5.26,
+                INR: 63.07,
+                MXN: 15.05
+            },
+            AUD: {
+                USD: 0.68,
+                EUR: 0.62,
+                GBP: 0.53,
+                JPY: 76.63,
+                CAD: 0.90,
+                CHF: 0.58,
+                CNY: 4.72,
+                INR: 56.63,
+                MXN: 13.52
+            },
+            CHF: {
+                USD: 1.16,
+                EUR: 1.06,
+                GBP: 0.92,
+                JPY: 130.99,
+                CAD: 1.53,
+                AUD: 1.71,
+                CNY: 8.07,
+                INR: 96.80,
+                MXN: 23.10
+            },
+            CNY: {
+                USD: 0.14,
+                EUR: 0.13,
+                GBP: 0.11,
+                JPY: 16.23,
+                CAD: 0.19,
+                AUD: 0.21,
+                CHF: 0.12,
+                INR: 12.00,
+                MXN: 2.86
+            },
+            INR: {
+                USD: 0.012,
+                EUR: 0.011,
+                GBP: 0.0094,
+                JPY: 1.35,
+                CAD: 0.016,
+                AUD: 0.018,
+                CHF: 0.010,
+                CNY: 0.083,
+                MXN: 0.24
+            },
+            MXN: {
+                USD: 0.050,
+                EUR: 0.046,
+                GBP: 0.039,
+                JPY: 5.67,
+                CAD: 0.066,
+                AUD: 0.074,
+                CHF: 0.043,
+                CNY: 0.35,
+                INR: 4.19
+            }
+        };
+
+        // Ensure all currency pairs have rates
+        Object.keys(exchangeRates).forEach(fromCurrency => {
+            exchangeRates[fromCurrency][fromCurrency] = 1;
+            
+            Object.keys(exchangeRates).forEach(toCurrency => {
+                if (!exchangeRates[fromCurrency][toCurrency] && fromCurrency !== toCurrency) {
+                    // Calculate cross rate if direct rate is not available
+                    if (exchangeRates[toCurrency][fromCurrency]) {
+                        exchangeRates[fromCurrency][toCurrency] = 1 / exchangeRates[toCurrency][fromCurrency];
+                    }
+                }
+            });
+        });
+
+        // DOM elements
+        const floatButton = document.getElementById('the_conve_float_button');
+        const overlay = document.getElementById('the_conve_overlay');
+        const container = document.getElementById('the_conve_container');
+        const closeBtn = document.getElementById('the_conve_close');
+        const amountInput = document.getElementById('the_conve_amount');
+        const fromCurrency = document.getElementById('the_conve_from_currency');
+        const toCurrency = document.getElementById('the_conve_to_currency');
+        const fromValue = document.getElementById('the_conve_from_value');
+        const toValue = document.getElementById('the_conve_to_value');
+        const convertBtn = document.getElementById('the_conve_convert_btn');
+        const swapBtn = document.getElementById('the_conve_swap');
+        const resultsDiv = document.getElementById('the_conve_results');
+        const resultAmount = document.getElementById('the_conve_result_amount');
+        const amountError = document.getElementById('the_conve_amount_error');
+        
+        // Format currency function
+        function formatCurrency(amount, currency) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: currency,
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(amount);
+        }
+
+        // Update displayed values
+        function updateValues() {
+            const amount = parseFloat(amountInput.value) || 0;
+            fromValue.value = formatCurrency(amount, fromCurrency.value).replace(/[^\d.-]/g, '');
+            
+            if (amount > 0) {
+                const rate = exchangeRates[fromCurrency.value][toCurrency.value];
+                const converted = amount * rate;
+                toValue.value = formatCurrency(converted, toCurrency.value).replace(/[^\d.-]/g, '');
+                resultAmount.textContent = formatCurrency(converted, toCurrency.value);
+            } else {
+                toValue.value = '';
+                resultAmount.textContent = formatCurrency(0, toCurrency.value);
+            }
+        }
+
+        // Convert function
+        function convert() {
+            const amount = parseFloat(amountInput.value);
+            
+            if (!amount || amount <= 0) {
+                amountError.style.display = 'block';
+                resultsDiv.style.display = 'none';
+                return;
+            }
+            
+            amountError.style.display = 'none';
+            
+            const rate = exchangeRates[fromCurrency.value][toCurrency.value];
+            const converted = amount * rate;
+            
+            toValue.value = formatCurrency(converted, toCurrency.value).replace(/[^\d.-]/g, '');
+            resultAmount.textContent = formatCurrency(converted, toCurrency.value);
+            resultsDiv.style.display = 'block';
+        }
+
+        // Swap currencies
+        function swapCurrencies() {
+            const temp = fromCurrency.value;
+            fromCurrency.value = toCurrency.value;
+            toCurrency.value = temp;
+            updateValues();
+        }
+
+        // Open converter
+        function openConverter() {
+            overlay.style.display = 'flex';
+            setTimeout(() => {
+                overlay.classList.add('fadeIn');
+                container.classList.add('active');
+            }, 10);
+        }
+
+        // Close converter
+        function closeConverter() {
+            overlay.classList.remove('fadeIn');
+            overlay.classList.add('fadeOut');
+            container.classList.remove('active');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                overlay.classList.remove('fadeOut');
+            }, 300);
+        }
+
+        // Event listeners
+        floatButton.addEventListener('click', openConverter);
+        closeBtn.addEventListener('click', closeConverter);
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                closeConverter();
+            }
+        });
+
+        amountInput.addEventListener('input', function() {
+            updateValues();
+            if (parseFloat(this.value) > 0) {
+                amountError.style.display = 'none';
+            }
+        });
+
+        fromCurrency.addEventListener('change', updateValues);
+        toCurrency.addEventListener('change', updateValues);
+        convertBtn.addEventListener('click', convert);
+        swapBtn.addEventListener('click', swapCurrencies);
+
+        // Initialize
+        amountInput.value = "1";
+        updateValues();
+
     </script>
+
+
+
+    
+
+</body>
+</html>
       
