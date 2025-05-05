@@ -3,1283 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="pricing.css">
+    <link rel="stylesheet" href="er_them.css">
     <title>HiTex EdiTex Pricing</title>
     <style>
-        :root {
-            --primary: #1a5db4;
-            --primary-light: #e8f1fd;
-            --primary-dark: #0c3b80;
-            --accent: #D54C4F;
-            --accent-light: #fff0eb;
-            --grey-light: #f7f9fc;
-            --grey: #e5e9f2;
-            --grey-dark: #8492a6;
-            --text: #2c3e50;
-            --text-light: #7e8c9a;
-            --white: #ffffff;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
-            --radius: 12px;
-            --radius-sm: 6px;
-            --transition: all 0.3s ease;
-            --red: #D54C4F;
-            --blue: #032672;
-            --light-blue: #D3E5FF;
-            --major-heading: 3em;
-            --major-header-font-weight: 800;
-            --sub-head-color: #EBEBEB;
-            --button-background:linear-gradient(135deg, #eb2525, #af1e1e);
-            --smaller-major-head: 1.5em;
-            --smaller-sub-heading: 1rem;
-            --text-color: #333;
-            --transition-speed: 0.3s;
-            --white: #ffffff;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            color: var(--text);
-            background-color: var(--grey-light);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .header h1 {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 16px;
-            letter-spacing: -0.025em;
-        }
-
-        .header p {
-            font-size: 1.1rem;
-            max-width: 700px;
-            margin: 0 auto;
-            color: var(--text-light);
-        }
-
-        .service-levels {
-            background-color: var(--white);
-            border-radius: var(--radius);
-            padding: 30px;
-            box-shadow: var(--shadow);
-            margin-bottom: 40px;
-            text-align: center;
-            margin-bottom: 12em;
-        }
-
-        .service-levels h2 {
-            margin-bottom: 20px;
-            color: var(--primary);
-            font-size: 1.8rem;
-        }
-
-        .service-levels .service-types {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin: 30px 0;
-        }
-
-        .service-levels .service-type {
-            padding: 20px;
-            background-color: var(--grey-light);
-            border-radius: var(--radius-sm);
-            font-weight: 600;
-            color: var(--primary);
-            min-width: 220px;
-        }
-
-        .alert-box {
-            background-color: var(--primary-light);
-            padding: 20px;
-            
-            margin: 30px auto;
-            max-width: 800px;
-            text-align: left;
-            border-left: 4px solid var(--primary);
-        }
-
-        .alert-box.warning {
-           
-            border-left: 4px solid var(--accent);
-        }
-
-        .alert-box p {
-            margin: 0;
-        }
-
-        .alert-box strong {
-            color: var(--primary);
-        }
-        .turnaround-container {
-
-        background-color: var(--white);
-        border-radius: var(--radius);
-        padding: 30px;
-        box-shadow: var(--shadow);
-        max-width: 1150px;
-        margin: 7em auto 0 auto; /* top: 4em, horizontal: auto, bottom: 0 */
-}
-
-        .turnaround-container h2 {
-            color: var(--primary);
-            margin-bottom: 20px;
-            font-size: 1.8rem;
-            text-align: center;
-        }
-
-        .timeline-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            margin-bottom: 20px;
-            border-radius: var(--radius-sm);
-            overflow: hidden;
-        }
-
-        .timeline-table th, 
-        .timeline-table td {
-            padding: 16px 20px;
-            text-align: left;
-            border-bottom: 1px solid var(--grey);
-        }
-
-        .timeline-table th {
-            background-color: var(--primary);
-            color: var(--white);
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        .timeline-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .timeline-table tr:hover td {
-            background-color: var(--grey-light);
-        }
-
-        .turnaround-text {
-            background-color: var(--accent-light);
-            padding: 20px;
-            border-radius: var(--radius-sm);
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .rush-fee {
-            font-weight: bold;
-            color: var(--accent);
-        }
-
-        .tabs-container {
-            margin-bottom: 40px;
-        }
-
-        .tabs {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 0;
-            border-bottom: 1px solid var(--grey);
-            padding-bottom: 1px;
-        }
-
-        .tab {
-            padding: 16px 24px;
-            background-color: var(--grey-light);
-            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
-            font-weight: 600;
-            color: var(--text-light);
-            cursor: pointer;
-            transition: var(--transition);
-            border: 1px solid transparent;
-            border-bottom: none;
-            position: relative;
-            top: 1px;
-        }
-
-        .tab:hover {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .tab.active {
-            background-color: var(--white);
-            color: var(--primary);
-            border-color: var(--grey);
-            border-bottom-color: var(--white);
-        }
-
-        .pricing-section {
-            display: none;
-            background-color: var(--white);
-            padding: 40px;
-            border-radius: 0 var(--radius) var(--radius) var(--radius);
-            box-shadow: var(--shadow);
-        }
-
-        .pricing-section.active {
-            display: block;
-            animation: fadeIn 0.4s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .pricing-section h2 {
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .pricing-container {
-            display: flex;
-            gap: 40px;
-        }
-
-        .pricing-table-container {
-            flex: 1;
-        }
-
-        .pricing-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            border-radius: var(--radius-sm);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-
-        .pricing-table th, 
-        .pricing-table td {
-            padding: 18px 15px;
-            text-align: center;
-            border-bottom: 1px solid var(--grey);
-        }
-
-        .pricing-table th {
-            background-color: var(--primary);
-            color: var(--white);
-            font-weight: 600;
-            font-size: 1rem;
-        }
-        
-        .pricing-table th:first-child {
-            text-align: left;
-        }
-
-        .pricing-table td:first-child {
-            text-align: left;
-            font-weight: 500;
-        }
-
-        .pricing-table tr:hover td {
-            background-color: var(--grey-light);
-        }
-
-        .pricing-table .price-cell {
-            transition: var(--transition);
-            font-weight: 800;
-            color: var(--primary);
-            font-size: 25px;
-        }
-
-        .pricing-table .price-cell.active {
-            background-color: var(--primary-light) !important;
-            transform: scale(1.05);
-            box-shadow: var(--shadow);
-            z-index: 10;
-            position: relative;
-            color: var(--primary-dark);
-        }
-
-        .pricing-table .not-applicable {
-            color: var(--grey-dark);
-            font-style: italic;
-        }
-
-        .calculator-container {
-            width: 360px;
-            background-color: var(--grey-light);
-            padding: 30px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 20px;
-        }
-
-        .calculator-container h3 {
-            margin-top: 0;
-            color: var(--primary);
-            font-size: 1.4rem;
-            margin-bottom: 24px;
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--text);
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 14px 16px;
-            border: 1px solid var(--grey);
-            border-radius: var(--radius-sm);
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            border-color: var(--primary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(26, 93, 180, 0.1);
-        }
-
-        .custom-quote-note {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-top: 8px;
-            font-style: italic;
-        }
-
-        .result-container {
-            background-color: var(--white);
-            border-radius: var(--radius-sm);
-            padding: 20px;
-            box-shadow: var(--shadow);
-            margin-top: 30px;
-        }
-
-        .pricing-result {
-            text-align: center;
-            font-weight: 700;
-            font-size: 1.6rem;
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .pricing-time {
-            text-align: center;
-            font-weight: 500;
-            font-size: 1rem;
-            color: var(--text);
-        }
-
-        .pricing-time .rush-fee {
-            display: block;
-            margin-top: 5px;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 900px) {
-            .pricing-container {
-                flex-direction: column;
-            }
-
-            .calculator-container {
-                width: 100%;
-                margin-top: 30px;
-                position: static;
-            }
-
-            .service-levels .service-types {
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-            }
-
-            .service-levels .service-type {
-                width: 100%;
-                max-width: 300px;
-            }
-            
-            .tabs {
-                flex-direction: column;
-                border-bottom: none;
-                gap: 8px;
-            }
-            
-            .tab {
-                border-radius: var(--radius-sm);
-                text-align: center;
-                border: 1px solid var(--grey);
-            }
-            
-            .tab.active {
-                border-color: var(--primary);
-                border-bottom-color: var(--primary);
-            }
-            
-            .pricing-section {
-                border-radius: var(--radius);
-                padding: 25px 20px;
-            }
-        }
-
-        /* CODE FOR INCENTIVES */
-
-        .pri__centv-container {
-  width: 90%; /* Reduced from 100% */
-  padding: 40px 15px; /* Reduced from 60px 20px */
-  background-image: url('assets/alexim.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  position: relative;
-  margin: 6em auto 0; /* Changed margin-top to margin and added auto for centering */
-  border-radius: 8px; /* Added border radius for contained look */
-}
-.pri__centv-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(3, 38, 114, 0.75);
-  z-index: 1;
-  border-radius: 8px; /* Match container border radius */
-}
-.pri__centv-heading {
-  text-align: center;
-  font-size: calc(var(--major-heading) * 0.85); /* 15% smaller */
-  font-weight: var(--major-header-font-weight);
-  color: var(--white);
-  margin-bottom: 30px; /* Reduced from 40px */
-  position: relative;
-  z-index: 2;
-}
-.pri__centv-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px; /* Reduced from 30px */
-  max-width: 1000px; /* Reduced from 1200px */
-  margin: 0 auto;
-  position: relative;
-  z-index: 2;
-}
-.pri__centv-card {
-  flex: 1 1 220px; /* Reduced from 250px */
-  max-width: 240px; /* Reduced from 280px */
-  background-color: var(--white);
-  border-radius: 6px; /* Reduced from 8px */
-  overflow: hidden;
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1); /* Reduced shadow */
-  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-  display: flex;
-  flex-direction: column;
-  height: 400px; /* Reduced from 460px */
-}
-.pri__centv-card:hover {
-  transform: translateY(-8px); /* Reduced from -10px */
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Reduced shadow */
-}
-.pri__centv-card-header {
-  background-color: var(--blue);
-  padding: 16px; /* Reduced from 20px */
-  text-align: center;
-}
-.pri__centv-icon {
-  font-size: 2.2rem; /* Reduced from 2.5rem */
-  margin-bottom: 8px; /* Reduced from 10px */
-}
-.pri__centv-title {
-  color: var(--white);
-  font-size: calc(var(--smaller-major-head) * 0.9); /* 10% smaller */
-  font-weight: 700;
-  margin-bottom: 8px; /* Reduced from 10px */
-  height: 3.2rem; /* Reduced from 3.5rem */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.pri__centv-divider {
-  width: 50px; /* Reduced from 60px */
-  height: 2px; /* Reduced from 3px */
-  background-color: var(--red);
-  margin: 0 auto;
-}
-.pri__centv-content {
-  padding: 16px; /* Reduced from 20px */
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-.pri__centv-description {
-  color: var(--text-color);
-  font-size: calc(var(--smaller-sub-heading) * 0.9); /* 10% smaller */
-  margin-bottom: 16px; /* Reduced from 20px */
-  line-height: 1.4; /* Reduced from 1.5 */
-  flex: 1; /* Take up available space */
-}
-.pri__centv-button-wrapper {
-  margin-top: auto; /* Push button to bottom */
-}
-.pri__centv-button {
-  display: block;
-  width: 100%;
-  padding: 10px; /* Reduced from 12px */
-  border: none;
-  border-radius: 4px; /* Reduced from 5px */
-  background: var(--button-background);
-  color: var(--white);
-  font-weight: 600;
-  text-align: center;
-  cursor: pointer;
-  transition: opacity var(--transition-speed);
-  text-decoration: none;
-  font-size: 0.95em; /* Slightly smaller font */
-}
-.pri__centv-button:hover {
-  opacity: 0.9;
-}
-@media (max-width: 768px) {
-  .pri__centv-grid {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .pri__centv-card {
-    max-width: 100%;
-    width: 100%;
-    height: auto; /* Allow height to adjust on mobile */
-  }
-  
-  .pri__centv-heading {
-    font-size: calc(var(--major-heading) * 0.65); /* Further reduced for mobile */
-  }
-  
-  .pri__centv-container {
-    width: 95%; /* Slightly wider on mobile */
-    padding: 30px 12px; /* Further reduced padding on mobile */
-  }
-}
-
-    /* CODE FOR  PAYMENT TERMS */
-
-    .mp_871_ty {
-    max-width: 1000px; /* Reduced from 1200px */
-    margin: 6em auto; /* Reduced from 8em */
-    padding: 15px; /* Reduced from 20px */
-    color: #333;
-    line-height: 1.4; /* Slightly reduced from 1.5 */
-    position: relative;
-}
-
-.mp_871_ty h1 {
-    color: var(--blue);
-    font-size: calc(var(--major-heading) * 0.85); /* 15% smaller */
-    font-weight: var(--major-header-font-weight);
-    text-align: center;
-    margin-bottom: 25px; /* Reduced from 30px */
-}
-
-.mp_871_ty_image_top {
-    text-align: center;
-    margin-bottom: 30px; /* Reduced from 40px */
-}
-
-.mp_871_ty_image_top img {
-    max-width: 50%; /* Reduced from 60% */
-    height: auto;
-}
-
-.mp_871_ty p {
-    margin-bottom: 2px;
-    font-size: 15px; /* Reduced from 17px */
-}
-
-.mp_871_ty h2 {
-    color: var(--red);
-    font-size: 1.2rem; /* Reduced from 1.3rem */
-    margin-top: 20px; /* Reduced from 25px */
-    margin-bottom: 8px; /* Reduced from 10px */
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-}
-
-.mp_871_ty_icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 35px; /* Reduced from 40px */
-    height: 35px; /* Reduced from 40px */
-    margin-right: 12px; /* Reduced from 15px */
-    background-color: var(--light-blue);
-    border: 1px solid #d0e3f7;
-    border-radius: 4px; /* Reduced from 5px */
-    color: var(--red);
-    font-size: 0.9em; /* Added smaller font size for icons */
-}
-
-.mp_871_ty ul {
-    list-style-type: disc;
-    padding-left: 20px; /* Reduced from 25px */
-    margin-bottom: 12px; /* Reduced from 15px */
-    margin-left: 47px; /* Reduced from 55px */
-}
-
-.mp_871_ty li {
-    margin-bottom: 6px; /* Reduced from 8px */
-    font-size: 14px; /* Reduced from 15px */
-}
-
-.mp_871_ty strong {
-    font-weight: bold;
-}
-
-.mp_871_ty .mp_871_ty_highlight {
-    background-color: #f5f5f5;
-    padding: 12px; /* Reduced from 15px */
-    border-radius: 3px; /* Reduced from 4px */
-    margin: 12px 0; /* Reduced from 15px 0 */
-}
-
-/* Two-column layout */
-.mp_871_ty_content_wrapper {
-    display: flex;
-    gap: 30px; /* Reduced from 40px */
-}
-
-.mp_871_ty_column {
-    width: 50%;
-}
-
-/* Responsive adjustments */
-@media (max-width: 900px) {
-    .mp_871_ty_content_wrapper {
-        flex-direction: column;
-    }
-    
-    .mp_871_ty_column {
-        width: 100%;
-    }
-    
-    .mp_871_ty_image_top img {
-        max-width: 70%; /* Reduced from 80% */
-    }
-    
-    .mp_871_ty ul {
-        margin-left: 20px; /* Reduced from 25px */
-    }
-    
-    .mp_871_ty {
-        margin: 4em auto; /* Further reduced for mobile */
-        padding: 12px; /* Further reduced for mobile */
-    }
-    
-    .mp_871_ty h1 {
-        font-size: calc(var(--major-heading) * 0.75); /* Further reduced for mobile */
-    }
-}
-        /* CODE FOR CHAT SECTION */
-
-        .kir_09Ui_container {
-    max-width: 800px; /* Further reduced from 1000px */
-    margin: 0 auto;
-    padding: 20px 10px; /* Further reduced from 30px 15px */
-    border-top: 1px dotted #0c3b80; /* Changed to dotted for lighter appearance */
-}
-
-.kir_09Ui_heading {
-    text-align: center;
-    margin-bottom: 25px; /* Reduced from 30px */
-}
-
-.kir_09Ui_title {
-    color: var(--blue);
-    font-size: calc(var(--major-heading) * 0.65); /* Further reduced from 85% */
-    margin-bottom: 5px; /* Further reduced from 8px */
-    font-weight: var(--major-header-font-weight);
-}
-
-.kir_09Ui_subtitle {
-    font-size: 15px; /* Further reduced from 18px */
-    color: #555;
-    margin-bottom: 25px; /* Further reduced from 40px */
-}
-
-.kir_09Ui_cards_container {
-    display: flex;
-    justify-content: center;
-    gap: 20px; /* Reduced from 30px */
-    flex-wrap: wrap;
-}
-
-.kir_09Ui_card {
-    background: white;
-    border-radius: 8px; /* Further reduced from 10px */
-    padding: 20px 15px; /* Further reduced from 30px 25px */
-    width: 220px; /* Further reduced from 280px */
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* Further reduced shadow */
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.kir_09Ui_card:hover {
-    transform: translateY(-4px); /* Reduced from -5px */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Reduced shadow */
-}
-
-.kir_09Ui_icon_container {
-    width: 60px; /* Reduced from 70px */
-    height: 60px; /* Reduced from 70px */
-    border-radius: 50%;
-    margin: 0 auto 15px; /* Reduced bottom margin from 20px */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.kir_09Ui_icon_phone {
-    background-color: rgba(255, 206, 86, 0.2);
-}
-
-.kir_09Ui_icon_chat {
-    background-color: rgba(116, 90, 242, 0.2);
-}
-
-.kir_09Ui_icon_email {
-    background-color: rgba(75, 192, 192, 0.2);
-}
-
-.kir_09Ui_icon {
-    font-size: 24px; /* Reduced from 28px */
-}
-
-.kir_09Ui_icon_phone .kir_09Ui_icon {
-    color: #ff07b5;
-}
-
-.kir_09Ui_icon_chat .kir_09Ui_icon {
-    color: #745af2;
-}
-
-.kir_09Ui_icon_email .kir_09Ui_icon {
-    color: #4bc0c0;
-}
-
-.kir_09Ui_card_title {
-    font-size: 20px; /* Reduced from 24px */
-    font-weight: 700;
-    margin-bottom: 15px; /* Reduced from 20px */
-    color: var(--blue);
-}
-
-.kir_09Ui_card_text {
-    font-size: 14px; /* Reduced from 15px */
-    color: #818181;
-    margin-bottom: 15px; /* Reduced from 20px */
-    line-height: 1.4; /* Reduced from 1.5 */
-    font-weight: 550;
-}
-
-.kir_09Ui_link {
-    display: inline-block;
-    color: var(--red);
-    font-weight: 500;
-    text-decoration: none;
-    transition: color 0.3s;
-    font-size: 14px; /* Added smaller font size */
-}
-
-.kir_09Ui_link:hover {
-    color: #3040c4;
-    text-decoration: underline;
-}
-
-.kir_09Ui_footer {
-    margin-top: 45px; /* Reduced from 60px */
-    padding-top: 15px; /* Reduced from 20px */
-    border-top: 1px solid #eee;
-    text-align: center;
-    font-size: 11px; /* Reduced from 12px */
-    color: #888;
-}
-
-.kir_09Ui_whatsapp {
-    position: fixed;
-    bottom: 25px; /* Reduced from 30px */
-    right: 25px; /* Reduced from 30px */
-    width: 50px; /* Reduced from 60px */
-    height: 50px; /* Reduced from 60px */
-    background: #25d366;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    text-decoration: none;
-    font-size: 25px; /* Reduced from 30px */
-    box-shadow: 0 3px 8px rgba(37, 211, 102, 0.4); /* Reduced shadow */
-    transition: transform 0.3s;
-}
-
-.kir_09Ui_whatsapp:hover {
-    transform: scale(1.08); /* Reduced from 1.1 */
-}
-
-@media (max-width: 768px) {
-    .kir_09Ui_cards_container {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .kir_09Ui_card {
-        width: 100%;
-        max-width: 300px; /* Reduced from 350px */
-        padding: 25px 20px; /* Further reduced for mobile */
-    }
-    
-    .kir_09Ui_title {
-        font-size: calc(var(--major-heading) * 0.75); /* Further reduced for mobile */
-    }
-    
-    .kir_09Ui_subtitle {
-        font-size: 16px; /* Further reduced for mobile */
-    }
-}
-
-/* CODE FOR PRICING HEADER*/
-
-.hd_uCtae {
-      width: 100%;
-      background-color: var(--blue);
-      height: 10vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-size: cover;
-      padding: 1rem;
-    }
-    
-    .hd_uCtae h1 {
-      font-size: 2.2rem;
-      font-weight: bold;
-      font-weight: var(--major-header-font-weight);
-      letter-spacing: 2px;
-      text-align: center;
-      color: #ffffff;
-    }
-   
-    @media screen and (max-width: 768px) {
-      .hd_uCtae {
-        height: 20vh;
-      }
-    }
-    
-    @media screen and (max-width: 480px) {
-      .hd_uCtae {
-        min-height: 120px;
-      }
-    }
-
-    /* CODE FOR PAYMENT METHODS */
-.ho_ver_123-payment-container {
-  width: 90%; /* Reduced from 100% */
-  max-width: 1000px; /* Reduced from 1200px */
-  margin: 2.5rem auto; /* Reduced from 3rem */
-  padding: 0 15px; /* Reduced from 20px */
-}
-/* Payment section styling */
-.ho_ver_123-payment-section {
-  background-color: var(--white);
-  border-radius: 14px; /* Reduced from 16px */
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07); /* Reduced shadow */
-  padding: 2.5rem; /* Reduced from 3rem */
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
-}
-.ho_ver_123-payment-section:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 5px; /* Reduced from 6px */
-  width: 100%;
-  background: linear-gradient(90deg, var(--red), var(--blue));
-}
-.ho_ver_123-payment-section h2 {
-  font-size: clamp(1.6rem, 3.5vw, 2.2rem); /* Reduced from 1.8rem, 4vw, 2.5rem */
-  font-weight: var(--major-header-font-weight);
-  color: var(--blue);
-  margin-bottom: 1.2rem; /* Reduced from 1.5rem */
-  position: relative;
-  display: inline-block;
-}
-.ho_ver_123-payment-section h2:after {
-  content: '';
-  position: absolute;
-  bottom: -7px; /* Reduced from -8px */
-  left: 0;
-  width: 50px; /* Reduced from 60px */
-  height: 3px; /* Reduced from 4px */
-  background-color: var(--red);
-  border-radius: 2px;
-}
-.ho_ver_123-payment-intro {
-  font-size: clamp(0.9rem, 1.8vw, 1.1rem); /* Reduced from 1rem, 2vw, 1.2rem */
-  line-height: 1.6; /* Reduced from 1.7 */
-  color: var(--text-color);
-  margin-bottom: 2rem; /* Reduced from 2.5rem */
-  max-width: 85%; /* Reduced from 90% */
-}
-/* Cards grid styling */
-.ho_ver_123-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Reduced from 130px */
-  gap: 20px; /* Reduced from 24px */
-  margin-top: 1.8rem; /* Reduced from 2rem */
-}
-.ho_ver_123-card-item {
-  background: var(--white);
-  border-radius: 10px; /* Reduced from 12px */
-  padding: 1.3rem; /* Reduced from 1.5rem */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04); /* Reduced shadow */
-  transition: var(--transition);
-  height: 90px; /* Reduced from 100px */
-  border: 1px solid rgba(0, 0, 0, 0.05);
-}
-.ho_ver_123-card-item:hover {
-  transform: translateY(-4px); /* Reduced from -5px */
-  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.08); /* Reduced shadow */
-  border-color: var(--light-blue);
-}
-.ho_ver_123-card-logo {
-  max-width: 90%; /* Added to make logos slightly smaller */
-  max-height: 55px; /* Reduced from 60px */
-  object-fit: contain;
-}
-/* Responsive adjustments */
-@media screen and (max-width: 992px) {
-  .ho_ver_123-payment-section {
-    padding: 2.2rem; /* Reduced from 2.5rem */
-  }
-  
-  .ho_ver_123-payment-intro {
-    max-width: 100%;
-  }
-}
-@media screen and (max-width: 768px) {
-  .ho_ver_123-payment-section {
-    padding: 1.8rem; /* Reduced from 2rem */
-  }
-  
-  .ho_ver_123-cards-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-@media screen and (max-width: 576px) {
-  .ho_ver_123-payment-container {
-    margin: 1.8rem auto; /* Reduced from 2rem */
-  }
-  
-  .ho_ver_123-payment-section {
-    padding: 1.3rem; /* Reduced from 1.5rem */
-    border-radius: 10px; /* Reduced from 12px */
-  }
-  
-  .ho_ver_123-cards-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px; /* Reduced from 16px */
-  }
-  
-  .ho_ver_123-card-item {
-    height: 70px; /* Reduced from 80px */
-    padding: 0.9rem; /* Reduced from 1rem */
-  }
-}
-
-    /* CODE FOR CURRENCY CONVERTER */
-
-    .the_conve_float_button {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: var(--blue);
-            color: var(--white);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: var(--box-shadow);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        .the_conve_float_button:hover {
-            transform: scale(1.05);
-            background-color: #04387c;
-        }
-
-        .the_conve_float_button i {
-            font-size: 24px;
-        }
-
-        .the_conve_overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .the_conve_container {
-            max-width: 500px;
-            width: 90%;
-            padding: 30px;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: var(--box-shadow);
-            position: relative;
-            transform: scale(0.9);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .the_conve_container.active {
-            transform: scale(1);
-            opacity: 1;
-        }
-
-        .the_conve_close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 20px;
-            color: var(--dark-gray);
-            cursor: pointer;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            background-color: var(--light-gray);
-            transition: background-color 0.3s ease;
-        }
-
-        .the_conve_close:hover {
-            background-color: #e0e0e0;
-        }
-
-        .the_conve_header {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .the_conve_title {
-            color: var(--blue);
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .the_conve_subtitle {
-            color: var(--dark-gray);
-            font-size: 14px;
-        }
-
-        .the_conve_form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .the_conve_input_group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .the_conve_label {
-            font-size: 14px;
-            color: var(--dark-gray);
-            font-weight: 600;
-        }
-
-        .the_conve_input {
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: border 0.3s ease;
-        }
-
-        .the_conve_input:focus {
-            border: 1px solid var(--blue);
-            outline: none;
-        }
-
-        .the_conve_currency_row {
-            display: flex;
-            gap: 10px;
-        }
-
-        .the_conve_currency_input {
-            flex: 2;
-        }
-
-        .the_conve_select {
-            flex: 1;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: var(--white);
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .the_conve_select:focus {
-            border: 1px solid var(--blue);
-            outline: none;
-        }
-
-        .the_conve_button {
-            background-color: var(--blue);
-            color: var(--white);
-            border: none;
-            padding: 14px;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .the_conve_button:hover {
-            background-color: #04387c;
-        }
-
-        .the_conve_results {
-            margin-top: 25px;
-            padding: 20px;
-            background-color: var(--light-gray);
-            border-radius: 5px;
-            text-align: center;
-            display: none;
-        }
-
-        .the_conve_result_text {
-            font-size: 18px;
-            color: var(--dark-gray);
-        }
-
-        .the_conve_result_amount {
-            font-size: 24px;
-            color: var(--red);
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        .the_conve_swap_btn {
-            align-self: center;
-            background-color: var(--light-gray);
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .the_conve_swap_btn:hover {
-            background-color: #e0e0e0;
-        }
-
-        .the_conve_error {
-            color: var(--red);
-            font-size: 14px;
-            margin-top: 5px;
-            display: none;
-        }
-
-        /* Float button icon */
-        .the_conve_float_icon {
-            display: inline-block;
-            position: relative;
-            width: 24px;
-            height: 24px;
-        }
-
-        .the_conve_float_icon::before {
-            content: "$";
-            font-size: 24px;
-            font-weight: bold;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        /* Animation for opening/closing */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes fadeOut {
-            from { opacity: 1; }
-            to { opacity: 0; }
-        }
-
-        .fadeIn {
-            animation: fadeIn 0.3s forwards;
-        }
-
-        .fadeOut {
-            animation: fadeOut 0.3s forwards;
-        }
-        
+       
     </style>
 </head>
 <body>
@@ -1289,16 +17,9 @@
       </header>
 
     <div class="container">
-        <div class="tabs" style="background-color: var(--light-blue);">
-            <div class="tab active" data-target="language-editing" style="background-color: var(--light-blue);">Language Editing</div>
-            <div class="tab" data-target="scientific-editing" style="background-color: var(--light-blue);">Scientific Editing</div>
-            <div class="tab" data-target="technical-editing" style="background-color: var(--light-blue);">Technical Editing</div>
-            <div class="tab" data-target="translation" style="background-color: var(--light-blue);">Translation</div>
-        </div>
-        <div class="service-levels">
-            
+      
+        <div class="service-levels">  
             <p>We offer three service levels for our editing services</p>
-            
             <div class="service-types">
                 <div class="service-type">Standard Editing Level</div>
                 <div class="service-type">Advanced Editing Level</div>
@@ -1308,6 +29,13 @@
             <div class="alert-box warning">
                 <p><strong>Please note:</strong> Advanced and Premium Editing Service levels are not available for our Language Editing and Translation services.</p>
             </div>
+        </div>
+
+        <div class="tabs" style="background-color: var(--light-blue); margin-top: -9em;">
+            <div class="tab active" data-target="language-editing" style="background-color: var(--light-blue);">Language Editing</div>
+            <div class="tab" data-target="scientific-editing" style="background-color: var(--light-blue);">Scientific Editing</div>
+            <div class="tab" data-target="technical-editing" style="background-color: var(--light-blue);">Technical Editing</div>
+            <div class="tab" data-target="translation" style="background-color: var(--light-blue);">Translation</div>
         </div>
         <div class="tabs-container">
            
@@ -1428,9 +156,9 @@
                                 </tr>
                                 <tr>
                                     <td><strong>Revised Submission</strong><br></td>
-                                    <td id="technical-revised-standard" class="price-cell">$70.00</td>
-                                    <td id="technical-revised-advanced" class="price-cell">$94.00</td>
-                                    <td id="technical-revised-premium" class="price-cell">$118.00</td>
+                                    <td id="technical-revised-standard" class="price-cell">$90.00</td>
+                                    <td id="technical-revised-advanced" class="price-cell">$124.00</td>
+                                    <td id="technical-revised-premium" class="price-cell">$178.00</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1502,6 +230,103 @@
         </div>
     </div>
 
+     <!-- NEW CURRENCY CONVERTER -->
+
+<main class="n_we_conv_currency-converter">
+    <header class="n_we_conv_converter-header">
+        <h1 class="n_we_conv_converter-title">Currency Converter</h1>
+        <div class="n_we_conv_converter-logo">
+            <div class="n_we_conv_logo-icon" aria-hidden="true">$</div>
+        </div>
+    </header>
+    
+    <form id="converterForm" class="n_we_conv_converter-card">
+        <div class="n_we_conv_input-group">
+            <div class="n_we_conv_amount-wrapper">
+                <label class="n_we_conv_form-label" for="fromAmount">Amount</label>
+                <input type="number" id="fromAmount" class="n_we_conv_form-input" value="1" min="0" step="0.01" aria-describedby="amountHelp">
+                <span id="amountHelp" class="n_we_conv_sr-only">Enter the amount you want to convert</span>
+            </div>
+            <div class="n_we_conv_currency-wrapper">
+                <label class="n_we_conv_form-label" for="fromCurrency">From</label>
+                <select id="fromCurrency" class="n_we_conv_form-select">
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                    <option value="JPY">JPY</option>
+                    <option value="CAD">CAD</option>
+                    <option value="AUD">AUD</option>
+                    <option value="CHF">CHF</option>
+                    <option value="CNY">CNY</option>
+                </select>
+            </div>
+        </div>
+        
+        <button type="button" class="n_we_conv_swap-btn" id="swapBtn" aria-label="Swap currencies">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+        </button>
+        
+        <div class="n_we_conv_input-group">
+            <div class="n_we_conv_amount-wrapper">
+                <label class="n_we_conv_form-label" for="toAmount">Converted Amount</label>
+                <input type="text" id="toAmount" class="n_we_conv_form-input" readonly aria-live="polite">
+            </div>
+            <div class="n_we_conv_currency-wrapper">
+                <label class="n_we_conv_form-label" for="toCurrency">To</label>
+                <select id="toCurrency" class="n_we_conv_form-select">
+                    <option value="USD">USD</option>
+                    <option value="EUR" selected>EUR</option>
+                    <option value="GBP">GBP</option>
+                    <option value="JPY">JPY</option>
+                    <option value="CAD">CAD</option>
+                    <option value="AUD">AUD</option>
+                    <option value="CHF">CHF</option>
+                    <option value="CNY">CNY</option>
+                </select>
+            </div>
+        </div>
+    </form>
+    
+    <div class="n_we_conv_result-container" aria-live="polite">
+        <h2 class="n_we_conv_result-amount" id="resultAmount">0.92 EUR</h2>
+        <p class="n_we_conv_result-text" id="resultText">1 USD = 0.92 EUR</p>
+    </div>
+    
+    <button type="button" class="n_we_conv_convert-btn" id="convertBtn">Convert Currency</button>
+    
+    <div class="n_we_conv_features-list">
+        <div class="n_we_conv_feature-item">
+            <div class="n_we_conv_feature-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </div>
+            <span>Real-time rates</span>
+        </div>
+        <div class="n_we_conv_feature-item">
+            <div class="n_we_conv_feature-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+            </div>
+            <span>Updated every hour</span>
+        </div>
+        <div class="n_we_conv_feature-item">
+            <div class="n_we_conv_feature-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+            </div>
+            <span>Secure calculation</span>
+        </div>
+    </div>
+</main>
+
+
      <div class="turnaround-container">
             <h2>Our Turnaround Times</h2>
             <table class="timeline-table">
@@ -1540,6 +365,8 @@
             </div>
         </div>
 
+
+       
         <!-- CODE FOR  INCENTIVES-->
 
         <div class="pri__centv-container">
@@ -1610,55 +437,18 @@
 
           <!-- CODE FOR PAYMENT TERMS -->
 
-          <div class="mp_871_ty">
-            <h1>Payment Terms</h1>
+          <div class="ht_payment_terms">
+            <h2>Payment Terms</h2>
             
-            <div class="mp_871_ty_image_top">
-                <img src="https://cdn.pixabay.com/photo/2019/12/15/13/12/hand-4697071_1280.png" alt="Payment illustration" />
+            <div class="ht_payment_terms_content">
+              <div class="ht_payment_icon">
+                <span>💰</span>
+              </div>
+              <div class="ht_payment_text">
+                <p>Payment is required upon receipt of the invoice. HiTex EdiTex reserves the right to request full or partial payment before beginning the editing process.</p>
+              </div>
             </div>
-            
-            <div class="mp_871_ty_content_wrapper">
-                <div class="mp_871_ty_column mp_871_ty_column_left">
-                    <h2><div class="mp_871_ty_icon">💳</div>1. Accepted Payment Methods</h2>
-                    <p>We accept a variety of secure and convenient payment options, including:</p>
-                    <ul>
-                        <li>Credit and debit cards (Visa, MasterCard, American Express)</li>
-                        <li>PayPal</li>
-                        <li>Bank transfers (details provided upon request)</li>
-                        <li>International payment services (such as Wise and Stripe)</li>
-                    </ul>
-                    
-                    <h2><div class="mp_871_ty_icon">📅</div>2. Payment Schedule</h2>
-                    <p>To ensure smooth service delivery, the following payment schedule applies:</p>
-                    <ul>
-                        <li><strong>Standard Orders</strong>: Full payment is required before editing work begins.</li>
-                        <li><strong>High-Value Orders (USD 300 and above)</strong>: A 50% deposit may be accepted, with the remaining balance due upon final delivery.</li>
-                        <li><strong>Institutional Clients</strong>: We offer invoice-based payment options for universities, research centers, and corporate clients, payable within 15 days of the invoice date.</li>
-                    </ul>
-                </div>
-                
-                <div class="mp_871_ty_column mp_871_ty_column_right">
-                    <h2><div class="mp_871_ty_icon">↩️</div>3. Refund and Cancellation Policy</h2>
-                    <ul>
-                        <li>If a project is canceled <strong>before</strong> editing work has commenced, a full refund will be issued.</li>
-                        <li>If work has already begun, a <strong>partial refund</strong> will be calculated based on the proportion of work completed.</li>
-                        <li>All approved refunds will be processed within <strong>7 business days</strong> through the original payment method.</li>
-                    </ul>
-                    
-                    <h2><div class="mp_871_ty_icon">⏰</div>4. Late Payment and Non-Payment</h2>
-                    <ul>
-                        <li>Delayed payments may result in the <strong>suspension of services</strong> or delay in delivery.</li>
-                        <li>Persistent non-payment may result in cancellation of ongoing services and <strong>legal action</strong> if necessary.</li>
-                    </ul>
-                    
-                    <h2><div class="mp_871_ty_icon">💱</div>5. Currency and Taxes</h2>
-                    <ul>
-                        <li>All pricing is listed in <strong>U.S. Dollars (USD)</strong> unless otherwise stated.</li>
-                        <li>Clients are responsible for any applicable local taxes, bank fees, or transaction charges incurred during payment.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+          </div>
 
         <!-- CODE FOR PAYMENT -->
 
@@ -1730,10 +520,6 @@
             <p class="kir_09Ui_card_text">Send in your queries to</p>
             <a href="mailto:request@example.com" class="kir_09Ui_link">request@example.com</a>
         </div>
-    </div>
-    
-    <div class="kir_09Ui_footer">
-        <p>All information provided is secure and confidential. We typically respond within 24 hours.</p>
     </div>
 </div>
 
@@ -1808,6 +594,8 @@
         </div>
     </div>
 </div>
+
+
 
     <script>
         // Tab switching functionality
@@ -2506,11 +1294,155 @@ function initializeTranslationCalculator() {
         amountInput.value = "1";
         updateValues();
 
+        // CODE FOR NEW CURRENCY CONVERTER
+
+          /**
+         * Currency Converter Application
+         * Handles currency conversion with real-time rates
+         */
+         class CurrencyConverter {
+            constructor() {
+                // Exchange rates (in a real app, these would come from an API)
+                this.exchangeRates = {
+                    USD: { USD: 1, EUR: 0.92, GBP: 0.79, JPY: 153.2, CAD: 1.35, AUD: 1.51, CHF: 0.90, CNY: 7.10 },
+                    EUR: { USD: 1.09, EUR: 1, GBP: 0.86, JPY: 166.5, CAD: 1.47, AUD: 1.64, CHF: 0.98, CNY: 7.72 },
+                    GBP: { USD: 1.27, EUR: 1.16, GBP: 1, JPY: 193.6, CAD: 1.71, AUD: 1.91, CHF: 1.14, CNY: 8.97 },
+                    JPY: { USD: 0.0065, EUR: 0.0060, GBP: 0.0052, JPY: 1, CAD: 0.0088, AUD: 0.0099, CHF: 0.0059, CNY: 0.046 },
+                    CAD: { USD: 0.74, EUR: 0.68, GBP: 0.58, JPY: 113.5, CAD: 1, AUD: 1.12, CHF: 0.67, CNY: 5.26 },
+                    AUD: { USD: 0.66, EUR: 0.61, GBP: 0.52, JPY: 101.3, CAD: 0.89, AUD: 1, CHF: 0.60, CNY: 4.70 },
+                    CHF: { USD: 1.11, EUR: 1.02, GBP: 0.88, JPY: 170.0, CAD: 1.50, AUD: 1.67, CHF: 1, CNY: 7.87 },
+                    CNY: { USD: 0.141, EUR: 0.130, GBP: 0.111, JPY: 21.6, CAD: 0.190, AUD: 0.213, CHF: 0.127, CNY: 1 }
+                };
+
+                // Cache DOM elements
+                this.elements = {
+                    fromAmount: document.getElementById('fromAmount'),
+                    toAmount: document.getElementById('toAmount'),
+                    fromCurrency: document.getElementById('fromCurrency'),
+                    toCurrency: document.getElementById('toCurrency'),
+                    swapBtn: document.getElementById('swapBtn'),
+                    convertBtn: document.getElementById('convertBtn'),
+                    resultAmount: document.getElementById('resultAmount'),
+                    resultText: document.getElementById('resultText'),
+                    form: document.getElementById('converterForm')
+                };
+
+                // Initialize event listeners
+                this.initEventListeners();
+                
+                // Run initial conversion
+                this.convert();
+            }
+            
+            /**
+             * Initialize all event listeners
+             */
+            initEventListeners() {
+                this.elements.fromAmount.addEventListener('input', () => this.convert());
+                this.elements.fromCurrency.addEventListener('change', () => this.convert());
+                this.elements.toCurrency.addEventListener('change', () => this.convert());
+                this.elements.swapBtn.addEventListener('click', () => this.swapCurrencies());
+                this.elements.convertBtn.addEventListener('click', () => this.convert());
+                this.elements.form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.convert();
+                });
+                
+                // Add keyboard accessibility
+                this.elements.swapBtn.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.swapCurrencies();
+                    }
+                });
+            }
+            
+            /**
+             * Format number for display
+             * @param {number} number - The number to format
+             * @param {number} decimals - Number of decimal places
+             * @returns {string} Formatted number
+             */
+            formatNumber(number, decimals = 2) {
+                return number.toLocaleString(undefined, {
+                    minimumFractionDigits: decimals,
+                    maximumFractionDigits: decimals
+                });
+            }
+            
+            /**
+             * Convert currencies based on current input values
+             */
+            convert() {
+                const amount = parseFloat(this.elements.fromAmount.value);
+                const from = this.elements.fromCurrency.value;
+                const to = this.elements.toCurrency.value;
+                
+                // Show loading state
+                this.setLoadingState(true);
+                
+                // Simulate API delay (would be a real API call in production)
+                setTimeout(() => {
+                    if (isNaN(amount)) {
+                        this.elements.toAmount.value = '';
+                        this.elements.resultAmount.textContent = '0.00 ' + to;
+                        this.elements.resultText.textContent = '1 ' + from + ' = ' + 
+                            this.formatNumber(this.exchangeRates[from][to]) + ' ' + to;
+                    } else {
+                        const rate = this.exchangeRates[from][to];
+                        const converted = amount * rate;
+                        
+                        // Update UI with results
+                        this.elements.toAmount.value = this.formatNumber(converted);
+                        this.elements.resultAmount.textContent = this.formatNumber(converted) + ' ' + to;
+                        this.elements.resultText.textContent = '1 ' + from + ' = ' + 
+                            this.formatNumber(rate) + ' ' + to;
+                    }
+                    
+                    // Remove loading state
+                    this.setLoadingState(false);
+                }, 300);
+            }
+            
+            /**
+             * Swap the from and to currencies
+             */
+            swapCurrencies() {
+                const tempCurrency = this.elements.fromCurrency.value;
+                this.elements.fromCurrency.value = this.elements.toCurrency.value;
+                this.elements.toCurrency.value = tempCurrency;
+                
+                this.convert();
+            }
+            
+            /**
+             * Set or remove loading state on the converter
+             * @param {boolean} isLoading - Whether the converter is in loading state
+             */
+            setLoadingState(isLoading) {
+                const converter = document.querySelector('.n_we_conv_currency-converter');
+                const convertBtn = this.elements.convertBtn;
+                
+                if (isLoading) {
+                    converter.classList.add('n_we_conv_loading');
+                    convertBtn.textContent = 'Converting...';
+                    convertBtn.disabled = true;
+                } else {
+                    converter.classList.remove('n_we_conv_loading');
+                    convertBtn.textContent = 'Convert Currency';
+                    convertBtn.disabled = false;
+                }
+            }
+        }
+
+        // Initialize when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new CurrencyConverter();
+        });
     </script>
 
 
 
-    
 
 </body>
 </html>
