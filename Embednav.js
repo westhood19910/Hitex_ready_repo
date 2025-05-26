@@ -152,6 +152,7 @@ class NavigationSystem {
 }
 
 // COUNTER ANIMATION SYSTEM
+// COUNTER ANIMATION SYSTEM
 class CounterSystem {
     constructor() {
         this.counters = document.querySelectorAll('[data-target]');
@@ -160,29 +161,57 @@ class CounterSystem {
 
     init() {
         this.counters.forEach(counter => {
-            const target = parseInt(counter.getAttribute('data-target'));
-            const originalText = counter.textContent;
+            const targetValueString = counter.getAttribute('data-target');
+            const target = parseInt(targetValueString);
+
+            // --- CORRECTION STARTS HERE ---
+            if (isNaN(target)) {
+                console.error(
+                    `CounterSystem: Invalid or missing 'data-target' attribute. Value was: "${targetValueString}". Element:`,
+                    counter
+                );
+                // Optionally, you could set a default text or hide the counter
+                // counter.textContent = 'N/A';
+                return; // Skip this counter
+            }
+            // --- CORRECTION ENDS HERE ---
+
+            const originalText = counter.textContent; // Store original text to revert to
             this.setupCounter(counter, target, originalText);
         });
     }
 
     setupCounter(counter, target, originalText) {
-        const duration = 6000;
-        const increment = target / (duration / 10);
+        const duration = 6000; // Animation duration in milliseconds
+        const frameDuration = 10; // Duration of each frame (e.g., 10ms for ~100fps, though requestAnimationFrame handles timing)
+        
+        // Calculate how many steps/frames are needed based on duration
+        const numberOfSteps = duration / frameDuration;
+        
+        // Calculate increment per step
+        // Ensure numberOfSteps is not zero to prevent division by zero if duration or frameDuration is misconfigured
+        const increment = numberOfSteps > 0 ? target / numberOfSteps : target; 
+
         let currentCount = 0;
 
         const updateCounter = () => {
             if (currentCount < target) {
                 currentCount += increment;
+                // Ensure currentCount doesn't overshoot target due to floating point inaccuracies
+                if (currentCount > target) {
+                    currentCount = target;
+                }
                 counter.textContent = `${Math.round(currentCount)}+`;
                 requestAnimationFrame(updateCounter);
             } else {
                 counter.textContent = `${target}+`;
+                // Optional: Reset and restart animation after a pause
                 setTimeout(() => {
-                    counter.textContent = originalText;
-                    currentCount = 0;
-                    updateCounter();
-                }, 2000);
+                    counter.textContent = originalText; // Reset to original text
+                    // If you want it to restart counting automatically after reset:
+                    // currentCount = 0;
+                    // requestAnimationFrame(updateCounter); 
+                }, 2000); // Pause for 2 seconds before resetting
             }
         };
 
@@ -190,18 +219,18 @@ class CounterSystem {
             (entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        updateCounter();
-                        observer.unobserve(entry.target);
+                        currentCount = 0; 
+                        requestAnimationFrame(updateCounter);
+                        observer.unobserve(entry.target); 
                     }
                 });
             },
-            { threshold: 0.1 }
+            { threshold: 0.1 } 
         );
 
         observer.observe(counter);
     }
 }
-
 
 // CODE FOR NEW NAV BAR
 document.addEventListener('DOMContentLoaded', function() {
