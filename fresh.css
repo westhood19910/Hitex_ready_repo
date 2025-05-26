@@ -9165,7 +9165,6 @@ p {
   }
 }
 
-
 /* VAVIGATION MENU */
 
 .nav__bar_oi {
@@ -9175,7 +9174,7 @@ p {
   padding: 0 2rem;
   background-color: var(--white);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  height: 70px;
+  height: 3.2rem;
   position: relative;
   width: 100%;
   top: 0;
@@ -9202,6 +9201,7 @@ p {
 
 .nav__bar_oi-menu-link {
   display: block;
+  font-size: 15px;
   padding: 1rem;
   color: var(--blue);
   text-decoration: none;
@@ -9247,7 +9247,7 @@ p {
 }
 
 .nav__bar_oi-actions {
-  display: flex;
+  display: none;
   align-items: center;
 }
 
@@ -9311,6 +9311,52 @@ p {
   transition: all var(--transition-speed);
   z-index: 900;
 }
+
+/* CODE FOR NEW NAV */ 
+
+.new_loger_nav__bar_oi-button {
+  padding: 0.5rem 1rem;
+  border: none; 
+  font-size: 0.6rem;
+  border-radius: 15px;
+  font-weight: var(--major-header-font-weight);
+  cursor: pointer;
+  transition: all var(--transition-speed);
+}
+
+/* Signup button styles */
+.new_loger_nav__bar_oi-button-signup {
+  background: var(--button-background);
+  color: var(--white);
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+/* Login button styles */
+.new_loger_nav__bar_oi-button-login {
+  background-color: transparent;
+  color: var(--blue);
+  border: 1px solid var(--blue);
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+}
+
+/* Actions container - visible on larger screens */
+.new_loger_nav__bar_oi-actions {
+  display: flex;
+  align-items: center;
+}
+
+/* Hide container on smaller screens (1024px and below) */
+@media screen and (max-width: 1024px) {
+  .new_loger_nav__bar_oi-actions {
+    display: none;
+  }
+}
+
+
+/* END */
+
 
 /* Responsive styles */
 @media screen and (max-width: 1024px) {
@@ -9399,6 +9445,7 @@ p {
   }
 
   .nav__bar_oi-actions {
+    display: block;
     margin-top: 1rem;
     flex-direction: column;
     width: 100%;

@@ -44,174 +44,329 @@ body {
     line-height: 1.6;
 }
 
-.container {
-    width: 100%;
-    margin: 0 auto 10em auto;
-    overflow: hidden;
-   background-color: white;
-   padding: 4em;
+/* Base container styles */
+.doub_ler89 {
+  width: 100%;
+  margin: 0 auto 10em auto;
+  overflow: hidden;
+  background-color: white;
+  padding: 0em;
+  box-sizing: border-box; /* Include padding in width calculation */
 }
 
-
-@media screen and (max-width:992px){
-    .container {
-       padding: 0em;
-    }
-}
-
+/* Service levels section */
 .service-levels {
-    background-color: var(--white);
-    padding: 40px;
-    position: relative;
-    width: 70%;
-    height: 100%;
-    margin: 0 auto; /* <-- Add this */
+  background-color: var(--white);
+  padding: 40px;
+  position: relative;
+  width: 100%; /* Use 100% instead of fixed percentage */
+  max-width: 900px; /* Maximum width on larger screens */
+  height: 100%;
+  margin: 0 auto;
+  box-sizing: border-box; /* Include padding in width calculation */
 }
 
 .service-levels::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 8px;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
 }
 
 .service-levels > p {
-    font-size: var(--smaller-major-head);
+  font-size: 1.4 rem;
+  color: var(--text-light);
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+/* Service types grid */
+.service-types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 30px;
+  justify-content: center;
+}
+
+.service-type {
+  flex: 1;
+  min-width: 150px;
+  max-width: 2100px; 
+  padding: 10px 20px;
+  background-color: var(--primary-light);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  font-weight: 600;
+  color: var(--blue);
+  transition: var(--transition);
+  border-left: 4px solid var(--red);
+}
+
+.service-type:nth-child(1) {
+  border-left-color: var(--red);
+}
+
+.service-type:nth-child(2) {
+  border-left-color: var(--blue);
+}
+
+.service-type:nth-child(3) {
+  border-left-color: var(--accent);
+}
+
+.service-type:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+.alert-box {
+  padding: 20px;
+  border-radius: var(--radius-sm);
+  margin-top: -20px;
+}
+
+.alert-box p {
+  color: var(--red);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.alert-box strong {
+  color: var(--red);
+}
+
+/* Large screens and laptops */
+@media screen and (max-width: 1200px) {
+  .container {
+      max-width: 95%;
+      padding: 3em;
+  }
+  
+  .service-levels {
+      max-width: 90%;
+      padding: 35px;
+  }
+}
+
+/* Tablets and small laptops */
+@media screen and (max-width: 992px) {
+  .container {
+      padding: 2em;
+  }
+  
+  .service-levels {
+      padding: 30px;
+      width: 90%;
+  }
+  
+  .service-type {
+      min-width: 180px;
+  }
+}
+
+/* Small tablets */
+@media screen and (max-width: 768px) {
+  .container {
+      padding: 1.5em;
+  }
+  
+  .service-levels {
+      padding: 25px;
+      width: 100%;
+  }
+  
+  .service-types {
+      gap: 15px;
+  }
+  
+  .service-type {
+      min-width: calc(50% - 15px); /* Two items per row with gap considered */
+      max-width: none;
+  }
+
+  .service-levels > p {
+    font-size: 1rem !important;
     color: var(--text);
     text-align: center;
     margin-bottom: 30px;
     font-weight: 600;
     position: relative;
-    padding-bottom: 15px;
+    padding-bottom: 0px;
+  }
+  
 }
 
+/* Mobile devices */
+@media screen and (max-width: 576px) {
+  .doub_ler89 {
+      padding: 1em;
+      margin-bottom: 5em;
+  }
+  
+  .service-levels {
+      padding: 20px;
+  }
+  
+  .service-levels > p {
+      font-size: calc(var(--smaller-major-head) * 0.9); /* Slightly smaller font */
+  }
+  
+  .service-types {
+      flex-direction: column;
+      gap: 15px;
+  }
+  
+  .service-type {
+      min-width: 100%;
+  }
 
-.service-types {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-bottom: 30px;
-    justify-content: center;
-}
-
-.service-type {
-    flex: 1;
-    min-width: 200px;
-    padding: 25px 20px;
-    background-color: var(--primary-light);
-    border-radius: var(--radius-sm);
-    text-align: center;
-    font-weight: 600;
-    color: var(--blue);
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-    border-left: 4px solid var(--red);
-}
-
-.service-type:nth-child(1) {
-    border-left-color: var(--red);
-}
-
-.service-type:nth-child(2) {
-    border-left-color: var(--blue);
-}
-
-.service-type:nth-child(3) {
-    border-left-color: var(--accent);
-}
-
-.service-type:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-hover);
-}
-
-.alert-box {
-    padding: 20px;
-    border-radius: var(--radius-sm);
-    margin-top: 20px;
-}
-
-.alert-box p {
+  .alert-box p {
     color: var(--red);
-    font-size: var(--smaller-sub-heading);
+    font-size: 0.6rem ;
     line-height: 1.5;
+  }
+  
 }
 
-.alert-box strong {
-    color: var(--red);
+/* Small mobile devices */
+@media screen and (max-width: 375px) {
+  .container {
+      padding: 0.5em;
+  }
+  
+  .service-levels {
+      padding: 15px;
+  }
 }
 
+/* Responsive Turnaround Timeline CSS */
+
+/* Responsive Turnaround Timeline CSS */
+
+/* Container styling with better responsive behavior */
 .turnaround-container {
-    background-color: var(--white);
-    border-radius: var(--radius);
-    padding: 20px; 
-    box-shadow: var(--shadow);
-    max-width: 80%;
-    margin: 5em auto 0 auto; 
-  }
+  background-color: var(--white);
+  border-radius: var(--radius);
+  padding: clamp(15px, 3vw, 20px); /* Responsive padding */
+  box-shadow: var(--shadow);
+  width: 90%; /* Default width */
+  max-width: 1200px; /* Prevent excessive stretching on large screens */
+  margin: clamp(2em, 5vw, 5em) auto 0 auto; /* Responsive top margin */
+}
 
-  @media screen and (max-width:915px){
-    .turnaround-container {
-      background-color: var(--white);
-      border-radius: var(--radius);
-      padding: 20px; 
-      box-shadow: var(--shadow);
-      max-width: 100%;
-      margin: 5em auto 0 auto; 
-    }
-  }
-  
-  .turnaround-container h2 {
-    color: var(--primary);
-    margin-bottom: 15px; 
-    font-size: 1.6rem; 
-    text-align: center;
-  }
-  
-  .timeline-table {
+@media screen and (max-width: 915px) {
+  .turnaround-container {
+    max-width: 100%; /* Maintain your original mobile styling */
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    margin-bottom: 15px; 
-    border-radius: var(--radius-sm);
-    overflow: hidden;
+  }
+}
+
+/* Heading with responsive sizing */
+.turnaround-container h2 {
+  color: var(--primary);
+  margin-bottom: clamp(10px, 2vw, 20px); /* Responsive bottom margin */
+  font-size: clamp(1.2rem, 4vw, 1.6rem); /* Responsive font size */
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* Timeline table with improved responsive behavior */
+.timeline-table {
+  width: 100%;
+  border-collapse: separate; /* Keep original border-spacing */
+  border-spacing: 0;
+  margin-bottom: clamp(10px, 3vw, 20px); /* Responsive margin */
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.timeline-table th, 
+.timeline-table td {
+  padding: clamp(6px, 2vw, 10px) clamp(8px, 3vw, 20px); /* Responsive padding */
+  text-align: left;
+  border-bottom: 1px solid var(--grey);
+  word-wrap: break-word; /* Allow text to wrap */
+  white-space: normal; /* Ensure text wraps when needed */
+}
+
+.timeline-table th {
+  background-color: var(--blue);
+  color: var(--white);
+  font-weight: 600;
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem); /* Responsive font size */
+}
+
+.timeline-table tr:last-child td {
+  border-bottom: none;
+}
+
+.timeline-table tr:hover td {
+  background-color: var(--grey-light);
+}
+
+/* Additional text section */
+.turnaround-text {
+  background-color: var(--new-background);
+  padding: clamp(10px, 3vw, 15px); /* Responsive padding */
+  border-radius: var(--radius-sm);
+  margin-top: clamp(10px, 2vw, 15px); /* Responsive margin */
+  text-align: center;
+  font-size: clamp(0.9rem, 2.5vw, 1rem); /* Slightly responsive font size */
+}
+
+.rush-fee {
+  font-weight: bold;
+  color: var(--accent);
+}
+
+/* Media queries for better responsive behavior */
+@media screen and (max-width: 768px) {
+  .turnaround-container {
+    width: 95%; /* Slightly wider on tablets */
+    padding: 15px;
   }
   
   .timeline-table th, 
   .timeline-table td {
-    padding: 10px 20px; 
-    text-align: left;
-    border-bottom: 1px solid var(--grey);
+    padding: 8px 10px; /* Reduced padding */
+    font-size: 0.9rem; /* Slightly smaller font */
   }
   
   .timeline-table th {
-    background-color: var(--blue);
-    color: var(--white);
-    font-weight: 600;
-    font-size: 0.95rem; 
+    font-size: 0.9rem;
+  }
+}
+
+/* Mobile view - maintain table layout but reduce sizes */
+@media screen and (max-width: 580px) {
+  .turnaround-container {
+    width: 100%; /* Full width on mobile */
+    padding: 12px;
+    margin-top: 1.5em;
+    border-radius: calc(var(--radius) / 2); /* Smaller border radius */
   }
   
-  .timeline-table tr:last-child td {
-    border-bottom: none;
+  /* Reduce table font size and spacing */
+  .timeline-table th, 
+  .timeline-table td {
+    padding: 6px 8px; /* Minimal padding */
+    font-size: 0.85rem; /* Smaller font */
   }
   
-  .timeline-table tr:hover td {
-    background-color: var(--grey-light);
+  .timeline-table th {
+    font-size: 0.8rem; /* Smaller header font */
   }
   
   .turnaround-text {
-    background-color: var(--new-background);
-    padding: 15px; 
-    border-radius: var(--radius-sm);
-    margin-top: 15px; 
-    text-align: center;
+    padding: 10px;
+    font-size: 0.85rem;
   }
-
-.rush-fee {
-    font-weight: bold;
-    color: var(--accent);
 }
 
 .tabs-container {
@@ -236,6 +391,7 @@ body {
     font-weight: 600;
     color: var(--text-light);
     cursor: pointer;
+    border-top: 1px solid transparent;
     transition: var(--transition);
     border: 1px solid transparent;
     border-bottom: none;
@@ -294,51 +450,37 @@ body {
 /* Responsive Pricing Table */
 .pricing-table {
   width: 100%;
-  border-collapse: collapse; /* Changed from separate for better mobile display */
+  border-collapse: separate;
+  border-spacing: 0;
   border-radius: var(--radius-sm);
-  overflow-x: auto; /* Enable horizontal scrolling if needed */
+  overflow: hidden;
   box-shadow: var(--shadow);
-  display: block; /* Makes the table scrollable on small screens */
-}
-
-/* Table container for better mobile experience */
-.pricing-table-container {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-  margin-bottom: 1.5rem;
 }
 
 .pricing-table th, 
 .pricing-table td {
-  padding: clamp(8px, 2vw, 15px) clamp(6px, 2vw, 12px); /* Responsive padding */
+  padding: clamp(6px, 2vw, 15px) clamp(5px, 2vw, 12px); /* Responsive padding */
   text-align: center;
   border-bottom: 1px solid var(--grey);
+  word-wrap: break-word; /* Allow text to wrap */
+  white-space: normal; /* Ensure text wraps when needed */
 }
 
 .pricing-table th {
   background-color: var(--blue);
   color: var(--white);
   font-weight: 600;
-  font-size: clamp(0.85rem, 2vw, 0.95rem); /* Responsive font size */
-  white-space: nowrap; /* Prevent header text from wrapping */
+  font-size: clamp(0.8rem, 2vw, 0.95rem); /* Responsive font size */
 }
 
 .pricing-table th:first-child {
   text-align: left;
-  position: sticky; /* Optional: make first column sticky */
-  left: 0;
-  z-index: 2;
 }
 
 .pricing-table td:first-child {
   text-align: left;
   font-weight: 500;
-  font-size: clamp(0.8rem, 1.8vw, 0.9rem);
-  position: sticky; /* Optional: make first column sticky */
-  left: 0;
-  z-index: 1;
-  background-color: inherit; /* Ensures background isn't transparent when sticky */
+  font-size: clamp(0.75rem, 1.8vw, 1rem);
 }
 
 .pricing-table tr:hover td {
@@ -366,64 +508,65 @@ body {
   font-style: italic;
 }
 
-/* Media queries for improved responsiveness */
-@media (max-width: 768px) {
+/* Media queries for better responsive behavior */
+@media screen and (max-width: 768px) {
   .pricing-table th, 
   .pricing-table td {
-      padding: 8px 6px; /* Smaller padding on mobile */
+    padding: 8px 8px; /* Further reduced padding on tablets */
+    font-size: 0.9rem;
+  }
+  
+  .pricing-table th {
+    font-size: 0.85rem;
   }
   
   .pricing-table .price-cell {
-      transform: none; /* Disable scaling on mobile */
-  }
-  
-  .pricing-table .price-cell.active {
-      transform: none; /* Disable scaling on mobile */
-      border-left: 3px solid var(--primary-dark);
-      border-right: 3px solid var(--primary-dark);
+    font-size: 18px;
   }
 }
 
-/* For very small screens, consider a mobile-first design */
-@media (max-width: 480px) {
-  /* Optional: Show table as cards on very small screens */
-  .pricing-table-mobile-cards .pricing-table,
-  .pricing-table-mobile-cards .pricing-table tbody,
-  .pricing-table-mobile-cards .pricing-table tr {
-      display: block;
-      width: 100%;
+/* Mobile specific adjustments */
+@media screen and (max-width: 580px) {
+  .pricing-table th, 
+  .pricing-table td {
+    padding: 6px 5px; /* Minimal padding on mobile */
+    font-size: 0.8rem;
   }
   
-  .pricing-table-mobile-cards .pricing-table thead {
-      display: none;
+  .pricing-table th {
+    font-size: 0.75rem;
   }
   
-  .pricing-table-mobile-cards .pricing-table tr {
-      margin-bottom: 1rem;
-      border: 1px solid var(--grey);
-      border-radius: var(--radius-sm);
+  .pricing-table td:first-child {
+    font-size: 0.8rem;
+    max-width: 80px; /* Limit first column width */
   }
   
-  .pricing-table-mobile-cards .pricing-table td {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      text-align: right;
-      border-bottom: 1px solid var(--grey-light);
+  .pricing-table .price-cell {
+    font-size: 16px;
+    transform: none; /* Disable scaling on small screens */
   }
   
-  .pricing-table-mobile-cards .pricing-table td:before {
-      content: attr(data-label);
-      font-weight: 600;
-      text-align: left;
-      padding-right: 0.5rem;
+  .pricing-table .price-cell.active {
+    transform: none; /* Disable scaling on small screens */
+    border-left: 2px solid var(--primary-dark);
+    border-right: 2px solid var(--primary-dark);
+  }
+}
+
+/* Very small screens */
+@media screen and (max-width: 400px) {
+  .pricing-table {
+    font-size: 0.75rem;
   }
   
-  .pricing-table-mobile-cards .pricing-table td:first-child {
-      background-color: var(--blue);
-      color: var(--white);
-      font-weight: 600;
-      position: static;
+  .pricing-table th, 
+  .pricing-table td {
+    padding: 5px 3px; /* Minimal padding */
+  }
+  
+  .pricing-table .price-cell {
+    font-size: 14px;
   }
 }
 
@@ -549,6 +692,7 @@ body {
     }
     
     .pricing-section {
+        width: 97%;
         border-radius: var(--radius);
         padding: 20px 16px; /* Reduced from 25px 20px */
     }
@@ -632,12 +776,7 @@ body {
     justify-content: center;
   }
   
-  .pri__centv-divider {
-    width: 45px;
-    height: 2px;
-    background-color: var(--red);
-    margin: 0 auto;
-  }
+ 
   
   .pri__centv-content {
     padding: 14px;
@@ -981,7 +1120,7 @@ body {
 .hd_uCtae {
 width: 100%;
 background-color: var(--blue);
-height: 10vh;
+height: 5vh;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -990,7 +1129,7 @@ padding: 1rem;
 }
 
 .hd_uCtae h1 {
-font-size: 2.2rem;
+font-size: 1.6rem;
 font-weight: bold;
 font-weight: var(--major-header-font-weight);
 letter-spacing: 2px;
