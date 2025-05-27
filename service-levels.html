@@ -265,10 +265,11 @@
 
         .old_sol_541-section:nth-child(odd):not(.old_sol_541-no-alt-bg) {
              background-color: var(--grey-light);
+             margin: 4rem auto;
         }
 
         .old_sol_541-section-title {
-            font-size: 2.2em; /* Reduced font size */
+            font-size: 2.2em; 
             font-weight: 700;
             color: var(--primary-dark);
             text-align: center;
@@ -283,17 +284,17 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 70px; /* Reduced width */
-            height: 3px; /* Reduced height */
+            width: 70px; 
+            height: 3px; 
             background-color: var(--accent);
         }
 
         .old_sol_541-service-level-intro p {
             text-align: center;
-            font-size: 1.05em; /* Slightly reduced */
+            font-size: 1.05em; 
             color: var(--text);
-            max-width: 750px; /* Slightly reduced */
-            margin: 0 auto 30px auto; /* Reduced margin */
+            max-width: 750px; 
+            margin: 0 auto 30px auto; 
         }
 
         .old_sol_541-service-grid {
@@ -378,18 +379,7 @@
             background-repeat: no-repeat;
             background-size: cover;
             color: var(--white);
-            padding: 70px 0; /* REDUCED padding for fixed bg sections */
-        }
-
-        .old_sol_541-fixed-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.55); /* Slightly increased overlay for readability if images are bright */
-            z-index: 1;
+            padding: 20px 0; 
         }
 
         .old_sol_541-fixed-bg .old_sol_541-container {
@@ -398,19 +388,18 @@
         }
 
         .old_sol_541-fixed-bg .old_sol_541-section-title,
-        .old_sol_541-fixed-bg p,
         .old_sol_541-fixed-bg h2,
         .old_sol_541-fixed-bg h3 {
-            color: var(--white);
+            color: rgb(59, 59, 59);
         }
+
+        .old_sol_541-fixed-bg p{
+            font-size: 1rem;
+            color: #7e8c9a;
+        }
+
         .old_sol_541-fixed-bg .old_sol_541-section-title::after {
             background-color: var(--white);
-        }
-
-
-        /* Specific Background Images - REPLACE THESE URLs */
-        .old_sol_541-intro-bg {
-            background-image: url('https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); /* Placeholder */
         }
 
         .old_sol_541-advanced-bg-anchor {
@@ -635,9 +624,8 @@
         <div class="old_sol_541-container">
             <h2 class="old_sol_541-section-title">Our Service Levels</h2>
             <div class="old_sol_541-service-level-intro">
-                <p>At HiTex EdiTex, we understand that no two manuscripts are alike—and neither are their editing needs. That’s why we offer three different editing service levels designed to meet the unique requirements of academic authors, technical professionals, and publishing institutions.</p>
-                <p>Whether you're refining the final draft of a research article or preparing a high-stakes technical document for submission, our editing levels are tailored to deliver clarity, precision, and impact.</p>
-                <p>Explore our three editing service levels below to determine the best fit for your project.</p>
+              <p>  At HiTex EdiTex, we understand that editing needs vary from one manuscript to another. That’s why we offer three distinct service levels, each designed to support the specific goals of each client.
+                Each level provides a targeted approach, ranging from surface-level corrections to in-depth language restructuring to help you choose the precise degree of editorial input based on the nature and stage of your work.</p>
             </div>
         </div>
     </section>
