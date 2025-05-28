@@ -1225,3 +1225,6 @@ function setupMobileMenu() {
             'Hide Table of Contents' : 'Table of Contents';
     });
 }
+
+// CODE FOR PRICING
+
