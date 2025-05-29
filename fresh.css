@@ -9187,12 +9187,13 @@ p {
 }
 
 .nav__bar_oi-logo img {
-  height: 40px;
+  height: 50px;
 }
 
 .nav__bar_oi-menu {
   display: flex;
   list-style: none;
+  margin-top: 1em;
 }
 
 .nav__bar_oi-menu-item {
@@ -9201,7 +9202,7 @@ p {
 
 .nav__bar_oi-menu-link {
   display: block;
-  font-size: 15px;
+  font-size: 13px;
   padding: 1rem;
   color: var(--blue);
   text-decoration: none;
@@ -9253,7 +9254,8 @@ p {
 
 .nav__bar_oi-button {
   padding: 0.5rem 1rem;
-  border: none; font-size: 0.6rem;
+  border: none; 
+  font-size: 0.6rem;
   border-radius: 15px;
   font-weight: var(--major-header-font-weight);
   cursor: pointer;
@@ -9263,16 +9265,12 @@ p {
 .nav__bar_oi-button-signup {
   background: var(--button-background);
   color: var(--white);
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
 }
 
 .nav__bar_oi-button-login {
   background-color: transparent;
   color: var(--blue);
   border: 1px solid var(--blue);
-  border-bottom-left-radius: 0px;
-  border-top-left-radius: 0px;
 }
 
 .nav__bar_oi-button:hover {
@@ -9315,39 +9313,41 @@ p {
 /* CODE FOR NEW NAV */ 
 
 .new_loger_nav__bar_oi-button {
-  padding: 0.5rem 1rem;
+  padding: 0.22rem 0.6rem;
   border: none; 
-  font-size: 0.6rem;
+  font-size: 0.60rem;
   border-radius: 15px;
-  font-weight: var(--major-header-font-weight);
+  font-weight: 700;
   cursor: pointer;
   transition: all var(--transition-speed);
 }
 
-/* Signup button styles */
+
 .new_loger_nav__bar_oi-button-signup {
   background: var(--button-background);
   color: var(--white);
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
+  border: 1px solid var(--red);
 }
 
-/* Login button styles */
+
 .new_loger_nav__bar_oi-button-login {
-  background-color: transparent;
+  background-color: var(--blue);
   color: var(--blue);
   border: 1px solid var(--blue);
   border-bottom-left-radius: 0px;
   border-top-left-radius: 0px;
+  color: #ffffff;
 }
 
-/* Actions container - visible on larger screens */
+
 .new_loger_nav__bar_oi-actions {
   display: flex;
   align-items: center;
 }
 
-/* Hide container on smaller screens (1024px and below) */
+
 @media screen and (max-width: 1024px) {
   .new_loger_nav__bar_oi-actions {
     display: none;
@@ -9358,7 +9358,6 @@ p {
 /* END */
 
 
-/* Responsive styles */
 @media screen and (max-width: 1024px) {
   .nav__bar_oi-toggle {
     display: flex;
