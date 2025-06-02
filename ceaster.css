@@ -506,7 +506,6 @@ body::-webkit-scrollbar-thumb:hover {
     }
 }
 
-/* Handle very small screens */
 @media (max-width: 320px) {
     .language_selector {
         width: 65%;

@@ -1226,5 +1226,50 @@ function setupMobileMenu() {
     });
 }
 
-// CODE FOR PRICING
+// CODE FOR HOME PAGE TEXT
+
+function typeWriter(element, text, speed, callback) {
+  let i = 0;
+  element.innerHTML = ''; // Clear existing content
+
+  function type() {
+    if (i < text.length) {
+      // Handle <br> tags specifically
+      if (text.substring(i, i + 4).toLowerCase() === '<br>') {
+        element.innerHTML += '<br>';
+        i += 4;
+      } else {
+        element.innerHTML += text.charAt(i);
+        i++;
+      }
+      setTimeout(type, speed);
+    } else if (callback) {
+      callback(); // Call the next function in sequence
+    }
+  }
+  type();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const textElements = document.querySelectorAll('.cnt-fr-ch-03 .gr-ps-tur-001');
+  const typingSpeed = 50; // Milliseconds per character
+
+  let currentElementIndex = 0;
+
+  function typeNextElement() {
+    if (currentElementIndex < textElements.length) {
+      const element = textElements[currentElementIndex];
+      // Preserve innerHTML to correctly handle <br> tags
+      const originalHTML = element.innerHTML;
+      typeWriter(element, originalHTML, typingSpeed, () => {
+        currentElementIndex++;
+        // Add a slight pause before typing the next element
+        setTimeout(typeNextElement, 500); // 500ms pause
+      });
+    }
+  }
+
+  // Start the typing animation for the first element
+  typeNextElement();
+});
 
