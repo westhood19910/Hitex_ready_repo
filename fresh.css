@@ -1835,12 +1835,13 @@ body {
 
 .gr-ps-tur-001 {
   width: 100%;
-  font-size: 70px;
+  font-size: 50px;
   color: rgb(255, 255, 255);
   font-weight: bold;
   line-height: 1.2;
+  top: 20px; 
+  left: 20px; 
   text-align: center;
-  opacity: 0;
   position: absolute;
   text-shadow: 2px 3px 4px rgb(3, 6, 46, 0.2);
 }
@@ -1854,7 +1855,7 @@ body {
 }
 
 .cnt-fr-ch-03{
-  width: 100vw;
+  width: 100%;
 }
 
 @media screen and (max-width:770px)
@@ -1875,105 +1876,8 @@ body {
 }
 
 
-
-.gr-pss-tr02-001{
-  animation: ani1 40s infinite ;
-}
-
-.gr-pss-tr02-002{
-  animation: ani2 40s infinite ;
-}
-.gr-pss-tr02-003{
-  animation: ani3 40s infinite ;
-  text-align: center;
-}
-.gr-pss-tr02-004{
-  animation: ani4 40s infinite ;
-}
-.gr-pss-tr02-005{
-  animation: ani5 40s infinite ;
-}
-.gr-pss-tr02-006{
-  animation: ani6 40s infinite ;
-}
-
-
-@keyframes ani1 {
-  0% {
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  20% {
-    opacity: 0;
-  }
-}
-
-@keyframes ani2 {
-  20% {
-    opacity: 0;
-  }
-  30% {
-    opacity: 1;
-  }
-  40% {
-    opacity: 0;
-  }
-}
-@keyframes ani3 {
-  40% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  60% {
-    opacity: 0;
-  }
-}
-
-@keyframes ani4 {
-  60% {
-    opacity: 0;
-  }
-  70% {
-    opacity: 1;
-  }
-  80% {
-    opacity: 0;
-  }
-}
-
-
-@keyframes ani5 {
-  80% {
-    opacity: 0;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-
-@keyframes ani6 {
-  100% {
-    opacity: 0;
-  }
-  110% {
-    opacity: 1;
-  }
-  120% {
-    opacity: 0;
-  }
-}
-
-
-
 /* Style for pag-2-but-1 */
+
 .pag_2_but_1{ 
   padding: 10px 5px;
   width: 14em; 
@@ -9236,7 +9140,8 @@ p {
 
 .nav__bar_oi-dropdown-item {
   display: block;
-  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
   color: var(--blue);
   text-decoration: none;
   transition: all var(--transition-speed);

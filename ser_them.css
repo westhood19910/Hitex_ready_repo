@@ -29,6 +29,8 @@ body {
 }
 
 /* CODE FOR HEADER ON SCIENTIFICE EDITING PAGE */
+
+
 .for_freher {
   color: #ffffff;
   padding: 3rem 1.5rem;
@@ -13999,3 +14001,364 @@ cursor: pointer;
     margin: 5px 0;
   }
 }
+
+/* CODE FOR TRANSTION PAGE */
+
+        .transle_container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .transle_header_section {
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .transle_header_section h1 {
+            font-size: var(--major-heading);
+            font-weight: var(--major-header-font-weight);
+            margin-bottom: 0.5em;
+            color: var(--blue);
+        }
+        
+        .transle_header_section .transle_subtitle {
+            font-size: 1.5em;
+            margin-bottom: 1em;
+        }
+
+        .transle_header_section .transle_description {
+            font-size: 1.1em;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* General Section Styling */
+        .transle_section {
+            padding: 50px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .transle_section:last-child {
+            border-bottom: none;
+        }
+
+        .transle_section_title {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--blue);
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .transle_section_title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--red);
+            margin: 10px auto 0;
+        }
+
+
+        /* Document Types Section */
+        .transle_document_types_grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .transle_document_type_card {
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            border-left: 5px solid var(--accent-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .transle_document_type_card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(3, 38, 114, 0.15);
+        }
+
+        .transle_document_type_card h3 {
+            font-size: 1.5em;
+            color: var(--blue);
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .transle_document_type_card p {
+            font-size: 1em;
+            color: var(--text-color);
+        }
+
+        /* Languages Section */
+        .transle_languages_list_container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .transle_language_item {
+            background: var(--category-bg);
+            color: var(--blue);
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .transle_language_item:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+
+        /* Service Levels Section */
+        .transle_service_levels_grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            align-items: stretch; /* Makes cards of same height if content differs slightly */
+        }
+
+        .transle_service_level_card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .transle_service_level_card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(3, 38, 114, 0.2);
+        }
+        .transle_service_level_card.transle_premium {
+            border-top: 5px solid var(--red);
+        }
+        .transle_service_level_card.transle_advanced {
+             border-top: 5px solid var(--accent-color);
+        }
+         .transle_service_level_card.transle_standard {
+             border-top: 5px solid var(--blue);
+        }
+
+
+        .transle_service_level_card h3 {
+            font-size: 1.8em;
+            color: var(--blue);
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .transle_service_level_card .transle_price {
+            font-size: 1.1em;
+            color: var(--red);
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .transle_service_level_card .transle_turnaround {
+            font-size: 0.9em;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .transle_features_list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 25px;
+            flex-grow: 1; /* Allows list to take available space */
+        }
+
+        .transle_features_list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            font-size: 0.95em;
+        }
+
+        .transle_features_list li::before {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            flex-shrink: 0; /* Prevent icon from shrinking */
+        }
+
+        .transle_features_list .transle_included::before {
+            content: '✔';
+            color: var(--check-color);
+            font-weight: bold;
+        }
+
+        .transle_features_list .transle_not_included::before {
+            content: '×';
+            color: var(--cross-color);
+            font-weight: bold;
+        }
+
+        .transle_service_level_card .transle_description_text {
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 25px;
+            text-align: center;
+            min-height: 50px; /* Ensure some space even if description is short */
+        }
+
+        .transle_cta_button {
+            display: block;
+            background: var(--button-background);
+            color: white;
+            text-align: center;
+            padding: 15px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: auto; /* Pushes button to the bottom */
+        }
+
+        .transle_cta_button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(235, 37, 37, 0.3);
+            color: white;
+        }
+
+
+        /* Translation Process Section */
+        .transle_process_steps_container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .transle_process_step_card {
+            background: var(--bg-light);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--blue);
+             transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+         .transle_process_step_card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(3, 38, 114, 0.1);
+        }
+
+
+        .transle_process_step_card .transle_step_number {
+            display: inline-block;
+            background: var(--red);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2em;
+            font-weight: 700;
+            text-align: center;
+            line-height: 40px;
+            margin-bottom: 15px;
+        }
+         .transle_process_step_card:nth-child(1) .transle_step_number { background: var(--blue); }
+        .transle_process_step_card:nth-child(2) .transle_step_number { background: var(--accent-color); }
+        .transle_process_step_card:nth-child(3) .transle_step_number { background: var(--red); }
+        .transle_process_step_card:nth-child(4) .transle_step_number { background: #F06292; } /* A lighter red variant */
+
+
+        .transle_process_step_card h3 {
+            font-size: 1.4em;
+            color: var(--blue);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .transle_process_step_card p {
+            font-size: 0.95em;
+        }
+
+        /* Sample Translations Section */
+        .transle_sample_translations_placeholder {
+            background: var(--category-bg);
+            padding: 40px;
+            text-align: center;
+            border-radius: 8px;
+            color: var(--text-color);
+        }
+        .transle_sample_translations_placeholder p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        .transle_sample_translations_placeholder .transle_cta_button {
+             background: var(--accent-color); /* Different color for variety */
+             display: inline-block; /* Make it not full width */
+             padding: 15px 30px;
+        }
+         .transle_sample_translations_placeholder .transle_cta_button:hover {
+            box-shadow: 0 8px 15px rgba(74, 144, 226, 0.3);
+         }
+
+
+        /* Footer */
+        .transle_footer {
+            background: var(--blue);
+            color: var(--sub-head-color);
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+        .transle_footer p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            :root {
+                --major-heading: 2.5em;
+            }
+            .transle_header_section h1 {
+                font-size: var(--major-heading);
+            }
+            .transle_header_section .transle_subtitle {
+                font-size: 1.2em;
+            }
+             .transle_section_title {
+                font-size: 2em;
+            }
+        }
+         @media (max-width: 480px) {
+            :root {
+                --major-heading: 2em;
+            }
+            .transle_header_section .transle_subtitle {
+                font-size: 1.1em;
+            }
+             .transle_section_title {
+                font-size: 1.8em;
+            }
+            .transle_document_types_grid,
+            .transle_service_levels_grid,
+            .transle_process_steps_container {
+                grid-template-columns: 1fr; /* Stack cards on small screens */
+            }
+        }
