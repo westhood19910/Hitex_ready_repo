@@ -17,6 +17,7 @@
   --border-color: #e2e8f0;
   --bg-light: #f8fafc;
   --category-bg: #edf2f7;
+  --general-text-font: 0.85em;
   }
 
 body {
@@ -14035,7 +14036,7 @@ cursor: pointer;
             margin: 0 auto;
         }
 
-        /* General Section Styling */
+
         .transle_section {
             padding: 50px 0;
             border-bottom: 1px solid var(--border-color);
@@ -14092,7 +14093,7 @@ cursor: pointer;
         }
 
         .transle_document_type_card p {
-            font-size: 1em;
+            font-size: 0.85em;
             color: var(--text-color);
         }
 
@@ -14189,7 +14190,7 @@ cursor: pointer;
             margin-bottom: 12px;
             display: flex;
             align-items: flex-start;
-            font-size: 0.95em;
+            font-size: 0.85em;
         }
 
         .transle_features_list li::before {
@@ -14200,7 +14201,7 @@ cursor: pointer;
             margin-right: 10px;
             background-size: contain;
             background-repeat: no-repeat;
-            flex-shrink: 0; /* Prevent icon from shrinking */
+            flex-shrink: 0; 
         }
 
         .transle_features_list .transle_included::before {
@@ -14228,13 +14229,13 @@ cursor: pointer;
             background: var(--button-background);
             color: white;
             text-align: center;
-            padding: 15px 20px;
+            padding: 10px 15px;
             border-radius: 5px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.1em;
+            font-size: 1rem;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
-            margin-top: auto; /* Pushes button to the bottom */
+            margin-top: auto; 
         }
 
         .transle_cta_button:hover {
@@ -14273,7 +14274,7 @@ cursor: pointer;
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            font-size: 1.2em;
+            font-size: 1.2em;font-size: 1.3em;
             font-weight: 700;
             text-align: center;
             line-height: 40px;
@@ -14286,14 +14287,14 @@ cursor: pointer;
 
 
         .transle_process_step_card h3 {
-            font-size: 1.4em;
+            
             color: var(--blue);
             margin-top: 0;
             margin-bottom: 10px;
         }
 
         .transle_process_step_card p {
-            font-size: 0.95em;
+            font-size: 0.85em;
         }
 
         /* Sample Translations Section */
