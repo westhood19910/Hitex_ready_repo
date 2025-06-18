@@ -5,12 +5,7 @@
 <title>HiTex EdiTex</title>
 <script src="Embednav.js"></script>
 <script src="freshtex.js"></script> 
-<script src="firebase-config.js"></script>
 <script src="sign-up.js"></script>
-<script type="module" src="firebase-config.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"></script>
 <link rel="stylesheet" href="ser_them.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -56,122 +51,82 @@
     
   
 
-        <div class="unl_live-signup-container">
-           <h1 class="unl_live-main-heading"><a href="home.html">HiTex <span style="color: var(--red);">EDiTex</span></a></h1>
-            <form id="signupForm" class="unl_live-signup-form">
-                <div class="unl_live-input-group">
-                    <label for="name" class="unl_live-label">Full Name</label>
-                    <div class="unl_live-input-wrapper">
-                        <i class="fa fa-user"></i>
-                        <input 
-                            type="text" 
-                            id="name" 
-                            class="unl_live-input" 
-                            placeholder="Enter your full name" 
-                            required
-                        >
-                    </div>
-                </div>
-    
-                <div class="unl_live-input-group">
-                    <label for="email" class="unl_live-label">Email Address</label>
-                    <div class="unl_live-input-wrapper">
-                        <i class="fa fa-envelope"></i>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            class="unl_live-input" 
-                            placeholder="Enter your email" 
-                            required
-                        >
-                    </div>
-                </div>
-    
-                <div class="unl_live-input-group">
-                    <label for="password" class="unl_live-label">Password</label>
-                    <div class="unl_live-input-wrapper">
-                        <i class="fa fa-lock"></i>
-                        <input 
-                            type="password" 
-                            id="password" 
-                            class="unl_live-input" 
-                            placeholder="Create a strong password" 
-                            required
-                        >
-                    </div>
-                </div>
-    
-                <div class="unl_live-input-group">
-                    <label for="manuscriptType" class="unl_live-label">Manuscript Type (Optional)</label>
-                    <div class="unl_live-input-wrapper">
-                        <i class="fa fa-file-text"></i>
-                        <select 
-                            id="manuscriptType" 
-                            class="unl_live-select" 
-                            required
-                        >
-                            <option value="">Select Manuscript Type</option>
-                            <option value="academic">Academic Paper</option>
-                            <option value="novel">Novel</option>
-                            <option value="thesis">Thesis</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                </div>
-    
-                <button 
-                    type="submit" 
-                    class="unl_live-submit-button"
-                >
-                    Sign Up
-                </button>
-            </form>
-    
-            <p class="unl_live-login-redirect">
-                Already have an account? 
-                <a href="client-login.html" class="unl_live-login-link">Log In</a>
-            </p>
-        </div>
+      <div class="unl_live-signup-container">
+    <h1 class="unl_live-main-heading"><a href="home.html">HiTex <span style="color: var(--red);">EDiTex</span></a></h1>
+     <form action="http://localhost:3000/register" id="signupForm" class="unl_live-signup-form" method="post">
+         <div class="unl_live-input-group">
+             <label for="name" class="unl_live-label">Full Name</label>
+             <div class="unl_live-input-wrapper">
+                 <i class="fa fa-user"></i>
+                 <input 
+                     type="text" 
+                     id="name"
+                     name="fullName" class="unl_live-input" 
+                     placeholder="Enter your full name" 
+                     required
+                 >
+             </div>
+         </div>
+ 
+         <div class="unl_live-input-group">
+             <label for="email" class="unl_live-label">Email Address</label>
+             <div class="unl_live-input-wrapper">
+                 <i class="fa fa-envelope"></i>
+                 <input 
+                     type="email" 
+                     id="email" 
+                     name="email" class="unl_live-input" 
+                     placeholder="Enter your email" 
+                     required
+                 >
+             </div>
+         </div>
+ 
+         <div class="unl_live-input-group">
+             <label for="password" class="unl_live-label">Password</label>
+             <div class="unl_live-input-wrapper">
+                 <i class="fa fa-lock"></i>
+                 <input 
+                     type="password" 
+                     id="password" 
+                     name="password" class="unl_live-input" 
+                     placeholder="Create a strong password" 
+                     required
+                 >
+             </div>
+         </div>
+ 
+         <div class="unl_live-input-group">
+             <label for="manuscriptType" class="unl_live-label">Manuscript Type (Optional)</label>
+             <div class="unl_live-input-wrapper">
+                 <i class="fa fa-file-text"></i>
+                 <select 
+                     id="manuscriptType" 
+                     name="manuscriptType" class="unl_live-select"
+                 >
+                     <option value="">Select Manuscript Type</option>
+                     <option value="academic">Academic Paper</option>
+                     <option value="novel">Novel</option>
+                     <option value="thesis">Thesis</option>
+                     <option value="other">Other</option>
+                 </select>
+             </div>
+         </div>`
+         <button 
+             type="submit" 
+             class="unl_live-submit-button"
+         >
+             Sign Up
+         </button>
+     </form>
+     <p class="unl_live-login-redirect">
+         Already have an account? 
+         <a href="client-login.html" class="unl_live-login-link">Log In</a>
+     </p>
+ </div>
     
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var signupForm = document.getElementById('signupForm');
-                
-                signupForm.addEventListener('submit', function(event) {
-                    event.preventDefault();
-                    
-                    var name = document.getElementById('name').value;
-                    var email = document.getElementById('email').value;
-                    var password = document.getElementById('password').value;
-                    var manuscriptType = document.getElementById('manuscriptType').value;
-    
-                    // Basic validation
-                    if (!name || !email || !password || !manuscriptType) {
-                        alert('Please fill out all fields');
-                        return;
-                    }
-    
-                    // Prepare form data object
-                    var formData = {
-                        name: name,
-                        email: email,
-                        password: password,
-                        manuscriptType: manuscriptType
-                    };
-    
-                    // Simulated submission
-                    console.log('Signup Data:', formData);
-                    alert('Signup Successful! (Simulated)');
-                });
-            });
-        </script>
-
-    
-
-              
-
      
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
