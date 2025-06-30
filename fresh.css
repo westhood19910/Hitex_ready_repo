@@ -3620,7 +3620,6 @@ color: #000000;
     cursor: pointer;
 }
 
-
 .service-card:hover .service-description {
   display: none;
   opacity: 1;
