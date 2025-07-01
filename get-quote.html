@@ -4,15 +4,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HiTex EdiTex</title>
 <script src="Embednav.js"></script>
-<script src="freshtex.js"></script> 
-<script src="firebase-config.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-<script src="quote-submission.js"></script>
+<script src="freshtex.js" defer></script> 
 <link rel="stylesheet" href="ser_them.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" defer>
 <link rel="stylesheet" href="fresh.css">  
 <link rel="stylesheet" href="Embednav.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
@@ -52,19 +47,91 @@
                 </ul>
             </div>
     </header>
-    
-    <nav class="alb_pa_001">
-                <div class="un_fr_0oper">
-                    <a href="home.html"><img src="assets/png_20221026_003820_0000.png" alt="" class="kerpa_023_001"></a>
-                </div>
-                <div class="fo_oc_cnt002">
-                  <input type="search" class="lat_but_pla_001" placeholder="search here">
-                  <button type="submit" class="se-er-ch-bt-001">
-                      <i class="fa fa-search" aria-hidden="true"></i>
-                  </button>
-              </div>
-                    <div class="fr_fl_fx_001">
-                      <div class="intbeh_01">
+              <!-- Modified Navigation HTML -->
+ <nav class="nav__bar_oi" style="margin-top: 2em;">
+  <div class="nav__bar_oi-logo">
+    <a href="home.html"><img src="assets/png_20221026_003820_0000.png" alt="HiTex EdiTex Logo"></a>
+  </div>
+  
+  <button class="nav__bar_oi-toggle" id="navToggle">
+    <span class="nav__bar_oi-toggle-line"></span>
+    <span class="nav__bar_oi-toggle-line"></span>
+    <span class="nav__bar_oi-toggle-line"></span>
+  </button>
+  
+  <ul class="nav__bar_oi-menu" id="navMenu">
+    <li class="nav__bar_oi-menu-item">
+      <a href="#" class="nav__bar_oi-menu-link">About Us</a>
+      <div class="nav__bar_oi-dropdown">
+        <a href="about.html" class="nav__bar_oi-dropdown-item">About Hitex EdiTex</a>
+        <a href="leadership.html" class="nav__bar_oi-dropdown-item">Leadership</a>
+        <a href="#offices" class="nav__bar_oi-dropdown-item">Offices</a>
+        <a href="#testimonials" class="nav__bar_oi-dropdown-item">Testimonials</a>
+        <a href="impact.html" class="nav__bar_oi-dropdown-item">Impact</a>
+      </div>
+    </li>
+    <li class="nav__bar_oi-menu-item">
+      <a href="#services" class="nav__bar_oi-menu-link">Services</a>
+      <div class="nav__bar_oi-dropdown">
+        <a href="language-editng.html" class="nav__bar_oi-dropdown-item">Language Editing</a>
+        <a href="Scientific.html" class="nav__bar_oi-dropdown-item">Scientific Editing</a>
+        <a href="technichal.html" class="nav__bar_oi-dropdown-item">Technical Editing</a>
+        <a href="translate.html" class="nav__bar_oi-dropdown-item">Translation Services</a>
+        <a href="service-levels.html" class="nav__bar_oi-dropdown-item">Service Levels</a>
+        <a href="pricing.html" class="nav__bar_oi-dropdown-item">Pricing</a>
+        <a href="auhtoredly.html" class="nav__bar_oi-dropdown-item">Authoredly</a>
+      </div>
+    </li>
+    <li class="nav__bar_oi-menu-item">
+      <a href="#careers" class="nav__bar_oi-menu-link">Careers</a>
+      <div class="nav__bar_oi-dropdown">
+        <a href="life-at-hitex.html" class="nav__bar_oi-dropdown-item">Life at HiTex EdiTex</a>
+        <a href="In-house.html" class="nav__bar_oi-dropdown-item">In-house</a>
+        <a href="freelance.html" class="nav__bar_oi-dropdown-item">Freelance</a>
+      </div>
+    </li>
+    <li class="nav__bar_oi-menu-item">
+      <a href="contact.html" class="nav__bar_oi-menu-link">Contact Us</a>
+    </li>
+    <li class="nav__bar_oi-menu-item">
+      <a href="#resources" class="nav__bar_oi-menu-link">Helpful Resources</a>
+      <div class="nav__bar_oi-dropdown">
+        <a href="support" class="nav__bar_oi-dropdown-item">Support and FAQs</a>
+        <a href="hitex-hub.html" class="nav__bar_oi-dropdown-item">The Hitex Hub</a>
+        <a href="newsroom.html" class="nav__bar_oi-dropdown-item">Newsroom</a>
+      </div>
+    </li>
+    <div class="nav__bar_oi-actions">
+      <button class="nav__bar_oi-button nav__bar_oi-button-signup">Client Sign-Up</button>
+      <button class="nav__bar_oi-button nav__bar_oi-button-login">Client Log-in</button>
+    </div>
+  </ul>
+  
+  <!-- Search bar and social media icons -->
+  <div class="nav__bar_oi-utility">
+    <div class="nav__bar_oi-search">
+      <button class="nav__bar_oi-search-icon" id="searchToggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+      <div class="nav__bar_oi-search-container" id="searchContainer">
+        <input type="text" class="nav__bar_oi-search-input" placeholder="Search..." aria-label="Search">
+        <button class="nav__bar_oi-search-close" id="searchClose">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="nav__bar_oi-social">
+      <div class="new_loger_nav__bar_oi-actions">
+        <a href="client-sign-up.html" class="new_loger_nav__bar_oi-button new_loger_nav__bar_oi-button-signup">Client Sign-up</a>
+        <a href="client-login.html" class="new_loger_nav__bar_oi-button new_loger_nav__bar_oi-button-login">Client Log-in</a>
+      </div>
+   <div class="intbeh_01">
                         <div class="kli_002_wer">
                             <a href="https://www.threads.net/@hitexeditex">
                             <img src="assets/threads-icon.svg" class="alb-im-001">
@@ -84,73 +151,11 @@
                   <div class="kli_002_wer">
                    <a href="https://www.instagram.com/hitexeditex" target="_blank"  >
                     <img src="assets/ig-instagram-icon.svg" class="alb-im-001"></a>
-                    </div>   
-                    <a href="https://wa.me/233503181696" target="_blank">
-                        <img src="assets/whatsapp-icon.svg" alt="WhatsApp Icon" class="alb-im-001">
-                      </a>    
-                </div>    
-               </nav> 
-
-               <nav class="main-nav" style="top: 5.5em">
-                <div class="menu-container">
-                    <div class="fr_open_01">
-                    </div> 
-                    <input type="checkbox" id="menu-toggle">
-                    <label for="menu-toggle" class="menu-button">
-                        <i class="fa fa-bars" aria-hidden="true"></i>
-                    </label>
-                    
-                    <ul class="main-menu">
-                        <li class="menu-item has-submenu">
-                            <button class="submenu-toggle" aria-expanded="false">
-                                About Us
-                                <i class="fa fa-angle-down" aria-hidden="true"></i>
-                            </button>
-                            <ul class="submenu">
-                                <li><a href="Vision.html">Vision</a></li>
-                                <li><a href="Vision.html#op_tu__01">Mission</a></li>
-                                <li><a href="Vision.html#pag_2_h1_1">The Team</a></li>
-                            </ul>
-                        </li>
-                        
-                        <li class="menu-item has-submenu">
-                            <button class="submenu-toggle" aria-expanded="false">
-                                Services
-                                <i class="fa fa-angle-down" aria-hidden="true"></i>
-                            </button>
-                            <ul class="submenu">
-                                <li><a href="languaged.html">Language Editing</a></li>
-                                <li><a href="Scientific.html">Scientific Editing</a></li>
-                                <li><a href="technichal.html">Technical Editing</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item has-submenu">
-                            <button class="submenu-toggle" aria-expanded="false">
-                                Careers
-                                <i class="fa fa-angle-down" aria-hidden="true"></i>
-                            </button>
-                            <ul class="submenu">
-                                <li><a href="car1reers.html">Freelance Editor</a></li>
-                                <li><a href="In-house.html">In-house Editor</a></li>
-                            </ul>
-                        </li>
-                        
-                        <li class="menu-item">
-                            <a href="contaUs.html">Contact Us</a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="Freshtex.html">Helpful Resources</a>
-                        </li>
-                    </ul>
-                    <div class="gro_btu_01">
-                        <a href="languaged.html" class="por_qt_pg_001">INSTANT QUOTE</a>
-                        <a href="#" class="author_login_btn"> CLIENT LOG IN</a>
-                    </div>
-                </div>
-            </nav>
-
-
-
+                    </div>  
+    </div>
+  </div>
+  <div class="nav__bar_oi-overlay" id="navOverlay"></div>
+</nav>
             <div class="on_lion-container" style="margin-top: 3em;">
                 <div class="on_lion-main-content">
                     <div class="on_lion-form-container">
@@ -160,23 +165,22 @@
                             <p class="on_lion-form-subtitle">Get your manuscripts assessed an receive a
                                 quote  in minutes.</p>
                         </div>
-        
-                        <form id="quoteForm" class="on_lion-form">
+                       <form id="quoteForm" class="on_lion-form" enctype="multipart/form-data">
                             <div class="on_lion-form-row">
-                                <div class="on_lion-form-group">
-                                    <label class="on_lion-label" for="name">Full Name</label>
-                                    <input class="on_lion-input" type="text" id="name" placeholder="Your name" required>
-                                </div>
-                                <div class="on_lion-form-group">
+                               <div class="on_lion-form-group">
+                                 <label class="on_lion-label" for="name">Full Name</label>
+                                  <input class="on_lion-input" type="text" id="name" name="fullName" placeholder="Your name" required>
+                               </div>
+                            <div class="on_lion-form-group">
                                     <label class="on_lion-label" for="email">Email Address</label>
-                                    <input class="on_lion-input" type="email" id="email" placeholder="Your email" required>
+                                   <input class="on_lion-input" type="email" id="email" name="email" placeholder="Your email" required>
                                 </div>
                             </div>
                         
                             <div class="on_lion-form-row">
                                 <div class="on_lion-form-group">
                                     <label class="on_lion-label" for="document-type">Document Type</label>
-                                    <select class="on_lion-select" id="document-type" required>
+                                   <select class="on_lion-select" id="document-type" name="documentType" required>
                                         <option value="" disabled selected>Select document type</option>
                                         <option value="academic">Academic Paper</option>
                                         <option value="book">Book Manuscript</option>
@@ -187,14 +191,14 @@
                                 </div>
                                 <div class="on_lion-form-group">
                                     <label class="on_lion-label" for="word-count">Word Count</label>
-                                    <input class="on_lion-input" type="number" id="word-count" placeholder="Approximate word count" required>
+                                    <input class="on_lion-input" type="number" id="word-count" name="wordCount" placeholder="Approximate word count" required>
                                 </div>
                             </div>
                         
                             <div class="on_lion-form-row">
                                 <div class="on_lion-form-group">
                                     <label class="on_lion-label" for="service-type">Service Needed</label>
-                                    <select class="on_lion-select" id="service-type" required>
+                                   <select class="on_lion-select" id="service-type" name="serviceType" required>
                                         <option value="" disabled selected>Select service type</option>
                                         <option value="proofreading">Proofreading</option>
                                         <option value="copyediting">Copyediting</option>
@@ -205,14 +209,14 @@
                                 </div>
                                 <div class="on_lion-form-group">
                                     <label class="on_lion-label" for="deadline">Deadline</label>
-                                    <input class="on_lion-input" type="date" id="deadline" required>
+                                  <input class="on_lion-input" type="date" id="deadline" name="deadline" required>
                                 </div>
                             </div>
                         
                             <div class="on_lion-form-row">
                                 <div class="on_lion-form-group" style="flex: 100%;">
                                     <label class="on_lion-label" for="message">Project Details</label>
-                                    <textarea class="on_lion-textarea" id="message" placeholder="Tell us more about your project, requirements, and any specific needs..." required></textarea>
+                                    <textarea class="on_lion-textarea" id="message" name="message" placeholder="..." required></textarea>
                                 </div>
                             </div>
                         
@@ -220,14 +224,7 @@
                                 <div class="on_lion-form-group" style="flex: 100%;">
                                     <label class="on_lion-label" for="file-upload">Upload Manuscript</label>
                                     <div class="on_lion-file-upload">
-                                        <input 
-                                            type="file" 
-                                            id="file-upload" 
-                                            name="file-upload" 
-                                            class="on_lion-file-input" 
-                                            accept=".doc,.docx,.pdf,.txt,.rtf"
-                                            multiple
-                                        >
+                                       <input type="file" id="file-upload" name="manuscriptFile" class="on_lion-file-input" ...>
                                         <label for="file-upload" class="on_lion-file-label">
                                             <span class="on_lion-file-icon">📁</span>
                                             <span class="on_lion-file-text">Choose Files</span>
@@ -290,228 +287,7 @@
                       All information and files are held in the strictest of confidence and are protected by the Data Protection Act 1998.
                     </p>
                   </div>
-             
-        
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    // Form handling
-                    const quoteForm = document.getElementById('quoteForm');
-                    const loadingElement = document.querySelector('.on_lion-loading');
-                    const successMessage = document.querySelector('.on_lion-success-message');
-                    const resetButton = document.getElementById('resetForm');
-                    
-                    quoteForm.addEventListener('submit', function(e) {
-                        e.preventDefault();
-                        
-                        // Show loading state
-                        quoteForm.style.display = 'none';
-                        loadingElement.style.display = 'block';
-                        
-                        // Simulate form submission
-                        setTimeout(function() {
-                            loadingElement.style.display = 'none';
-                            successMessage.style.display = 'block';
-                        }, 2000);
-                    });
-                    
-                    resetButton.addEventListener('click', function() {
-                        successMessage.style.display = 'none';
-                        quoteForm.reset();
-                        quoteForm.style.display = 'block';
-                    });
-                    
-                    // Price calculator
-                    const wordCountInput = document.getElementById('word-count');
-                    const serviceTypeSelect = document.getElementById('service-type');
-                    const deadlineInput = document.getElementById('deadline');
-                    const estimatedTotal = document.getElementById('estimatedTotal');
-                    
-                    const calculatePrice = function() {
-                        let basePrice = 0;
-                        let additionalPrice = 0;
-                        let rushFee = 0;
-                        
-                        // Get word count
-                        const wordCount = parseInt(wordCountInput.value) || 0;
-                        
-                        if (wordCount > 0) {
-                            // Base price calculation (example: $0.02 per word)
-                            basePrice = wordCount * 0.02;
-                            
-                            // Service type multiplier
-                            const service = serviceTypeSelect.value;
-                            if (service === 'proofreading') {
-                                // No additional cost for basic proofreading
-                            } else if (service === 'copyediting') {
-                                additionalPrice = wordCount * 0.01;
-                            } else if (service === 'developmental') {
-                                additionalPrice = wordCount * 0.03;
-                            } else if (service === 'formatting') {
-                                additionalPrice = 50; // Flat fee
-                            } else if (service === 'full-package') {
-                                additionalPrice = wordCount * 0.04 + 50;
-                            }
-                            
-                            // Rush fee calculation
-                            if (deadlineInput.value) {
-                                const deadline = new Date(deadlineInput.value);
-                                const today = new Date();
-                                const diffTime = Math.abs(deadline - today);
-                                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                                
-                                if (diffDays <= 2) {
-                                    rushFee = (basePrice + additionalPrice) * 0.5; // 50% rush fee
-                                } else if (diffDays <= 5) {
-                                    rushFee = (basePrice + additionalPrice) * 0.25; // 25% rush fee
-                                }
-                            }
-                        }
-                        
-                        // Update calculator values
-                        document.querySelectorAll('.on_lion-calculator-value')[0].textContent = '$' + basePrice.toFixed(2);
-                        document.querySelectorAll('.on_lion-calculator-value')[1].textContent = '$' + additionalPrice.toFixed(2);
-                        document.querySelectorAll('.on_lion-calculator-value')[2].textContent = '$' + rushFee.toFixed(2);
-                        
-                        // Update total
-                        const total = basePrice + additionalPrice + rushFee;
-                        estimatedTotal.textContent = '$' + total.toFixed(2);
-                    };
-                    
-                    // Add event listeners to form inputs for calculator
-                    wordCountInput.addEventListener('input', calculatePrice);
-                    serviceTypeSelect.addEventListener('change', calculatePrice);
-                    deadlineInput.addEventListener('change', calculatePrice);
-                    
-                    // FAQ toggle
-                    const faqQuestions = document.querySelectorAll('.on_lion-faq-question');
-                    
-                    faqQuestions.forEach(question => {
-                        question.addEventListener('click', function() {
-                            const faqItem = this.parentNode;
-                            faqItem.classList.toggle('active');
-                        });
-                    });
-                    
-                    // Testimonial slider
-                    const testimonialsContainer = document.querySelector('.on_lion-testimonials-container');
-                    const sliderDots = document.querySelectorAll('.on_lion-slider-dot');
-                    const testimonialWidth = document.querySelector('.on_lion-testimonial').offsetWidth + 32; // width + margin
-                    
-                    sliderDots.forEach(dot => {
-                        dot.addEventListener('click', function() {
-                            const index = parseInt(this.getAttribute('data-index'));
-                            testimonialsContainer.style.transform = `translateX(-${index * testimonialWidth}px)`;
-                            
-                            // Update active dot
-                            document.querySelector('.on_lion-slider-dot.active').classList.remove('active');
-                            this.classList.add('active');
-                        });
-                    });
-                    
-                    // Automatic counter animation
-                    const counters = document.querySelectorAll('.on_lion-counter-value');
-                    const counterSpeed = 200; // Lower is faster
-                    
-                    const startCounters = function() {
-                        counters.forEach(counter => {
-                            const target = parseInt(counter.getAttribute('data-count'));
-                            const count = +counter.innerText;
-                            const increment = target / counterSpeed;
-                            
-                            if (count < target) {
-                                counter.innerText = Math.ceil(count + increment);
-                                setTimeout(startCounters, 1);
-                            } else {
-                                counter.innerText = target;
-                            }
-                        });
-                    };
-                    
-                    // Start counters when they come into view
-                    const counterSection = document.querySelector('.on_lion-counter');
-                    const options = {
-                        root: null,
-                        threshold: 0.5,
-                        rootMargin: "0px"
-                    };
-                    
-                    const observer = new IntersectionObserver(function(entries) {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                startCounters();
-                                observer.unobserve(entry.target);
-                            }
-                        });
-                    }, options);
-                    
-                    observer.observe(counterSection);
-                    
-                    // Floating price button
-                    const floatingPrice = document.getElementById('floatingPrice');
-                    const scrollToFormButton = document.getElementById('scrollToForm');
-                    const formContainer = document.querySelector('.on_lion-form-container');
-                    
-                    // Show floating button after scrolling down
-                    window.addEventListener('scroll', function() {
-                        if (window.scrollY > 500) {
-                            floatingPrice.classList.add('show');
-                        } else {
-                            floatingPrice.classList.remove('show');
-                        }
-                    });
-                    
-                    // Scroll to form functionality
-                    floatingPrice.addEventListener('click', function() {
-                        formContainer.scrollIntoView({ behavior: 'smooth' });
-                    });
-                    
-                    scrollToFormButton.addEventListener('click', function() {
-                        formContainer.scrollIntoView({ behavior: 'smooth' });
-                    });
-                    
-                    // Set minimum date for deadline input
-                    const tomorrow = new Date();
-                    tomorrow.setDate(tomorrow.getDate() + 1);
-                    deadlineInput.min = tomorrow.toISOString().split('T')[0];
-                });
-
-                document.addEventListener('DOMContentLoaded', function() {
-    const fileInput = document.getElementById('file-upload');
-    const fileList = document.getElementById('file-list');
-
-    fileInput.addEventListener('change', function(event) {
-        fileList.innerHTML = ''; // Clear previous files
-        
-        Array.from(this.files).forEach(file => {
-            const fileItem = document.createElement('div');
-            fileItem.classList.add('on_lion-file-list-item');
-            
-            const fileName = document.createElement('span');
-            fileName.textContent = file.name;
-            
-            const removeButton = document.createElement('span');
-            removeButton.textContent = '✖️';
-            removeButton.classList.add('on_lion-file-list-item-remove');
-            
-            removeButton.addEventListener('click', function() {
-                // Remove this specific file from the FileList
-                const updatedFiles = Array.from(fileInput.files).filter(f => f.name !== file.name);
-                const dataTransfer = new DataTransfer();
-                updatedFiles.forEach(f => dataTransfer.items.add(f));
-                fileInput.files = dataTransfer.files;
-                
-                // Remove the file item from the list
-                fileItem.remove();
-            });
-            
-            fileItem.appendChild(fileName);
-            fileItem.appendChild(removeButton);
-            fileList.appendChild(fileItem);
-        });
-    });
-});
-            </script>
-
+               <script src="manuscript-submission.js"></script>
            
         
      

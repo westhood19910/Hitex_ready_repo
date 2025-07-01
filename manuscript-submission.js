@@ -1,4 +1,4 @@
-// The complete code for your manuscript-submission.js file
+// The complete and final code for your manuscript-submission.js file
 
 document.addEventListener('DOMContentLoaded', function() {
     // --- VARIABLE DECLARATIONS ---
@@ -13,37 +13,29 @@ document.addEventListener('DOMContentLoaded', function() {
     const fileInput = document.getElementById('file-upload');
     const fileList = document.getElementById('file-list');
 
-    // --- REAL FORM SUBMISSION LOGIC ---
+    // --- FORM SUBMISSION LOGIC ---
     if (quoteForm) {
         quoteForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-
             const token = localStorage.getItem('authToken');
             if (!token) {
                 alert('You must be logged in to submit a manuscript.');
                 return;
             }
-
             quoteForm.style.display = 'none';
             successMessage.style.display = 'none';
             loadingElement.style.display = 'block';
-
             const formData = new FormData(quoteForm);
-
             try {
                 const response = await fetch('https://hitex-backend-server.onrender.com/submit-manuscript', {
                     method: 'POST',
                     headers: { 'Authorization': `Bearer ${token}` },
                     body: formData
                 });
-                
                 loadingElement.style.display = 'none';
                 const result = await response.json();
-
                 if (!response.ok) { throw new Error(result.message); }
-
                 successMessage.style.display = 'block';
-
             } catch (error) {
                 loadingElement.style.display = 'none';
                 quoteForm.style.display = 'block';
@@ -57,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
         resetButton.addEventListener('click', function() {
             successMessage.style.display = 'none';
             quoteForm.reset();
-            fileList.innerHTML = '';
+            if(fileList) fileList.innerHTML = '';
             quoteForm.style.display = 'block';
         });
     }
@@ -65,28 +57,31 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- PRICE CALCULATOR LOGIC ---
     const calculatePrice = function() {
         if (!wordCountInput || !serviceTypeSelect || !deadlineInput || !estimatedTotal) return;
-        let basePrice = 0; let additionalPrice = 0; let rushFee = 0;
+        let basePrice = 0, additionalPrice = 0, rushFee = 0;
         const wordCount = parseInt(wordCountInput.value) || 0;
         if (wordCount > 0) {
             basePrice = wordCount * 0.02;
             const service = serviceTypeSelect.value;
-            if (service === 'copyediting') { additionalPrice = wordCount * 0.01; } 
-            else if (service === 'developmental') { additionalPrice = wordCount * 0.03; }
-            else if (service === 'formatting') { additionalPrice = 50; }
-            else if (service === 'full-package') { additionalPrice = wordCount * 0.04 + 50; }
+            if (service === 'copyediting') additionalPrice = wordCount * 0.01;
+            else if (service === 'developmental') additionalPrice = wordCount * 0.03;
+            else if (service === 'formatting') additionalPrice = 50;
+            else if (service === 'full-package') additionalPrice = wordCount * 0.04 + 50;
             if (deadlineInput.value) {
                 const deadline = new Date(deadlineInput.value);
                 const today = new Date();
                 const diffDays = Math.ceil(Math.abs(deadline - today) / (1000 * 60 * 60 * 24));
-                if (diffDays <= 2) { rushFee = (basePrice + additionalPrice) * 0.5; } 
-                else if (diffDays <= 5) { rushFee = (basePrice + additionalPrice) * 0.25; }
+                if (diffDays <= 2) rushFee = (basePrice + additionalPrice) * 0.5;
+                else if (diffDays <= 5) rushFee = (basePrice + additionalPrice) * 0.25;
             }
         }
-        document.querySelector('.on_lion-price-calculator .on_lion-calculator-value:nth-of-type(1)').textContent = '$' + basePrice.toFixed(2);
-        document.querySelector('.on_lion-price-calculator .on_lion-calculator-value:nth-of-type(2)').textContent = '$' + additionalPrice.toFixed(2);
-        document.querySelector('.on_lion-price-calculator .on_lion-calculator-value:nth-of-type(3)').textContent = '$' + rushFee.toFixed(2);
+        const priceCalc = document.querySelector('.on_lion-price-calculator');
+        if(priceCalc) {
+            priceCalc.querySelector('.on_lion-calculator-value:nth-of-type(1)').textContent = '$' + basePrice.toFixed(2);
+            priceCalc.querySelector('.on_lion-calculator-value:nth-of-type(2)').textContent = '$' + additionalPrice.toFixed(2);
+            priceCalc.querySelector('.on_lion-calculator-value:nth-of-type(3)').textContent = '$' + rushFee.toFixed(2);
+        }
         const total = basePrice + additionalPrice + rushFee;
-        estimatedTotal.textContent = '$' + total.toFixed(2);
+        if(estimatedTotal) estimatedTotal.textContent = '$' + total.toFixed(2);
     };
     if(wordCountInput) wordCountInput.addEventListener('input', calculatePrice);
     if(serviceTypeSelect) serviceTypeSelect.addEventListener('change', calculatePrice);
