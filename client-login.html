@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head> 
 <body style="background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 50%, rgba(3, 38, 114, 1) 50%);">
-    <header class="pag-2-hed-1">
+   <header class="pag-2-hed-1">
                 <div class="lat_clo_001">              
                 <a href="index.html" class="action-home">
                   <i class="fa-solid fa-house"></i>
@@ -47,6 +47,115 @@
                 </ul>
             </div>
     </header>
+              <!-- Modified Navigation HTML -->
+<nav class="nav__bar_oi" style="margin-top: 2em;">
+  <div class="nav__bar_oi-logo">
+    <img src="assets/png_20221026_003820_0000.png" alt="HiTex EdiTex Logo">
+  </div>
+  
+  <button class="nav__bar_oi-toggle" id="navToggle">
+    <span class="nav__bar_oi-toggle-line"></span>
+    <span class="nav__bar_oi-toggle-line"></span>
+    <span class="nav__bar_oi-toggle-line"></span>
+  </button>
+  
+  <ul class="nav__bar_oi-menu" id="navMenu">
+    <li class="nav__bar_oi-menu-item">
+      <a href="#" class="nav__bar_oi-menu-link">About Us</a>
+      <div class="nav__bar_oi-dropdown">
+        <a href="about.html" class="nav__bar_oi-dropdown-item">About Hitex EdiTex</a>
+        <a href="leadership.html" class="nav__bar_oi-dropdown-item">Leadership</a>
+        <a href="#offices" class="nav__bar_oi-dropdown-item">Offices</a>
+        <a href="#testimonials" class="nav__bar_oi-dropdown-item">Testimonials</a>
+        <a href="impact.html" class="nav__bar_oi-dropdown-item">Impact</a>
+      </div>
+    </li>
+    <li class="nav__bar_oi-menu-item">
+      <a href="#services" class="nav__bar_oi-menu-link">Services</a>
+      <div class="nav__bar_oi-dropdown">
+        <a href="language-editng.html" class="nav__bar_oi-dropdown-item">Language Editing</a>
+        <a href="Scientific.html" class="nav__bar_oi-dropdown-item">Scientific Editing</a>
+        <a href="technichal.html" class="nav__bar_oi-dropdown-item">Technical Editing</a>
+        <a href="translate.html" class="nav__bar_oi-dropdown-item">Translation Services</a>
+        <a href="service-levels.html" class="nav__bar_oi-dropdown-item">Service Levels</a>
+        <a href="pricing.html" class="nav__bar_oi-dropdown-item">Pricing</a>
+        <a href="auhtoredly.html" class="nav__bar_oi-dropdown-item">Authoredly</a>
+      </div>
+    </li>
+    <li class="nav__bar_oi-menu-item">
+      <a href="#careers" class="nav__bar_oi-menu-link">Careers</a>
+      <div class="nav__bar_oi-dropdown">
+        <a href="life-at-hitex.html" class="nav__bar_oi-dropdown-item">Life at HiTex EdiTex</a>
+        <a href="In-house.html" class="nav__bar_oi-dropdown-item">In-house</a>
+        <a href="freelance.html" class="nav__bar_oi-dropdown-item">Freelance</a>
+      </div>
+    </li>
+    <li class="nav__bar_oi-menu-item">
+      <a href="contact.html" class="nav__bar_oi-menu-link">Contact Us</a>
+    </li>
+    <li class="nav__bar_oi-menu-item">
+      <a href="#resources" class="nav__bar_oi-menu-link">Helpful Resources</a>
+      <div class="nav__bar_oi-dropdown">
+        <a href="support" class="nav__bar_oi-dropdown-item">Support and FAQs</a>
+        <a href="hitex-hub.html" class="nav__bar_oi-dropdown-item">The Hitex Hub</a>
+        <a href="newsroom.html" class="nav__bar_oi-dropdown-item">Newsroom</a>
+      </div>
+    </li>
+    <div class="nav__bar_oi-actions">
+      <button class="nav__bar_oi-button nav__bar_oi-button-signup">Client Sign-Up</button>
+      <button class="nav__bar_oi-button nav__bar_oi-button-login">Client Log-in</button>
+    </div>
+  </ul>
+  
+  <!-- Search bar and social media icons -->
+  <div class="nav__bar_oi-utility">
+    <div class="nav__bar_oi-search">
+      <button class="nav__bar_oi-search-icon" id="searchToggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+      <div class="nav__bar_oi-search-container" id="searchContainer">
+        <input type="text" class="nav__bar_oi-search-input" placeholder="Search..." aria-label="Search">
+        <button class="nav__bar_oi-search-close" id="searchClose">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="nav__bar_oi-social">
+      <div class="new_loger_nav__bar_oi-actions">
+        <a href="client-sign-up.html" class="new_loger_nav__bar_oi-button new_loger_nav__bar_oi-button-signup">Client Sign-up</a>
+        <a href="client-login.html" class="new_loger_nav__bar_oi-button new_loger_nav__bar_oi-button-login">Client Log-in</a>
+      </div>
+   <div class="intbeh_01">
+                        <div class="kli_002_wer">
+                            <a href="https://www.threads.net/@hitexeditex">
+                            <img src="assets/threads-icon.svg" class="alb-im-001">
+                           </a>
+                        </div>
+                           </div>
+                        <div class="kli_002_wer">
+                    <a href="https://www.linkedin.com/company/hitexeditex/">
+                    <img src="assets/linkedin-app-icon.svg" class="alb-im-001">
+                   </a>
+                   </div>
+                   <div class="kli_002_wer">
+                   <a href="https://x.com/HiTexEdiTex" target="_blank">
+                    <img src="assets/x-social-media-black-icon.svg" alt="Twitter Icon" class="alb-im-001">
+                  </a>
+                  </div>  
+                  <div class="kli_002_wer">
+                   <a href="https://www.instagram.com/hitexeditex" target="_blank"  >
+                    <img src="assets/ig-instagram-icon.svg" class="alb-im-001"></a>
+                    </div>  
+    </div>
+  </div>
+  <div class="nav__bar_oi-overlay" id="navOverlay"></div>
+</nav>
     
                <div class="log_er_h-container">
                 <div class="log_er_h-header">
