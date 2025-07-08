@@ -725,6 +725,9 @@ h2 {
 
 /* SUBJECT AREA CONTAINER HERE*/
 
+/* =================================================================== */
+/* Container & Heading Styles                     */
+/* =================================================================== */
 
 .subjects-cont {
     border-radius: 10px;
@@ -733,7 +736,6 @@ h2 {
     margin-left: 10vw;
     margin-right: 10vw;
 }
-
 
 @media (max-width: 533px) {
     .subjects-cont {
@@ -749,7 +751,6 @@ h2 {
     }
 }
 
-
 @media (max-width: 160px) {
     .subjects-cont {
         margin-left: 1em;
@@ -764,105 +765,127 @@ h2 {
     }
 }
 
-
 @media screen and (max-width: 1181px) {
     .subjects-cont {
-      
-        margin-top: 10em; margin-bottom: 10em;
-        margin-left: 4em; margin-right: 4em;
-    }
-}
-@media screen and (max-width: 667px) {
-    .subjects-cont {
-        margin-top: 8em; margin-bottom: 8em;
-        margin-left: 0.8em; margin-right: 0.8em;
-    }
-}
-@media screen and (max-width: 480px) {
-    .subjects-cont {
-        margin-top: 5em; margin-bottom: 5em;
-        margin-left: 0.5em; margin-right: 0.5em;
+        margin-top: 10em;
+        margin-bottom: 10em;
+        margin-left: 4em;
+        margin-right: 4em;
     }
 }
 
+@media screen and (max-width: 667px) {
+    .subjects-cont {
+        margin-top: 8em;
+        margin-bottom: 8em;
+        margin-left: 0.8em;
+        margin-right: 0.8em;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .subjects-cont {
+        margin-top: 5em;
+        margin-bottom: 5em;
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+    }
+}
 
 /* Heading Styling */
 .m_b8 {
-   
-    margin-bottom: 1vw; 
+    margin-bottom: 1vw;
     color: var(--blue);
-  
-    font-size: 4vw; 
+    font-size: 4vw;
     text-align: center;
     font-weight: var(--major-header-font-weight, 700);
 }
 
-
 @media (max-width: 499px) {
-    .m_b8 { margin-bottom: 5px; }
+    .m_b8 {
+        margin-bottom: 5px;
+    }
 }
 
 @media (min-width: 1000px) {
-    .m_b8 { margin-bottom: 10px; }
+    .m_b8 {
+        margin-bottom: 10px;
+    }
 }
 
-
 @media (max-width: 624px) {
-    .m_b8 { font-size: 25px; }
+    .m_b8 {
+        font-size: 25px;
+    }
 }
 
 @media (min-width: 900px) {
-    .m_b8 { font-size: 36px; }
+    .m_b8 {
+        font-size: 36px;
+    }
 }
-
 
 @media screen and (max-width: 898px) {
     .m_b8 {
-        
-        font-size: 5vw; 
-    }
-   
-    @media (max-width: 399px) { 
-        .m_b8 { font-size: 20px; }
-    }
-
-    @media (min-width: 500px) and (max-width: 898px) {
-        .m_b8 { font-size: 25px; }
+        font-size: 5vw;
     }
 }
 
-
-@media screen and (max-width: 480px) { 
-  
+@media (max-width: 399px) {
     .m_b8 {
-        font-size: 18px; 
+        font-size: 20px;
     }
+}
+
+@media (min-width: 500px) and (max-width: 898px) {
+    .m_b8 {
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .m_b8 {
+        font-size: 18px;
+    }
+}
+
+/* =================================================================== */
+/* ✅ Corrected Image Grid Styles (2-Column)            */
+/* =================================================================== */
+
+:root {
+    /* Defines a responsive gap between images for easy changes */
+    --grid-gap: 2vw;
 }
 
 .we_34hood {
     text-align: center;
     font-size: var(--font-size-sub-head);
     color: var(--second-sub-head-color);
-    margin-bottom: var(--c
-    lient-grid-gap);
+    margin-bottom: var(--grid-gap); /* Uses the new gap variable */
 }
 
-
+/* This is the flex container for the image columns */
+/* This is the flex container for the image columns */
 .client-grid-row {
-
     display: flex;
     flex-wrap: wrap;
-    gap: var(--client-grid-gap);
+    gap: var(--grid-gap); /* Applies the space between items */
+    justify-content: center; /* This is the new line you need to add */
 }
 
+/* This is the individual column for each image */
 .client-grid-col {
-    padding-left: 0;
-    padding-right: 0;
     box-sizing: border-box;
-    
+    width: calc((100% - var(--grid-gap)) / 2);
 }
 
-/* Client Box Styling */
+@media (max-width: 580px) {
+    .client-grid-col {
+        width: 100%;
+    }
+}
+
 .client-box {
     width: 100%;
     height: 100%;
@@ -874,33 +897,43 @@ h2 {
     background-position: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-  
-    min-height: 35vw; 
+    min-height: 35vw;
     position: relative;
     overflow: hidden;
     filter: grayscale(100%);
     -webkit-filter: grayscale(100%);
 }
 
-
 @media (max-width: 685px) {
-    .client-box { min-height: 15em; }
+    .client-box {
+        min-height: 15em;
+    }
 }
 
 @media (min-width: 1006px) {
-    .client-box { min-height: 22em; }
+    .client-box {
+        min-height: 22em;
+    }
 }
 
+#client-box-researchers {
+    background-image: url("https://cdn.pixabay.com/photo/2016/03/24/06/36/documentary-1276190_1280.jpg");
+}
 
+#client-box-authors {
+    background-image: url("https://cdn.pixabay.com/photo/2021/10/22/16/11/dharmendra-rai-6732979_1280.jpg");
+}
 
-#client-box-researchers { background-image: url("https://cdn.pixabay.com/photo/2016/03/24/06/36/documentary-1276190_1280.jpg"); }
-#client-box-authors { background-image: url("https://cdn.pixabay.com/photo/2021/10/22/16/11/dharmendra-rai-6732979_1280.jpg"); }
-#client-box-universities { background-image: url("https://cdn.pixabay.com/photo/2024/05/24/15/53/durham-castle-8785343_1280.jpg"); }
-#client-box-societies { background-image: url("https://img.freepik.com/free-photo/diverse-hands-circle_53876-139637.jpg?t=st=1744028542~exp=1744032142~hmac=2cc40f872bdf4aaf0f61d09d3ec6402882de4b0139eac165e8c01f8e9460a06f&w=2000"); }
+#client-box-universities {
+    background-image: url("https://cdn.pixabay.com/photo/2024/05/24/15/53/durham-castle-8785343_1280.jpg");
+}
 
+#client-box-societies {
+    background-image: url("https://img.freepik.com/free-photo/diverse-hands-circle_53876-139637.jpg?t=st=1744028542~exp=1744032142~hmac=2cc40f872bdf4aaf0f61d09d3ec6402882de4b0139eac165e8c01f8e9460a06f&w=2000");
+}
 
 .client-box-title {
-    font-size: 2.5vw; 
+    font-size: 2.5vw;
     font-weight: bold;
     color: #ffffff;
     text-align: center;
@@ -914,21 +947,25 @@ h2 {
 }
 
 @media (max-width: 703px) {
-    .client-box-title { font-size: 1.1rem; }
+    .client-box-title {
+        font-size: 1.1rem;
+    }
 }
 
 @media (min-width: 960px) {
-    .client-box-title { font-size: 1.5rem; }
+    .client-box-title {
+        font-size: 1.5rem;
+    }
 }
-
 
 @media screen and (max-width: 454px) {
     .client-box-title {
         padding: 0.5em 1em;
-        
-        font-size: 1rem; 
+        font-size: 1rem;
     }
 }
+
+/* END */
 
 .add_va_lue {
   font-family: sans-serif;
@@ -1567,8 +1604,6 @@ h2 {
 }
 }
 
-
-
 .toggle-button-2 {
   display: none;
   font-size: 20px;
@@ -1582,19 +1617,6 @@ h2 {
   margin-left: 11em;
   transition: color 0.3s ease;
 }
-
-/* Reset and base styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-}
-
-/* Navbar styles */
 
 .pag_2_nav_bar {
   display: flex;
@@ -1611,7 +1633,6 @@ body {
   justify-content:space-between;
   align-items: center;
 }
-
 
 @media screen and (max-width: 869px){
   .pag_2_nav_bar {
@@ -2376,7 +2397,8 @@ font-weight: bold;
   }
 }
 
-/*DROP DOWN MENU CODE FOR Fresh2*/
+/*DROP DOWN MENU CODE FOR FRESH*/
+
 .ser_ul_001 {
   top: 100%;
   list-style-type: none;
@@ -9044,6 +9066,7 @@ p {
 .nav__bar_oi-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  color: #000000;
 }
 
 .nav__bar_oi-toggle {
@@ -9099,6 +9122,9 @@ p {
   border: 1px solid var(--red);
 }
 
+.new_loger_nav__bar_oi-button-signup:hover {
+color: #ffffffff;
+}
 
 .new_loger_nav__bar_oi-button-login {
   background-color: var(--blue);

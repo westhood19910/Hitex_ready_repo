@@ -1273,3 +1273,5 @@ document.addEventListener('DOMContentLoaded', () => {
   typeNextElement();
 });
 
+
+
