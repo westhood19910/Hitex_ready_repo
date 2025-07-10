@@ -1,5 +1,4 @@
-// The complete and final code for your manuscript-submission.js file
-
+// The complete and final 
 document.addEventListener('DOMContentLoaded', function() {
     // --- VARIABLE DECLARATIONS ---
     const quoteForm = document.getElementById('quoteForm');
@@ -53,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
             quoteForm.style.display = 'block';
         });
     }
-    
+
     // --- PRICE CALCULATOR LOGIC ---
     const calculatePrice = function() {
         if (!wordCountInput || !serviceTypeSelect || !deadlineInput || !estimatedTotal) return;
