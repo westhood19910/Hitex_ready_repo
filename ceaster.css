@@ -1,3 +1,21 @@
+:root {
+  --red: #D54C4F;
+  --blue: #032672;
+  --light-blue: #D3E5FF;
+  --major-heading: 3em;
+  --major-header-font-weight: 800;
+  --sub-head-color: #EBEBEB;
+  --button-background:linear-gradient(135deg, #eb2525, #af1e1e);
+  --smaller-major-head: 1.5em;
+  --smaller-sub-heading: 1rem;
+  --text-color: #333;
+  --transition-speed: 0.3s;
+  --white: #ffffff;
+  --general-text-font: 0.85em;
+   --second-sub-head-color:rgb(121, 125, 131);
+   --font-size-sub-head: 1.25rem;
+}
+
 html, body { 
     font-family: Arial, sans-serif;
     margin: 0;
@@ -534,4 +552,27 @@ body::-webkit-scrollbar-thumb:hover {
         height: 1.5rem;
         width: 1px;
     }
+}
+
+.admin-link-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.admin-dashboard-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--white);
+    background: var(--button-background);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: transform 0.2s;
+}
+
+.admin-dashboard-button:hover {
+    transform: scale(1.05);
+    color: var(--white);
 }
