@@ -852,7 +852,45 @@ document.querySelector('.SlodsProgress').addEventListener('click', (e) => {
 });
 
 
-// CODE FOR PRIVACY POLICY PAGE
+// NEW CODE FOR CUSTOMISED MESSAGE AFTER LOGGED IN
+
+// Add this function to your freshtex.js file
+
+function showCustomAlert(message, type = 'success') {
+    // Create the alert element
+    const alertBox = document.createElement('div');
+    
+    // Style it based on success or error
+    alertBox.style.position = 'fixed';
+    alertBox.style.top = '20px';
+    alertBox.style.left = '50%';
+    alertBox.style.transform = 'translateX(-50%)';
+    alertBox.style.padding = '1rem 1.5rem';
+    alertBox.style.borderRadius = '8px';
+    alertBox.style.color = 'var(--white)';
+    alertBox.style.fontWeight = 'bold';
+    alertBox.style.zIndex = '2000';
+    alertBox.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
+
+    if (type === 'success') {
+        // Use your brand's blue for success
+        alertBox.style.backgroundColor = 'var(--blue)';
+    } else {
+        // Use your brand's red for error
+        alertBox.style.backgroundColor = 'var(--red)';
+    }
+
+    // Add the message
+    alertBox.textContent = message;
+
+    // Add it to the page
+    document.body.appendChild(alertBox);
+
+    // Make it disappear after 3 seconds
+    setTimeout(() => {
+        alertBox.remove();
+    }, 3000);
+}
 
 
 

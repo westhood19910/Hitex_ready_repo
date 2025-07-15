@@ -1258,32 +1258,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const textsToType = [
         "Enhancing science and technical communications<br>for a better world.",
         "Bridging the communication gap between <br>research and society",
-        "Narrating ideas and innovation one<br> word at a time."
+        "Narrating ideas and innovation one word at a time."
     ];
 
-    // 2. Select the SINGLE element where the text will appear
+
     const textElement = document.querySelector('.cnt-fr-ch-03 .gr-ps-tur-001');
-    const typingSpeed = 50; // Milliseconds per character
-    const pauseBetweenSentences = 2000; // 2-second pause
+    const typingSpeed = 50; 
+    const pauseBetweenSentences = 2000; 
 
     let textIndex = 0;
 
     function typeNextSentence() {
-        // Get the current sentence from the array
+        
         const currentText = textsToType[textIndex];
 
-        // Call the typeWriter, and when it's done, wait and then start the next one
+       
         typeWriter(textElement, currentText, typingSpeed, () => {
             
-            // Move to the next sentence, and loop back to the start if at the end
+           
             textIndex = (textIndex + 1) % textsToType.length;
 
-            // Wait for the specified pause time before typing the next sentence
+           
             setTimeout(typeNextSentence, pauseBetweenSentences);
         });
     }
-
-    // Start the typing animation cycle
     typeNextSentence();
 });
 
