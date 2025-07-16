@@ -1275,8 +1275,7 @@ document.addEventListener('DOMContentLoaded', () => {
        
         typeWriter(textElement, currentText, typingSpeed, () => {
             
-           
-            textIndex = (textIndex + 1) % textsToType.length;
+           textIndex = (textIndex + 1) % textsToType.length;
 
            
             setTimeout(typeNextSentence, pauseBetweenSentences);
