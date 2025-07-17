@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Dashboard</title>
+    <style>
+        :root { 
+            --blue: #032672;
+            --light-blue: #D3E5FF;
+            --button-background: linear-gradient(135deg, #eb2525, #af1e1e);
+            --white: #ffffff;
+            --text-color: #333;
+            --grey-light: #f7f9fc;
+            --grey: #e5e9f2;
+            --text: #2c3e50;
+            --text-light: #7e8c9a;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --radius: 10px;
+        }
+        body { font-family: 'Roboto', sans-serif; background-color: var(--grey-light); margin: 0; padding: 2em; }
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 3fr; gap: 2em; max-width: 1200px; margin: auto; }
+        .dashboard-card { background: var(--white); padding: 2em; border-radius: var(--radius); box-shadow: var(--shadow); }
+        .dashboard-card h2 { color: var(--blue); border-bottom: 1px solid var(--grey); padding-bottom: 0.5rem; margin-top: 0; }
+        .profile-info p { margin: 0.5rem 0; }
+        .profile-info strong { color: var(--text-light); }
+        .action-button, .logout-button { display: inline-block; width: 100%; text-align: center; margin-top: 1rem; padding: 0.8rem; border: none; border-radius: var(--radius); background: var(--button-background); color: var(--white); font-weight: bold; cursor: pointer; text-decoration: none; }
+        .logout-button { background: var(--text-light); margin-top: 0.5rem; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { border-bottom: 1px solid var(--grey); padding: 1rem; text-align: left; }
+        th { color: var(--text-light); }
+        @media (max-width: 900px) { .dashboard-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-grid">
+        <div class="profile-sidebar">
+            <div class="dashboard-card profile-info">
+                <h2>Welcome!</h2>
+                <p><strong>Name:</strong> <span id="profileName">Loading...</span></p>
+                <p><strong>Email:</strong> <span id="profileEmail">Loading...</span></p>
+                <p><strong>Job Title:</strong> <span id="profileJobTitle">Loading...</span></p>
+                <p><strong>Institution:</strong> <span id="profileInstitution">Loading...</span></p>
+                <a href="/profile.html" class="action-button" style="background: var(--blue);">Edit Profile</a>
+                <button id="logoutButton" class="logout-button">Logout</button>
+            </div>
+        </div>
+
+        <div class="manuscript-main">
+            <div class="dashboard-card">
+                <h2>Your Manuscript Submissions</h2>
+                <a href="/submit-manuscript.html" class="action-button">Submit New Manuscript</a>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Filename</th>
+                            <th>Word Count</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="manuscriptList">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                window.location.href = 'login.html'; 
+                return;
+            }
+
+            const headers = { 'Authorization': `Bearer ${token}` };
+
+            // --- Fetch and display profile information ---
+            fetch('https://hitex-backend-server.onrender.com/profile', { headers })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        document.getElementById('profileName').textContent = data.fullName || 'Not set';
+                        document.getElementById('profileEmail').textContent = data.email || 'Not set';
+                        document.getElementById('profileJobTitle').textContent = data.jobTitle || 'Not set';
+                        document.getElementById('profileInstitution').textContent = data.institution || 'Not set';
+                    }
+                })
+                .catch(err => console.error('Failed to load profile', err));
+
+            // --- Fetch and display user's manuscripts ---
+            fetch('https://hitex-backend-server.onrender.com/my-manuscripts', { headers })
+                .then(response => response.json())
+                .then(manuscripts => {
+                    const list = document.getElementById('manuscriptList');
+                    if (manuscripts.length === 0) {
+                        list.innerHTML = '<tr><td colspan="4" style="text-align:center;">You have not submitted any manuscripts yet.</td></tr>';
+                        return;
+                    }
+                    
+                    manuscripts.forEach(doc => {
+                        const row = list.insertRow();
+                        row.innerHTML = `
+                            <td>${new Date(doc.uploadDate).toLocaleDateString()}</td>
+                            <td>${doc.originalName}</td>
+                            <td>${doc.wordCount}</td>
+                            <td>${doc.status || 'Submitted'}</td>
+                        `;
+                    });
+                })
+                .catch(err => console.error('Failed to load manuscripts', err));
+
+            // --- Logout Button Logic ---
+            document.getElementById('logoutButton').addEventListener('click', () => {
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('user');
+                alert('You have been logged out.');
+                window.location.href = 'client-login.html';
+            });
+        });
+    </script>
+</body>
+</html>
