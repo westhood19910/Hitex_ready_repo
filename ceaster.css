@@ -562,8 +562,8 @@ body::-webkit-scrollbar-thumb:hover {
 
 .admin-dashboard-button {
     display: inline-block;
-    padding: 10px 20px;
-    font-size: 0.9rem;
+    padding: 10px 10px;
+    font-size: 0.5rem;
     font-weight: bold;
     color: var(--white);
     background: var(--button-background);
