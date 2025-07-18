@@ -49,126 +49,7 @@
     <div class="adm-fiu-modal" id="assignmentModal" style="display: none;">
         </div>
 
-   <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-        const token = localStorage.getItem('adminAuthToken');
-        if (!token) {
-            alert('Admin access required. Please log in.');
-            window.location.href = '/admin-login.html';
-            return;
-        }
-
-        const assignmentModal = document.getElementById('assignmentModal');
-        const assignmentModalOverlay = document.getElementById('assignmentModalOverlay');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        const assignmentDetailsForm = document.getElementById('assignmentDetailsForm');
-
-        // --- Function to open the modal ---
-        window.openAssignmentModal = (manuscriptId, wordCount) => {
-            const editorId = document.getElementById(`editor-select-${manuscriptId}`).value;
-            if (!editorId) {
-                alert('Please select an editor from the dropdown.');
-                return;
-            }
-            // Store data and show modal
-            document.getElementById('modalManuscriptId').value = manuscriptId;
-            document.getElementById('modalEditorId').value = editorId;
-            document.getElementById('modalEditableWords').value = wordCount;
-            document.getElementById('modalEffectiveWords').value = wordCount;
-            assignmentModal.style.display = 'block';
-            assignmentModalOverlay.style.display = 'block';
-        };
-
-        // --- Function to close the modal ---
-        const closeAssignmentModal = () => {
-            assignmentModal.style.display = 'none';
-            assignmentModalOverlay.style.display = 'none';
-        };
-
-        // --- Event listeners for closing the modal ---
-        closeModalBtn.addEventListener('click', closeAssignmentModal);
-        assignmentModalOverlay.addEventListener('click', closeAssignmentModal);
-
-        // --- Logic to fetch data and build the table ---
-        try {
-            const editorResponse = await fetch('https://hitex-backend-server.onrender.com/admin/editors', { headers: { 'Authorization': `Bearer ${token}` } });
-            if (!editorResponse.ok) throw new Error('Could not fetch editors.');
-            const editors = await editorResponse.json();
-
-            const manuscriptResponse = await fetch('https://hitex-backend-server.onrender.com/admin/dashboard', { headers: { 'Authorization': `Bearer ${token}` } });
-            if (!manuscriptResponse.ok) throw new Error('Could not fetch manuscripts.');
-            const manuscripts = await manuscriptResponse.json();
-
-            const tableBody = document.querySelector('#manuscriptTable tbody');
-            tableBody.innerHTML = ''; 
-            
-            manuscripts.forEach(doc => {
-                const row = tableBody.insertRow();
-                let statusInfo = doc.status || 'New';
-                if (doc.assignedEditorId) {
-                    const assignedEditor = editors.find(e => e._id === doc.assignedEditorId);
-                    statusInfo = `<span style="color: green; font-weight: bold;">Assigned</span> (to: ${assignedEditor ? assignedEditor.fullName : 'Unknown'})`;
-                }
-                let editorOptions = '<option value="">Select an Editor...</option>';
-                editors.forEach(editor => {
-                    editorOptions += `<option value="${editor._id}">${editor.fullName}</option>`;
-                });
-
-                row.innerHTML = `
-                    <td>${new Date(doc.uploadDate).toLocaleString()}</td>
-                    <td>${doc.originalName}</td>
-                    <td>${statusInfo}</td>
-                    <td><a href="https://hitex-backend-server.onrender.com/${doc.filePath}" class="adm-fiu-download-btn" download>Download</a></td>
-                    <td>
-                        <div style="display: flex; gap: 5px;">
-                           <select id="editor-select-${doc._id}" style="flex-grow: 1;">${editorOptions}</select>
-                           <button onclick="openAssignmentModal('${doc._id}', '${doc.wordCount}')" class="assign-btn">Assign</button>
-                        </div>
-                    </td>
-                `;
-            });
-        } catch (error) {
-            alert('Error loading dashboard: ' + error.message);
-        }
-
-        // --- Event listener for the final assignment from the modal ---
-        assignmentDetailsForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const manuscriptId = document.getElementById('modalManuscriptId').value;
-            const assignmentData = {
-                editorId: document.getElementById('modalEditorId').value,
-                jobType: document.getElementById('modalJobType').value,
-                serviceType: document.getElementById('modalServiceType').value,
-                editableWords: document.getElementById('modalEditableWords').value,
-                effectiveEditableWords: document.getElementById('modalEffectiveWords').value,
-                targetJournal: document.getElementById('modalTargetJournal').value,
-                languageRequirements: document.getElementById('modalLanguage').value,
-                subjectArea: document.getElementById('modalSubjectArea').value,
-                assignmentStartDate: document.getElementById('modalStartDate').value,
-                assignmentReturnDate: document.getElementById('modalReturnDate').value
-            };
-
-            try {
-                const response = await fetch(`https://hitex-backend-server.onrender.com/admin/assign-job/${manuscriptId}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify(assignmentData)
-                });
-                const result = await response.json();
-                if (!response.ok) throw new Error(result.message);
-                alert('Job assigned successfully!');
-                window.location.reload();
-            } catch (error) {
-                alert('Failed to assign job: ' + error.message);
-            }
-        });
-    });
-</script>
-
-    <div class="adm-fiu-modal-overlay" id="assignmentModalOverlay" style="display: none;"></div>
+         <div class="adm-fiu-modal-overlay" id="assignmentModalOverlay" style="display: none;"></div>
 
 <div class="adm-fiu-modal" id="assignmentModal" style="display: none;">
     <div class="adm-fiu-modal-header">
@@ -229,5 +110,123 @@
         </form>
     </div>
 </div>
+
+ <script>
+    // --- These helper functions are now in the global scope so the 'onclick' can find them ---
+    function openAssignmentModal(manuscriptId, wordCount) {
+        const editorId = document.getElementById(`editor-select-${manuscriptId}`).value;
+        if (!editorId) {
+            alert('Please select an editor from the dropdown.');
+            return;
+        }
+        
+        // Store the IDs and pre-fill data in the modal's hidden form fields
+        document.getElementById('modalManuscriptId').value = manuscriptId;
+        document.getElementById('modalEditorId').value = editorId;
+        document.getElementById('modalEditableWords').value = wordCount;
+        document.getElementById('modalEffectiveWords').value = wordCount;
+        
+        // Show the modal and the overlay
+        document.getElementById('assignmentModal').style.display = 'block';
+        document.getElementById('assignmentModalOverlay').style.display = 'block';
+    }
+
+    function closeAssignmentModal() {
+        document.getElementById('assignmentModal').style.display = 'none';
+        document.getElementById('assignmentModalOverlay').style.display = 'none';
+    }
+
+    // --- The main script that runs after the page is loaded ---
+    document.addEventListener('DOMContentLoaded', async () => {
+        const token = localStorage.getItem('adminAuthToken');
+        if (!token) {
+            alert('Admin access required. Please log in.');
+            window.location.href = '/admin-login.html';
+            return;
+        }
+
+        // --- Event listeners for the modal elements ---
+        document.getElementById('closeModalBtn').addEventListener('click', closeAssignmentModal);
+        document.getElementById('assignmentModalOverlay').addEventListener('click', closeAssignmentModal);
+
+        document.getElementById('assignmentDetailsForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const manuscriptId = document.getElementById('modalManuscriptId').value;
+            
+            const assignmentData = {
+                editorId: document.getElementById('modalEditorId').value,
+                jobType: document.getElementById('modalJobType').value,
+                serviceType: document.getElementById('modalServiceType').value,
+                editableWords: document.getElementById('modalEditableWords').value,
+                effectiveEditableWords: document.getElementById('modalEffectiveWords').value,
+                targetJournal: document.getElementById('modalTargetJournal').value,
+                languageRequirements: document.getElementById('modalLanguage').value,
+                subjectArea: document.getElementById('modalSubjectArea').value,
+                assignmentStartDate: document.getElementById('modalStartDate').value,
+                assignmentReturnDate: document.getElementById('modalReturnDate').value
+            };
+
+            try {
+                const response = await fetch(`https://hitex-backend-server.onrender.com/admin/assign-job/${manuscriptId}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify(assignmentData)
+                });
+
+                const result = await response.json();
+                if (!response.ok) throw new Error(result.message);
+
+                alert('Job assigned successfully!');
+                window.location.reload();
+            } catch (error) {
+                alert('Failed to assign job: ' + error.message);
+            }
+        });
+
+        // --- Logic to fetch data and build the table (remains the same) ---
+        try {
+            const editorResponse = await fetch('https://hitex-backend-server.onrender.com/admin/editors', { headers: { 'Authorization': `Bearer ${token}` } });
+            if (!editorResponse.ok) throw new Error('Could not fetch editors.');
+            const editors = await editorResponse.json();
+
+            const manuscriptResponse = await fetch('https://hitex-backend-server.onrender.com/admin/dashboard', { headers: { 'Authorization': `Bearer ${token}` } });
+            if (!manuscriptResponse.ok) throw new Error('Could not fetch manuscripts.');
+            const manuscripts = await manuscriptResponse.json();
+
+            const tableBody = document.querySelector('#manuscriptTable tbody');
+            tableBody.innerHTML = ''; 
+
+            manuscripts.forEach(doc => {
+                const row = tableBody.insertRow();
+                // ... (The table row creation logic remains the same)
+                let statusInfo = doc.status || 'New';
+                if (doc.assignedEditorId) {
+                    const assignedEditor = editors.find(e => e._id === doc.assignedEditorId);
+                    statusInfo = `<span style="color: green; font-weight: bold;">Assigned</span> (to: ${assignedEditor ? assignedEditor.fullName : 'Unknown'})`;
+                }
+                let editorOptions = '<option value="">Select an Editor...</option>';
+                editors.forEach(editor => {
+                    editorOptions += `<option value="${editor._id}">${editor.fullName}</option>`;
+                });
+                row.innerHTML = `
+                    <td>${new Date(doc.uploadDate).toLocaleString()}</td>
+                    <td>${doc.originalName}</td>
+                    <td>${statusInfo}</td>
+                    <td><a href="https://hitex-backend-server.onrender.com/${doc.filePath}" class="adm-fiu-download-btn" download>Download</a></td>
+                    <td>
+                        <div style="display: flex; gap: 5px;">
+                           <select id="editor-select-${doc._id}" style="flex-grow: 1;">${editorOptions}</select>
+                           <button onclick="openAssignmentModal('${doc._id}', '${doc.wordCount}')" class="assign-btn">Assign</button>
+                        </div>
+                    </td>
+                `;
+            });
+        } catch (error) {
+            alert('Error loading dashboard: ' + error.message);
+        }
+    });
+</script>
+
+   
 </body>
 </html>
