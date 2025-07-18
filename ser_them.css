@@ -5,21 +5,35 @@
   --major-heading: 3em;
   --major-header-font-weight: 800;
   --sub-head-color: #EBEBEB;
-   --second-sub-head-color:rgb(121, 125, 131);
-  --gradient-bg: linear-gradient(135deg, var(--blue) 0%, #0D47A1 100%);
-  --red-gradient: linear-gradient(135deg, var(--red) 0%, #F06292 100%);
-  --card-shadow: 0 10px 30px rgba(3, 38, 114, 0.1);
-  --text-color: #2C3E50;
-  --accent-color: #4A90E2;
-  --double-gradient: linear-gradient(135deg, rgba(3, 38, 114, 0.9) 0%, rgba(213, 76, 79, 0.8) 100%);
   --button-background: linear-gradient(135deg, #eb2525, #af1e1e);
-  --check-color: #22c55e;
-  --cross-color: var(--red);
-  --border-color: #e2e8f0;
-  --bg-light: #f8fafc;
-  --category-bg: #edf2f7;
+  --smaller-major-head: 1.5em;
+  --smaller-sub-heading: 1rem;
+  --text-color: #333;
+  --transition-speed: 0.3s;
+  --white: #ffffff;
   --general-text-font: 0.85em;
-  }
+  --second-sub-head-color: rgb(121, 125, 131);
+  --font-size-sub-head: 1.25rem;
+  --grey-background: #f7f7f7;
+  --grid-gap: 2vw;
+  --primary: #1a5db4;
+  --primary-light: #e8f1fd;
+  --primary-dark: #0c3b80;
+  --accent: #D54C4F;
+  --accent-light: #fff0eb;
+  --grey-light: #f7f9fc;
+  --grey: #e5e9f2;
+  --grey-dark: #8492a6;
+  --text: #2c3e50;
+  --text-light: #7e8c9a;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --radius: 10px;
+  --radius-sm: 5px;
+  --transition: all 0.3s ease;
+  --check-color: #1bcf5d;
+  --new-background: rgba(219, 6, 6, 0.1);
+}
 
 body {
     font-family: 'Georgia', serif;
@@ -9201,7 +9215,6 @@ h3 {
     }
 
     .auth_cete-hero {
-      margin-top: 5em;
       height: 50vh;
       display: flex;
       align-items: center;
@@ -9249,7 +9262,7 @@ h3 {
     .auth_cete-btn {
       display: inline-block;
       padding: 12px 30px;
-      background-color: var(--red);
+      background: var(--button-background);
       color: white;
       text-decoration: none;
       border-radius: 5px;
@@ -9258,9 +9271,7 @@ h3 {
     }
 
     .auth_cete-btn:hover {
-      background-color: #c03c3f;
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(213, 76, 79, 0.4);
+      color: white;
     }
 
     .auth_cete-section {
@@ -9491,6 +9502,10 @@ h3 {
       z-index: 1;
       max-width: 700px;
       margin: 0 auto;
+    }
+
+    .auth_cete-cta-content p{
+       color: white;
     }
 
     .auth_cete-cta h2 {
