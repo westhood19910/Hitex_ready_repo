@@ -9065,7 +9065,7 @@ p {
 .nav__bar_oi-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  color: #000000;
+  color: white;
 }
 
 .nav__bar_oi-toggle {
