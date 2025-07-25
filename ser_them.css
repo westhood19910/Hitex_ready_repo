@@ -1725,13 +1725,13 @@ body {
   margin: 8em auto;
   min-height: 80vh;
   width: 100%;
-  position: relative; /* Required for pseudo-elements */
+  position: relative; 
   overflow: hidden;
   padding: 2rem;
   box-sizing: border-box;
 }
 
-/* Fixed background image using a pseudo-element */
+
 .glim-florp-z7::before {
   content: '';
   position: absolute;
@@ -1746,7 +1746,7 @@ body {
   z-index: -2;
 }
 
-/* Color overlay using a pseudo-element */
+
 .glim-florp-z7::after {
   content: '';
   position: absolute;
@@ -1759,7 +1759,7 @@ body {
   z-index: -1;
 }
 
-/* Container for the content */
+
 .bloop-widget {
   width: 100%;
   max-width: 1200px;
@@ -1769,7 +1769,7 @@ body {
   box-sizing: border-box;
 }
 
-/* Flex container for the two columns */
+
 .fizzle-snork {
   display: flex;
   align-items: center;

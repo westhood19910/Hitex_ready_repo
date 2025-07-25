@@ -14,77 +14,78 @@ document.addEventListener('DOMContentLoaded', function() {
     const languages = Object.keys(translations);
 
     // --- Animation State & Configuration ---
-    let languageIndex = 0; // Current language index from the 'languages' array
-    let charIndex = 0;     // Current character index for the text being typed
-    let isDeleting = false; // Flag to check if we are deleting or typing
-    let animationTimeoutId;  // To hold the timeout ID for pausing/resuming
+    let languageIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let animationTimeoutId;
 
-    const typingSpeed = 120;       // Speed of typing in ms
-    const deletingSpeed = 60;        // Speed of deleting in ms
-    const delayBetweenTexts = 2000;  // Pause after a text is fully typed
+    const typingSpeed = 120;
+    const deletingSpeed = 60;
+    const delayBetweenTexts = 2000;
 
     /**
      * Main function for the typing animation loop.
-     * It uses a recursive setTimeout to type, pause, delete, and switch languages.
      */
     function typeWriterLoop() {
         const currentLangKey = languages[languageIndex];
         const fullText = translations[currentLangKey];
         let timeoutSpeed = isDeleting ? deletingSpeed : typingSpeed;
 
-        // Logic for typing or deleting
         if (isDeleting) {
-            // Remove a character
             languageText.textContent = fullText.substring(0, languageText.textContent.length - 1);
         } else {
-            // Add a character
             languageText.textContent = fullText.substring(0, charIndex + 1);
             charIndex++;
         }
 
-        // --- State Transition Logic ---
-
-        // If text is fully typed, set a pause before starting to delete
         if (!isDeleting && languageText.textContent === fullText) {
             isDeleting = true;
-            timeoutSpeed = delayBetweenTexts; // Set the pause duration
-        } 
-        // If text is fully deleted, move to the next language and start typing
-        else if (isDeleting && languageText.textContent === '') {
+            timeoutSpeed = delayBetweenTexts;
+        } else if (isDeleting && languageText.textContent === '') {
             isDeleting = false;
-            languageIndex = (languageIndex + 1) % languages.length; // Loop back to the start
-            charIndex = 0; // Reset character index for the new text
-            timeoutSpeed = 500; // A brief pause before typing the new text
+            languageIndex = (languageIndex + 1) % languages.length;
+            charIndex = 0;
+            timeoutSpeed = 500;
         }
 
-        // Call the loop again after the calculated timeout
         animationTimeoutId = setTimeout(typeWriterLoop, timeoutSpeed);
     }
 
     /**
      * Pauses the animation and shows a specific language text instantly.
-     * Used for hover/touch interaction.
      * @param {string} lang - The language key (e.g., 'french').
      */
     function showStaticText(lang) {
-        clearTimeout(animationTimeoutId); // Stop the animation loop
+        clearTimeout(animationTimeoutId);
         languageText.textContent = translations[lang] || translations.english;
     }
 
     // --- Event Listeners ---
     const languageLinks = document.querySelectorAll('.language-link');
+    const languageSelector = document.querySelector('.language_selector');
+
     languageLinks.forEach(link => {
         const lang = link.getAttribute('data-lang');
-        // Pause animation and show text on hover/touch
-        link.addEventListener('mouseover', () => showStaticText(lang));
-        link.addEventListener('touchstart', (e) => {
-            e.preventDefault(); // Prevent potential unwanted page scroll or other touch behaviors
+
+        // On both click and tap, this function will run
+        link.addEventListener('click', function(event) {
+            // 1. Stop the link from navigating immediately
+            event.preventDefault();
+
+            // 2. Get the destination URL from the link itself
+            const destinationUrl = this.href;
+
+            // 3. Instantly show the static text for the selected language
             showStaticText(lang);
-        }, { passive: false });
+
+            // 4. Wait for a short moment (e.g., 300ms) then navigate
+            setTimeout(() => {
+                window.location.href = destinationUrl;
+            }, 300);
+        });
     });
 
     // Resume animation when the mouse leaves the language selector area
-    const languageSelector = document.querySelector('.language_selector');
     languageSelector.addEventListener('mouseleave', () => {
         clearTimeout(animationTimeoutId); // Clear any existing timeout
         isDeleting = true; // Set to deleting to cleanly transition back into the loop
