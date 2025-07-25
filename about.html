@@ -3,169 +3,160 @@
 <head> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HiTex EdiTex</title>
-<script src="Embednav.js"></script>
-<script src="freshtex.js"></script> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<link rel="stylesheet" href="fresh.css">  
+<script src="Embednav.js" defer></script>
+<script src="freshtex.js" defer></script> 
 <link rel="stylesheet" href="ser_them.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" defer>
+<link rel="stylesheet" href="fresh.css">  
 <link rel="stylesheet" href="Embednav.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head> 
 <body>
-    
-    
-  <header class="pag-2-hed-1">
-    <div class="lat_clo_001">              
-    <a href="index.html" class="action-home">
-      <i class="fa-solid fa-house"></i>
-   </a>  
-    </div>  
-    <div class="lat_clo_002">
-    <button class="toggle-button-2" onclick="toggleLanguageList()">En &#9776;</button> 
-    <ul class="language-list" id="languagelist">
-        <li>
-            <a href="Chinese.html" class="language-link" data-lang="chinese">中文</a>
-        </li>
-        <li>
-            <a href="French.html" class="language-link" data-lang="french">Français</a>
-        </li>
-        <li>
-            <a href="Spanish.html" class="language-link" data-lang="spanish">Español</a>
-        </li>
-        <li>
-            <a href="Japanese.html" class="language-link" data-lang="japanese">日本語</a>
-        </li>
-        <li>
-            <a href="Arabic.html" class="language-link" data-lang="arabian">عربي</a>
-        </li>
-        <li>
-            <a href="portuguese.html" class="language-link" data-lang="portuguese">Português</a>
-        </li>
-        <li>
-            <a href="Korean.html" class="language-link" data-lang="japanese">한국어</a>
-        </li>
-    </ul>
-</div>
-</header>
-
-<nav class="alb_pa_001">
-    <div class="un_fr_0oper">
-        <a href="home.html"><img src="assets/png_20221026_003820_0000.png" alt="" class="kerpa_023_001"></a>
-    </div>
-    <div class="fo_oc_cnt002">
-      <input type="search" class="lat_but_pla_001" placeholder="search here">
-      <button type="submit" class="se-er-ch-bt-001">
-          <i class="fa fa-search" aria-hidden="true"></i>
-      </button>
-  </div>
-        <div class="fr_fl_fx_001">
-          <a href="client-sign-up.html" class="signup-button">
-            Sign Up
-        </a>
-          <div class="intbeh_01">
-            <div class="kli_002_wer">
-                <a href="https://www.threads.net/@hitexeditex">
-                <img src="assets/threads-icon.svg" class="alb-im-001">
-               </a>
+    <header class="pag-2-hed-1">
+                <div class="lat_clo_001">              
+                <a href="index.html" class="action-home">
+                  <i class="fa-solid fa-house"></i>
+               </a>  
+                </div>  
+                <div class="lat_clo_002">
+                <button class="toggle-button-2" onclick="toggleLanguageList()">En &#9776;</button> 
+                <ul class="language-list" id="languagelist">
+                    <li>
+                        <a href="Chinese.html" class="language-link" data-lang="chinese">中文</a>
+                    </li>
+                    <li>
+                        <a href="French.html" class="language-link" data-lang="french">Français</a>
+                    </li>
+                    <li>
+                        <a href="Spanish.html" class="language-link" data-lang="spanish">Español</a>
+                    </li>
+                    <li>
+                        <a href="Japanese.html" class="language-link" data-lang="japanese">日本語</a>
+                    </li>
+                    <li>
+                        <a href="Arabic.html" class="language-link" data-lang="arabian">عربي</a>
+                    </li>
+                    <li>
+                        <a href="portuguese.html" class="language-link" data-lang="portuguese">Português</a>
+                    </li>
+                    <li>
+                        <a href="Korean.html" class="language-link" data-lang="japanese">한국어</a>
+                    </li>
+                </ul>
             </div>
-               </div>
-            <div class="kli_002_wer">
-        <a href="https://www.linkedin.com/company/hitexeditex/">
-        <img src="assets/linkedin-app-icon.svg" class="alb-im-001">
-       </a>
-       </div>
-       <div class="kli_002_wer">
-       <a href="https://x.com/HiTexEdiTex" target="_blank">
-        <img src="assets/x-social-media-black-icon.svg" alt="Twitter Icon" class="alb-im-001">
-      </a>
-      </div>  
-      <div class="kli_002_wer">
-       <a href="https://www.instagram.com/hitexeditex" target="_blank"  >
-        <img src="assets/ig-instagram-icon.svg" class="alb-im-001"></a>
-        </div>   
-        <a href="https://wa.me/233503181696" target="_blank">
-            <img src="assets/whatsapp-icon.svg" alt="WhatsApp Icon" class="alb-im-001">
-          </a>    
-    </div>    
-   </nav> 
-
-   <nav class="main-nav">
-    <div class="menu-container">
-        <div class="fr_open_01">
-        </div> 
-        <input type="checkbox" id="menu-toggle">
-        <label for="menu-toggle" class="menu-button">
-            <i class="fa fa-bars" aria-hidden="true"></i>
-        </label>
-        
-        <ul class="main-menu">
-            <li class="menu-item has-submenu">
-                <button class="submenu-toggle" aria-expanded="false">
-                    About Us
-                    <i class="fa fa-angle-down" aria-hidden="true"></i>
-                </button>
-                <ul class="submenu">
-                    <li><a href="about.html">About Hitex EdiTex</a></li>
-                    <li><a href="leadership.html">Leadership</a></li>
-                    <li><a href="Vision.html#pag_2_h1_1">Offices</a></li>
-                    <li><a href="Vision.html#pag_2_h1_1">Testimonials</a></li>
-                    <li><a href="Vision.html#pag_2_h1_1">Impact</a></li>
-                </ul>
-            </li>
-            
-            <li class="menu-item has-submenu">
-                <button class="submenu-toggle" aria-expanded="false">
-                    Services
-                    <i class="fa fa-angle-down" aria-hidden="true"></i>
-                </button>
-                <ul class="submenu">
-                    <li><a href="language-editng.html">Language Editing</a></li>
-                    <li><a href="Scientific.html">Scientific Editing</a></li>
-                    <li><a href="technichal.html">Technical Editing</a></li>
-                    <li><a href="technichal.html">Translation Services</a></li>
-                    <li><a href="technichal.html">Service Levels</a></li>
-                    <li><a href="technichal.html">Pricing</a></li>
-                </ul>
-            </li>
-            <li class="menu_sep9_1">
-              <a href="auhtoredy.html">Authoredly</a>
-              <img src="assets/corTM.svg" alt="" class="one_authre">
-          </li>
-           
-            <li class="menu-item has-submenu">
-                <button class="submenu-toggle" aria-expanded="false">
-                    Careers
-                    <i class="fa fa-angle-down" aria-hidden="true"></i>
-                </button>
-                <ul class="submenu">
-                    <li><a href="car1reers.html">Life at HiTex EdiTex</a></li>
-                    <li><a href="Careerss.html">In-house</a></li>
-                    <li><a href="freelance.html">Freelance</a></li>
-                </ul>
-            </li>  
-          <li class="menu-item">
-            <a href="contact.html">Contact Us</a>
-        </li>
-        <li class="menu-item has-submenu">
-          <button class="submenu-toggle" aria-expanded="false">
-              Helpful Resources
-              <i class="fa fa-angle-down" aria-hidden="true"></i>
-          </button>
-          <ul class="submenu">
-            <li><a href="resources.html">Hitex EdiTex Hub</a></li>
-              <li><a href="Careerss.html#refbar">FAQs</a></li>
-              <li><a href="newsroom.html">Newsroom</a></li>
-          </ul>
-      </li>
-        </ul>
-        
-        <div class="gro_btu_01">
-            <a href="get-quote.html" class="por_qt_pg_001">INSTANT QUOTE</a>
-            <a href="client-login.html" class="author_login_btn"> CLIENT LOG IN</a>
-        </div>
+    </header>
+              <!-- Modified Navigation HTML -->
+<nav class="nav__bar_oi" style="margin-top: 2em;">
+  <div class="nav__bar_oi-logo">
+    <img src="assets/png_20221026_003820_0000.png" alt="HiTex EdiTex Logo">
+  </div>
+  
+  <button class="nav__bar_oi-toggle" id="navToggle">
+    <span class="nav__bar_oi-toggle-line"></span>
+    <span class="nav__bar_oi-toggle-line"></span>
+    <span class="nav__bar_oi-toggle-line"></span>
+  </button>
+  
+  <ul class="nav__bar_oi-menu" id="navMenu">
+    <li class="nav__bar_oi-menu-item">
+      <a href="#" class="nav__bar_oi-menu-link">About Us</a>
+      <div class="nav__bar_oi-dropdown">
+        <a href="about.html" class="nav__bar_oi-dropdown-item">About Hitex EdiTex</a>
+        <a href="leadership.html" class="nav__bar_oi-dropdown-item">Leadership</a>
+        <a href="#offices" class="nav__bar_oi-dropdown-item">Offices</a>
+        <a href="#testimonials" class="nav__bar_oi-dropdown-item">Testimonials</a>
+        <a href="impact.html" class="nav__bar_oi-dropdown-item">Impact</a>
+        <a href="user-profile.html" class="nav__bar_oi-dropdown-item">User profile</a>
+         <a href="editor-dashboard.html" class="nav__bar_oi-dropdown-item">Editor Dashboard</a>
+      </div>
+    </li>
+    <li class="nav__bar_oi-menu-item">
+      <a href="#services" class="nav__bar_oi-menu-link">Services</a>
+      <div class="nav__bar_oi-dropdown">
+        <a href="language-editng.html" class="nav__bar_oi-dropdown-item">Language Editing</a>
+        <a href="Scientific.html" class="nav__bar_oi-dropdown-item">Scientific Editing</a>
+        <a href="technichal.html" class="nav__bar_oi-dropdown-item">Technical Editing</a>
+        <a href="translate.html" class="nav__bar_oi-dropdown-item">Translation Services</a>
+        <a href="service-levels.html" class="nav__bar_oi-dropdown-item">Service Levels</a>
+        <a href="pricing.html" class="nav__bar_oi-dropdown-item">Pricing</a>
+        <a href="auhtoredly.html" class="nav__bar_oi-dropdown-item">Authoredly</a>
+      </div>
+    </li>
+    <li class="nav__bar_oi-menu-item">
+      <a href="#careers" class="nav__bar_oi-menu-link">Careers</a>
+      <div class="nav__bar_oi-dropdown">
+        <a href="life-at-hitex.html" class="nav__bar_oi-dropdown-item">Life at HiTex EdiTex</a>
+        <a href="In-house.html" class="nav__bar_oi-dropdown-item">In-house</a>
+        <a href="freelance.html" class="nav__bar_oi-dropdown-item">Freelance</a>
+      </div>
+    </li>
+    <li class="nav__bar_oi-menu-item">
+      <a href="contact.html" class="nav__bar_oi-menu-link">Contact Us</a>
+    </li>
+    <li class="nav__bar_oi-menu-item">
+      <a href="#resources" class="nav__bar_oi-menu-link">Helpful Resources</a>
+      <div class="nav__bar_oi-dropdown">
+        <a href="support" class="nav__bar_oi-dropdown-item">Support and FAQs</a>
+        <a href="hitex-hub.html" class="nav__bar_oi-dropdown-item">The Hitex Hub</a>
+        <a href="newsroom.html" class="nav__bar_oi-dropdown-item">Newsroom</a>
+      </div>
+    </li>
+    <div class="nav__bar_oi-actions">
+      <button class="nav__bar_oi-button nav__bar_oi-button-signup">Client Sign-Up</button>
+      <button class="nav__bar_oi-button nav__bar_oi-button-login">Client Log-in</button>
     </div>
+  </ul>
+  
+  <!-- Search bar and social media icons -->
+  <div class="nav__bar_oi-utility">
+    <div class="nav__bar_oi-search">
+      <button class="nav__bar_oi-search-icon" id="searchToggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+      <div class="nav__bar_oi-search-container" id="searchContainer">
+        <input type="text" class="nav__bar_oi-search-input" placeholder="Search..." aria-label="Search">
+        <button class="nav__bar_oi-search-close" id="searchClose">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="nav__bar_oi-social">
+      <div class="new_loger_nav__bar_oi-actions">
+        <a href="client-sign-up.html" class="new_loger_nav__bar_oi-button new_loger_nav__bar_oi-button-signup">Client Sign-up</a>
+        <a href="client-login.html" class="new_loger_nav__bar_oi-button new_loger_nav__bar_oi-button-login">Client Log-in</a>
+      </div>
+   <div class="intbeh_01">
+                        <div class="kli_002_wer">
+                            <a href="https://www.threads.net/@hitexeditex">
+                            <img src="assets/threads-icon.svg" class="alb-im-001">
+                           </a>
+                        </div>
+                           </div>
+                        <div class="kli_002_wer">
+                    <a href="https://www.linkedin.com/company/hitexeditex/">
+                    <img src="assets/linkedin-app-icon.svg" class="alb-im-001">
+                   </a>
+                   </div>
+                   <div class="kli_002_wer">
+                   <a href="https://x.com/HiTexEdiTex" target="_blank">
+                    <img src="assets/x-social-media-black-icon.svg" alt="Twitter Icon" class="alb-im-001">
+                  </a>
+                  </div>  
+                  <div class="kli_002_wer">
+                   <a href="https://www.instagram.com/hitexeditex" target="_blank"  >
+                    <img src="assets/ig-instagram-icon.svg" class="alb-im-001"></a>
+                    </div>  
+    </div>
+  </div>
+  <div class="nav__bar_oi-overlay" id="navOverlay"></div>
 </nav>
 
             <div class="js-hero-container">
@@ -228,37 +219,31 @@
                 </div>
             </div>
 
-            <section class="xk4p2m_initial_view2" id="rea_frm001">
-                <div class="n9q7r_fixed_bg"></div>
-                <div class="red_overlay"></div>
-                <div class="zt5j3_flex_container">
-                    <div class="xk92_wrapper2">
-                        <div class="bg_m2p2"></div>
-                        <div class="overlay_p9j2"></div>
-                        <div class="content_h7r">
-                            <div class="fo2_leard"><h1>OUR <P></P> STORY</h1></div>
-                          <div class="divider_v2n"></div>
-                          <div class="text_section_k8m2">
-                            <p>Identifying a significant gap and driven by
-                                the passion to make a difference, HiTex Editex was founded in 2015 to empower
-                                researchers and authors in the Asian and African region to navigate the
-                                complexities of getting published in global journals. Over the years, our
-                                mission has expanded, growing into a worldwide presence with offices across
-                                multiple continents, and offering expert solutions and advanced technology
-                                tools to support researchers at every stage of their journey.</p>
-                            </p><p style="margin-top: -0.5em;">
-                                We are driven by a single goal: to bridge
-                                the gap between research and its impact on the world. With a deep understanding
-                                of the challenges researchers face, we are committed to providing services that
-                                enhance their work’s visibility and reach, ensuring that their discoveries can
-                                make a lasting difference. Through continuous innovation, we empower
-                                researchers to overcome barriers and share their work with the world.</p>
-                          </div>
-                        </div>
-                      </div>
-                  </div>
-              </section>
+         <!-- CODE FOR NEW STORY -->
 
+       <section class="glim-florp-z7" id="rea_frm001">
+  
+                  <div class="bloop-widget">
+    
+                 <div class="fizzle-snork">
+      
+      <div class="whirly-gig-a9">
+        <h1>OUR<br><span class="zap-mode">STORY</span></h1>
+      </div>
+      <div class="doodle-plank">
+        <p>
+          Identifying a significant gap and driven by the passion to make a difference, HiTex Editex was founded in 2015 to empower researchers and authors in the Asian and African region to navigate the complexities of getting published in global journals. Over the years, our mission has expanded, growing into a worldwide presence with offices across multiple continents, and offering expert solutions and advanced technology tools to support researchers at every stage of their journey.
+        </p>
+        <p>
+          We are driven by a single goal: to bridge the gap between research and its impact on the world. With a deep understanding of the challenges researchers face, we are committed to providing services that enhance their work’s visibility and reach, ensuring that their discoveries can make a lasting difference. Through continuous innovation, we empower researchers to overcome barriers and share their work with the world.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+         <!-- END -->
             <div class="galaxy_wrapper">
                 <div class="unicorn_content">
                     <h1 class="sparkle_heading">Our Clients Our Priority</h1>
@@ -272,25 +257,26 @@
             
             <!-- NEW LEADERSHIP CODE -->
 
-            <section class="xk4p2m_initial_view3">
-                <div class="n9q7r_fixed_bg3"></div>
-                <div class="red_overlay"></div>
-                <div class="zt5j3_flex_container">
-                    <div class="xk92_wrapper2">
-                        <div class="bg_m2p2"></div>
-                        <div class="content_h7r">
-                            <div class="fo2_leard"><h1>LEADERSHIP</h1></div>
-                          <div class="divider_v2n"></div>
-                          <div class="text_section_k8m">
-                            <p>Our leadership team is composed of highly accomplished academics, experts, and thought leaders across various fields,
-                                committed to advancing the field of research and the standards of scholarly communications.</p>
-                            </p>
-                            <a href="leadership.html" class="btn_l5p">Meet Our Leadership</a>
-                          </div>
-                        </div>
-                      </div>
-                  </div>
-              </section>
+          <section class="zypher-box-r2">
+  
+  <div class="flux-capacitor-v9">
+    
+    <div class="quibble-grid">
+      
+      <div class="vortex-title">
+        <h1>LEADERSHIP</h1>
+      </div>
+      
+      <div class="narrative-pod">
+        <p>
+          Our leadership team is composed of highly accomplished academics, experts, and thought leaders across various fields, committed to advancing the field of research and the standards of scholarly communications.
+        </p>
+        <a href="leadership.html" class="jump-link-x">Meet Our Leadership</a>
+      </div>
+
+    </div>
+  </div>
+                </section>
             
               <div class="xk4p2m_wrapper">
                 <div class="n9tq7_bifold">

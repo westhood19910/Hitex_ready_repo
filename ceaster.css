@@ -250,7 +250,7 @@ body::-webkit-scrollbar-thumb:hover {
 /* Responsive design for different screen sizes */
 @media screen and (max-width: 1400px) {
     .image-container #languageText {
-        font-size: 4rem;
+        font-size: 2.7rem;
     }
     
     #cursor {
@@ -258,7 +258,7 @@ body::-webkit-scrollbar-thumb:hover {
     }
     
     .image-container h3 {
-        font-size: 1.8rem;
+        font-size: 1.2rem;
     }
 
     .language-list li a {
@@ -269,7 +269,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 @media screen and (max-width: 1200px) {
     .image-container #languageText {
-        font-size: 3.5rem;
+        font-size: 2.7rem;
     }
     
     #cursor {
@@ -311,7 +311,7 @@ body::-webkit-scrollbar-thumb:hover {
     }
     
     .image-container h3 {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
     }
 
     .language-list {
