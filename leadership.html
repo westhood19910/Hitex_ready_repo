@@ -3,11 +3,11 @@
 <head> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HiTex EdiTex</title>
-<script src="Embednav.js"></script>
-<script src="freshtex.js"></script> 
+<script src="Embednav.js" defer></script>
+<script src="freshtex.js" defer></script> 
 <link rel="stylesheet" href="ser_them.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" defer>
 <link rel="stylesheet" href="fresh.css">  
 <link rel="stylesheet" href="Embednav.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
@@ -47,19 +47,93 @@
                 </ul>
             </div>
     </header>
-    
-    <nav class="alb_pa_001">
-                <div class="un_fr_0oper">
-                    <a href="home.html"><img src="assets/png_20221026_003820_0000.png" alt="" class="kerpa_023_001"></a>
-                </div>
-                <div class="fo_oc_cnt002">
-                  <input type="search" class="lat_but_pla_001" placeholder="search here">
-                  <button type="submit" class="se-er-ch-bt-001">
-                      <i class="fa fa-search" aria-hidden="true"></i>
-                  </button>
-              </div>
-                    <div class="fr_fl_fx_001">
-                      <div class="intbeh_01">
+              <!-- Modified Navigation HTML -->
+<nav class="nav__bar_oi" style="margin-top: 2em;">
+  <div class="nav__bar_oi-logo">
+    <img src="assets/png_20221026_003820_0000.png" alt="HiTex EdiTex Logo">
+  </div>
+  
+  <button class="nav__bar_oi-toggle" id="navToggle">
+    <span class="nav__bar_oi-toggle-line"></span>
+    <span class="nav__bar_oi-toggle-line"></span>
+    <span class="nav__bar_oi-toggle-line"></span>
+  </button>
+  
+  <ul class="nav__bar_oi-menu" id="navMenu">
+    <li class="nav__bar_oi-menu-item">
+      <a href="#" class="nav__bar_oi-menu-link">About Us</a>
+      <div class="nav__bar_oi-dropdown">
+        <a href="about.html" class="nav__bar_oi-dropdown-item">About Hitex EdiTex</a>
+        <a href="leadership.html" class="nav__bar_oi-dropdown-item">Leadership</a>
+        <a href="#offices" class="nav__bar_oi-dropdown-item">Offices</a>
+        <a href="#testimonials" class="nav__bar_oi-dropdown-item">Testimonials</a>
+        <a href="impact.html" class="nav__bar_oi-dropdown-item">Impact</a>
+        <a href="user-profile.html" class="nav__bar_oi-dropdown-item">User profile</a>
+         <a href="editor-dashboard.html" class="nav__bar_oi-dropdown-item">Editor Dashboard</a>
+      </div>
+    </li>
+    <li class="nav__bar_oi-menu-item">
+      <a href="#services" class="nav__bar_oi-menu-link">Services</a>
+      <div class="nav__bar_oi-dropdown">
+        <a href="language-editng.html" class="nav__bar_oi-dropdown-item">Language Editing</a>
+        <a href="Scientific.html" class="nav__bar_oi-dropdown-item">Scientific Editing</a>
+        <a href="technichal.html" class="nav__bar_oi-dropdown-item">Technical Editing</a>
+        <a href="translate.html" class="nav__bar_oi-dropdown-item">Translation Services</a>
+        <a href="service-levels.html" class="nav__bar_oi-dropdown-item">Service Levels</a>
+        <a href="pricing.html" class="nav__bar_oi-dropdown-item">Pricing</a>
+        <a href="auhtoredly.html" class="nav__bar_oi-dropdown-item">Authoredly</a>
+      </div>
+    </li>
+    <li class="nav__bar_oi-menu-item">
+      <a href="#careers" class="nav__bar_oi-menu-link">Careers</a>
+      <div class="nav__bar_oi-dropdown">
+        <a href="life-at-hitex.html" class="nav__bar_oi-dropdown-item">Life at HiTex EdiTex</a>
+        <a href="In-house.html" class="nav__bar_oi-dropdown-item">In-house</a>
+        <a href="freelance.html" class="nav__bar_oi-dropdown-item">Freelance</a>
+      </div>
+    </li>
+    <li class="nav__bar_oi-menu-item">
+      <a href="contact.html" class="nav__bar_oi-menu-link">Contact Us</a>
+    </li>
+    <li class="nav__bar_oi-menu-item">
+      <a href="#resources" class="nav__bar_oi-menu-link">Helpful Resources</a>
+      <div class="nav__bar_oi-dropdown">
+        <a href="support" class="nav__bar_oi-dropdown-item">Support and FAQs</a>
+        <a href="hitex-hub.html" class="nav__bar_oi-dropdown-item">The Hitex Hub</a>
+        <a href="newsroom.html" class="nav__bar_oi-dropdown-item">Newsroom</a>
+      </div>
+    </li>
+    <div class="nav__bar_oi-actions">
+      <button class="nav__bar_oi-button nav__bar_oi-button-signup">Client Sign-Up</button>
+      <button class="nav__bar_oi-button nav__bar_oi-button-login">Client Log-in</button>
+    </div>
+  </ul>
+  
+  <!-- Search bar and social media icons -->
+  <div class="nav__bar_oi-utility">
+    <div class="nav__bar_oi-search">
+      <button class="nav__bar_oi-search-icon" id="searchToggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+      <div class="nav__bar_oi-search-container" id="searchContainer">
+        <input type="text" class="nav__bar_oi-search-input" placeholder="Search..." aria-label="Search">
+        <button class="nav__bar_oi-search-close" id="searchClose">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="nav__bar_oi-social">
+      <div class="new_loger_nav__bar_oi-actions">
+        <a href="client-sign-up.html" class="new_loger_nav__bar_oi-button new_loger_nav__bar_oi-button-signup">Client Sign-up</a>
+        <a href="client-login.html" class="new_loger_nav__bar_oi-button new_loger_nav__bar_oi-button-login">Client Log-in</a>
+      </div>
+   <div class="intbeh_01">
                         <div class="kli_002_wer">
                             <a href="https://www.threads.net/@hitexeditex">
                             <img src="assets/threads-icon.svg" class="alb-im-001">
@@ -79,72 +153,11 @@
                   <div class="kli_002_wer">
                    <a href="https://www.instagram.com/hitexeditex" target="_blank"  >
                     <img src="assets/ig-instagram-icon.svg" class="alb-im-001"></a>
-                    </div>   
-                    <a href="https://wa.me/233503181696" target="_blank">
-                        <img src="assets/whatsapp-icon.svg" alt="WhatsApp Icon" class="alb-im-001">
-                      </a>    
-                </div>    
-               </nav> 
-
-               <nav class="main-nav" style="top:">
-                <div class="menu-container">
-                    <div class="fr_open_01">
-                    </div> 
-                    <input type="checkbox" id="menu-toggle">
-                    <label for="menu-toggle" class="menu-button">
-                        <i class="fa fa-bars" aria-hidden="true"></i>
-                    </label>
-                    
-                    <ul class="main-menu">
-                        <li class="menu-item has-submenu">
-                            <button class="submenu-toggle" aria-expanded="false">
-                                About Us
-                                <i class="fa fa-angle-down" aria-hidden="true"></i>
-                            </button>
-                            <ul class="submenu">
-                                <li><a href="Vision.html">Vision</a></li>
-                                <li><a href="Vision.html#op_tu__01">Mission</a></li>
-                                <li><a href="Vision.html#pag_2_h1_1">The Team</a></li>
-                            </ul>
-                        </li>
-                        
-                        <li class="menu-item has-submenu">
-                            <button class="submenu-toggle" aria-expanded="false">
-                                Services
-                                <i class="fa fa-angle-down" aria-hidden="true"></i>
-                            </button>
-                            <ul class="submenu">
-                                <li><a href="languaged.html">Language Editing</a></li>
-                                <li><a href="Scientific.html">Scientific Editing</a></li>
-                                <li><a href="technichal.html">Technical Editing</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item has-submenu">
-                            <button class="submenu-toggle" aria-expanded="false">
-                                Careers
-                                <i class="fa fa-angle-down" aria-hidden="true"></i>
-                            </button>
-                            <ul class="submenu">
-                                <li><a href="car1reers.html">Freelance Editor</a></li>
-                                <li><a href="In-house.html">In-house Editor</a></li>
-                            </ul>
-                        </li>
-                        
-                        <li class="menu-item">
-                            <a href="contaUs.html">Contact Us</a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="Freshtex.html">Helpful Resources</a>
-                        </li>
-                    </ul>
-                    <div class="gro_btu_01">
-                        <a href="languaged.html" class="por_qt_pg_001">INSTANT QUOTE</a>
-                        <a href="#" class="author_login_btn"> CLIENT LOG IN</a>
-                    </div>
-                </div>
-            </nav>
-
-
+                    </div>  
+    </div>
+  </div>
+  <div class="nav__bar_oi-overlay" id="navOverlay"></div>
+</nav>
            
         
           <!-- Header Section with Background Image and Red Overlay -->
@@ -234,41 +247,88 @@
   </section>
 
 
-      <footer class="fot-dow-1">
-        <div class="row justify-content-around align-items-center">
-          <div class="col-sm-12 col-md-3 col-lg-3 ColDesghCnt">
-              <h3 class="foot-h3">Contact Center</h3>
-                <ul class="fot-ul-001">
-                    <li><a href="mailto:hitexeditex.com" class="fot-ln-001"> <i class="fa fa-envelope" aria-hidden="true"></i> HiTexediTex.com</a></li>
-                    <li><a href="#" class="fot-ln-001"><i class="fa fa-volume-control-phone" aria-hidden="true"></i> 0546525435</a></li>
-                    <li><a href="services.html" class="fot-ln-001">Services</a></li>
-                    <li><a href="#" class="fot-ln-001">The team</a></li>
-                    <li><a href="#" class="fot-ln-001"><img src="assets/map-pin-icon.svg" class="alb-im-001" style="margin-left: -3em;">Adweso, Koforidua, Ghana</a></li>
-                </ul>
-          </div>
-          <div class="col-sm-12 col-md-3 col-lg-3 ColDesghCnt">
-              <h3 class="foot-h3">Find Us</h3>
-              <div class="gps_code_002">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15877.202531816156!2d-0.250482!3d6.069084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTrCsDUzJzMwLjgiTiAwwrAwNic0Mi4zIlc!5e0!3m2!1sen!2sus!4v1645841132286!5m2!1sen!2sus" width="300" height="170" style="border:0;" allowfullscreen="" loading="lazy" class="gog-901-uy"></iframe>
+       <footer class="xyz789">
+        <div class="qwerty123">
+          <div class="kappa445">         
+            <div class="lambda123">
+              <h3 class="beta12">Newsletter</h3>
+              <p class="gamma89">Sign up to receive the resources that matters most to you. You can update your preferences or unsubscribe any time.</p>
+              <form class="delta34">
+                <input type="email" placeholder="Enter your email" class="epsilon78"/>
+                <button type="submit" class="zeta99">Subscribe</button>
+              </form>
+            </div>
+      
+            <div class="lambda1234">
+              <h3 class="beta12">About HiTex EdiTex</h3>
+              <ul class="omega678">
+                <li class="phi234"><a href="#" class="psi567">Company Overview</a></li>
+                <li class="phi234"><a href="#" class="psi567">Leadership Team</a></li>
+                <li class="phi234"><a href="#" class="psi567">Global Offices</a></li>
+                <li class="phi234"><a href="#" class="psi567">Careers</a></li>
+                <li class="phi234"><a href="#" class="psi567">Testimonials</a></li>
+                <li class="phi234"><a href="#" class="psi567">Social Impact</a></li>
+                <li class="phi234"><a href="#" class="psi567">Security Practices</a></li>
+              </ul>
+            </div>
+      
+            <div class="lambda12345">
+              <h3 class="beta12">Resources</h3>
+              <ul class="omega678">
+                <li class="phi234"><a href="#" class="psi567">The HiTex Hub</a></li>
+                <li class="phi234"><a href="#" class="psi567">Journal Selector tool</a></li>
+                <li class="phi234"><a href="#" class="psi567">For Researchers</a></li>
+                <li class="phi234"><a href="auhtoredy.html" class="psi567">For Authors</a></li>
+                <li class="phi234"><a href="#" class="psi567">For Academics and Students</a></li>
+                <li class="phi234"><a href="newsroom.html" class="psi567">Newsroom</a></li>
+              </ul>
+            </div>
+      
+            <!-- Help Column -->
+            <div class="lambda123456">
+              <h3 class="beta12">Help and Support</h3>
+              <ul class="omega678">
+                <li class="phi234"><a href="contact.html" class="psi567">Contact Us</a></li>
+                <li class="phi234"><a href="Copyright.html" class="psi567">Copyright Policy</a></li>
+                
+              </ul>
             </div>
           </div>
-          <div class="col-sm-12 col-md-3 col-lg-3 ColDesghCnt">
-              <h3 class="foot-h3">Follow Us</h3 >
-                <ul class="fot-ul-003">
-                <li>
-                  <ul class="Obtao_0012">
-                    <li><a href=""><img src="assets/x-social-media-white-icon.svg" class="kil_im_001"></a></li>
-                    <li><a href=""><img src="assets/facebook-app-round-white-icon.svg" class="kil_im_001"></a></li>
-                    <li><a href=""><img src="assets/instagram-white-icon.svg" class="kil_im_001"></a></li>
-                    <li><a href=""><img src="assets/whatsapp-white-icon.svg" class="kil_im_001"></a></li>
-                  </ul>
-                </li>
-                <li><a href="Copyright.html" class="fot-ln-001"><img src="assets/copyright-icon.svg" class="alb-im-001">Copyright Policy </a></li>
-                <li><a href="privacy.html" class="fot-ln-001"><img src="assets/copyright-icon.svg" class="alb-im-001">Privacy Policy </a></li>
-                </ul>
-          </div>  
-      </div>
-</footer>
+      
+          <!-- Bottom Bar -->
+          <div class="theta890">
+            
+            <div class="iota777">
+                <div class="mu456">
+                    <p class="nu789">© 2025 HiTexEdiTex</p>
+                  </div>
+              <div class="xi123">
+                <a href="privacy.html" class="psi567">Privacy Policy |</a>
+                <a href="terms-of-use.html" class="psi567">Term of use |</a>
+              
+                <a href="cookie-policy.html" class="psi567">Cookie Policy |</a>
+                <a href="compliance-policy.html" class="psi567">Compliance  </a>
+              </div>
+              <div class="rho444">
+                <a href="https://www.instagram.com/hitexeditex" target="_blank"  >
+                    <img src="assets/ig-instagram-icon.svg" class="alb-im-001"></a>
+                    <a href="https://www.threads.net/@hitexeditex">
+                        <img src="assets/threads-icon.svg" class="alb-im-001">
+                       </a>
+                       <a href="https://www.linkedin.com/company/hitexeditex/">
+                        <img src="assets/linkedin-app-icon.svg" class="alb-im-001">
+                       </a>
+                       <a href="https://x.com/HiTexEdiTex" target="_blank">
+                        <img src="assets/x-social-media-black-icon.svg" alt="Twitter Icon" class="alb-im-001">
+                      </a>
+                      <a href="https://wa.me/233503181696" target="_blank">
+                        <img src="assets/whatsapp-icon.svg" alt="WhatsApp Icon" class="alb-im-001">
+                      </a> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 

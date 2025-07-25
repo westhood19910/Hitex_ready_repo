@@ -1930,7 +1930,7 @@ h2 {
   padding: 10px 5px;
   width: 14em; 
   max-width: 14em;
-  font-size: 16px; 
+  font-size: 12px; 
   font-weight: bolder; 
   text-align: center; 
   text-decoration: none; 
@@ -2003,7 +2003,7 @@ h2 {
   padding: 10px 5px; 
   max-width: 14em;
   width: 14em;
-  font-size: 16px; 
+  font-size: 12px; 
   font-weight: bolder; 
   text-align: center; 
   text-decoration: none; 
@@ -2021,8 +2021,8 @@ h2 {
   transform: translatey(-4px);
 }
 .pag_2_but_1:hover {
-  background-color: rgb(5, 18, 118); 
-  color: #ffff;
+  color: var(--red);
+  transform: translateY(-4px);
 }
 
 

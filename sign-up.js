@@ -12,9 +12,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const fullName = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value; // Get confirm password value
             const manuscriptType = document.getElementById('manuscriptType').value;
 
-            // 2. Create a data object to send
+            // --- ADDED VALIDATION ---
+            // 2. Check if passwords match
+            if (password !== confirmPassword) {
+                alert("Passwords do not match. Please try again.");
+                return; // Stop the function from proceeding
+            }
+
+            // 3. Create a data object to send (only if passwords match)
             const dataToSend = {
                 fullName: fullName,
                 email: email,
@@ -22,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 manuscriptType: manuscriptType
             };
 
-            // 3. Use fetch to send the data to YOUR live Render server
+            // 4. Use fetch to send the data to YOUR live Render server
             try {
                 const response = await fetch('https://hitex-backend-server.onrender.com/register', {
                     method: 'POST',
@@ -32,22 +40,53 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify(dataToSend),
                 });
 
-                const result = await response.json(); // Get the JSON response from the server
+                const result = await response.json();
 
                 if (!response.ok) {
-                    // If the server responded with an error (like "email already exists")
                     throw new Error(result.message || 'Something went wrong');
                 }
-                
-                // If successful, show a success message
-                alert('Success! ' + result.message);
-                signupForm.reset();
+
+                alert('Success! You will now be redirected to the login page.');
+                window.location.href = 'client-login.html';
 
             } catch (error) {
-                // If there's an error with the fetch call or from the server
                 console.error('Signup Error:', error);
                 alert('Error: ' + error.message);
             }
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    // ... your existing signup form code ...
+
+    const togglePassword = document.getElementById('togglePassword');
+    const password = document.getElementById('password');
+
+    const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+    const confirmPassword = document.getElementById('confirmPassword');
+
+    // Function to toggle a single password field
+    function toggleVisibility(inputField, toggleIcon) {
+        // Check the current type of the input field
+        const type = inputField.getAttribute('type') === 'password' ? 'text' : 'password';
+        inputField.setAttribute('type', type);
+
+        // Toggle the icon class
+        toggleIcon.classList.toggle('fa-eye-slash');
+    }
+
+    // Add click listener for the main password toggle
+    if (togglePassword) {
+        togglePassword.addEventListener('click', () => {
+            toggleVisibility(password, togglePassword);
+        });
+    }
+
+    // Add click listener for the confirm password toggle
+    if (toggleConfirmPassword) {
+        toggleConfirmPassword.addEventListener('click', () => {
+            toggleVisibility(confirmPassword, toggleConfirmPassword);
         });
     }
 });
