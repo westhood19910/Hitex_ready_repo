@@ -34,6 +34,12 @@
   --transition: all 0.3s ease;
   --check-color: #1bcf5d;
   --new-background: rgba(219, 6, 6, 0.1);
+  -bg-light: #f8f9fa;          
+  --category-bg: #eef5ff;            
+  --cross-color: #e42626ff; 
+  --border-color: #dee2e6;
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+   --gradient-bg: linear-gradient(135deg, #0a4ca8, #032672);
 }
 
 body {
@@ -46,7 +52,6 @@ body {
 }
 
 /* CODE FOR HEADER ON SCIENTIFICE EDITING PAGE */
-
 
 .for_freher {
   color: #ffffff;
@@ -411,6 +416,7 @@ body {
 
 .ta__ble__e-feature-item {
   padding: 0.5rem;
+  font-size: 15px;
   border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
@@ -467,6 +473,7 @@ body {
 .ta__ble__e-btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  color: #fff;
 }
 
 .ta__ble__e-btn-container {
@@ -1965,20 +1972,18 @@ body {
   }
 }
 
-/* == MEDIA QUERIES FOR RESPONSIVENESS == */
 
-/* For tablets and smaller devices (below 992px) */
 @media screen and (max-width: 992px) {
   .fizzle-snork {
-    flex-direction: column; /* Stack columns vertically */
+    flex-direction: column; 
     gap: 2.5rem;
   }
   
   .doodle-plank {
-    border-left: none; /* Remove vertical line */
+    border-left: none; 
     padding-left: 0;
     text-align: center;
-    border-top: 3px solid rgba(255, 255, 255, 0.8); /* Add horizontal line */
+    border-top: 3px solid rgba(255, 255, 255, 0.8); 
     padding-top: 2.5rem;
   }
 
@@ -1987,7 +1992,6 @@ body {
   }
 }
 
-/* For mobile phones (below 576px) */
 @media screen and (max-width: 576px) {
   .glim-florp-z7 {
     margin: 4em auto;
@@ -7286,15 +7290,12 @@ h3 {
   }
   
   .banku678 {
-      height: auto;
-      padding: 40px 0;
+      height: max-content;
+     
   }
 }
 
 @media (max-width: 480px) {
-  .banku678 {
-      margin-top: 5em;
-  }
   
   .tex_llbelo h1 {
       margin-bottom: 15px;
