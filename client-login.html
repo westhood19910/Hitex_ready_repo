@@ -195,151 +195,70 @@
                 </div>
             </div>
         
-           <script>
-   
-function showCustomAlert(message, type) {
-    // Remove any existing alerts
-    const existingAlert = document.querySelector('.custom-alert');
-    if (existingAlert) {
-        existingAlert.remove();
-    }
-    
-    // Create alert element
-    const alert = document.createElement('div');
-    alert.className = `custom-alert ${type}`;
-    alert.innerHTML = `
-        <div class="alert-content">
-            <span class="alert-message">${message}</span>
-            <button class="alert-close" onclick="this.parentElement.parentElement.remove()">×</button>
-        </div>
-    `;
-    
-    // Add styles
-    alert.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 9999;
-        padding: 15px 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        max-width: 400px;
-        word-wrap: break-word;
-        ${type === 'success' ? 
-            'background: #d4edda; color: #155724; border: 1px solid #c3e6cb;' : 
-            'background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;'
-        }
-    `;
-    
-    alert.querySelector('.alert-content').style.cssText = `
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 10px;
-    `;
-    
-    alert.querySelector('.alert-close').style.cssText = `
-        background: none;
-        border: none;
-        font-size: 20px;
-        cursor: pointer;
-        color: inherit;
-        padding: 0;
-        line-height: 1;
-    `;
-    
-    // Add to page
-    document.body.appendChild(alert);
-    
-    // Auto remove after 5 seconds
-    setTimeout(() => {
-        if (alert.parentElement) {
-            alert.remove();
-        }
-    }, 5000);
-}
-
-// Updated login form handler
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value;
-
-    // Basic validation
-    if (!email || !password) {
-        showCustomAlert('Please fill in all fields', 'error');
-        return;
-    }
-
-    // Disable submit button during request
-    const submitBtn = e.target.querySelector('button[type="submit"]');
-    const originalText = submitBtn.textContent;
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Logging in...';
-
-    try {
-        const response = await fetch('https://hitex-backend-server.onrender.com/login', {
-            method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email, password })
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-            // Handle different error scenarios
-            throw new Error(data.error || 'Login failed');
-        }
-
-        // Show success message
-        showCustomAlert('Login successful! Welcome back, ' + data.user.fullName, 'success');
-
-        // Save authentication data
-        localStorage.setItem('authToken', data.token);
-        localStorage.setItem('user', JSON.stringify(data.user));
-        
-        // Redirect based on user role
-        setTimeout(() => {
-            if (data.user.role === 'editor') {
-                window.location.href = 'editor-dashboard.html'; // Create this page for editors
-            } else if (data.user.role === 'admin') {
-                window.location.href = 'admin-dashboard.html'; // Create this page for admins
-            } else {
-                window.location.href = 'get-quote.html'; // For authors and regular users
+              <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('loginForm');
+            
+            // Check if user is already logged in and redirect them away from the login page
+            const token = localStorage.getItem('authToken');
+            if (token) {
+                const user = JSON.parse(localStorage.getItem('user'));
+                alert(`You are already logged in as ${user.fullName}. Redirecting to your dashboard.`);
+                if (user.role === 'editor') {
+                    window.location.href = '/editor-dashboard.html';
+                } else {
+                    window.location.href = '/dashboard.html';
+                }
+                return; // Stop the script here
             }
-        }, 1500);
 
-    } catch (error) {
-        console.error('Login error:', error);
-        showCustomAlert('Login failed: ' + error.message, 'error');
-    } finally {
-        // Re-enable submit button
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalText;
-    }
-});
+            // Handle a new login attempt
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
 
-// Check if user is already logged in (optional)
-document.addEventListener('DOMContentLoaded', () => {
-    const token = localStorage.getItem('authToken');
-    const user = localStorage.getItem('user');
-    
-    if (token && user) {
-        try {
-            const userData = JSON.parse(user);
-            // Optionally redirect if already logged in
-            showCustomAlert(`You're already logged in as ${userData.fullName}`, 'success');
-        } catch (error) {
-            // Clear invalid data
-            localStorage.removeItem('authToken');
-            localStorage.removeItem('user');
-        }
-    }
-});
-</script>
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const submitBtn = e.target.querySelector('button[type="submit"]');
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Logging in...';
+
+                try {
+                    const response = await fetch('https://hitex-backend-server.onrender.com/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password })
+                    });
+
+                    const data = await response.json();
+                    if (!response.ok) {
+                        throw new Error(data.error || 'Login failed');
+                    }
+
+                    // Save authentication data
+                    localStorage.setItem('authToken', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    
+                    alert('Login successful! Welcome back, ' + data.user.fullName);
+                    
+                    // Redirect based on user role
+                    setTimeout(() => {
+                        if (data.user.role === 'editor') {
+                            window.location.href = '/editor-dashboard.html';
+                        } else {
+                            window.location.href = '/dashboard.html';
+                        }
+                    }, 1000);
+
+                } catch (error) {
+                    alert('Login failed: ' + error.message);
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Log In';
+                }
+            });
+        });
+    </script>
+
       
 
      
