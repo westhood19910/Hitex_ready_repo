@@ -13,7 +13,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head> 
-   <header class="pag-2-hed-1">
+
+   <!-- <header class="pag-2-hed-1">
                 <div class="lat_clo_001">              
                 <a href="index.html" class="action-home">
                   <i class="fa-solid fa-house"></i>
@@ -45,11 +46,12 @@
                     </li>
                 </ul>
             </div>
-    </header>
+    </header> -->
               <!-- Modified Navigation HTML -->
-<nav class="nav__bar_oi" style="margin-top: 2em;">
+
+<nav class="nav__bar_oi">
   <div class="nav__bar_oi-logo">
-   <a href="home.html"><img src="assets/png_20221026_003820_0000.png" alt="HiTex EdiTex Logo"></a>
+   <a href="index.html"><img src="assets/png_20221026_003820_0000.png" alt="HiTex EdiTex Logo"></a>
   </div>
   
   <button class="nav__bar_oi-toggle" id="navToggle">
@@ -78,7 +80,7 @@
         <a href="translate.html" class="nav__bar_oi-dropdown-item">Translation Services</a>
         <a href="service-levels.html" class="nav__bar_oi-dropdown-item">Service Levels</a>
         <a href="pricing.html" class="nav__bar_oi-dropdown-item">Pricing</a>
-        <a href="auhtoredly.html" class="nav__bar_oi-dropdown-item">Authoredly</a>
+        <!-- <a href="auhtoredly.html" class="nav__bar_oi-dropdown-item">Authoredly</a> -->
       </div>
     </li>
     <li class="nav__bar_oi-menu-item">
@@ -99,10 +101,10 @@
         <a href="hitex-hub.html" class="nav__bar_oi-dropdown-item">The Hitex Hub</a>
         <a href="newsroom.html" class="nav__bar_oi-dropdown-item">Newsroom</a>
       </div>
-    </li>
+    </li> 
     <div class="nav__bar_oi-actions">
-      <button class="nav__bar_oi-button nav__bar_oi-button-signup">Client Sign-Up</button>
-      <button class="nav__bar_oi-button nav__bar_oi-button-login">Client Log-in</button>
+      <a href="client-sign-up.html" class="nav__bar_oi-button nav__bar_oi-button-signup">Submit Enquiry</a>
+      <a href="client-login.html" class="nav__bar_oi-button nav__bar_oi-button-login">Get quote</a>
     </div>
   </ul>
   
@@ -183,7 +185,7 @@
                        <div class="log_er_h-separator">OR</div>
 
                       <div class="log_er_h-form-group">
-                       <a href="https://hitex-backend-server.onrender.com/auth/google" class="google-login-btn">
+                       <a href="https://all-branched-end.onrender.com/auth/google" class="google-login-btn">
                       <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google logo">
                        Continue with Google
                        </a>
@@ -217,10 +219,10 @@
                 submitBtn.textContent = 'Logging in...';
 
                 try {
-                    const response = await fetch('https://hitex-backend-server.onrender.com/login', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ email, password })
+                    const response = await fetch('https://all-branched-end.onrender.com/login', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ email, password })
                     });
 
                     const data = await response.json();
@@ -236,13 +238,17 @@
                     showCustomAlert('Login successful! Welcome back, ' + data.user.fullName, 'success');
                     
                     // Redirect based on user role after a short delay
-                    setTimeout(() => {
-                        if (data.user.role === 'editor') {
-                            window.location.href = '/editor-dashboard.html';
-                        } else {
-                            window.location.href = '/dashboard.html';
-                        }
-                    }, 1500);
+                     // Redirect based on user role after a short delay
+                 setTimeout(() => {
+    if (data.user.role === 'editor') {
+        // If the user is an editor, go to the editor dashboard
+        window.location.href = '/editor-dashboard.html';
+    } else {
+        // Otherwise (if they are an author), go to the main user dashboard
+        window.location.href = '/dashboard.html';
+    }
+          }, 1500);
+
 
                 } catch (error) {
                     showCustomAlert('Login failed: ' + error.message, 'error');
