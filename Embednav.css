@@ -7,16 +7,19 @@
 
 html, body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    padding-top: 3.2rem;
 }
 
 /* Navbar styles */
 .navbar {
     background-color: #ffffff;
     box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 5.5em;
     left: 0;
+    top: 0;
+    position: sticky;
     right: 0;
+    left: 0;
+      width: 100%;    
     z-index: 35;
     height: 3.5rem;
   }

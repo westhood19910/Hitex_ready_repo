@@ -239,17 +239,10 @@
                     
                     // Redirect based on user role after a short delay
                      // Redirect based on user role after a short delay
-                 setTimeout(() => {
-    if (data.user.role === 'editor') {
-        // If the user is an editor, go to the editor dashboard
-        window.location.href = '/editor-dashboard.html';
-    } else {
-        // Otherwise (if they are an author), go to the main user dashboard
-        window.location.href = '/dashboard.html';
-    }
-          }, 1500);
-
-
+                // Redirect ALL users to the services page after a short delay
+setTimeout(() => {
+    window.location.href = '/service-levels.html';
+}, 1500);
                 } catch (error) {
                     showCustomAlert('Login failed: ' + error.message, 'error');
                 } finally {
