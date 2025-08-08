@@ -38,6 +38,7 @@
 body, html { 
     margin: 0;
     padding: 0;
+    padding-top: 3.2rem;
     overflow-x: hidden;
     box-sizing: border-box;
     font-family: 'Lora';
@@ -8997,7 +8998,7 @@ p {
 }
 
 
-/* VAVIGATION MENU */
+/* NAVIGATION MENU */
 .nav__bar_oi {
   display: flex;
   justify-content: space-between;
@@ -9007,7 +9008,7 @@ p {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   height: 3.2rem;
   position: fixed;
-  width: 100%;
+  width: 100vw;
   top: 0;
   z-index: 1000;
 }
