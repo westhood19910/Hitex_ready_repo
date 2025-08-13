@@ -2,7 +2,8 @@
   --red: #D54C4F;
   --blue: #032672;
   --light-blue: #D3E5FF;
-  --major-heading: 3em;
+  --major-heading: 2.8em;
+  --major-head-small: 1.4em;
   --major-header-font-weight: 800;
   --sub-head-color: #EBEBEB;
   --button-background: linear-gradient(135deg, #eb2525, #af1e1e);
@@ -1359,10 +1360,9 @@ body {
 
 .xk9_vb2_wrapper {
     max-width: 100%;
-    margin-top: 12em;
     padding: 20px;
     text-align: center;
-  
+    margin: 9em auto;
 }
 
 .qt7_heading_zy3 {
@@ -2409,15 +2409,16 @@ body {
 }
 
 .jamal_int h1{
-font-size: 2rem;
+font-size: var(--major-heading);
 padding: 1em;
-color: #636363;
+color: var(--blue);
 font-weight: 850;
+text-align: center;
 }
 
 .xk9_wrapper {
-    width: 60%;
-    max-width: 1400px;
+    width: 100%;
+    max-width: 1300px;
     display: grid;
     grid-template-columns: 1.2fr 1fr 1.2fr;
     gap: 0px;
@@ -2473,19 +2474,19 @@ font-weight: 850;
 
   .hz7_connection_line {
     position: absolute;
-    border: 2px dashed #585858;
+    border: 2px dashed var(--blue);
     pointer-events: none;
   }
 
   .hz7_connection_line2 {
     position: absolute;
-    border: 2px dashed #585858;
+    border: 2px dashed var(--blue);;
     pointer-events: none;
   }
 
   .hz7_connection_line3  {
     position: absolute;
-    border: 2px dashed #585858;
+    border: 2px dashed var(--blue);;
     pointer-events: none;
   }
 
@@ -2615,12 +2616,20 @@ font-weight: 850;
       gap: 30px;
       padding: 20px;
     }
-
     .rotating_image {
       width: 250px;
       height: 250px;
     }
+
+    
   }
+
+  @media screen and (max-width:650px){
+    .jamal_int h1{
+      font-size: var(--major-head-small);
+    }
+  }
+  
 
 /* CODE FOR STORY */
 .l-page {
@@ -10803,11 +10812,12 @@ h3 {
 .log_er_h-container {
     position: relative;
     width: 100%;
-    max-width: 360px; /* Reduced from 420px */
+    max-width: 360px; 
     background-color: white;
-    border-radius: 12px; /* Slightly smaller radius */
+    border-radius: 12px; 
     overflow: hidden;
-    margin: 2em auto;
+    margin: 10em auto;
+    padding: 3rem auto;
     border: 1px solid rgba(3, 38, 114, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
