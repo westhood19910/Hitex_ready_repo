@@ -525,18 +525,19 @@
     </div>
 
    <script>
-  document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
     // --- CONFIG ---
     const BACKEND_URL = "https://all-branched-end.onrender.com";
 
-    // --- DOM ELEMENT SELECTION ---
+    // --- DOM ELEMENTS ---
     const serviceTabs = document.querySelectorAll('.service-tab');
     const wordCountInput = document.getElementById('word-count');
     const priceDisplay = document.getElementById('calculated-price');
     const pageHeading = document.getElementById('page-main-heading');
     const quoteForm = document.querySelector('.quote-form');
+    const fileInput = document.getElementById('manuscript-file'); // Ensure your file input has this ID
 
-    // --- 1. PRICE CALCULATION LOGIC ---
+    // --- PRICE CALCULATION ---
     function calculatePrice() {
         const activeTab = document.querySelector('.service-tab.active');
         if (!activeTab) return;
@@ -563,37 +564,39 @@
     if (wordCountInput) {
         wordCountInput.addEventListener('input', calculatePrice);
     }
-    calculatePrice(); // Initial calculation on page load
+    calculatePrice();
 
-    // --- 2. FORM SUBMISSION LOGIC ---
+    // --- FORM SUBMISSION ---
     if (quoteForm) {
         quoteForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+
             const token = localStorage.getItem('authToken');
             if (!token) {
                 alert('You must be logged in to submit a request.');
-                return window.location.href = '/login.html'; // Or your login page name
+                return window.location.href = '/login.html';
             }
 
             const submitBtn = quoteForm.querySelector('.submit-btn');
             submitBtn.textContent = 'Submitting...';
             submitBtn.disabled = true;
 
-            // Create a FormData object to handle all fields, including the file
-            const formData = new FormData(quoteForm);
-            
-            // Add the selected service type to the form data
-            const activeServiceTab = document.querySelector('.service-tab.active');
-            if (activeServiceTab) {
-                formData.append('serviceType', activeServiceTab.dataset.service);
-            }
-
             try {
+                const formData = new FormData();
+                if (fileInput && fileInput.files.length > 0) {
+                    formData.append("file", fileInput.files[0]);
+                }
+                formData.append("title", "My Manuscript");
+
+                const activeServiceTab = document.querySelector('.service-tab.active');
+                if (activeServiceTab) {
+                    formData.append('serviceType', activeServiceTab.dataset.service);
+                }
+
                 const response = await fetch(`${BACKEND_URL}/submit-manuscript`, {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`
-                        // Note: Do NOT set Content-Type manually for FormData
                     },
                     body: formData
                 });
@@ -615,8 +618,8 @@
             }
         });
     }
-});
-
+          });
 </script>
+
 </body>
 </html>
