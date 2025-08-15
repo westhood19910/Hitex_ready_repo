@@ -525,91 +525,98 @@
     </div>
 
    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // --- DOM ELEMENT SELECTION ---
-        const serviceTabs = document.querySelectorAll('.service-tab');
-        const wordCountInput = document.getElementById('word-count');
-        const priceDisplay = document.getElementById('calculated-price');
-        const pageHeading = document.getElementById('page-main-heading');
-        const quoteForm = document.querySelector('.quote-form');
+  document.addEventListener('DOMContentLoaded', () => {
+    // --- CONFIG ---
+    const BACKEND_URL = "https://all-branched-end.onrender.com";
 
-        // --- 1. PRICE CALCULATION LOGIC ---
-        function calculatePrice() {
-            const activeTab = document.querySelector('.service-tab.active');
-            if (!activeTab) return;
-            const ratePerWord = parseFloat(activeTab.dataset.rate);
-            const wordCount = parseInt(wordCountInput.value) || 0;
-            const totalPrice = wordCount > 0 ? wordCount * ratePerWord : 0;
-            if (priceDisplay) {
-                priceDisplay.textContent = `$${totalPrice.toFixed(2)}`;
+    // --- DOM ELEMENT SELECTION ---
+    const serviceTabs = document.querySelectorAll('.service-tab');
+    const wordCountInput = document.getElementById('word-count');
+    const priceDisplay = document.getElementById('calculated-price');
+    const pageHeading = document.getElementById('page-main-heading');
+    const quoteForm = document.querySelector('.quote-form');
+
+    // --- 1. PRICE CALCULATION LOGIC ---
+    function calculatePrice() {
+        const activeTab = document.querySelector('.service-tab.active');
+        if (!activeTab) return;
+        const ratePerWord = parseFloat(activeTab.dataset.rate);
+        const wordCount = parseInt(wordCountInput.value) || 0;
+        const totalPrice = wordCount > 0 ? wordCount * ratePerWord : 0;
+        if (priceDisplay) {
+            priceDisplay.textContent = `$${totalPrice.toFixed(2)}`;
+        }
+    }
+
+    serviceTabs.forEach(tab => {
+        tab.addEventListener('click', (event) => {
+            serviceTabs.forEach(t => t.classList.remove('active'));
+            const clickedTab = event.currentTarget;
+            clickedTab.classList.add('active');
+            if (pageHeading) {
+                pageHeading.textContent = clickedTab.textContent;
             }
-        }
-        serviceTabs.forEach(tab => {
-            tab.addEventListener('click', (event) => {
-                serviceTabs.forEach(t => t.classList.remove('active'));
-                const clickedTab = event.currentTarget;
-                clickedTab.classList.add('active');
-                if (pageHeading) {
-                    pageHeading.textContent = clickedTab.textContent;
-                }
-                calculatePrice();
-            });
+            calculatePrice();
         });
-        if (wordCountInput) {
-            wordCountInput.addEventListener('input', calculatePrice);
-        }
-        calculatePrice(); // Initial calculation on page load
-
-        // --- 2. FORM SUBMISSION LOGIC ---
-        if (quoteForm) {
-            quoteForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const token = localStorage.getItem('authToken');
-                if (!token) {
-                    alert('You must be logged in to submit a request.');
-                    return window.location.href = '/login.html'; // Or your login page name
-                }
-
-                const submitBtn = quoteForm.querySelector('.submit-btn');
-                submitBtn.textContent = 'Submitting...';
-                submitBtn.disabled = true;
-
-                // Create a FormData object to handle all fields, including the file
-                const formData = new FormData(quoteForm);
-                
-                // Add the selected service type to the form data
-                const activeServiceTab = document.querySelector('.service-tab.active');
-                if (activeServiceTab) {
-                    formData.append('serviceType', activeServiceTab.dataset.service);
-                }
-
-                try {
-                    const response = await fetch('https://hitex-backend-server.onrender.com/submit-manuscript', {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': `Bearer ${token}`
-                        },
-                        body: formData
-                    });
-
-                    const result = await response.json();
-                    if (!response.ok) {
-                        throw new Error(result.error || 'Submission failed');
-                    }
-
-                    alert('Success! ' + result.message);
-                    quoteForm.reset();
-                    if (priceDisplay) priceDisplay.textContent = '$0.00';
-
-                } catch (error) {
-                    alert('Submission failed: ' + error.message);
-                } finally {
-                    submitBtn.textContent = 'Submit Order';
-                    submitBtn.disabled = false;
-                }
-            });
-        }
     });
+
+    if (wordCountInput) {
+        wordCountInput.addEventListener('input', calculatePrice);
+    }
+    calculatePrice(); // Initial calculation on page load
+
+    // --- 2. FORM SUBMISSION LOGIC ---
+    if (quoteForm) {
+        quoteForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                alert('You must be logged in to submit a request.');
+                return window.location.href = '/login.html'; // Or your login page name
+            }
+
+            const submitBtn = quoteForm.querySelector('.submit-btn');
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+
+            // Create a FormData object to handle all fields, including the file
+            const formData = new FormData(quoteForm);
+            
+            // Add the selected service type to the form data
+            const activeServiceTab = document.querySelector('.service-tab.active');
+            if (activeServiceTab) {
+                formData.append('serviceType', activeServiceTab.dataset.service);
+            }
+
+            try {
+                const response = await fetch(`${BACKEND_URL}/submit-manuscript`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                        // Note: Do NOT set Content-Type manually for FormData
+                    },
+                    body: formData
+                });
+
+                const result = await response.json();
+                if (!response.ok) {
+                    throw new Error(result.error || 'Submission failed');
+                }
+
+                alert('Success! ' + result.message);
+                quoteForm.reset();
+                if (priceDisplay) priceDisplay.textContent = '$0.00';
+
+            } catch (error) {
+                alert('Submission failed: ' + error.message);
+            } finally {
+                submitBtn.textContent = 'Submit Order';
+                submitBtn.disabled = false;
+            }
+        });
+    }
+});
+
 </script>
 </body>
 </html>
