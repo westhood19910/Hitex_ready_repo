@@ -1861,11 +1861,10 @@ h2 {
   .pag-2-001 {
   position: relative;
   width: 100%;
-  height: 30vh;
+  height: 40vh;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.7);
 }
-
 }
 
 .pag_2_nav_bar ul li a:hover {
