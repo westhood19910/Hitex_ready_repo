@@ -7195,6 +7195,7 @@ h3 {
   align-items: center;
   justify-content: center;
   text-align: center;
+  margin-top: 3rem;
 }
 
 .hero-content {
@@ -10680,7 +10681,7 @@ h3 {
           .unl_live-signup-container {
     background-color: white;
     width: 100%;
-    margin: 0 auto;
+    margin: 5em auto;
     max-width: 380px; /* Was 450px */
     padding: 30px; /* Was 40px */
     border-radius: 15px; /* Was 20px */
@@ -10808,7 +10809,6 @@ h3 {
 }
 
 /* CODE FOR CLIENT LOG IN PAGE*/
-
 .log_er_h-container {
     position: relative;
     width: 100%;
