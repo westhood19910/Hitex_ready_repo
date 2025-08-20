@@ -525,100 +525,87 @@
     </div>
 
    <script>
-document.addEventListener('DOMContentLoaded', () => {
-    // --- CONFIG ---
-    const BACKEND_URL = "https://all-branched-end.onrender.com";
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- DOM ELEMENT SELECTION ---
+        const serviceTabs = document.querySelectorAll('.service-tab');
+        const wordCountInput = document.getElementById('word-count');
+        const priceDisplay = document.getElementById('calculated-price');
+        const pageHeading = document.getElementById('page-main-heading');
+        const quoteForm = document.querySelector('.quote-form');
 
-    // --- DOM ELEMENTS ---
-    const serviceTabs = document.querySelectorAll('.service-tab');
-    const wordCountInput = document.getElementById('word-count');
-    const priceDisplay = document.getElementById('calculated-price');
-    const pageHeading = document.getElementById('page-main-heading');
-    const quoteForm = document.querySelector('.quote-form');
-    const fileInput = document.getElementById('manuscript-file'); // Ensure your file input has this ID
-
-    // --- PRICE CALCULATION ---
-    function calculatePrice() {
-        const activeTab = document.querySelector('.service-tab.active');
-        if (!activeTab) return;
-        const ratePerWord = parseFloat(activeTab.dataset.rate);
-        const wordCount = parseInt(wordCountInput.value) || 0;
-        const totalPrice = wordCount > 0 ? wordCount * ratePerWord : 0;
-        if (priceDisplay) {
-            priceDisplay.textContent = `$${totalPrice.toFixed(2)}`;
+        // --- PRICE CALCULATION LOGIC (This part is correct) ---
+        function calculatePrice() {
+            const activeTab = document.querySelector('.service-tab.active');
+            if (!activeTab) return;
+            const ratePerWord = parseFloat(activeTab.dataset.rate);
+            const wordCount = parseInt(wordCountInput.value) || 0;
+            const totalPrice = wordCount > 0 ? wordCount * ratePerWord : 0;
+            if (priceDisplay) {
+                priceDisplay.textContent = `$${totalPrice.toFixed(2)}`;
+            }
         }
-    }
-
-    serviceTabs.forEach(tab => {
-        tab.addEventListener('click', (event) => {
-            serviceTabs.forEach(t => t.classList.remove('active'));
-            const clickedTab = event.currentTarget;
-            clickedTab.classList.add('active');
-            if (pageHeading) {
-                pageHeading.textContent = clickedTab.textContent;
-            }
-            calculatePrice();
-        });
-    });
-
-    if (wordCountInput) {
-        wordCountInput.addEventListener('input', calculatePrice);
-    }
-    calculatePrice();
-
-    // --- FORM SUBMISSION ---
-    if (quoteForm) {
-        quoteForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const token = localStorage.getItem('authToken');
-            if (!token) {
-                alert('You must be logged in to submit a request.');
-                return window.location.href = '/login.html';
-            }
-
-            const submitBtn = quoteForm.querySelector('.submit-btn');
-            submitBtn.textContent = 'Submitting...';
-            submitBtn.disabled = true;
-
-            try {
-                const formData = new FormData();
-                if (fileInput && fileInput.files.length > 0) {
-                    formData.append("file", fileInput.files[0]);
+        serviceTabs.forEach(tab => {
+            tab.addEventListener('click', (event) => {
+                serviceTabs.forEach(t => t.classList.remove('active'));
+                event.currentTarget.classList.add('active');
+                if (pageHeading) {
+                    pageHeading.textContent = event.currentTarget.textContent;
                 }
-                formData.append("title", "My Manuscript");
+                calculatePrice();
+            });
+        });
+        if (wordCountInput) {
+            wordCountInput.addEventListener('input', calculatePrice);
+        }
+        calculatePrice();
 
+        // --- FORM SUBMISSION LOGIC (Corrected Version) ---
+        if (quoteForm) {
+            quoteForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const token = localStorage.getItem('authToken');
+                if (!token) {
+                    alert('You must be logged in to submit a request.');
+                    return window.location.href = '/login.html';
+                }
+
+                const submitBtn = quoteForm.querySelector('.submit-btn');
+                submitBtn.textContent = 'Submitting...';
+                submitBtn.disabled = true;
+                
+                // === THIS IS THE CORRECTION ===
+                // This will automatically gather all fields that have a 'name' attribute
+                const formData = new FormData(quoteForm);
+                // ============================
+                
                 const activeServiceTab = document.querySelector('.service-tab.active');
                 if (activeServiceTab) {
                     formData.append('serviceType', activeServiceTab.dataset.service);
                 }
 
-                const response = await fetch(`${BACKEND_URL}/submit-manuscript`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: formData
-                });
+                try {
+                    const response = await fetch('https://all-branched-end.onrender.com/submit-manuscript', {
+                        method: 'POST',
+                        headers: { 'Authorization': `Bearer ${token}` },
+                        body: formData
+                    });
 
-                const result = await response.json();
-                if (!response.ok) {
-                    throw new Error(result.error || 'Submission failed');
+                    const result = await response.json();
+                    if (!response.ok) throw new Error(result.error || 'Submission failed');
+                    
+                    alert('Success! ' + result.message);
+                    quoteForm.reset();
+                    if (priceDisplay) priceDisplay.textContent = '$0.00';
+
+                } catch (error) {
+                    alert('Submission failed: ' + error.message);
+                } finally {
+                    submitBtn.textContent = 'Submit Order';
+                    submitBtn.disabled = false;
                 }
-
-                alert('Success! ' + result.message);
-                quoteForm.reset();
-                if (priceDisplay) priceDisplay.textContent = '$0.00';
-
-            } catch (error) {
-                alert('Submission failed: ' + error.message);
-            } finally {
-                submitBtn.textContent = 'Submit Order';
-                submitBtn.disabled = false;
-            }
-        });
-    }
-          });
+            });
+        }
+    });
 </script>
 
 </body>
