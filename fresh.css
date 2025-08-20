@@ -751,7 +751,7 @@ h2 {
 /* =================================================================== */
 
 .subjects-cont {
-  max-width: 90%;
+  max-width: 100%;
     border-radius: 10px;
     margin-top: 15vw;
     margin-bottom: 15vw;
@@ -3377,7 +3377,6 @@ color: #000000;
   display: flex;
   align-items: center;
   padding: 1.5rem;
-  /* Add a vertical separator line */
   border-right: 1px solid rgba(61, 61, 61, 0.25);
 }
 
