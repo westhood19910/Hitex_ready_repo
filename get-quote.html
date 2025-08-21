@@ -417,7 +417,7 @@
                 </div>
                 <div class="form-group">
                     <label for="manuscript-file">Upload your manuscript</label>
-                    <input type="file" id="manuscript-file" name="manuscript-file" accept=".doc,.docx,.pdf">
+                    <input type="file" id="manuscript-file" name="manuscriptFile" accept=".doc,.docx,.pdf">
                     <p class="helper-text">Accepted formats: .doc, .docx, .pdf</p>
                 </div>
                 <div class="form-grid">
@@ -595,7 +595,7 @@
                     
                     alert('Success! ' + result.message);
                     quoteForm.reset();
-                    if (priceDisplay) priceDisplay.textContent = '$0.00';
+                    if (priceDisplay) priceDisplay.textContent = '$0.00';   
 
                 } catch (error) {
                     alert('Submission failed: ' + error.message);
