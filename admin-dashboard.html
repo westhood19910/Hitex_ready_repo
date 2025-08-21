@@ -315,7 +315,7 @@
             };
 
             try {
-                const response = await fetch(`https://hitex-backend-server.onrender.com/admin/assign-job/${manuscriptId}`, {
+                const response = await fetch(`https://all-branched-end.onrender.com/admin/assign-job/${manuscriptId}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                     body: JSON.stringify(assignmentData)
@@ -331,11 +331,11 @@
 
         // --- Logic to fetch data and build the table ---
         try {
-            const editorResponse = await fetch('https://hitex-backend-server.onrender.com/admin/editors', { headers: { 'Authorization': `Bearer ${token}` } });
+            const editorResponse = await fetch('https://all-branched-end.onrender.com/admin/editors', { headers: { 'Authorization': `Bearer ${token}` } });
             if (!editorResponse.ok) throw new Error('Could not fetch editors.');
             const editors = await editorResponse.json();
 
-            const manuscriptResponse = await fetch('https://hitex-backend-server.onrender.com/admin/dashboard', { headers: { 'Authorization': `Bearer ${token}` } });
+            const manuscriptResponse = await fetch('https://all-branched-end.onrender.com/admin/dashboard', { headers: { 'Authorization': `Bearer ${token}` } });
             if (!manuscriptResponse.ok) throw new Error('Could not fetch manuscripts.');
             const manuscripts = await manuscriptResponse.json();
 
@@ -357,7 +357,7 @@
                     <td>${new Date(doc.uploadDate).toLocaleString()}</td>
                     <td>${doc.originalName}</td>
                     <td>${statusInfo}</td>
-                    <td><a href="https://hitex-backend-server.onrender.com/${doc.filePath}" class="adm-fiu-download-btn" download>Download</a></td>
+                    <td><a href="https://all-branched-end.onrender.com/${doc.filePath}" class="adm-fiu-download-btn" download>Download</a></td>
                     <td>
                         <div style="display: flex; gap: 5px;">
                            <select id="editor-select-${doc._id}" style="flex-grow: 1;">${editorOptions}</select>
