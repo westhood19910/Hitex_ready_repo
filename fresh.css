@@ -45,6 +45,13 @@ body, html {
     
 }
 
+@media screen and (min-width: 1024px) {
+  body {
+   zoom: 0.9;
+   overflow-x: hidden;
+  }
+}
+
 a {
   text-decoration: none;
 }
@@ -9001,7 +9008,6 @@ p {
   }
 }
 
-
 /* NAVIGATION MENU */
 .nav__bar_oi {
   display: flex;
@@ -9012,7 +9018,7 @@ p {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   height: 3.2rem;
   position: fixed;
-  width: 100vw;
+  width: 111.11vw;
   top: 0;
   z-index: 1000;
 }
@@ -9203,7 +9209,6 @@ color: #ffffffff;
 
 /* END */
 
-
 @media screen and (max-width: 1024px) {
   .nav__bar_oi-toggle {
     display: flex;
@@ -9211,7 +9216,7 @@ color: #ffffffff;
 
   .nav__bar_oi-menu {
     position: fixed;
-    top: 0;
+    top: -2em;
     left: -300px;
     width: 280px;
     height: 100vh;
@@ -9302,6 +9307,104 @@ color: #ffffffff;
     margin: 0.5rem 0;
     text-align: center;
   }
+}
+
+/* NEW SOCIAL BUTTON FOR SIDEBAR */
+
+/* The main nexus for the entire component */
+.aether-nexus {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #1a1a1d; /* Dark background for a different feel */
+    border: 1px solid #c3073f; /* A sharp accent color */
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace; /* Monospaced font for a distinct style */
+}
+
+/* --- Authentication Section --- */
+
+/* The gate holding the action links */
+.lumen-gate {
+    display: flex;
+    gap: 15px; /* Creates space between the two glyphs */
+}
+
+/* Styling for the actionable links */
+.gate-link {
+    text-decoration: none;
+    padding: 9px 16px;
+    border-radius: 2px; /* Sharper corners */
+    font-weight: normal;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase; /* Make text all caps */
+    letter-spacing: 1px; /* Add some letter spacing */
+}
+
+/* The 'Sign-up' button style */
+.glyph-ascend {
+    background-color: #c3073f; /* Primary accent color */
+    color: #ffffff;
+    border: 1px solid #c3073f;
+}
+
+/* Hover effect for the ascend glyph */
+.glyph-ascend:hover {
+    background-color: #950740; /* Darker shade on hover */
+    color: #fff;
+    box-shadow: 0 0 8px rgba(195, 7, 63, 0.7); /* Adds a glow effect */
+}
+
+/* The 'Log-in' button style */
+.glyph-enter {
+    background-color: transparent;
+    color: #6f2232; /* A muted, secondary accent color */
+    border: 1px solid #6f2232;
+}
+
+/* Hover effect for the enter glyph */
+.glyph-enter:hover {
+    background-color: #6f2232;
+    color: #ffffff;
+}
+
+/* --- Social Media Section --- */
+
+/* The stream containing social echoes */
+.whisper-stream {
+    display: flex;
+    align-items: center;
+    gap: 18px; /* Space between the echo pods */
+}
+
+
+.echo-pod {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* The sigil (image icon) itself */
+.stream-sigil {
+    width: 22px;
+    height: 22px;
+    filter: invert(90%) sepia(20%) saturate(500%) hue-rotate(300deg); /* Gives a unique color tint to icons */
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Hover effect for the sigil */
+.stream-sigil:hover {
+    transform: scale(1.2); /* Slightly enlarges the icon on hover */
+    filter: invert(100%) sepia(0%) saturate(100%) hue-rotate(0deg); /* Brightens icon to white on hover */
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 600px) {
+    .aether-nexus {
+        flex-direction: column; /* Stacks the gate and stream vertically */
+        gap: 20px;
+    }
 }
 
 /* Content placeholder */
@@ -9456,8 +9559,12 @@ color: #ffffffff;
   100% { box-shadow: 0 0 0 0 rgba(3, 38, 114, 0); }
 }
 
-
 .nav__bar_oi-social {
+  display: flex;
+  align-items: center;
+}
+
+.new_nav__baroi-social {
   display: flex;
   align-items: center;
 }
@@ -9538,6 +9645,13 @@ color: #ffffffff;
 
 /* CODE FOR ADMIN DASHBOARD */
 
+.adm-fiu-login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
 .adm-fiu-login-container {
             background-color: var(--white);
             padding: 2.5rem;
@@ -9546,7 +9660,9 @@ color: #ffffffff;
             width: 100%;
             max-width: 400px;
             text-align: center;
+            margin: 0 auto;
         }
+
         .adm-fiu-login-container h1 {
             color: var(--blue);
             font-weight: 800;
