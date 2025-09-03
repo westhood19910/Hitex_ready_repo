@@ -49,9 +49,10 @@
     </header> -->
               <!-- Modified Navigation HTML -->
 
+               
 <nav class="nav__bar_oi">
   <div class="nav__bar_oi-logo">
-   <a href="index.html"><img src="assets/png_20221026_003820_0000.png" alt="HiTex EdiTex Logo"></a>
+    <a href="index.html"><img src="assets/png_20221026_003820_0000.png" alt="HiTex EdiTex Logo"></a>
   </div>
   
   <button class="nav__bar_oi-toggle" id="navToggle">
@@ -62,13 +63,14 @@
   
   <ul class="nav__bar_oi-menu" id="navMenu">
     <li class="nav__bar_oi-menu-item">
-      <a href="#" class="nav__bar_oi-menu-link">About Us</a>
-      <div class="nav__bar_oi-dropdown">
-        <a href="about.html" class="nav__bar_oi-dropdown-item">About Hitex EdiTex</a>
-        <a href="leadership.html" class="nav__bar_oi-dropdown-item">Leadership</a>
-        <a href="#offices" class="nav__bar_oi-dropdown-item">Offices</a>
-        <a href="#testimonials" class="nav__bar_oi-dropdown-item">Testimonials</a>
-        <a href="impact.html" class="nav__bar_oi-dropdown-item">Impact</a>
+      <a href="about.html" class="nav__bar_oi-menu-link">About Us</a>
+      <!-- <div class="nav__bar_oi-dropdown"> -->
+        <!-- <a href="about.html" class="nav__bar_oi-dropdown-item">About Hitex EdiTex</a> -->
+        <!-- <a href="leadership.html" class="nav__bar_oi-dropdown-item">Leadership</a> -->
+        <!-- <a href="#offices" class="nav__bar_oi-dropdown-item">Offices</a> -->
+        <!-- <a href="impact.html" class="nav__bar_oi-dropdown-item">Impact</a> -->
+       
+        
       </div>
     </li>
     <li class="nav__bar_oi-menu-item">
@@ -99,12 +101,12 @@
       <div class="nav__bar_oi-dropdown">
         <a href="support" class="nav__bar_oi-dropdown-item">Support and FAQs</a>
         <a href="hitex-hub.html" class="nav__bar_oi-dropdown-item">The Hitex Hub</a>
-        <a href="newsroom.html" class="nav__bar_oi-dropdown-item">Newsroom</a>
+        <!-- <a href="newsroom.html" class="nav__bar_oi-dropdown-item">Newsroom</a> -->
       </div>
-    </li> 
+    </li>
     <div class="nav__bar_oi-actions">
-      <a href="client-sign-up.html" class="nav__bar_oi-button nav__bar_oi-button-signup">Submit Enquiry</a>
-      <a href="client-login.html" class="nav__bar_oi-button nav__bar_oi-button-login">Get quote</a>
+      <button class="nav__bar_oi-button nav__bar_oi-button-signup">Client Sign-Up</button>
+      <button class="nav__bar_oi-button nav__bar_oi-button-login">Client Log-in</button>
     </div>
   </ul>
   
@@ -244,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Redirect to frontend page after 1.5s
                 setTimeout(() => {
-                    window.location.href = `${FRONTEND_URL}/service-levels.html`;
+                    window.location.href = `${FRONTEND_URL}/client-dashboard.html`;
                 }, 1500);
 
             } catch (error) {

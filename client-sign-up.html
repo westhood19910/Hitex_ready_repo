@@ -51,9 +51,10 @@
     
               <!-- Modified Navigation HTML -->
                
+               
 <nav class="nav__bar_oi">
   <div class="nav__bar_oi-logo">
-   <a href="index.html"><img src="assets/png_20221026_003820_0000.png" alt="HiTex EdiTex Logo"></a>
+    <a href="index.html"><img src="assets/png_20221026_003820_0000.png" alt="HiTex EdiTex Logo"></a>
   </div>
   
   <button class="nav__bar_oi-toggle" id="navToggle">
@@ -64,13 +65,14 @@
   
   <ul class="nav__bar_oi-menu" id="navMenu">
     <li class="nav__bar_oi-menu-item">
-      <a href="#" class="nav__bar_oi-menu-link">About Us</a>
-      <div class="nav__bar_oi-dropdown">
-        <a href="about.html" class="nav__bar_oi-dropdown-item">About Hitex EdiTex</a>
-        <a href="leadership.html" class="nav__bar_oi-dropdown-item">Leadership</a>
-        <a href="#offices" class="nav__bar_oi-dropdown-item">Offices</a>
-        <a href="#testimonials" class="nav__bar_oi-dropdown-item">Testimonials</a>
-        <a href="impact.html" class="nav__bar_oi-dropdown-item">Impact</a>
+      <a href="about.html" class="nav__bar_oi-menu-link">About Us</a>
+      <!-- <div class="nav__bar_oi-dropdown"> -->
+        <!-- <a href="about.html" class="nav__bar_oi-dropdown-item">About Hitex EdiTex</a> -->
+        <!-- <a href="leadership.html" class="nav__bar_oi-dropdown-item">Leadership</a> -->
+        <!-- <a href="#offices" class="nav__bar_oi-dropdown-item">Offices</a> -->
+        <!-- <a href="impact.html" class="nav__bar_oi-dropdown-item">Impact</a> -->
+       
+        
       </div>
     </li>
     <li class="nav__bar_oi-menu-item">
@@ -82,7 +84,7 @@
         <a href="translate.html" class="nav__bar_oi-dropdown-item">Translation Services</a>
         <a href="service-levels.html" class="nav__bar_oi-dropdown-item">Service Levels</a>
         <a href="pricing.html" class="nav__bar_oi-dropdown-item">Pricing</a>
-        <a href="auhtoredly.html" class="nav__bar_oi-dropdown-item">Authoredly</a>
+        <!-- <a href="auhtoredly.html" class="nav__bar_oi-dropdown-item">Authoredly</a> -->
       </div>
     </li>
     <li class="nav__bar_oi-menu-item">
@@ -101,7 +103,7 @@
       <div class="nav__bar_oi-dropdown">
         <a href="support" class="nav__bar_oi-dropdown-item">Support and FAQs</a>
         <a href="hitex-hub.html" class="nav__bar_oi-dropdown-item">The Hitex Hub</a>
-        <a href="newsroom.html" class="nav__bar_oi-dropdown-item">Newsroom</a>
+        <!-- <a href="newsroom.html" class="nav__bar_oi-dropdown-item">Newsroom</a> -->
       </div>
     </li>
     <div class="nav__bar_oi-actions">
@@ -159,7 +161,8 @@
   </div>
   <div class="nav__bar_oi-overlay" id="navOverlay"></div>
 </nav>
-    
+
+
   <div class="unl_live-signup-container">
    <form id="signupForm" class="unl_live-signup-form">
     <div class="unl_live-input-group">
@@ -286,7 +289,7 @@
             }
 
             alert(result.message);
-            window.location.href = '/login.html'; // Redirect to login page on success
+            window.location.href = 'client-dashboard.html'; // Redirect to login page on success
 
         } catch (error) {
             alert('Registration failed: ' + error.message);
