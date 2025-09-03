@@ -9023,6 +9023,14 @@ p {
   z-index: 1000;
 }
 
+@media screen and (max-width:1024px) {
+  .nav__bar_oi {
+
+   width: 100.11vw;
+  
+}
+
+}
 .nav__bar_oi-logo {
   display: flex;
   align-items: center;

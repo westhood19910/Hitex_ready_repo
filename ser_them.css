@@ -2397,7 +2397,6 @@ body {
 
 /* ROTATING GLOBE CODE */
 
-
 .jamal_int {
     background-color: #fcfcfc;
     min-height: 90vh;
@@ -6614,16 +6613,17 @@ h3 {
 /* NEW CODE FOR TECHNICAL UPLOAD */
 
 .g14 {
+    max-width: 900px;
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.5rem;
     background: linear-gradient(to right, #f8f9fa, #e9ecef);
     border-radius: 0.5rem;
-    margin: 1rem;
+    margin: 5rem auto;
     min-height: 2em;
 }
 
-.col_duty{
+.col_duty {
     text-align: left;
     align-self:first baseline;
     margin-bottom: -0.2em;
@@ -7195,7 +7195,6 @@ h3 {
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-top: 3rem;
 }
 
 .hero-content {

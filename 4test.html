@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #D54C4F; --blue: #032672; --light-blue: #D3E5FF;
+            --button-background: linear-gradient(135deg, #eb2525, #af1e1e);
+            --white: #ffffff; --grey-light: #f7f9fc; --grey: #e5e9f2;
+            --text: #2c3e50; --text-light: #7e8c9a; --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --radius: 10px; --transition: all 0.3s ease;
+            --success: #28a745; --warning: #ffc107; --info: #17a2b8;
+        }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--grey-light); margin: 0; }
+        .app-scaffold { display: flex; min-height: 100vh; }
+        
+        /* --- Sidebar Navigation --- */
+        .navigation-pillar {
+            width: 280px;
+            background: var(--blue);
+            color: var(--white);
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .pillar-crest { text-align: center; margin-bottom: 2rem; }
+        .pillar-crest .profile-identifier { font-size: 1.2rem; font-weight: 600; margin-top: 1rem; }
+        .profile-sigil { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--light-blue); }
+        .pillar-directory { flex-grow: 1; }
+        .pillar-directory ul { list-style: none; padding: 0; }
+        .pillar-directory a {
+            display: block;
+            padding: 1rem;
+            color: var(--light-blue);
+            text-decoration: none;
+            border-radius: var(--radius);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        .pillar-directory a:hover, .pillar-directory a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+        .session-terminate-btn {
+            background: var(--button-background);
+            color: var(--white);
+            border: none;
+            width: 100%;
+            padding: 1rem;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        /* --- Main Content Area --- */
+        .primary-viewport { flex-grow: 1; padding: 2rem 3rem; overflow-y: auto; }
+        .viewport-heading { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+        .viewport-heading h1 { color: var(--blue); margin: 0; }
+        .prompt-button {
+            background: var(--button-background);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* --- Dashboard Stats --- */
+        .metrics-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .metric-capsule {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        .metric-capsule h3 { margin: 0 0 0.5rem; color: var(--text-light); font-size: 0.9rem; text-transform: uppercase; }
+        .metric-capsule .figure { font-size: 2rem; font-weight: 700; color: var(--blue); margin: 0.5rem 0; }
+        .metric-capsule .delta { font-size: 0.8rem; color: var(--success); }
+
+        /* --- Content Cards --- */
+        .data-enclosure {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        .enclosure-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .enclosure-header h2 { margin: 0; color: var(--text); }
+
+        /* --- Tables --- */
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--grey); }
+        th { color: var(--text-light); font-weight: 600; background: var(--grey-light); }
+        .state-indicator {
+            padding: 0.25em 0.75em;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        .state-new { background-color: var(--light-blue); color: var(--blue); }
+        .state-assigned { background-color: #ffe8cc; color: #ff8c00; }
+        .state-in-progress { background-color: #fff3cd; color: #856404; }
+        .state-review { background-color: #cce5ff; color: #004085; }
+        .state-completed { background-color: #d1e7dd; color: #0f5132; }
+        .state-revision-needed { background-color: #f8d7da; color: #721c24; }
+
+        /* --- Action Buttons --- */
+        .op-button {
+            padding: 0.4rem 0.8rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .op-primary { background: var(--blue); color: white; }
+        .op-confirm { background: var(--success); color: white; }
+        .op-info { background: var(--info); color: white; }
+        .op-caution { background: var(--warning); color: black; }
+
+        /* --- Progress Bars --- */
+        .completion-track {
+            width: 100%;
+            height: 8px;
+            background: var(--grey);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+        .track-fill {
+            height: 100%;
+            background: var(--success);
+            transition: width 0.3s ease;
+        }
+
+        /* --- Notifications --- */
+        .alert-stream {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .alert-item {
+            padding: 1rem;
+            border-left: 4px solid var(--info);
+            background: var(--grey-light);
+            margin-bottom: 0.5rem;
+            border-radius: 0 var(--radius) var(--radius) 0;
+        }
+        .alert-item.critical { border-left-color: var(--red); }
+        .alert-item h4 { margin: 0 0 0.5rem; font-size: 0.9rem; }
+        .alert-item p { margin: 0; font-size: 0.8rem; color: var(--text-light); }
+
+        /* --- Tabs --- */
+        .view-switcher {
+            margin-bottom: 1rem;
+        }
+        .switcher-controls {
+            display: flex;
+            border-bottom: 2px solid var(--grey);
+        }
+        .switcher-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+        .switcher-tab.active {
+            color: var(--blue);
+            border-bottom: 2px solid var(--blue);
+        }
+        .switcher-pane {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .switcher-pane.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 900px) {
+            .app-scaffold { flex-direction: column; }
+            .navigation-pillar { width: 100%; height: auto; }
+            .primary-viewport { padding: 1.5rem; }
+            .metrics-matrix { grid-template-columns: 1fr; }
+        }
+
+        /* --- Modal Styles --- */
+        .overlay-dialog {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+        .dialog-box {
+            background: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 600px;
+        }
+        .dialog-dismiss {
+            float: right;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+         
+    </style>
+</head>
+<body>
+    <div class="app-scaffold">
+        <aside class="navigation-pillar">
+            <div class="pillar-crest">
+                <img src="https://i.pravatar.cc/150" alt="User Avatar" class="profile-sigil">
+                <div class="profile-identifier" id="profileName">Loading...</div>
+                <div class="user-email" id="profileEmail"></div>
+            </div>
+            <nav class="pillar-directory">
+                <ul>
+                    <li><a href="#" class="pillar-link active" data-section="dashboard">Dashboard</a></li>
+                    <li><a href="#" class="pillar-link" data-section="submissions">My Submissions</a></li>
+                    <li><a href="#" class="pillar-link" data-section="projects">Active Projects</a></li>
+                    <li><a href="#" class="pillar-link" data-section="communications">Messages</a></li>
+                    <li><a href="#" class="pillar-link" data-section="invoices">Invoices & Payments</a></li>
+                    <li><a href="#" class="pillar-link" data-section="resources">Resources</a></li>
+                    <li><a href="/profile.html" class="pillar-link">Edit Profile</a></li>
+                    <li><a href="#" class="pillar-link" data-section="support">Support</a></li>
+                </ul>
+            </nav>
+            <button class="session-terminate-btn" id="logoutButton">Logout</button>
+        </aside>
+
+        <main class="primary-viewport">
+            <section id="dashboard-section" class="view-segment">
+                <header class="viewport-heading">
+                    <h1>Dashboard Overview</h1>
+                    <a href="/service-levels.html" class="prompt-button">Submit New Manuscript</a>
+                </header>
+
+                <div class="metrics-matrix">
+                    <div class="metric-capsule">
+                        <h3>Total Manuscripts</h3>
+                        <div class="figure" id="totalManuscripts">0</div>
+                        <div class="delta">All time submissions</div>
+                    </div>
+                    <div class="metric-capsule">
+                        <h3>Active Projects</h3>
+                        <div class="figure" id="activeProjects">0</div>
+                        <div class="delta">Currently in progress</div>
+                    </div>
+                    <div class="metric-capsule">
+                        <h3>Completed Projects</h3>
+                        <div class="figure" id="completedProjects">0</div>
+                        <div class="delta">Successfully finished</div>
+                    </div>
+                    <div class="metric-capsule">
+                        <h3>Outstanding Balance</h3>
+                        <div class="figure" id="outstandingBalance">$0</div>
+                        <div class="delta">Pending payments</div>
+                    </div>
+                </div>
+
+                <div class="data-enclosure">
+                    <div class="enclosure-header">
+                        <h2>Recent Activity</h2>
+                        <button class="prompt-button" onclick="refreshDashboard()">Refresh</button>
+                    </div>
+                    <div id="recentActivity">
+                        <p>Loading recent activity...</p>
+                    </div>
+                </div>
+
+                <div class="data-enclosure">
+                    <h2>Important Notifications</h2>
+                    <div class="alert-stream" id="notifications">
+                        <div class="alert-item critical">
+                            <h4>Action Required: Review Completed</h4>
+                            <p>Your manuscript "Sample Novel" has been edited and is ready for review. Please check your active projects.</p>
+                        </div>
+                        <div class="alert-item">
+                            <h4>Payment Confirmation</h4>
+                            <p>Payment received for project #12345. Thank you for your business!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="submissions-section" class="view-segment" style="display: none;">
+                <header class="viewport-heading">
+                    <h1>My Submissions</h1>
+                    <a href="/get-quote.html" class="prompt-button">Submit New Manuscript</a>
+                </header>
+                <div class="data-enclosure">
+                    <div class="enclosure-header">
+                        <h2>Manuscript History</h2>
+                        <button class="op-button op-info" onclick="exportSubmissions()">Export List</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date Submitted</th>
+                                <th>Manuscript Title</th>
+                                <th>Word Count</th>
+                                <th>Service Type</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="manuscriptList">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="projects-section" class="view-segment" style="display: none;">
+                <header class="viewport-heading">
+                    <h1>Active Projects</h1>
+                </header>
+                <div class="data-enclosure">
+                    <h2>Projects in Progress</h2>
+                    <div id="activeProjectsList">
+                        <div class="project-item" style="border: 1px solid var(--grey); padding: 1.5rem; margin-bottom: 1rem; border-radius: var(--radius);">
+                            <h3>Sample Novel - Comprehensive Edit</h3>
+                            <p><strong>Editor:</strong> Jane Smith | <strong>Deadline:</strong> September 15, 2025</p>
+                            <div class="completion-track">
+                                <div class="track-fill" style="width: 65%;"></div>
+                            </div>
+                            <p>Progress: 65% Complete</p>
+                            <div>
+                                <button class="op-button op-primary">View Details</button>
+                                <button class="op-button op-info">Download Draft</button>
+                                <button class="op-button op-caution">Message Editor</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="communications-section" class="view-segment" style="display: none;">
+                <header class="viewport-heading">
+                    <h1>Messages & Communications</h1>
+                    <button class="prompt-button">New Message</button>
+                </header>
+                
+                <div class="view-switcher">
+                    <div class="switcher-controls">
+                        <button class="switcher-tab active" onclick="switchTab('inbox')">Inbox (3)</button>
+                        <button class="switcher-tab" onclick="switchTab('sent')">Sent</button>
+                        <button class="switcher-tab" onclick="switchTab('archived')">Archived</button>
+                    </div>
+                </div>
+
+                <div class="data-enclosure">
+                    <div id="inbox-tab" class="switcher-pane active">
+                        <div class="message-list">
+                            <div class="message-item" style="padding: 1rem; border-bottom: 1px solid var(--grey); cursor: pointer;">
+                                <h4>Re: Your manuscript editing timeline</h4>
+                                <p>From: Editor Sarah Johnson | September 2, 2025</p>
+                                <p>Thank you for your patience. I'm pleased to inform you that your manuscript editing is ahead of schedule...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="sent-tab" class="switcher-pane">
+                        <p>Your sent messages will appear here.</p>
+                    </div>
+                    <div id="archived-tab" class="switcher-pane">
+                        <p>Archived messages will appear here.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="invoices-section" class="view-segment" style="display: none;">
+                <header class="viewport-heading">
+                    <h1>Invoices & Payments</h1>
+                </header>
+                <div class="data-enclosure">
+                    <div class="enclosure-header">
+                        <h2>Payment History</h2>
+                        <button class="op-button op-confirm">Download Tax Summary</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Invoice #</th>
+                                <th>Project</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>INV-001</td>
+                                <td>Sample Novel - Comprehensive Edit</td>
+                                <td>$450.00</td>
+                                <td>September 1, 2025</td>
+                                <td><span class="state-indicator state-completed">Paid</span></td>
+                                <td>
+                                    <button class="op-button op-info">Download</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>INV-002</td>
+                                <td>Short Story Collection - Proofreading</td>
+                                <td>$125.00</td>
+                                <td>August 28, 2025</td>
+                                <td><span class="state-indicator state-assigned">Pending</span></td>
+                                <td>
+                                    <button class="op-button op-caution">Pay Now</button>
+                                    <button class="op-button op-info">Download</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="resources-section" class="view-segment" style="display: none;">
+                <header class="viewport-heading">
+                    <h1>Writing Resources</h1>
+                </header>
+                
+                <div class="metrics-matrix">
+                    <div class="data-enclosure">
+                        <h3>Style Guides</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li><a href="#" class="op-button op-primary" style="margin-bottom: 0.5rem; width: 100%; text-align: center;">Chicago Manual of Style Guide</a></li>
+                            <li><a href="#" class="op-button op-primary" style="margin-bottom: 0.5rem; width: 100%; text-align: center;">AP Style Guide</a></li>
+                            <li><a href="#" class="op-button op-primary" style="width: 100%; text-align: center;">MLA Style Guide</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="data-enclosure">
+                        <h3>Writing Tips</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li><a href="#" class="op-button op-info" style="margin-bottom: 0.5rem; width: 100%; text-align: center;">Character Development Tips</a></li>
+                            <li><a href="#" class="op-button op-info" style="margin-bottom: 0.5rem; width: 100%; text-align: center;">Plot Structure Guide</a></li>
+                            <li><a href="#" class="op-button op-info" style="width: 100%; text-align: center;">Dialogue Best Practices</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="data-enclosure">
+                        <h3>Templates</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li><a href="#" class="op-button op-confirm" style="margin-bottom: 0.5rem; width: 100%; text-align: center;">Manuscript Format Template</a></li>
+                            <li><a href="#" class="op-button op-confirm" style="margin-bottom: 0.5rem; width: 100%; text-align: center;">Query Letter Template</a></li>
+                            <li><a href="#" class="op-button op-confirm" style="width: 100%; text-align: center;">Synopsis Template</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="support-section" class="view-segment" style="display: none;">
+                <header class="viewport-heading">
+                    <h1>Support Center</h1>
+                </header>
+                
+                <div class="data-enclosure">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-item" style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--grey);">
+                        <h4>How long does the editing process take?</h4>
+                        <p>Editing timelines vary based on manuscript length and service type. Typically, comprehensive editing takes 7-14 business days, while proofreading takes 3-5 business days.</p>
+                    </div>
+                    <div class="faq-item" style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--grey);">
+                        <h4>Can I request revisions?</h4>
+                        <p>Yes! We offer one round of revisions within 30 days of project completion at no additional charge.</p>
+                    </div>
+                </div>
+                
+                <div class="data-enclosure">
+                    <h2>Contact Support</h2>
+                    <p>Need help? Our support team is here to assist you.</p>
+                    <div>
+                        <button class="op-button op-primary">Live Chat</button>
+                        <button class="op-button op-info">Email Support</button>
+                        <button class="op-button op-caution">Schedule Call</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="manuscriptModal" class="overlay-dialog">
+        <div class="dialog-box">
+            <span class="dialog-dismiss" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Manuscript Details</h2>
+            <div id="modalBody">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables for dashboard state
+        let currentSection = 'dashboard';
+        let manuscripts = [];
+        
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+            const headers = { 'Authorization': `Bearer ${token}` };
+
+            // Initialize dashboard
+            await loadProfileInfo(headers);
+            await loadManuscripts(headers);
+            updateDashboardStats();
+            setupNavigation();
+            
+            // Setup logout
+            document.getElementById('logoutButton').addEventListener('click', logout);
+        });
+
+        // Load profile information
+        async function loadProfileInfo(headers) {
+            try {
+                const response = await fetch('https://all-branched-end.onrender.com/profile', { headers });
+                const profileData = await response.json();
+                if (profileData) {
+                    document.getElementById('profileName').textContent = profileData.fullName || 'Author';
+                    document.getElementById('profileEmail').textContent = profileData.email || '';
+                }
+            } catch (err) {
+                console.error('Failed to load profile info:', err);
+            }
+        }
+
+        // Load manuscripts data
+        async function loadManuscripts(headers) {
+            try {
+                const response = await fetch('https://all-branched-end.onrender.com/my-manuscripts', { headers });
+                manuscripts = await response.json();
+                
+                // Populate submissions table
+                const list = document.getElementById('manuscriptList');
+                list.innerHTML = '';
+                
+                if (manuscripts.length === 0) {
+                    list.innerHTML = '<tr><td colspan="6" style="text-align:center;">You have not submitted any manuscripts yet.</td></tr>';
+                    return;
+                }
+                
+                manuscripts.forEach((doc, index) => {
+                    const statusClass = `state-${(doc.status || 'new').toLowerCase().replace(/\s+/g, '-')}`;
+                    const row = list.insertRow();
+                    row.innerHTML = `
+                        <td>${new Date(doc.uploadDate).toLocaleDateString()}</td>
+                        <td>${doc.originalName || doc.title}</td>
+                        <td>${doc.wordCount || 'N/A'}</td>
+                        <td>${doc.serviceType || 'Standard Edit'}</td>
+                        <td><span class="state-indicator ${statusClass}">${doc.status || 'New'}</span></td>
+                        <td>
+                            <button class="op-button op-primary" onclick="viewManuscript(${index})">View</button>
+                            <button class="op-button op-info" onclick="downloadManuscript(${index})">Download</button>
+                        </td>
+                    `;
+                });
+            } catch (err) {
+                console.error('Failed to load manuscripts:', err);
+            }
+        }
+
+        // Update dashboard statistics
+        function updateDashboardStats() {
+            document.getElementById('totalManuscripts').textContent = manuscripts.length;
+            document.getElementById('activeProjects').textContent = manuscripts.filter(m => 
+                ['assigned', 'in-progress', 'review'].includes((m.status || '').toLowerCase())
+            ).length;
+            document.getElementById('completedProjects').textContent = manuscripts.filter(m => 
+                (m.status || '').toLowerCase() === 'completed'
+            ).length;
+            
+            // Mock outstanding balance - in real app, this would come from API
+            document.getElementById('outstandingBalance').textContent = '$275.00';
+            
+            // Update recent activity
+            const recentActivity = document.getElementById('recentActivity');
+            if (manuscripts.length > 0) {
+                const recent = manuscripts.slice(0, 3);
+                recentActivity.innerHTML = recent.map(m => `
+                    <div style="padding: 0.5rem 0; border-bottom: 1px solid var(--grey);">
+                        <strong>${m.originalName || m.title}</strong> - Status: ${m.status || 'New'}
+                        <br><small>${new Date(m.uploadDate).toLocaleDateString()}</small>
+                    </div>
+                `).join('');
+            } else {
+                recentActivity.innerHTML = '<p>No recent activity to display.</p>';
+            }
+        }
+
+        // Setup navigation
+        function setupNavigation() {
+            document.querySelectorAll('.pillar-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const section = e.target.getAttribute('data-section');
+                    if (section) {
+                        showSection(section);
+                        
+                        // Update active nav
+                        document.querySelectorAll('.pillar-link').forEach(l => l.classList.remove('active'));
+                        e.target.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        // Show specific section
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.view-segment').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show selected section
+            const section = document.getElementById(sectionName + '-section');
+            if (section) {
+                section.style.display = 'block';
+                currentSection = sectionName;
+            }
+        }
+
+        // Tab switching functionality
+        function switchTab(tabName) {
+            document.querySelectorAll('.switcher-tab').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.switcher-pane').forEach(content => content.classList.remove('active'));
+            
+            document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
+            document.getElementById(tabName + '-tab').classList.add('active');
+        }
+
+        // View manuscript details
+        function viewManuscript(index) {
+            const manuscript = manuscripts[index];
+            const modal = document.getElementById('manuscriptModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            modalTitle.textContent = manuscript.originalName || manuscript.title;
+            modalBody.innerHTML = `
+                <div style="margin-bottom: 1rem;">
+                    <strong>Upload Date:</strong> ${new Date(manuscript.uploadDate).toLocaleDateString()}
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <strong>Word Count:</strong> ${manuscript.wordCount || 'Not specified'}
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <strong>Service Type:</strong> ${manuscript.serviceType || 'Standard Edit'}
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <strong>Status:</strong> <span class="state-indicator state-${(manuscript.status || 'new').toLowerCase().replace(/\s+/g, '-')}">${manuscript.status || 'New'}</span>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <strong>Description:</strong> ${manuscript.description || 'No description provided'}
+                </div>
+                ${manuscript.quote ? `
+                    <div style="margin-bottom: 1rem;">
+                        <strong>Quote:</strong> $${manuscript.quote}
+                    </div>
+                ` : ''}
+                ${manuscript.editorNotes ? `
+                    <div style="margin-bottom: 1rem;">
+                        <strong>Editor Notes:</strong> ${manuscript.editorNotes}
+                    </div>
+                ` : ''}
+                <div style="margin-top: 1.5rem;">
+                    <button class="op-button op-primary" onclick="downloadManuscript(${index})">Download Original</button>
+                    ${manuscript.editedVersion ? `
+                        <button class="op-button op-confirm" onclick="downloadEditedVersion(${index})">Download Edited Version</button>
+                    ` : ''}
+                    <button class="op-button op-info" onclick="messageEditor(${index})">Message Editor</button>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('manuscriptModal').style.display = 'none';
+        }
+
+        // Download manuscript
+        async function downloadManuscript(index) {
+            const manuscript = manuscripts[index];
+            const token = localStorage.getItem('authToken');
+            
+            try {
+                const response = await fetch(`https://all-branched-end.onrender.com/download/${manuscript._id}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = manuscript.originalName || 'manuscript.docx';
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                } else {
+                    alert('Failed to download manuscript');
+                }
+            } catch (error) {
+                console.error('Download error:', error);
+                alert('Error downloading manuscript');
+            }
+        }
+
+        // Download edited version
+        async function downloadEditedVersion(index) {
+            const manuscript = manuscripts[index];
+            const token = localStorage.getItem('authToken');
+            
+            try {
+                const response = await fetch(`https://all-branched-end.onrender.com/download-edited/${manuscript._id}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = `${manuscript.originalName || 'manuscript'}_edited.docx`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                } else {
+                    alert('Edited version not available yet');
+                }
+            } catch (error) {
+                console.error('Download error:', error);
+                alert('Error downloading edited manuscript');
+            }
+        }
+
+        // Message editor functionality
+        function messageEditor(index) {
+            const manuscript = manuscripts[index];
+            const message = prompt(`Send a message about "${manuscript.originalName || manuscript.title}":`);
+            if (message && message.trim()) {
+                alert('Message sent to editor successfully!');
+                
+                const notifications = document.getElementById('notifications');
+                const newNotification = document.createElement('div');
+                newNotification.className = 'alert-item';
+                newNotification.innerHTML = `
+                    <h4>Message Sent</h4>
+                    <p>Your message about "${manuscript.originalName || manuscript.title}" has been sent to the editor.</p>
+                `;
+                notifications.insertBefore(newNotification, notifications.firstChild);
+            }
+        }
+
+        // Export submissions
+        function exportSubmissions() {
+            if (manuscripts.length === 0) {
+                alert('No submissions to export');
+                return;
+            }
+            const headers = ['Date Submitted', 'Title', 'Word Count', 'Service Type', 'Status'];
+            const csvContent = [
+                headers.join(','),
+                ...manuscripts.map(m => [
+                    new Date(m.uploadDate).toLocaleDateString(),
+                    `"${m.originalName || m.title}"`,
+                    m.wordCount || 'N/A',
+                    `"${m.serviceType || 'Standard Edit'}"`,
+                    m.status || 'New'
+                ].join(','))
+            ].join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'my_submissions.csv';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+
+        // Refresh dashboard
+        async function refreshDashboard() {
+            const token = localStorage.getItem('authToken');
+            if (!token) return;
+            
+            const refreshBtn = event.target;
+            refreshBtn.textContent = 'Refreshing...';
+            refreshBtn.disabled = true;
+            
+            try {
+                const headers = { 'Authorization': `Bearer ${token}` };
+                await loadManuscripts(headers);
+                updateDashboardStats();
+                
+                const notification = document.createElement('div');
+                notification.className = 'alert-item';
+                notification.innerHTML = `
+                    <h4>Dashboard Updated</h4>
+                    <p>Your dashboard has been refreshed with the latest information.</p>
+                `;
+                document.getElementById('notifications').insertBefore(notification, document.getElementById('notifications').firstChild);
+                
+            } catch (error) {
+                console.error('Refresh error:', error);
+                alert('Failed to refresh dashboard');
+            } finally {
+                refreshBtn.textContent = 'Refresh';
+                refreshBtn.disabled = false;
+            }
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('userProfile');
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('manuscriptModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
