@@ -6619,7 +6619,7 @@ h3 {
     gap: 1.5rem;
     background: linear-gradient(to right, #f8f9fa, #e9ecef);
     border-radius: 0.5rem;
-    margin: 5rem auto;
+    margin: 15rem auto;
     min-height: 2em;
 }
 
@@ -6628,7 +6628,7 @@ h3 {
     align-self:first baseline;
     margin-bottom: -0.2em;
     font-style: italic;
-    color: #4299e1;
+    color: var(--red);
 }
 
 .b8 {
@@ -6732,7 +6732,6 @@ h3 {
         padding: 3rem;
         gap: 3rem;
         max-width: 1200px;
-        margin: 2rem auto;
     }
 
     .t5 {
@@ -6791,7 +6790,7 @@ h3 {
 .tor_mented {
     max-width: 100%;
     background-color: #ececec;
-    margin: 13em 0em;
+    margin: 20em auto;
 }
 
 .a8k2p9 {
@@ -6799,7 +6798,6 @@ h3 {
     flex-direction: row;
     gap: 8rem;
     padding: 2rem;
-    max-width: 1000px;
     margin: 0 auto;
     align-items: center;
 }
@@ -6814,6 +6812,7 @@ h3 {
 
 .b4m7n3 {
     flex: 1;
+   
 }
 
 .g7r2s9 {
@@ -6849,13 +6848,12 @@ h3 {
 
 
 .sev_ver_00_4_tech {
-    top: -2em;
     display: flex;
     flex-direction: column;
     position: relative;
     justify-content: center;
     align-items: center;
-    margin: 2em;
+    margin: 10em auto;
   }
 
 
@@ -6899,7 +6897,7 @@ h3 {
 .artistic-nav {
   padding: 1.5rem; /* Original: 2rem */
   border-radius: 0.75rem; /* Original: 1rem */
-  margin-top: 1.5em; /* Original: 2em */
+  margin: 10em auto; /* Original: 2em */
   width: 100%;
   box-sizing: border-box;
 }
@@ -7206,7 +7204,8 @@ h3 {
 .f4_thecall_to h1 {
   margin-top: 1rem;
   color: #fff;
-  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-weight: 700;
+  font-size: 2em !important;
 }
 
 .f4_thecall_to {
