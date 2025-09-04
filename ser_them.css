@@ -344,6 +344,19 @@ body {
   color: var(--blue);
   margin-bottom: 1rem;
   font-weight: var(--major-header-font-weight);
+  position: relative; /* ✅ establish positioning context */
+}
+
+.ta__ble__e-section-header h2::after {
+  content: "";
+  position: absolute;
+  bottom: -8px; 
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background-color: var(--red);
+  border-radius: 2px;
 }
 
 .ta__ble__e-section-header p {
@@ -1025,14 +1038,13 @@ body {
 
 
 /* CODE FOR NEW PROMOBOX */
-
 .quoteBox_wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr; 
     gap: 20px; 
     align-items: center;
     max-width: 1100px;
-    margin: 0 auto;
+    margin: 15em auto;
 }
 
     .content_section {
@@ -6506,7 +6518,7 @@ text-align: center;
     justify-content: center;
     margin: 0 auto;
     padding: 2rem;
-    margin: 5.8em 0em;
+    margin: 15.8em 0em;
 }
 
 .payment-section {
@@ -7067,8 +7079,8 @@ h3 {
       font-size: 19px; /* Slightly adjusted for tablet */
   }
 }
-/* CONTENT FOR FOOTEND */
 
+/* CONTENT FOR FOOTEND */
 
 .flex-center {
     display: flex;
@@ -7107,7 +7119,21 @@ h3 {
     font-size: var(--major-heading);
     font-weight: var(--major-header-font-weight);
     color: #021c64;
-}   
+    position: relative;
+}  
+
+.adwu_ma::after {
+  content: "";
+  position: absolute;
+  bottom: -8px; /* put it just below the text */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background-color: var(--red);
+  border-radius: 2px;
+}
+
 
 .rounded {
     border-radius: 8px;
