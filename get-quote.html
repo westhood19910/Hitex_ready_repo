@@ -354,6 +354,32 @@
             background-color: var(--primary);
             box-shadow: inset 0 0 0 3px var(--white);
         }
+
+         #other-languages {
+            /* Spacing and Size */
+            padding: 8px 12px;
+            
+            /* Border and Appearance */
+            border: 1px solid #ccc;
+            border-radius: 5px; /* Rounded corners */
+            background-color: #f9f9f9;
+            
+            /* Font and Text */
+            font-size: 14px;
+            color: #333;
+            
+           
+            cursor: pointer;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease; /* Smooth transition for focus */
+        }
+
+       
+        #other-languages:focus {
+            outline: none; 
+            border-color: #007bff; 
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
         .choice-card-group { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         .choice-card {
             border: 2px solid var(--grey);
@@ -395,7 +421,7 @@
 
     <div class="service-selector">
         <button class="service-tab active" data-service="advanced" data-rate="0.06">Advanced Editing</button>
-        <button class="service-tab" data-service="premium" data-rate="0.13">Premium Editing</button>
+        <button class="service-tab" data-service="premium" data-rate="0.13">Specialist Editing</button>
         <button class="service-tab" data-service="scientific" data-rate="0.24">Scientific Editing</button>
     </div>
 
@@ -465,9 +491,29 @@
                     <div class="form-group">
                         <label>Language style</label>
                         <div class="radio-group horizontal">
-                            <label class="radio-label"><input type="radio" name="lang-style" value="us" checked> American English</label>
-                            <label class="radio-label"><input type="radio" name="lang-style" value="uk"> British English</label>
-                        </div>
+         <label class="radio-label">
+        <input type="radio" name="lang-style" value="us" checked onchange="document.getElementById('other-languages').style.display='none'"> 
+        American English
+        </label>
+
+        <label class="radio-label">
+        <input type="radio" name="lang-style" value="uk" onchange="document.getElementById('other-languages').style.display='none'"> 
+        British English
+        </label>
+
+        <label class="radio-label">
+        <input type="radio" name="lang-style" value="other" onchange="document.getElementById('other-languages').style.display='inline-block'"> 
+        Others
+        </label>
+
+         <select name="other-languages" id="other-languages" style="display:none;">
+        <option value="es">Spanish</option>
+        <option value="fr">French</option>
+        <option value="de">German</option>
+        <option value="zh">Korean</option>
+        <option value="ja">Japanese</option>
+    </select>
+          </div>
                     </div>
                     <div class="form-group">
                         <label>Do you want free journal formatting?</label>
