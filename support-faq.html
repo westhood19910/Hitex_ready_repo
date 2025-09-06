@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support & FAQs - HiTex EdiTex</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* CSS Variables Provided */
+        :root {
+            --red: #D54C4F; --blue: #032672; --light-blue: #D3E5FF; --major-heading: 2.8em; --major-head-small: 1.4em; --major-header-font-weight: 800; --sub-head-color: #EBEBEB; --button-background: linear-gradient(135deg, #eb2525, #af1e1e); --smaller-major-head: 1.5em; --smaller-sub-heading: 1rem; --text-color: #333; --transition-speed: 0.3s; --white: #ffffff; --general-text-font: 0.85em; --second-sub-head-color: rgb(121, 125, 131); --font-size-sub-head: 1.25rem; --grey-background: #f7f7f7; --grid-gap: 2vw; --primary: #1a5db4; --primary-light: #e8f1fd; --primary-dark: #0c3b80; --accent-light: #fff0eb; --grey-light: #f7f9fc; --grey: #e5e9f2; --grey-dark: #8492a6; --text: #2c3e50; --text-light: #7e8c9a; --shadow: 0 4px 12px rgba(0, 0, 0, 0.08); --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12); --radius: 10px; --radius-sm: 5px; --transition: all 0.3s ease; --check-color: #1bcf5d; --new-background: rgba(219, 6, 6, 0.1); --font-heading: 'Montserrat', sans-serif; --font-body: 'Roboto', sans-serif;
+        }
+
+        /* Base Styles */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--font-body); color: var(--text); line-height: 1.6; background-color: var(--white); }
+        .w-rpr_8h-jkl { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        h1, h2, h3 { font-family: var(--font-heading); color: var(--blue); font-weight: var(--major-header-font-weight); margin-bottom: 1rem; }
+        p { margin-bottom: 1rem; font-size: var(--general-text-font); color: var(--text-light); }
+
+        /* Component Styles with Gibberish Classes */
+        .p-g_bl-k_5z { padding: 80px 0; }
+        .p-g_bl-k_bg_3y { background-color: var(--grey-light); }
+        .bl-k_h-d_r_2x { text-align: center; margin-bottom: 50px; }
+        .bl-k_h-d_r_2x h2 { font-size: var(--smaller-major-head); color: var(--primary-dark); }
+        .bl-k_h-d_r_2x p { max-width: 600px; margin: 0 auto; color: var(--grey-dark); }
+        .b_t-n-ac_1_t { display: inline-block; padding: 12px 28px; border-radius: var(--radius-sm); text-decoration: none; font-weight: 700; transition: var(--transition); border: none; cursor: pointer; text-align: center; }
+        .b_t-n-rd_ac_1_t { background: var(--button-background); color: var(--white); }
+        .b_t-n-rd_ac_1_t:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+
+        /* Header */
+        .n-v_br-t_p_01x { background: var(--white); padding: 15px 0; box-shadow: var(--shadow); position: sticky; top: 0; z-index: 1000; }
+        .n-v_br-t_p_01x .w-rpr_8h-jkl { display: flex; justify-content: space-between; align-items: center; }
+        .l-g_br-nd-id_02y { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; color: var(--blue); text-decoration: none; }
+        .l-g_br-nd-id_02y span { color: var(--red); }
+        .n-v_l-n_ks-w_03z { display: flex; align-items: center; }
+        .n-v_l-n_ks-w_03z a { color: var(--text); text-decoration: none; margin-left: 25px; font-weight: 500; transition: var(--transition); }
+        .n-v_l-n_ks-w_03z a:hover { color: var(--red); }
+
+        /* Hero Section */
+        .h-r_s-p_rt-pg_1a { background: var(--primary-dark); color: var(--white); text-align: center; padding: 80px 0; }
+        .h-r_s-p_rt-pg_1a h1 { color: var(--white); font-size: var(--major-heading); }
+        .h-r_s-p_rt-pg_1a p { color: var(--sub-head-color); font-size: var(--font-size-sub-head); max-width: 700px; margin: 1rem auto 2rem; }
+
+        /* FAQ Categories */
+        .c-t-gr_y-gr_d-2b { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--grid-gap); }
+        .c-t-gr_y-c_rd-3c { background: var(--white); padding: 25px; border-radius: var(--radius); box-shadow: var(--shadow); transition: var(--transition); text-decoration: none; text-align: center; display: block; }
+        .c-t-gr_y-c_rd-3c:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+        .c-t-gr_y-c_rd-3c i { font-size: 2.2rem; color: var(--primary); margin-bottom: 1rem; }
+        .c-t-gr_y-c_rd-3c h3 { color: var(--blue); font-size: 1.1rem; }
+
+        /* FAQ Accordion */
+        .f-q_l-st-wr_p-4d { max-width: 900px; margin: 40px auto 0; }
+        .q_a-bl_k-x_5 { background: var(--white); border: 1px solid var(--grey); border-radius: var(--radius-sm); margin-bottom: 15px; overflow: hidden; }
+        .q_a-tr-g_r-y_6 { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 20px; background: none; border: none; font-family: var(--font-body); font-size: 1.05rem; font-weight: 500; cursor: pointer; text-align: left; }
+        .q_a-tr-g_r-y_6:hover { background-color: var(--primary-light); }
+        .q_a-c-nt-nt-z_7 { padding: 0 20px 20px; max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.3s ease; }
+        .q_a-bl_k-x_5.is_op_n-s_t_t .q_a-c-nt-nt-z_7 { max-height: 300px; }
+        .q_a-bl_k-x_5.is_op_n-s_t_t .q_a-ic-n_9 { transform: rotate(180deg); }
+        .q_a-ic-n_9 { transition: var(--transition); }
+        .f-q_s-c-t-hdr { font-size: var(--major-head-small); color: var(--primary-dark); margin-top: 50px; margin-bottom: 20px; border-bottom: 2px solid var(--grey); padding-bottom: 10px; }
+
+        /* Contact Form Section */
+        .c-nt_ct-wr_p-5e { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .f-rm_gr-p_6f { margin-bottom: 1.5rem; }
+        .f-rm_gr-p_6f label { display: block; margin-bottom: 8px; font-weight: 500; }
+        .in_p-t-f_ld_7g, .t-xt_ar-a_8h { width: 100%; padding: 12px; border: 1px solid var(--grey); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 1rem; }
+        .in_p-t-f_ld_7g:focus, .t-xt_ar-a_8h:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-light); }
+
+        /* Footer */
+        .f-t_r-p-n_l-9i { background: var(--primary-dark); color: var(--sub-head-color); padding: 40px 0; text-align: center; }
+        .f-t_r-l-g_0j { font-size: 1.8rem; font-weight: 800; color: var(--white); margin-bottom: 1rem; }
+        .f-t_r-l-g_0j span { color: var(--red); }
+        .s-c_l-m-d_a-1k a { color: var(--white); margin: 0 10px; font-size: 1.2rem; transition: var(--transition); }
+        .s-c_l-m-d_a-1k a:hover { color: var(--red); }
+        .c-p_y-r-t_xt-2l { margin-top: 1rem; font-size: var(--general-text-font); color: var(--grey-dark); }
+    </style>
+</head>
+<body>
+
+    <header class="n-v_br-t_p_01x">
+        <div class="w-rpr_8h-jkl">
+            <a href="#" class="l-g_br-nd-id_02y">HiTex<span>EdiTex</span></a>
+            <nav class="n-v_l-n_ks-w_03z">
+                <a href="#">HiTex Hub</a>
+                <a href="#faq-list">FAQs</a>
+                <a href="#contact" class="b_t-n-ac_1_t b_t-n-rd_ac_1_t">Contact Support</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="h-r_s-p_rt-pg_1a">
+            <div class="w-rpr_8h-jkl">
+                <h1>How can we help?</h1>
+                <p>Find answers to common questions about our services, processes, and policies. Our goal is to provide you with clear and timely support.</p>
+            </div>
+        </section>
+
+        <section class="p-g_bl-k_5z">
+            <div class="w-rpr_8h-jkl">
+                <div class="bl-k_h-d_r_2x">
+                    <h2>Browse by Category</h2>
+                </div>
+                <div class="c-t-gr_y-gr_d-2b">
+                    <a href="#services" class="c-t-gr_y-c_rd-3c">
+                        <i class="fas fa-briefcase"></i>
+                        <h3>Services & Ordering</h3>
+                    </a>
+                    <a href="#payment" class="c-t-gr_y-c_rd-3c">
+                        <i class="fas fa-credit-card"></i>
+                        <h3>Payment & Billing</h3>
+                    </a>
+                    <a href="#process" class="c-t-gr_y-c_rd-3c">
+                        <i class="fas fa-cogs"></i>
+                        <h3>The Editing Process</h3>
+                    </a>
+                    <a href="#technical" class="c-t-gr_y-c_rd-3c">
+                        <i class="fas fa-laptop-code"></i>
+                        <h3>Technical Support</h3>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq-list" class="p-g_bl-k_5z p-g_bl-k_bg_3y">
+            <div class="w-rpr_8h-jkl">
+                <div class="bl-k_h-d_r_2x">
+                    <h2>Frequently Asked Questions</h2>
+                </div>
+                <div class="f-q_l-st-wr_p-4d">
+                    <h3 id="services" class="f-q_s-c-t-hdr">Services & Ordering</h3>
+                    <div class="q_a-bl_k-x_5">
+                        <button class="q_a-tr-g_r-y_6"><span>What is the turnaround time for editing?</span><i class="fas fa-chevron-down q_a-ic-n_9"></i></button>
+                        <div class="q_a-c-nt-nt-z_7"><p>Our standard turnaround time is 3-5 business days. We also offer express options for faster delivery (24-hour and 48-hour) at an additional cost, which you can select when placing your order.</p></div>
+                    </div>
+                    <div class="q_a-bl_k-x_5">
+                        <button class="q_a-tr-g_r-y_6"><span>Which service is right for my manuscript?</span><i class="fas fa-chevron-down q_a-ic-n_9"></i></button>
+                        <div class="q_a-c-nt-nt-z_7"><p>We offer several levels of editing. **Proofreading** is best for final drafts needing a check for typos and grammatical errors. **Substantive Editing** is ideal for manuscripts that require improvements in clarity, flow, and structure. Please visit our Services page for a detailed comparison.</p></div>
+                    </div>
+
+                    <h3 id="payment" class="f-q_s-c-t-hdr">Payment & Billing</h3>
+                    <div class="q_a-bl_k-x_5">
+                        <button class="q_a-tr-g_r-y_6"><span>What payment methods do you accept?</span><i class="fas fa-chevron-down q_a-ic-n_9"></i></button>
+                        <div class="q_a-c-nt-nt-z_7"><p>We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and bank transfers. All payments are processed securely through our encrypted payment gateway.</p></div>
+                    </div>
+                    <div class="q_a-bl_k-x_5">
+                        <button class="q_a-tr-g_r-y_6"><span>Can I get an invoice for my institution?</span><i class="fas fa-chevron-down q_a-ic-n_9"></i></button>
+                        <div class="q_a-c-nt-nt-z_7"><p>Absolutely. After payment confirmation, an official invoice will be automatically generated and sent to your email address. It will contain all the necessary details for reimbursement or institutional records.</p></div>
+                    </div>
+
+                    <h3 id="process" class="f-q_s-c-t-hdr">The Editing Process</h3>
+                    <div class="q_a-bl_k-x_5">
+                        <button class="q_a-tr-g_r-y_6"><span>How will I receive my edited document?</span><i class="fas fa-chevron-down q_a-ic-n_9"></i></button>
+                        <div class="q_a-c-nt-nt-z_7"><p>You'll receive an email notification once your document is ready. It will be available for download from your secure client portal. We will provide two versions: one with "Track Changes" to show all edits and a "clean" version with all changes accepted.</p></div>
+                    </div>
+
+                    <h3 id="technical" class="f-q_s-c-t-hdr">Technical Support</h3>
+                    <div class="q_a-bl_k-x_5">
+                        <button class="q_a-tr-g_r-y_6"><span>What file formats do you accept?</span><i class="fas fa-chevron-down q_a-ic-n_9"></i></button>
+                        <div class="q_a-c-nt-nt-z_7"><p>We primarily work with Microsoft Word files (.doc, .docx). This allows us to use the "Track Changes" feature. If your manuscript is in another format like LaTeX or PDF, please contact our support team before ordering to discuss options.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="p-g_bl-k_5z">
+            <div class="w-rpr_8h-jkl">
+                <div class="bl-k_h-d_r_2x">
+                    <h2>Still Need Help?</h2>
+                    <p>If you can't find the answer you're looking for, please don't hesitate to reach out to our support team directly.</p>
+                </div>
+                <div class="c-nt_ct-wr_p-5e">
+                    <div class="c-nt_ct-inf-o-5f">
+                        <h3>Contact Support</h3>
+                        <p>Our team is available to assist you from Monday to Friday, 9:00 AM - 5:00 PM (GMT). We typically respond within a few hours.</p>
+                        <p><i class="fas fa-envelope"></i> <strong>Email:</strong> support@hitex-editex.com</p>
+                        <p><i class="fas fa-phone"></i> <strong>Phone:</strong> +233 12 345 6789</p>
+                    </div>
+                    <form>
+                        <div class="f-rm_gr-p_6f">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" class="in_p-t-f_ld_7g">
+                        </div>
+                        <div class="f-rm_gr-p_6f">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" class="in_p-t-f_ld_7g">
+                        </div>
+                        <div class="f-rm_gr-p_6f">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" rows="5" class="t-xt_ar-a_8h"></textarea>
+                        </div>
+                        <button type="submit" class="b_t-n-ac_1_t b_t-n-rd_ac_1_t">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="f-t_r-p-n_l-9i">
+        <div class="w-rpr_8h-jkl">
+            <div class="f-t_r-l-g_0j">HiTex<span>EdiTex</span></div>
+            <p>Empowering Research. Inspiring Discovery.</p>
+            <div class="s-c_l-m-d_a-1k">
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p class="c-p_y-r-t_xt-2l">&copy; 2025 HiTex EdiTex. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // JS for FAQ Accordion with new gibberish class names
+        const v_ar_q_a_blks = document.querySelectorAll('.q_a-bl_k-x_5');
+        v_ar_q_a_blks.forEach(item_block => {
+            const trigger_btn = item_block.querySelector('.q_a-tr-g_r-y_6');
+            trigger_btn.addEventListener('click', () => {
+                const is_already_open = item_block.classList.contains('is_op_n-s_t_t');
+                v_ar_q_a_blks.forEach(i => i.classList.remove('is_op_n-s_t_t'));
+                if (!is_already_open) {
+                    item_block.classList.add('is_op_n-s_t_t');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
