@@ -7213,7 +7213,7 @@ h3 {
   background-size: cover;
   position: relative;
   background-position: center;
-  height: 35vh;
+  height: max-content;
   display: flex;
   flex-direction: column;
   align-items: center;

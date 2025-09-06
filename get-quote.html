@@ -507,6 +507,8 @@
         </label>
 
          <select name="other-languages" id="other-languages" style="display:none;">
+        <option value="es">Canadian English</option>
+        <option value="es">Astrialian</option>
         <option value="es">Spanish</option>
         <option value="fr">French</option>
         <option value="de">German</option>
@@ -557,14 +559,34 @@
                     </div>
                 </div>
                 <div class="form-group">
-                     <label for="how-heard">How did you hear about us? *</label>
-                     <select id="how-heard" name="how-heard" required>
-                         <option value="">A friend</option>
-                         <option value="colleague">Colleague Recommendation</option>
-                         <option value="search">Search Engine</option>
-                         <option value="social">Social Media</option>
-                     </select>
-                </div>
+    <label for="how-heard">How did you hear about us? *</label>
+    <select id="how-heard" name="how-heard" required>
+        <option value="" disabled selected>Select an option</option>
+        <option value="colleague">Colleague Recommendation</option>
+        <option value="search">Search Engine</option>
+        <option value="social">Social Media</option>
+    </select>
+</div>
+
+           <div id="colleague-details" style="display: none; margin-top: 15px;">
+    
+          <div class="form-group">
+           <label>Would you like to provide the recommender's name/code?</label>
+        <div>
+            <label style="margin-right: 15px;">
+                <input type="radio" name="provide-recommender" value="yes"> Yes
+            </label>
+            <label>
+                <input type="radio" name="provide-recommender" value="no" checked> No
+            </label>
+        </div>
+        </div>
+
+    <div id="recommender-input-box" class="form-group" style="display: none; margin-top: 10px;">
+        <label for="recommender-code">Recommender's Name or Code:</label>
+        <input type="text" id="recommender-code" name="recommender-code" style="width: 100%; padding: 8px;">
+    </div>
+            </div>
             </fieldset>
             
             <fieldset class="form-section">
@@ -601,6 +623,10 @@
         const priceDisplay = document.getElementById('calculated-price');
         const pageHeading = document.getElementById('page-main-heading');
         const quoteForm = document.querySelector('.quote-form');
+        const howHeardSelect = document.getElementById('how-heard');
+    const colleagueDetailsDiv = document.getElementById('colleague-details');
+    const recommenderInputBox = document.getElementById('recommender-input-box');
+    const provideRecommenderRadios = document.querySelectorAll('input[name="provide-recommender"]');
 
         // --- PRICE CALCULATION LOGIC (This part is correct) ---
         function calculatePrice() {
@@ -627,6 +653,32 @@
             wordCountInput.addEventListener('input', calculatePrice);
         }
         calculatePrice();
+
+        //  CODE FOR HOW DID YPU HESAR ABOUT US
+
+         howHeardSelect.addEventListener('change', function() {
+        // If "Colleague Recommendation" is selected, show the Yes/No section
+        if (this.value === 'colleague') {
+            colleagueDetailsDiv.style.display = 'block';
+        } else {
+            // Otherwise, hide both conditional sections
+            colleagueDetailsDiv.style.display = 'none';
+            recommenderInputBox.style.display = 'none';
+        }
+    });
+
+    // Listen for changes on the "Yes/No" radio buttons
+    provideRecommenderRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            // If "Yes" is selected, show the text input box
+            if (this.value === 'yes') {
+                recommenderInputBox.style.display = 'block';
+            } else {
+                // Otherwise, hide it
+                recommenderInputBox.style.display = 'none';
+            }
+        });
+    });
 
         // --- FORM SUBMISSION LOGIC (Corrected Version) ---
         if (quoteForm) {
