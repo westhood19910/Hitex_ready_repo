@@ -9161,6 +9161,72 @@ p {
   z-index: 900;
 }
 
+/* Append this to your existing CSS file */
+
+/* New styles for the social media options dropdown */
+.search-social-options {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--white);
+    border-radius: 24px;
+    padding: 0.75rem 0;
+    text-align: center;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.search-social-options-header {
+    font-size: 0.9rem;
+    color: rgba(3, 38, 114, 0.6);
+    margin-bottom: 0.5rem;
+    padding: 0 1rem;
+    font-weight: 500;
+}
+
+.search-social-options ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.search-social-options ul li a {
+    display: block;
+    padding: 0.6rem 1.5rem;
+    color: var(--blue);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.search-social-options ul li a:hover {
+    background-color: rgba(3, 38, 114, 0.05);
+    color: var(--red);
+}
+
+/* NEW state class: 'social-active' 
+  This class will be added via JavaScript to the search container.
+*/
+
+/* When social options are active, hide the input and close button */
+.nav__bar_oi-search-container.social-active .nav__bar_oi-search-input,
+.nav__bar_oi-search-container.social-active .nav__bar_oi-search-close {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* And show the social options list */
+.nav__bar_oi-search-container.social-active .search-social-options {
+    display: block;
+}
+
 /* CODE FOR NEW NAV */ 
 
 .new_loger_nav__bar_oi-button {
@@ -9171,6 +9237,11 @@ p {
   font-weight: 700;
   cursor: pointer;
   transition: all var(--transition-speed);
+}
+
+.new_nav__baroi-social {
+  display: flex;
+  align-items: center;
 }
 
 .new_loger_nav__bar_oi-button-signup {
@@ -9570,10 +9641,7 @@ color: #ffffffff;
   align-items: center;
 }
 
-.new_nav__baroi-social {
-  display: flex;
-  align-items: center;
-}
+
 
 .nav__bar_oi-social-icon {
   color: var(--blue);
