@@ -184,124 +184,698 @@
   <div class="nav__bar_oi-overlay" id="navOverlay"></div>
 </nav>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Enhanced Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+       /* Complete Rewritten CSS with Enhanced Password Toggle */
 
-  <div class="unl_live-signup-container">
-   <form id="signupForm" class="unl_live-signup-form">
-    <div class="unl_live-input-group">
-        <label for="name" class="unl_live-label">Full Name</label>
-        <div class="unl_live-input-wrapper">
-           
-            <input 
-                type="text" 
-                id="name"
-                name="fullName" class="unl_live-input" 
-                placeholder="Enter your full name" 
-                required
-            >
-        </div>
-    </div>
+ .unl_live-signup-container {
+            background-color: white;
+            width: 100%;
+            margin: 5em auto;
+            max-width: 780px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
 
-    <div class="unl_live-input-group">
-        <label for="email" class="unl_live-label">Email Address</label>
-        <div class="unl_live-input-wrapper">
-           
-            <input 
-                type="email" 
-                id="email" 
-                name="email" class="unl_live-input" 
-                placeholder="Enter your email" 
-                required
-            >
-        </div>
-    </div>
+        .unl_live-main-heading a {
+            color: var(--blue);
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: var(--major-header-font-weight);
+            margin-bottom: 25px;
+            display: block;
+            text-decoration: none;
+        }
 
-    <div class="unl_live-input-group">
-        <label for="password" class="unl_live-label">Password</label>
-        <div class="unl_live-input-wrapper">
-            <input 
-                type="password" 
-                id="password" 
-                name="password" class="unl_live-input" 
-                placeholder="Create a strong password" 
-                required
-            >
-            <i class="fa-solid fa-eye" id="togglePassword"></i>
-        </div>
-    </div>
+        @media screen and (max-width: 400px) {
+            .unl_live-main-heading a {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+        }
 
-    <div class="unl_live-input-group">
-        <label for="confirmPassword" class="unl_live-label">Confirm password</label>
-        <div class="unl_live-input-wrapper">
+        .unl_live-input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .unl_live-label {
+            display: block;
+            color: var(--blue);
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .unl_live-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .unl_live-input,
+        .unl_live-select {
+            width: 100%;
+            border: none;
+            border-bottom: 2px solid var(--blue);
+            padding: 8px 40px 8px 28px;
+            font-size: 15px;
+            background: transparent;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .unl_live-input:focus,
+        .unl_live-select:focus {
+            border-bottom-color: var(--red);
+        }
+
+        /* Left Side Icons */
+        .unl_live-input-wrapper .fa-user,
+        .unl_live-input-wrapper .fa-envelope,
+        .unl_live-input-wrapper .fa-lock,
+        .unl_live-input-wrapper .fa-graduation-cap,
+        .unl_live-input-wrapper .fa-building {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--blue);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Password Toggle Icons - ENHANCED */
+        .unl_live-input-wrapper #togglePassword,
+        .unl_live-input-wrapper #toggleConfirmPassword {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #666;
+            font-size: 16px;
+            z-index: 10;
+            padding: 4px;
+            border-radius: 3px;
+            user-select: none;
+            transition: all 0.2s ease;
+            background: transparent;
+            border: none;
+            outline: none;
+            min-width: 24px;
+            min-height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .unl_live-input-wrapper #togglePassword:hover,
+        .unl_live-input-wrapper #toggleConfirmPassword:hover {
+            color: var(--blue);
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .unl_live-input-wrapper #togglePassword:active,
+        .unl_live-input-wrapper #toggleConfirmPassword:active {
+            color: var(--red);
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        /* Special Input Padding for Password Fields */
+        input#password,
+        input#confirmPassword {
+            padding-right: 40px !important;
+        }
+
+        .unl_live-input {
+            position: relative;
+            z-index: 1;
+        }
+
+        .unl_live-submit-button {
+            width: 100%;
+            background-color: var(--blue);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .unl_live-submit-button:hover {
+            background-color: var(--red);
+        }
+
+        .unl_live-submit-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .unl_live-login-redirect {
+            text-align: center;
+            margin-top: 15px;
+            color: var(--blue);
+            font-size: 14px;
+        }
+
+        .unl_live-login-link {
+            color: var(--red);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .unl_live-login-link:hover {
+            text-decoration: underline;
+        }
+
+        .info-link {
+            color: var(--blue);
+            cursor: pointer;
+            text-decoration: underline;
+            font-size: 12px;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .info-link:hover {
+            color: var(--red);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: var(--red);
+        }
+
+        .error-message {
+            color: var(--red);
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+            font-weight: 500;
+        }
+
+        .success-message {
+            color: green;
+            font-size: 12px;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .placeholder-text {
+            font-style: italic;
+            color: #888;
+            font-size: 13px;
+        }
+
+        /* Mobile Responsiveness */
+        @media screen and (max-width: 768px) {
+            .unl_live-signup-container {
+                margin: 2em auto;
+                padding: 20px;
+            }
+
+            .unl_live-input-wrapper #togglePassword,
+            .unl_live-input-wrapper #toggleConfirmPassword {
+                right: 5px;
+                font-size: 18px;
+                padding: 6px;
+                min-width: 28px;
+                min-height: 28px;
+            }
             
-            <input 
-                type="password" 
-                id="confirmPassword" 
-                name="confirmPassword" class="unl_live-input" 
-                placeholder="Confirm your password" 
-                required
+            input#password,
+            input#confirmPassword {
+                padding-right: 45px !important;
+            }
+        }  
+    </style>
+</head>
+<body>
+    <div class="unl_live-signup-container">
+        <h1 class="unl_live-main-heading">
+            <a href="#">Sign Up</a>
+        </h1>
+
+        <form id="signupForm">
+            <!-- Salutation Dropdown - Optional -->
+            <div class="unl_live-input-group">
+                <label for="salutation" class="unl_live-label">Salutation (Optional)</label>
+                <div class="unl_live-input-wrapper">
+                   
+                    <select 
+                        id="salutation" 
+                        name="salutation" 
+                        class="unl_live-select"
+                    >
+                        <option value="">Select (Optional)</option>
+                        <option value="Prof.">Prof.</option>
+                        <option value="Dr.">Dr.</option>
+                        <option value="Mr.">Mr.</option>
+                        <option value="Mrs.">Mrs.</option>
+                        <option value="Ms.">Ms.</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- First Name -->
+            <div class="unl_live-input-group">
+                <label for="firstName" class="unl_live-label">First Name</label>
+                <div class="unl_live-input-wrapper">
+                   
+                    <input 
+                        type="text" 
+                        id="firstName" 
+                        name="firstName" 
+                        class="unl_live-input" 
+                        placeholder="Enter your first name" 
+                        required
+                    >
+                </div>
+            </div>
+
+            <!-- Last Name -->
+            <div class="unl_live-input-group">
+                <label for="lastName" class="unl_live-label">Last Name</label>
+                <div class="unl_live-input-wrapper">
+                    
+                    <input 
+                        type="text" 
+                        id="lastName" 
+                        name="lastName" 
+                        class="unl_live-input" 
+                        placeholder="Enter your last name" 
+                        required
+                    >
+                </div>
+            </div>
+
+            <!-- Primary Email -->
+            <div class="unl_live-input-group" id="regularEmailGroup">
+                <label for="email" class="unl_live-label">Primary Email Address</label>
+                <div class="unl_live-input-wrapper">
+            
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        class="unl_live-input" 
+                        placeholder="Enter your primary email address" 
+                        required
+                    >
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="unl_live-input-group">
+                <label for="password" class="unl_live-label">Password</label>
+                <div class="unl_live-input-wrapper">
+                    <i class="fa-solid fa-lock"></i>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        class="unl_live-input" 
+                        placeholder="Enter your password (min 8 characters)" 
+                        required
+                    >
+                    <i class="fa-solid fa-eye" id="togglePassword"></i>
+                </div>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="unl_live-input-group">
+                <label for="confirmPassword" class="unl_live-label">Confirm Password</label>
+                <div class="unl_live-input-wrapper">
+                    <i class="fa-solid fa-lock"></i>
+                    <input 
+                        type="password" 
+                        id="confirmPassword" 
+                        name="confirmPassword" 
+                        class="unl_live-input" 
+                        placeholder="Confirm your password" 
+                        required
+                    >
+                    <i class="fa-solid fa-eye" id="toggleConfirmPassword"></i>
+                </div>
+            </div>
+
+            <!-- Current Institution (Optional) -->
+            <div class="unl_live-input-group">
+                <label for="currentInstitution" class="unl_live-label">Current Institution (Optional)</label>
+                <div class="unl_live-input-wrapper">
+                    
+                    <input 
+                        type="text" 
+                        id="currentInstitution" 
+                        name="currentInstitution" 
+                        class="unl_live-input" 
+                        placeholder="Enter your institution for potential discounts"
+                    >
+                </div>
+            </div>
+
+            <!-- Institutional Email (Conditional) -->
+            <div class="unl_live-input-group hidden" id="institutionalEmailGroup">
+                <label for="institutionalEmail" class="unl_live-label">Institutional Email Address</label>
+                <div class="unl_live-input-wrapper">
+                    
+                    <input 
+                        type="email" 
+                        id="institutionalEmail" 
+                        name="institutionalEmail" 
+                        class="unl_live-input" 
+                        placeholder="Enter your institutional email"
+                    >
+                </div>
+                <span class="info-link" id="whyEmailLink">Why am I being asked this?</span>
+                <div class="error-message" id="emailError">
+                    Please enter a valid institutional email address.
+                </div>
+            </div>
+
+            <button 
+                type="submit" 
+                class="unl_live-submit-button"
             >
-            <i class="fa-solid fa-eye" id="toggleConfirmPassword"></i>
+                Sign Up
+            </button>
+        </form>
+
+        <p class="unl_live-login-redirect">
+            Already have an account? 
+            <a href="client-login.html" class="unl_live-login-link">Log In</a>
+        </p>
+    </div>
+
+    <!-- Modal for institutional discount info -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Institutional Discount Information</h3>
+            <p>You may qualify for a discount if your institution is included in our list of partner institutions.</p>
         </div>
     </div>
 
-    <div class="unl_live-input-group">
-        <label for="manuscriptType" class="unl_live-label">Manuscript Type (Optional)</label>
-        <div class="unl_live-input-wrapper">
-           
-            <select 
-                id="manuscriptType" 
-                name="manuscriptType" class="unl_live-select"
-            >
-                <option value="">Select Manuscript Type</option>
-                <option value="academic">Academic Paper</option>
-                <option value="novel">Novel</option>
-                <option value="thesis">Thesis</option>
-                <option value="other">Other</option>
-            </select>
-        </div>
-    </div>
-    
-    <button 
-        type="submit" 
-        class="unl_live-submit-button"
-    >
-        Sign Up
-    </button>
-</form>
-     <p class="unl_live-login-redirect">
-         Already have an account? 
-         <a href="client-login.html" class="unl_live-login-link">Log In</a>
-     </p>
- </div>
-    
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
-     
-            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
-<script>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Password toggle functionality - WORKING VERSION
+    function togglePasswordVisibility(toggleId, passwordId) {
+        const toggle = document.getElementById(toggleId);
+        const password = document.getElementById(passwordId);
+        
+        if (toggle && password) {
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const currentType = password.getAttribute('type');
+                const newType = currentType === 'password' ? 'text' : 'password';
+                password.setAttribute('type', newType);
+                
+                if (newType === 'text') {
+                    this.classList.remove('fa-eye');
+                    this.classList.add('fa-eye-slash');
+                } else {
+                    this.classList.remove('fa-eye-slash');
+                    this.classList.add('fa-eye');
+                }
+            });
+        }
+    }
+
+    // Initialize password toggles
+    togglePasswordVisibility('togglePassword', 'password');
+    togglePasswordVisibility('toggleConfirmPassword', 'confirmPassword');
+
+    // Institution and institutional email logic
+    const institutionInput = document.getElementById('currentInstitution');
+    const institutionalEmailGroup = document.getElementById('institutionalEmailGroup');
+    const institutionalEmailInput = document.getElementById('institutionalEmail');
+
+    if (institutionInput && institutionalEmailGroup) {
+        institutionInput.addEventListener('input', function() {
+            if (this.value.trim()) {
+                institutionalEmailGroup.classList.remove('hidden');
+                if (institutionalEmailInput) {
+                    institutionalEmailInput.required = true;
+                }
+            } else {
+                institutionalEmailGroup.classList.add('hidden');
+                if (institutionalEmailInput) {
+                    institutionalEmailInput.required = false;
+                    institutionalEmailInput.value = '';
+                }
+                
+                const emailError = document.getElementById('emailError');
+                const existingSuccess = document.getElementById('emailSuccess');
+                if (emailError) emailError.style.display = 'none';
+                if (existingSuccess) existingSuccess.remove();
+            }
+        });
+    }
+
+    // Modal functionality
+    const modal = document.getElementById('infoModal');
+    const whyEmailLink = document.getElementById('whyEmailLink');
+    const closeModal = document.getElementsByClassName('close')[0];
+
+    if (whyEmailLink) {
+        whyEmailLink.addEventListener('click', function() {
+            modal.style.display = 'block';
+        });
+    }
+
+    if (closeModal) {
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+    }
+
+    window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+
+    // Email validation function matching your backend
+    async function validateInstitutionalEmailOnline(email) {
+        try {
+            const response = await fetch('https://all-branched-end.onrender.com/validate-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email }),
+            });
+
+            const validation = await response.json();
+            return validation;
+        } catch (error) {
+            console.error('Email validation error:', error);
+            return {
+                valid: false,
+                message: 'Unable to validate email at this time. Please try again later.',
+                error: error.message
+            };
+        }
+    }
+
+    // Real-time validation with debouncing
+    let emailValidationTimeout;
+    const emailError = document.getElementById('emailError');
+    
+    if (institutionalEmailInput && emailError) {
+        institutionalEmailInput.addEventListener('input', function() {
+            const email = this.value.trim();
+
+            clearTimeout(emailValidationTimeout);
+
+            if (!email) {
+                emailError.style.display = 'none';
+                emailError.textContent = '';
+                const existingSuccess = document.getElementById('emailSuccess');
+                if (existingSuccess) {
+                    existingSuccess.remove();
+                }
+                return;
+            }
+
+            emailError.textContent = 'Validating institutional email...';
+            emailError.style.display = 'block';
+            emailError.style.color = '#888';
+
+            const existingSuccess = document.getElementById('emailSuccess');
+            if (existingSuccess) {
+                existingSuccess.remove();
+            }
+
+            emailValidationTimeout = setTimeout(async () => {
+                try {
+                    const validation = await validateInstitutionalEmailOnline(email);
+                    
+                    if (validation.valid) {
+                        emailError.style.display = 'none';
+                        
+                        if (validation.institution) {
+                            const successMsg = document.createElement('div');
+                            successMsg.textContent = `✓ Validated: ${validation.institution}${validation.country ? ` (${validation.country})` : ''}`;
+                            successMsg.style.color = 'green';
+                            successMsg.style.fontSize = '12px';
+                            successMsg.style.marginTop = '5px';
+                            successMsg.style.fontWeight = '500';
+                            successMsg.id = 'emailSuccess';
+                            
+                            institutionalEmailInput.parentNode.parentNode.appendChild(successMsg);
+                        }
+                    } else {
+                        emailError.textContent = validation.message || 'This email domain is not recognized as an institutional email address.';
+                        emailError.style.display = 'block';
+                        emailError.style.color = 'var(--red)';
+                    }
+                } catch (error) {
+                    emailError.textContent = 'Error validating email. Please check your connection and try again.';
+                    emailError.style.display = 'block';
+                    emailError.style.color = 'var(--red)';
+                }
+            }, 1500);
+        });
+
+        institutionalEmailInput.addEventListener('focus', function() {
+            const existingSuccess = document.getElementById('emailSuccess');
+            if (existingSuccess) {
+                existingSuccess.remove();
+            }
+        });
+    }
+
+    // Form submission - PERFECTLY MATCHING YOUR BACKEND
     document.getElementById('signupForm').addEventListener('submit', async (e) => {
-        e.preventDefault(); // Prevents the default form submission
+        e.preventDefault();
 
         const form = e.target;
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
+        const submitButton = document.querySelector('.unl_live-submit-button');
 
-        // Check if passwords match
+        // Basic validation
         if (data.password !== data.confirmPassword) {
             alert('Passwords do not match.');
             return;
         }
 
+        if (!data.firstName || !data.lastName || !data.email || !data.password) {
+            alert('Please fill in all required fields.');
+            return;
+        }
+
+        if (data.password.length < 8) {
+            alert('Password must be at least 8 characters long.');
+            return;
+        }
+
+        // Validate institutional email if provided
+        if (data.institutionalEmail && data.institutionalEmail.trim()) {
+            submitButton.textContent = 'Validating Institutional Email...';
+            submitButton.disabled = true;
+
+            try {
+                const emailValidation = await validateInstitutionalEmailOnline(data.institutionalEmail);
+                
+                if (!emailValidation.valid) {
+                    const emailError = document.getElementById('emailError');
+                    if (emailError) {
+                        emailError.textContent = emailValidation.message || 'Please enter a valid institutional email address.';
+                        emailError.style.display = 'block';
+                        emailError.style.color = 'var(--red)';
+                    }
+                    
+                    submitButton.textContent = 'Sign Up';
+                    submitButton.disabled = false;
+                    return;
+                } else {
+                    const emailError = document.getElementById('emailError');
+                    if (emailError) {
+                        emailError.style.display = 'none';
+                    }
+                }
+            } catch (error) {
+                console.error('Email validation error:', error);
+                alert('Unable to validate institutional email at this time. Please try again later.');
+                submitButton.textContent = 'Sign Up';
+                submitButton.disabled = false;
+                return;
+            }
+        }
+
+        submitButton.textContent = 'Creating Account...';
+        submitButton.disabled = true;
+
         try {
-            // Send the data to your LIVE server on Render
+            // Send exactly what your backend expects
             const response = await fetch('https://all-branched-end.onrender.com/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(data),
+                body: JSON.stringify({
+                    salutation: data.salutation || null,
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    email: data.email,
+                    password: data.password,
+                    currentInstitution: data.currentInstitution || null,
+                    institutionalEmail: data.institutionalEmail || null
+                }),
             });
 
             const result = await response.json();
@@ -310,14 +884,25 @@
                 throw new Error(result.error || 'Registration failed');
             }
 
-            alert(result.message);
-            window.location.href = 'service-levels.html'; // Redirect to login page on success
+            let successMessage = result.message;
+            if (result.institutionalUser) {
+                successMessage += ' Your institutional email has been verified and may qualify you for discounts.';
+            }
+            
+            alert(successMessage);
+            window.location.href = 'service-levels.html';
 
         } catch (error) {
+            console.error('Registration error:', error);
             alert('Registration failed: ' + error.message);
+        } finally {
+            submitButton.textContent = 'Sign Up';
+            submitButton.disabled = false;
         }
     });
-</script>
 
+    console.log('Frontend perfectly matched to backend - ready for testing!');
+});
+    </script>
 </body>
 </html>
