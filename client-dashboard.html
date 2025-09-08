@@ -3,10 +3,12 @@
 <head> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HiTex EdiTex</title>
-<script src="pricing.js"></script>
-<script src="Embednav.js"></script>
+<script src="pricing.js" defer></script>
+<script src="Embednav.js" defer></script>
+<script src="clientdasnboard.js"></script>
 <script src="freshtex.js"></script> 
 <link rel="stylesheet" href="pricing.css">
+<link rel="stylesheet" href="clientdasnboard.css">
 <link rel="stylesheet" href="ser_them.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -159,6 +161,294 @@
   </div>
   <div class="nav__bar_oi-overlay" id="navOverlay"></div>
 </nav>
+
+
+<!-- CODE FOR CLIENT DASHBOARD PAGE -->
+
+ <div class="app-scaffold">
+        <aside class="navigation-pillar">
+            <div class="pillar-crest">
+                <img src="https://i.pravatar.cc/150" alt="User Avatar" class="profile-sigil">
+                <div class="profile-identifier" id="profileName">Loading...</div>
+                <div class="user-email" id="profileEmail"></div>
+            </div>
+            <nav class="pillar-directory">
+                <ul>
+                    <li><a href="#" class="pillar-link active" data-section="dashboard">Dashboard</a></li>
+                    <li><a href="#" class="pillar-link" data-section="submissions">My Submissions</a></li>
+                    <li><a href="#" class="pillar-link" data-section="projects">Active Projects</a></li>
+                    <li><a href="#" class="pillar-link" data-section="communications">Messages</a></li>
+                    <li><a href="#" class="pillar-link" data-section="invoices">Invoices & Payments</a></li>
+                    <li><a href="#" class="pillar-link" data-section="resources">Resources</a></li>
+                    <li><a href="/profile.html" class="pillar-link">Edit Profile</a></li>
+                    <li><a href="#" class="pillar-link" data-section="support">Support</a></li>
+                </ul>
+            </nav>
+            <button class="session-terminate-btn" id="logoutButton">Logout</button>
+        </aside>
+
+        <main class="primary-viewport">
+            <section id="dashboard-section" class="view-segment">
+                <header class="viewport-heading">
+                    <h1>Dashboard Overview</h1>
+                    <a href="/service-levels.html" class="prompt-button">Submit New Manuscript</a>
+                </header>
+
+                <div class="metrics-matrix">
+                    <div class="metric-capsule">
+                        <h3>Total Manuscripts</h3>
+                        <div class="figure" id="totalManuscripts">0</div>
+                        <div class="delta">All time submissions</div>
+                    </div>
+                    <div class="metric-capsule">
+                        <h3>Active Projects</h3>
+                        <div class="figure" id="activeProjects">0</div>
+                        <div class="delta">Currently in progress</div>
+                    </div>
+                    <div class="metric-capsule">
+                        <h3>Completed Projects</h3>
+                        <div class="figure" id="completedProjects">0</div>
+                        <div class="delta">Successfully finished</div>
+                    </div>
+                    <div class="metric-capsule">
+                        <h3>Outstanding Balance</h3>
+                        <div class="figure" id="outstandingBalance">$0</div>
+                        <div class="delta">Pending payments</div>
+                    </div>
+                </div>
+
+                <div class="data-enclosure">
+                    <div class="enclosure-header">
+                        <h2>Recent Activity</h2>
+                        <button class="prompt-button" onclick="refreshDashboard()">Refresh</button>
+                    </div>
+                    <div id="recentActivity">
+                        <p>Loading recent activity...</p>
+                    </div>
+                </div>
+
+                <div class="data-enclosure">
+                    <h2>Important Notifications</h2>
+                    <div class="alert-stream" id="notifications">
+                        <div class="alert-item critical">
+                            <h4>Action Required: Review Completed</h4>
+                            <p>Your manuscript "Sample Novel" has been edited and is ready for review. Please check your active projects.</p>
+                        </div>
+                        <div class="alert-item">
+                            <h4>Payment Confirmation</h4>
+                            <p>Payment received for project #12345. Thank you for your business!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="submissions-section" class="view-segment" style="display: none;">
+                <header class="viewport-heading">
+                    <h1>My Submissions</h1>
+                    <a href="/get-quote.html" class="prompt-button">Submit New Manuscript</a>
+                </header>
+                <div class="data-enclosure">
+                    <div class="enclosure-header">
+                        <h2>Manuscript History</h2>
+                        <button class="op-button op-info" onclick="exportSubmissions()">Export List</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date Submitted</th>
+                                <th>Manuscript Title</th>
+                                <th>Word Count</th>
+                                <th>Service Type</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="manuscriptList">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="projects-section" class="view-segment" style="display: none;">
+                <header class="viewport-heading">
+                    <h1>Active Projects</h1>
+                </header>
+                <div class="data-enclosure">
+                    <h2>Projects in Progress</h2>
+                    <div id="activeProjectsList">
+                        <div class="project-item" style="border: 1px solid var(--grey); padding: 1.5rem; margin-bottom: 1rem; border-radius: var(--radius);">
+                            <h3>Sample Novel - Comprehensive Edit</h3>
+                            <p><strong>Editor:</strong> Jane Smith | <strong>Deadline:</strong> September 15, 2025</p>
+                            <div class="completion-track">
+                                <div class="track-fill" style="width: 65%;"></div>
+                            </div>
+                            <p>Progress: 65% Complete</p>
+                            <div>
+                                <button class="op-button op-primary">View Details</button>
+                                <button class="op-button op-info">Download Draft</button>
+                                <button class="op-button op-caution">Message Editor</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="communications-section" class="view-segment" style="display: none;">
+                <header class="viewport-heading">
+                    <h1>Messages & Communications</h1>
+                    <button class="prompt-button">New Message</button>
+                </header>
+                
+                <div class="view-switcher">
+                    <div class="switcher-controls">
+                        <button class="switcher-tab active" onclick="switchTab('inbox')">Inbox (3)</button>
+                        <button class="switcher-tab" onclick="switchTab('sent')">Sent</button>
+                        <button class="switcher-tab" onclick="switchTab('archived')">Archived</button>
+                    </div>
+                </div>
+
+                <div class="data-enclosure">
+                    <div id="inbox-tab" class="switcher-pane active">
+                        <div class="message-list">
+                            <div class="message-item" style="padding: 1rem; border-bottom: 1px solid var(--grey); cursor: pointer;">
+                                <h4>Re: Your manuscript editing timeline</h4>
+                                <p>From: Editor Sarah Johnson | September 2, 2025</p>
+                                <p>Thank you for your patience. I'm pleased to inform you that your manuscript editing is ahead of schedule...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="sent-tab" class="switcher-pane">
+                        <p>Your sent messages will appear here.</p>
+                    </div>
+                    <div id="archived-tab" class="switcher-pane">
+                        <p>Archived messages will appear here.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="invoices-section" class="view-segment" style="display: none;">
+                <header class="viewport-heading">
+                    <h1>Invoices & Payments</h1>
+                </header>
+                <div class="data-enclosure">
+                    <div class="enclosure-header">
+                        <h2>Payment History</h2>
+                        <button class="op-button op-confirm">Download Tax Summary</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Invoice #</th>
+                                <th>Project</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>INV-001</td>
+                                <td>Sample Novel - Comprehensive Edit</td>
+                                <td>$450.00</td>
+                                <td>September 1, 2025</td>
+                                <td><span class="state-indicator state-completed">Paid</span></td>
+                                <td>
+                                    <button class="op-button op-info">Download</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>INV-002</td>
+                                <td>Short Story Collection - Proofreading</td>
+                                <td>$125.00</td>
+                                <td>August 28, 2025</td>
+                                <td><span class="state-indicator state-assigned">Pending</span></td>
+                                <td>
+                                    <button class="op-button op-caution">Pay Now</button>
+                                    <button class="op-button op-info">Download</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="resources-section" class="view-segment" style="display: none;">
+                <header class="viewport-heading">
+                    <h1>Writing Resources</h1>
+                </header>
+                
+                <div class="metrics-matrix">
+                    <div class="data-enclosure">
+                        <h3>Style Guides</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li><a href="#" class="op-button op-primary" style="margin-bottom: 0.5rem; width: 100%; text-align: center;">Chicago Manual of Style Guide</a></li>
+                            <li><a href="#" class="op-button op-primary" style="margin-bottom: 0.5rem; width: 100%; text-align: center;">AP Style Guide</a></li>
+                            <li><a href="#" class="op-button op-primary" style="width: 100%; text-align: center;">MLA Style Guide</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="data-enclosure">
+                        <h3>Writing Tips</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li><a href="#" class="op-button op-info" style="margin-bottom: 0.5rem; width: 100%; text-align: center;">Character Development Tips</a></li>
+                            <li><a href="#" class="op-button op-info" style="margin-bottom: 0.5rem; width: 100%; text-align: center;">Plot Structure Guide</a></li>
+                            <li><a href="#" class="op-button op-info" style="width: 100%; text-align: center;">Dialogue Best Practices</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="data-enclosure">
+                        <h3>Templates</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li><a href="#" class="op-button op-confirm" style="margin-bottom: 0.5rem; width: 100%; text-align: center;">Manuscript Format Template</a></li>
+                            <li><a href="#" class="op-button op-confirm" style="margin-bottom: 0.5rem; width: 100%; text-align: center;">Query Letter Template</a></li>
+                            <li><a href="#" class="op-button op-confirm" style="width: 100%; text-align: center;">Synopsis Template</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="support-section" class="view-segment" style="display: none;">
+                <header class="viewport-heading">
+                    <h1>Support Center</h1>
+                </header>
+                
+                <div class="data-enclosure">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-item" style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--grey);">
+                        <h4>How long does the editing process take?</h4>
+                        <p>Editing timelines vary based on manuscript length and service type. Typically, comprehensive editing takes 7-14 business days, while proofreading takes 3-5 business days.</p>
+                    </div>
+                    <div class="faq-item" style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--grey);">
+                        <h4>Can I request revisions?</h4>
+                        <p>Yes! We offer one round of revisions within 30 days of project completion at no additional charge.</p>
+                    </div>
+                </div>
+                
+                <div class="data-enclosure">
+                    <h2>Contact Support</h2>
+                    <p>Need help? Our support team is here to assist you.</p>
+                    <div>
+                        <button class="op-button op-primary">Live Chat</button>
+                        <button class="op-button op-info">Email Support</button>
+                        <button class="op-button op-caution">Schedule Call</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="manuscriptModal" class="overlay-dialog">
+        <div class="dialog-box">
+            <span class="dialog-dismiss" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Manuscript Details</h2>
+            <div id="modalBody">
+                </div>
+        </div>
+    </div>
+
+
+<!-- END -->
 
 
 
