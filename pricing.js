@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /**
- * Calculates standard turnaround time based on word count
+
  * @param {number} wordCount - The number of words in the document
  * @returns {number} - Standard turnaround time in hours
  */
@@ -53,7 +53,7 @@ function calculateStandardTime(wordCount) {
 }
 
 /**
- * Calculates rush fee multiplier based on requested time vs standard time
+
  * @param {number} requestedTime - Requested turnaround time in hours
  * @param {number} standardTime - Standard turnaround time in hours
  * @returns {number} - Rush fee multiplier
@@ -384,7 +384,6 @@ Object.keys(exchangeRates).forEach(fromCurrency => {
         }
     });
 });
-
 
 document.addEventListener('DOMContentLoaded', function() {
     // DOM elements for the first currency converter
