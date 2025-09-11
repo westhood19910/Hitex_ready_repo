@@ -615,17 +615,9 @@
         </p>
     </div>
 
-    <!-- Modal for institutional discount info -->
-    <div id="infoModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3>Institutional Discount Information</h3>
-            <p>You may qualify for a discount if your institution is included in our list of partner institutions.</p>
-        </div>
-    </div>
     <script>
-
-document.addEventListener('DOMContentLoaded', function() {
+    <!-- Modal for institutional discount info -->
+   document.addEventListener('DOMContentLoaded', function() {
     
     // Password toggle functionality - WORKING VERSION
     function togglePasswordVisibility(toggleId, passwordId) {
@@ -656,7 +648,8 @@ document.addEventListener('DOMContentLoaded', function() {
     togglePasswordVisibility('togglePassword', 'password');
     togglePasswordVisibility('toggleConfirmPassword', 'confirmPassword');
 
-    // Institution and institutional email logic
+    // Institution and institutional email logic - COMMENTED OUT
+    /*
     const institutionInput = document.getElementById('currentInstitution');
     const institutionalEmailGroup = document.getElementById('institutionalEmailGroup');
     const institutionalEmailInput = document.getElementById('institutionalEmail');
@@ -682,6 +675,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+    */
 
     // Modal functionality
     const modal = document.getElementById('infoModal');
@@ -732,6 +726,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Real-time validation with debouncing
     let emailValidationTimeout;
     const emailError = document.getElementById('emailError');
+    const institutionalEmailInput = document.getElementById('institutionalEmail');
     
     if (institutionalEmailInput && emailError) {
         institutionalEmailInput.addEventListener('input', function() {

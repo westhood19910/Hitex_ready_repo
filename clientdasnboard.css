@@ -1,233 +1,389 @@
-   :root {
-            --red: #D54C4F; --blue: #032672; --light-blue: #D3E5FF;
-            --button-background: linear-gradient(135deg, #eb2525, #af1e1e);
-            --white: #ffffff; --grey-light: #f7f9fc; --grey: #e5e9f2;
-            --text: #2c3e50; --text-light: #7e8c9a; --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            --radius: 10px; --transition: all 0.3s ease;
-            --success: #28a745; --warning: #ffc107; --info: #17a2b8;
-        }
-
-
-        body { font-family: 'Poppins', sans-serif; background-color: var(--grey-light); margin: 0; }
-        .app-scaffold { display: flex; min-height: 100vh; }
- 
- 
- .navigation-pillar {
-            width: 280px;
-            background: var(--blue);
-            color: var(--white);
-            padding: 2rem 1.5rem;
-            display: flex;
-            flex-direction: column;
-        }
-        .pillar-crest { text-align: center; margin-bottom: 2rem; }
-        .pillar-crest .profile-identifier { font-size: 1.2rem; font-weight: 600; margin-top: 1rem; }
-        .profile-sigil { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--light-blue); }
-        .pillar-directory { flex-grow: 1; }
-        .pillar-directory ul { list-style: none; padding: 0; }
-        .pillar-directory a {
-            display: block;
-            padding: 1rem;
-            color: var(--light-blue);
-            text-decoration: none;
-            border-radius: var(--radius);
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-        .pillar-directory a:hover, .pillar-directory a.active {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: var(--white);
-        }
-        .session-terminate-btn {
-            background: var(--button-background);
-            color: var(--white);
-            border: none;
-            width: 100%;
-            padding: 1rem;
-            border-radius: var(--radius);
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 1rem;
-        }
-
-        /* --- Main Content Area --- */
-        .primary-viewport { flex-grow: 1; padding: 2rem 3rem; overflow-y: auto; }
-        .viewport-heading { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
-        .viewport-heading h1 { color: var(--blue); margin: 0; }
-        .prompt-button {
-            background: var(--button-background);
-            color: var(--white);
-            padding: 0.75rem 1.5rem;
-            text-decoration: none;
-            border-radius: var(--radius);
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-        }
-
-        /* --- Dashboard Stats --- */
-        .metrics-matrix {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        .metric-capsule {
-            background: var(--white);
+.discount-banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
             padding: 1.5rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            text-align: center;
-        }
-        .metric-capsule h3 { margin: 0 0 0.5rem; color: var(--text-light); font-size: 0.9rem; text-transform: uppercase; }
-        .metric-capsule .figure { font-size: 2rem; font-weight: 700; color: var(--blue); margin: 0.5rem 0; }
-        .metric-capsule .delta { font-size: 0.8rem; color: var(--success); }
-
-        /* --- Content Cards --- */
-        .data-enclosure {
-            background-color: var(--white);
-            padding: 2rem;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
+            border-radius: 12px;
             margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
         }
-        .enclosure-header {
+
+        .discount-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(30px, -30px);
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .banner-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
-        .enclosure-header h2 { margin: 0; color: var(--text); }
 
-        /* --- Tables --- */
-        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-        th, td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--grey); }
-        th { color: var(--text-light); font-weight: 600; background: var(--grey-light); }
-        .state-indicator {
-            padding: 0.25em 0.75em;
-            border-radius: 50px;
+        .banner-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+
+        .banner-title {
+            font-size: 1.4rem;
             font-weight: 600;
-            font-size: 0.8rem;
+            margin: 0;
         }
-        .state-new { background-color: var(--light-blue); color: var(--blue); }
-        .state-assigned { background-color: #ffe8cc; color: #ff8c00; }
-        .state-in-progress { background-color: #fff3cd; color: #856404; }
-        .state-review { background-color: #cce5ff; color: #004085; }
-        .state-completed { background-color: #d1e7dd; color: #0f5132; }
-        .state-revision-needed { background-color: #f8d7da; color: #721c24; }
 
-        /* --- Action Buttons --- */
-        .op-button {
-            padding: 0.4rem 0.8rem;
-            border: none;
-            border-radius: 5px;
+        .banner-description {
+            margin: 0.5rem 0 1.5rem 0;
+            line-height: 1.5;
+            opacity: 0.95;
+        }
+
+        .banner-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .banner-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.7rem 1.5rem;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 0.8rem;
-            margin-right: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
         }
-        .op-primary { background: var(--blue); color: white; }
-        .op-confirm { background: var(--success); color: white; }
-        .op-info { background: var(--info); color: white; }
-        .op-caution { background: var(--warning); color: black; }
 
-        /* --- Progress Bars --- */
-        .completion-track {
-            width: 100%;
-            height: 8px;
-            background: var(--grey);
-            border-radius: 4px;
-            overflow: hidden;
-            margin: 0.5rem 0;
-        }
-        .track-fill {
-            height: 100%;
-            background: var(--success);
-            transition: width 0.3s ease;
+        .banner-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
         }
 
-        /* --- Notifications --- */
-        .alert-stream {
-            max-height: 300px;
-            overflow-y: auto;
+        .banner-btn.primary {
+            background: white;
+            color: #667eea;
         }
-        .alert-item {
-            padding: 1rem;
-            border-left: 4px solid var(--info);
-            background: var(--grey-light);
-            margin-bottom: 0.5rem;
-            border-radius: 0 var(--radius) var(--radius) 0;
-        }
-        .alert-item.critical { border-left-color: var(--red); }
-        .alert-item h4 { margin: 0 0 0.5rem; font-size: 0.9rem; }
-        .alert-item p { margin: 0; font-size: 0.8rem; color: var(--text-light); }
 
-        /* --- Tabs --- */
-        .view-switcher {
-            margin-bottom: 1rem;
+        .banner-btn.primary:hover {
+            background: #f8f9ff;
         }
-        .switcher-controls {
-            display: flex;
-            border-bottom: 2px solid var(--grey);
-        }
-        .switcher-tab {
-            padding: 1rem 1.5rem;
+
+        .banner-dismiss {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
             background: none;
             border: none;
+            color: white;
+            font-size: 1.5rem;
             cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .banner-dismiss:hover {
+            opacity: 1;
+        }
+
+        /* Discount Code Display */
+        .discount-code-container {
+            background: #f8f9ff;
+            border: 1px solid #e1e5fe;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .discount-code-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .discount-code-icon {
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+
+        .discount-code-display {
+            background: white;
+            border: 2px dashed #667eea;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .discount-code-value {
+            font-family: 'Courier New', monospace;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            letter-spacing: 2px;
+        }
+
+        .discount-code-actions {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .copy-btn, .apply-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #667eea;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .copy-btn {
+            background: white;
+            color: #667eea;
+        }
+
+        .copy-btn:hover {
+            background: #f8f9ff;
+        }
+
+        .apply-btn {
+            background: #667eea;
+            color: white;
+        }
+
+        .apply-btn:hover {
+            background: #5a6fd8;
+        }
+
+        /* Payment Integration */
+        .payment-discount-section {
+            background: #f8f9ff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .discount-input-group {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .discount-input {
+            flex: 1;
+            padding: 0.7rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .apply-discount-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .discount-summary {
+            background: white;
+            border-radius: 6px;
+            padding: 1rem;
+            border-left: 4px solid #4caf50;
+        }
+
+        .discount-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .discount-line.total {
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-top: 1px solid #eee;
+            padding-top: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Admin Panel Styles */
+        .admin-section {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .admin-table th {
+            background: #f8f9ff;
             font-weight: 600;
-            color: var(--text-light);
-            transition: var(--transition);
-        }
-        .switcher-tab.active {
-            color: var(--blue);
-            border-bottom: 2px solid var(--blue);
-        }
-        .switcher-pane {
-            display: none;
-            animation: fadeIn 0.3s ease;
-        }
-        .switcher-pane.active { display: block; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- Responsive Design --- */
-        @media (max-width: 900px) {
-            .app-scaffold { flex-direction: column; }
-            .navigation-pillar { width: 100%; height: auto; }
-            .primary-viewport { padding: 1.5rem; }
-            .metrics-matrix { grid-template-columns: 1fr; }
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
         }
 
-        /* --- Modal Styles --- */
-        .overlay-dialog {
-            display: none;
+        .status-badge.active {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        .status-badge.inactive {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .admin-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 0.5rem;
+            transition: background 0.3s ease;
+        }
+
+        .admin-btn:hover {
+            background: #5a6fd8;
+        }
+
+        .admin-btn.danger {
+            background: #f44336;
+        }
+
+        .admin-btn.danger:hover {
+            background: #d32f2f;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             z-index: 1000;
         }
-        .dialog-box {
+
+        .modal-content {
             background: white;
-            margin: 5% auto;
+            border-radius: 8px;
             padding: 2rem;
-            border-radius: var(--radius);
+            max-width: 500px;
             width: 90%;
-            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
         }
-        .dialog-dismiss {
-            float: right;
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--text-light);
         }
-         
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .banner-actions {
+                flex-direction: column;
+            }
+
+            .discount-input-group {
+                flex-direction: column;
+            }
+
+            .admin-table {
+                font-size: 0.9rem;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }

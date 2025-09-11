@@ -165,290 +165,160 @@
 
 <!-- CODE FOR CLIENT DASHBOARD PAGE -->
 
- <div class="app-scaffold">
-        <aside class="navigation-pillar">
-            <div class="pillar-crest">
-                <img src="https://i.pravatar.cc/150" alt="User Avatar" class="profile-sigil">
-                <div class="profile-identifier" id="profileName">Loading...</div>
-                <div class="user-email" id="profileEmail"></div>
+<div id="discountBanner" class="discount-banner hidden">
+        <button class="banner-dismiss" onclick="dismissDiscountBanner()">&times;</button>
+        <div class="banner-content">
+            <div class="banner-header">
+                <span class="banner-icon">🎓</span>
+                <h3 class="banner-title">Institutional Discount Available!</h3>
             </div>
-            <nav class="pillar-directory">
-                <ul>
-                    <li><a href="#" class="pillar-link active" data-section="dashboard">Dashboard</a></li>
-                    <li><a href="#" class="pillar-link" data-section="submissions">My Submissions</a></li>
-                    <li><a href="#" class="pillar-link" data-section="projects">Active Projects</a></li>
-                    <li><a href="#" class="pillar-link" data-section="communications">Messages</a></li>
-                    <li><a href="#" class="pillar-link" data-section="invoices">Invoices & Payments</a></li>
-                    <li><a href="#" class="pillar-link" data-section="resources">Resources</a></li>
-                    <li><a href="/profile.html" class="pillar-link">Edit Profile</a></li>
-                    <li><a href="#" class="pillar-link" data-section="support">Support</a></li>
-                </ul>
-            </nav>
-            <button class="session-terminate-btn" id="logoutButton">Logout</button>
-        </aside>
-
-        <main class="primary-viewport">
-            <section id="dashboard-section" class="view-segment">
-                <header class="viewport-heading">
-                    <h1>Dashboard Overview</h1>
-                    <a href="/service-levels.html" class="prompt-button">Submit New Manuscript</a>
-                </header>
-
-                <div class="metrics-matrix">
-                    <div class="metric-capsule">
-                        <h3>Total Manuscripts</h3>
-                        <div class="figure" id="totalManuscripts">0</div>
-                        <div class="delta">All time submissions</div>
-                    </div>
-                    <div class="metric-capsule">
-                        <h3>Active Projects</h3>
-                        <div class="figure" id="activeProjects">0</div>
-                        <div class="delta">Currently in progress</div>
-                    </div>
-                    <div class="metric-capsule">
-                        <h3>Completed Projects</h3>
-                        <div class="figure" id="completedProjects">0</div>
-                        <div class="delta">Successfully finished</div>
-                    </div>
-                    <div class="metric-capsule">
-                        <h3>Outstanding Balance</h3>
-                        <div class="figure" id="outstandingBalance">$0</div>
-                        <div class="delta">Pending payments</div>
-                    </div>
-                </div>
-
-                <div class="data-enclosure">
-                    <div class="enclosure-header">
-                        <h2>Recent Activity</h2>
-                        <button class="prompt-button" onclick="refreshDashboard()">Refresh</button>
-                    </div>
-                    <div id="recentActivity">
-                        <p>Loading recent activity...</p>
-                    </div>
-                </div>
-
-                <div class="data-enclosure">
-                    <h2>Important Notifications</h2>
-                    <div class="alert-stream" id="notifications">
-                        <div class="alert-item critical">
-                            <h4>Action Required: Review Completed</h4>
-                            <p>Your manuscript "Sample Novel" has been edited and is ready for review. Please check your active projects.</p>
-                        </div>
-                        <div class="alert-item">
-                            <h4>Payment Confirmation</h4>
-                            <p>Payment received for project #12345. Thank you for your business!</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="submissions-section" class="view-segment" style="display: none;">
-                <header class="viewport-heading">
-                    <h1>My Submissions</h1>
-                    <a href="/get-quote.html" class="prompt-button">Submit New Manuscript</a>
-                </header>
-                <div class="data-enclosure">
-                    <div class="enclosure-header">
-                        <h2>Manuscript History</h2>
-                        <button class="op-button op-info" onclick="exportSubmissions()">Export List</button>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Date Submitted</th>
-                                <th>Manuscript Title</th>
-                                <th>Word Count</th>
-                                <th>Service Type</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="manuscriptList">
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <section id="projects-section" class="view-segment" style="display: none;">
-                <header class="viewport-heading">
-                    <h1>Active Projects</h1>
-                </header>
-                <div class="data-enclosure">
-                    <h2>Projects in Progress</h2>
-                    <div id="activeProjectsList">
-                        <div class="project-item" style="border: 1px solid var(--grey); padding: 1.5rem; margin-bottom: 1rem; border-radius: var(--radius);">
-                            <h3>Sample Novel - Comprehensive Edit</h3>
-                            <p><strong>Editor:</strong> Jane Smith | <strong>Deadline:</strong> September 15, 2025</p>
-                            <div class="completion-track">
-                                <div class="track-fill" style="width: 65%;"></div>
-                            </div>
-                            <p>Progress: 65% Complete</p>
-                            <div>
-                                <button class="op-button op-primary">View Details</button>
-                                <button class="op-button op-info">Download Draft</button>
-                                <button class="op-button op-caution">Message Editor</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="communications-section" class="view-segment" style="display: none;">
-                <header class="viewport-heading">
-                    <h1>Messages & Communications</h1>
-                    <button class="prompt-button">New Message</button>
-                </header>
-                
-                <div class="view-switcher">
-                    <div class="switcher-controls">
-                        <button class="switcher-tab active" onclick="switchTab('inbox')">Inbox (3)</button>
-                        <button class="switcher-tab" onclick="switchTab('sent')">Sent</button>
-                        <button class="switcher-tab" onclick="switchTab('archived')">Archived</button>
-                    </div>
-                </div>
-
-                <div class="data-enclosure">
-                    <div id="inbox-tab" class="switcher-pane active">
-                        <div class="message-list">
-                            <div class="message-item" style="padding: 1rem; border-bottom: 1px solid var(--grey); cursor: pointer;">
-                                <h4>Re: Your manuscript editing timeline</h4>
-                                <p>From: Editor Sarah Johnson | September 2, 2025</p>
-                                <p>Thank you for your patience. I'm pleased to inform you that your manuscript editing is ahead of schedule...</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="sent-tab" class="switcher-pane">
-                        <p>Your sent messages will appear here.</p>
-                    </div>
-                    <div id="archived-tab" class="switcher-pane">
-                        <p>Archived messages will appear here.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="invoices-section" class="view-segment" style="display: none;">
-                <header class="viewport-heading">
-                    <h1>Invoices & Payments</h1>
-                </header>
-                <div class="data-enclosure">
-                    <div class="enclosure-header">
-                        <h2>Payment History</h2>
-                        <button class="op-button op-confirm">Download Tax Summary</button>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Invoice #</th>
-                                <th>Project</th>
-                                <th>Amount</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>INV-001</td>
-                                <td>Sample Novel - Comprehensive Edit</td>
-                                <td>$450.00</td>
-                                <td>September 1, 2025</td>
-                                <td><span class="state-indicator state-completed">Paid</span></td>
-                                <td>
-                                    <button class="op-button op-info">Download</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>INV-002</td>
-                                <td>Short Story Collection - Proofreading</td>
-                                <td>$125.00</td>
-                                <td>August 28, 2025</td>
-                                <td><span class="state-indicator state-assigned">Pending</span></td>
-                                <td>
-                                    <button class="op-button op-caution">Pay Now</button>
-                                    <button class="op-button op-info">Download</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <section id="resources-section" class="view-segment" style="display: none;">
-                <header class="viewport-heading">
-                    <h1>Writing Resources</h1>
-                </header>
-                
-                <div class="metrics-matrix">
-                    <div class="data-enclosure">
-                        <h3>Style Guides</h3>
-                        <ul style="list-style: none; padding: 0;">
-                            <li><a href="#" class="op-button op-primary" style="margin-bottom: 0.5rem; width: 100%; text-align: center;">Chicago Manual of Style Guide</a></li>
-                            <li><a href="#" class="op-button op-primary" style="margin-bottom: 0.5rem; width: 100%; text-align: center;">AP Style Guide</a></li>
-                            <li><a href="#" class="op-button op-primary" style="width: 100%; text-align: center;">MLA Style Guide</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="data-enclosure">
-                        <h3>Writing Tips</h3>
-                        <ul style="list-style: none; padding: 0;">
-                            <li><a href="#" class="op-button op-info" style="margin-bottom: 0.5rem; width: 100%; text-align: center;">Character Development Tips</a></li>
-                            <li><a href="#" class="op-button op-info" style="margin-bottom: 0.5rem; width: 100%; text-align: center;">Plot Structure Guide</a></li>
-                            <li><a href="#" class="op-button op-info" style="width: 100%; text-align: center;">Dialogue Best Practices</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="data-enclosure">
-                        <h3>Templates</h3>
-                        <ul style="list-style: none; padding: 0;">
-                            <li><a href="#" class="op-button op-confirm" style="margin-bottom: 0.5rem; width: 100%; text-align: center;">Manuscript Format Template</a></li>
-                            <li><a href="#" class="op-button op-confirm" style="margin-bottom: 0.5rem; width: 100%; text-align: center;">Query Letter Template</a></li>
-                            <li><a href="#" class="op-button op-confirm" style="width: 100%; text-align: center;">Synopsis Template</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <section id="support-section" class="view-segment" style="display: none;">
-                <header class="viewport-heading">
-                    <h1>Support Center</h1>
-                </header>
-                
-                <div class="data-enclosure">
-                    <h2>Frequently Asked Questions</h2>
-                    <div class="faq-item" style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--grey);">
-                        <h4>How long does the editing process take?</h4>
-                        <p>Editing timelines vary based on manuscript length and service type. Typically, comprehensive editing takes 7-14 business days, while proofreading takes 3-5 business days.</p>
-                    </div>
-                    <div class="faq-item" style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--grey);">
-                        <h4>Can I request revisions?</h4>
-                        <p>Yes! We offer one round of revisions within 30 days of project completion at no additional charge.</p>
-                    </div>
-                </div>
-                
-                <div class="data-enclosure">
-                    <h2>Contact Support</h2>
-                    <p>Need help? Our support team is here to assist you.</p>
-                    <div>
-                        <button class="op-button op-primary">Live Chat</button>
-                        <button class="op-button op-info">Email Support</button>
-                        <button class="op-button op-caution">Schedule Call</button>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <div id="manuscriptModal" class="overlay-dialog">
-        <div class="dialog-box">
-            <span class="dialog-dismiss" onclick="closeModal()">&times;</span>
-            <h2 id="modalTitle">Manuscript Details</h2>
-            <div id="modalBody">
-                </div>
+            <p class="banner-description">
+                We noticed you're affiliated with <span id="institutionName">your institution</span>. 
+                You're eligible for a <span id="discountPercentage">0</span>% discount on all our editing services!
+            </p>
+            <div class="banner-actions">
+                <button class="banner-btn primary" onclick="claimDiscount()">Claim Your Discount</button>
+                <button class="banner-btn" onclick="dismissDiscountBanner()">Maybe Later</button>
+            </div>
         </div>
     </div>
 
+    <!-- Discount Code Display Component -->
+    <div id="discountCodeContainer" class="discount-code-container hidden">
+        <div class="discount-code-header">
+            <div class="discount-code-icon">🎫</div>
+            <div>
+                <h4 style="margin: 0;">Your Institutional Discount Code</h4>
+                <p style="margin: 0.5rem 0 0 0; color: #666;">Save <span id="savedPercentage">0</span>% on your next order</p>
+            </div>
+        </div>
+        <div class="discount-code-display">
+            <div class="discount-code-value" id="discountCodeValue">LOADING...</div>
+            <div class="discount-code-actions">
+                <button class="copy-btn" onclick="copyDiscountCode()">Copy Code</button>
+                <button class="apply-btn" onclick="applyDiscountToPayment()">Apply to Order</button>
+            </div>
+        </div>
+        <p style="font-size: 0.9rem; color: #666; margin: 1rem 0 0 0; text-align: center;">
+            Code expires in <span id="codeExpiry">90 days</span>
+        </p>
+    </div>
 
-<!-- END -->
+    <!-- Payment Integration Component -->
+    <div id="paymentDiscountSection" class="payment-discount-section hidden">
+        <h4>Apply Institutional Discount</h4>
+        <div class="discount-input-group">
+            <input 
+                type="text" 
+                id="discountCodeInput" 
+                class="discount-input" 
+                placeholder="Enter discount code"
+                maxlength="20"
+            >
+            <button class="apply-discount-btn" onclick="validateDiscountCode()">Apply</button>
+        </div>
+        <div id="discountSummary" class="discount-summary hidden">
+            <div class="discount-line">
+                <span>Subtotal:</span>
+                <span id="subtotalAmount">$0.00</span>
+            </div>
+            <div class="discount-line">
+                <span>Institutional Discount (<span id="appliedDiscountPercent">0</span>%):</span>
+                <span id="discountAmount" style="color: #4caf50;">-$0.00</span>
+            </div>
+            <div class="discount-line total">
+                <span>Total:</span>
+                <span id="finalAmount">$0.00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel Components -->
+    <div id="adminPanel" class="hidden">
+        <!-- Partner Institutions Management -->
+        <div class="admin-section">
+            <div class="admin-header">
+                <h3>Partner Institutions</h3>
+                <button class="admin-btn" onclick="openAddInstitutionModal()">Add Institution</button>
+            </div>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Institution Name</th>
+                        <th>Email Domains</th>
+                        <th>Discount %</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="institutionsTableBody">
+                    <!-- Will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Discount Analytics -->
+        <div class="admin-section">
+            <div class="admin-header">
+                <h3>Discount Usage Analytics</h3>
+                <button class="admin-btn" onclick="refreshAnalytics()">Refresh</button>
+            </div>
+            <div class="metrics-matrix" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <div class="metric-capsule" style="background: #f8f9ff; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                    <h4>Total Codes Generated</h4>
+                    <div class="figure" id="totalCodes" style="font-size: 2rem; font-weight: bold; color: #667eea;">0</div>
+                </div>
+                <div class="metric-capsule" style="background: #f8f9ff; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                    <h4>Codes Used</h4>
+                    <div class="figure" id="usedCodes" style="font-size: 2rem; font-weight: bold; color: #4caf50;">0</div>
+                </div>
+                <div class="metric-capsule" style="background: #f8f9ff; padding: 1.5rem; border-radius: 8px; text-align: center;">
+                    <h4>Conversion Rate</h4>
+                    <div class="figure" id="conversionRate" style="font-size: 2rem; font-weight: bold; color: #ff9800;">0%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Institution Modal -->
+    <div id="addInstitutionModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Partner Institution</h3>
+                <button class="modal-close" onclick="closeAddInstitutionModal()">&times;</button>
+            </div>
+            <form id="addInstitutionForm">
+                <div class="form-group">
+                    <label class="form-label">Institution Name *</label>
+                    <input type="text" class="form-input" id="institutionNameInput" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Institution Code</label>
+                    <input type="text" class="form-input" id="institutionCodeInput" maxlength="10">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email Domains * (comma-separated)</label>
+                    <input type="text" class="form-input" id="emailDomainsInput" placeholder="university.edu, dept.university.edu" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Discount Percentage *</label>
+                    <input type="number" class="form-input" id="discountPercentageInput" min="1" max="50" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Contact Email</label>
+                    <input type="email" class="form-input" id="contactEmailInput">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Notes</label>
+                    <textarea class="form-input" id="notesInput" rows="3"></textarea>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 2rem;">
+                    <button type="button" class="admin-btn" style="background: #ccc;" onclick="closeAddInstitutionModal()">Cancel</button>
+                    <button type="submit" class="admin-btn">Add Institution</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
 
 
@@ -641,7 +511,7 @@
     </div>
 </div>
 
-    <script src="pricing.js"></script>
 
+<script src="discount-integration.js"></script>
 </body>
 </html>
