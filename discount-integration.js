@@ -38,20 +38,25 @@
         // CORE DASHBOARD FUNCTIONS
         // ==========================================
 
-        // Load profile information
-        async function loadProfileInfo(headers) {
-            try {
-                const response = await fetch(`${API_BASE}/profile`, { headers });
-                const profileData = await response.json();
-                if (profileData) {
-                    currentUser = profileData;
-                    document.getElementById('profileName').textContent = profileData.fullName || 'Author';
-                    document.getElementById('profileEmail').textContent = profileData.email || '';
-                }
-            } catch (err) {
-                console.error('Failed to load profile info:', err);
+       
+      async function loadProfileInfo(headers) {
+    try {
+        const response = await fetch(`${API_BASE}/profile`, { headers });
+        const profileData = await response.json();
+        if (profileData) {
+            currentUser = profileData;
+            // Show first name with last initial
+            let displayName = profileData.firstName || 'Author';
+            if (profileData.lastName) {
+                displayName += ` ${profileData.lastName.charAt(0)}.`;
             }
+            document.getElementById('profileName').textContent = displayName;
+            document.getElementById('profileEmail').textContent = profileData.email || '';
         }
+    } catch (err) {
+        console.error('Failed to load profile info:', err);
+    }
+          }
 
         // Load manuscripts data
         async function loadManuscripts(headers) {
