@@ -7,56 +7,97 @@
         let discountEligibilityData = null;
 
         // Initialize everything when page loads
-        document.addEventListener('DOMContentLoaded', async () => {
-            const token = localStorage.getItem('authToken');
-            if (!token) {
-                window.location.href = 'login.html';
-                return;
-            }
-            const headers = { 'Authorization': `Bearer ${token}` };
+      // Improved dashboard initialization
+document.addEventListener('DOMContentLoaded', async () => {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+        window.location.href = 'client-login.html';
+        return;
+    }
+    
+    console.log('Dashboard initializing...');
+    
+    // Show loading state
+    document.getElementById('profileName').textContent = 'Loading...';
+    
+    const headers = { 'Authorization': `Bearer ${token}` };
 
-            // Initialize core dashboard
-            await loadProfileInfo(headers);
-            await loadManuscripts(headers);
-            updateDashboardStats();
-            setupNavigation();
-            
-            // Initialize discount system
-            await initializeDiscountSystem();
-            
-            // Check for admin access
-            await checkAdminAccess();
-            
-            // Add discount styles to page
-            addDiscountStyles();
-            
-            // Setup logout
-            document.getElementById('logoutButton').addEventListener('click', logout);
-        });
+    // Load core data
+    await loadProfileInfo(headers);
+    await loadManuscripts(headers);
+    updateDashboardStats();
+    setupNavigation();
+    
+    // Initialize discount system with proper timing
+    setTimeout(async () => {
+        await initializeDiscountSystem();
+    }, 500); // Small delay to ensure profile is loaded first
+    
+    await checkAdminAccess();
+    addDiscountStyles();
+    
+    document.getElementById('logoutButton').addEventListener('click', logout);
+    
+    console.log('Dashboard initialization complete');
+});
 
         // ==========================================
         // CORE DASHBOARD FUNCTIONS
         // ==========================================
 
-       
-      async function loadProfileInfo(headers) {
+      async function loadProfileInfo(headers, retryCount = 0) {
     try {
         const response = await fetch(`${API_BASE}/profile`, { headers });
+        
+        if (!response.ok) {
+            if (response.status >= 500 && retryCount < 2) {
+                console.log(`Server error loading profile, retrying... (${retryCount + 1}/3)`);
+                setTimeout(() => {
+                    loadProfileInfo(headers, retryCount + 1);
+                }, 1000);
+                return;
+            }
+            throw new Error(`HTTP ${response.status}: Failed to load profile`);
+        }
+        
         const profileData = await response.json();
+        
+        // If firstName is missing and we haven't retried much, try again
+        if (!profileData.firstName && retryCount < 3) {
+            console.log(`Profile data not ready, retrying... (${retryCount + 1}/3)`);
+            setTimeout(() => {
+                loadProfileInfo(headers, retryCount + 1);
+            }, 1000);
+            return;
+        }
+        
         if (profileData) {
             currentUser = profileData;
-            // Show first name with last initial
-            let displayName = profileData.firstName || 'Author';
-            if (profileData.lastName) {
-                displayName += ` ${profileData.lastName.charAt(0)}.`;
+            
+            let displayName = profileData.firstName;
+            if (!displayName && profileData.fullName) {
+                displayName = profileData.fullName.split(' ')[0];
             }
-            document.getElementById('profileName').textContent = displayName;
+            
+            document.getElementById('profileName').textContent = displayName || 'Author';
             document.getElementById('profileEmail').textContent = profileData.email || '';
+            
+            console.log('Profile loaded successfully:', displayName);
         }
     } catch (err) {
         console.error('Failed to load profile info:', err);
+        // Only retry on network errors, not HTTP errors
+        if (err.name === 'TypeError' && retryCount < 2) {
+            setTimeout(() => {
+                loadProfileInfo(headers, retryCount + 1);
+            }, 1000);
+        } else {
+            // Show fallback after all retries failed
+            document.getElementById('profileName').textContent = 'Author';
+        }
     }
-          }
+       }
+    
 
         // Load manuscripts data
         async function loadManuscripts(headers) {
@@ -434,12 +475,11 @@
         }
 
         // Check discount eligibility
-        async function checkUserDiscountEligibility() {
+      async function checkUserDiscountEligibility(retryCount = 0) {
     try {
         const token = localStorage.getItem('authToken');
         if (!token) return;
         
-        // Check eligibility using the user's profile data (including institution from signup)
         const response = await fetch(`${API_BASE}/check-discount-eligibility`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -447,29 +487,43 @@
             }
         });
         
+        // Only retry on server errors or network issues
+        if (response.status >= 500 && retryCount < 2) {
+            console.log(`Discount eligibility check failed (${response.status}), retrying... (${retryCount + 1}/3)`);
+            setTimeout(() => {
+                checkUserDiscountEligibility(retryCount + 1);
+            }, 1500);
+            return;
+        }
+        
         if (!response.ok) {
-            console.log('Discount eligibility check failed');
+            console.log('User not eligible or other client error:', response.status);
             return;
         }
         
         const data = await response.json();
         discountEligibilityData = data;
         
+        console.log('Discount eligibility data:', data);
+        
         if (data.eligible) {
-            // User entered an institution during signup that matches a partner
             showDiscountEligibilityBanner(data);
         } else if (data.hasInstitutionFromSignup) {
-            // User entered an institution during signup but it's not a partner yet
             showPartnershipSuggestion(data);
         } else if (data.hasInstitutionalEmail) {
-            // User has institutional email but didn't specify institution during signup
             showPartnershipSuggestion(data);
         }
         
     } catch (error) {
         console.error('Error checking discount eligibility:', error);
+        if (retryCount < 2) {
+            console.log(`Network error, retrying... (${retryCount + 1}/3)`);
+            setTimeout(() => {
+                checkUserDiscountEligibility(retryCount + 1);
+            }, 1500);
+        }
     }
-}
+                }
 
         // Show discount banner
        function showDiscountEligibilityBanner(eligibilityData) {
@@ -1041,7 +1095,7 @@
                 localStorage.removeItem('authToken');
                 localStorage.removeItem('userProfile');
                 localStorage.removeItem('discountBannerDismissed');
-                window.location.href = 'login.html';
+                window.location.href = 'client-login.html';
             }
         }
 
