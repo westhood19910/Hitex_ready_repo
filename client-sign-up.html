@@ -71,9 +71,7 @@
         <!-- <a href="leadership.html" class="nav__bar_oi-dropdown-item">Leadership</a> -->
         <!-- <a href="#offices" class="nav__bar_oi-dropdown-item">Offices</a> -->
         <!-- <a href="impact.html" class="nav__bar_oi-dropdown-item">Impact</a> -->
-       
-        
-      </div>
+            </div>
     </li>
     <li class="nav__bar_oi-menu-item">
       <a href="#services" class="nav__bar_oi-menu-link">Services</a>
@@ -648,34 +646,33 @@
     togglePasswordVisibility('togglePassword', 'password');
     togglePasswordVisibility('toggleConfirmPassword', 'confirmPassword');
 
-    // Institution and institutional email logic - COMMENTED OUT
-    /*
-    const institutionInput = document.getElementById('currentInstitution');
-    const institutionalEmailGroup = document.getElementById('institutionalEmailGroup');
-    const institutionalEmailInput = document.getElementById('institutionalEmail');
+    
+    // const institutionInput = document.getElementById('currentInstitution');
+    // const institutionalEmailGroup = document.getElementById('institutionalEmailGroup');
+    // const institutionalEmailInput = document.getElementById('institutionalEmail');
 
-    if (institutionInput && institutionalEmailGroup) {
-        institutionInput.addEventListener('input', function() {
-            if (this.value.trim()) {
-                institutionalEmailGroup.classList.remove('hidden');
-                if (institutionalEmailInput) {
-                    institutionalEmailInput.required = true;
-                }
-            } else {
-                institutionalEmailGroup.classList.add('hidden');
-                if (institutionalEmailInput) {
-                    institutionalEmailInput.required = false;
-                    institutionalEmailInput.value = '';
-                }
+    // if (institutionInput && institutionalEmailGroup) {
+    //     institutionInput.addEventListener('input', function() {
+    //         if (this.value.trim()) {
+    //             institutionalEmailGroup.classList.remove('hidden');
+    //             if (institutionalEmailInput) {
+    //                 institutionalEmailInput.required = true;
+    //             }
+    //         } else {
+    //             institutionalEmailGroup.classList.add('hidden');
+    //             if (institutionalEmailInput) {
+    //                 institutionalEmailInput.required = false;
+    //                 institutionalEmailInput.value = '';
+    //             }
                 
-                const emailError = document.getElementById('emailError');
-                const existingSuccess = document.getElementById('emailSuccess');
-                if (emailError) emailError.style.display = 'none';
-                if (existingSuccess) existingSuccess.remove();
-            }
-        });
-    }
-    */
+    //             const emailError = document.getElementById('emailError');
+    //             const existingSuccess = document.getElementById('emailSuccess');
+    //             if (emailError) emailError.style.display = 'none';
+    //             if (existingSuccess) existingSuccess.remove();
+    //         }
+    //     });
+    // }
+    // */
 
     // Modal functionality
     const modal = document.getElementById('infoModal');

@@ -3,8 +3,8 @@
 <head> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HiTex EdiTex</title>
-<script src="pricing.js" defer></script>
-<script src="Embednav.js" defer></script>
+<script src="pricing.js"></script>
+<script src="Embednav.js"></script>
 <script src="freshtex.js"></script> 
 <link rel="stylesheet" href="pricing.css">
 <link rel="stylesheet" href="clientdasnboard.css">
@@ -51,6 +51,7 @@
 </div>
 </header> -->
 
+               
 <nav class="nav__bar_oi">
   <div class="nav__bar_oi-logo">
     <a href="index.html"><img src="assets/png_20221026_003820_0000.png" alt="HiTex EdiTex Logo"></a>
@@ -65,9 +66,9 @@
   <ul class="nav__bar_oi-menu" id="navMenu">
     <li class="nav__bar_oi-menu-item">
       <a href="about.html" class="nav__bar_oi-menu-link">About Us</a>
-      <!-- <div class="nav__bar_oi-dropdown"> -->
-        <!-- <a href="about.html" class="nav__bar_oi-dropdown-item">About Hitex EdiTex</a> -->
-        <!-- <a href="leadership.html" class="nav__bar_oi-dropdown-item">Leadership</a> -->
+      <div class="nav__bar_oi-dropdown">
+        <a href="about.html" class="nav__bar_oi-dropdown-item">About Hitex EdiTex</a>
+        <a href="leadership.html" class="nav__bar_oi-dropdown-item">Leadership</a>
         <!-- <a href="#offices" class="nav__bar_oi-dropdown-item">Offices</a> -->
         <!-- <a href="impact.html" class="nav__bar_oi-dropdown-item">Impact</a> -->
        
@@ -83,7 +84,7 @@
         <a href="translate.html" class="nav__bar_oi-dropdown-item">Translation Services</a>
         <a href="service-levels.html" class="nav__bar_oi-dropdown-item">Service Levels</a>
         <a href="pricing.html" class="nav__bar_oi-dropdown-item">Pricing</a>
-        <!-- <a href="auhtoredly.html" class="nav__bar_oi-dropdown-item">Authoredly</a> -->
+        <!-- <a href="aaauhtoredly.html" class="nav__bar_oi-dropdown-item">Authoredly</a> -->
       </div>
     </li>
     <li class="nav__bar_oi-menu-item">
@@ -100,7 +101,7 @@
     <li class="nav__bar_oi-menu-item">
       <a href="#resources" class="nav__bar_oi-menu-link">Helpful Resources</a>
       <div class="nav__bar_oi-dropdown">
-        <a href="support" class="nav__bar_oi-dropdown-item">Support and FAQs</a>
+        <a href="support-faq.html" class="nav__bar_oi-dropdown-item">Support and FAQs</a>
         <a href="hitex-hub.html" class="nav__bar_oi-dropdown-item">The Hitex Hub</a>
         <!-- <a href="newsroom.html" class="nav__bar_oi-dropdown-item">Newsroom</a> -->
       </div>
@@ -109,6 +110,28 @@
       <button class="nav__bar_oi-button nav__bar_oi-button-signup">Client Sign-Up</button>
       <button class="nav__bar_oi-button nav__bar_oi-button-login">Client Log-in</button>
     </div>
+    <div class="xzy-container-88">
+     <div class="qrs-icon-hold-42">
+        <a href="https://www.threads.net/@hitexeditex">
+            <img src="assets/threads-icon.svg" class="pqr-img-elem-91" alt="Threads Icon">
+        </a>
+    </div>
+    <div class="qrs-icon-hold-42">
+        <a href="https://www.linkedin.com/company/hitexeditex/">
+            <img src="assets/linkedin-app-icon.svg" class="pqr-img-elem-91" alt="LinkedIn Icon">
+        </a>
+    </div>
+    <div class="qrs-icon-hold-42">
+        <a href="https://x.com/HiTexEdiTex" target="_blank">
+            <img src="assets/x-social-media-black-icon.svg" class="pqr-img-elem-91" alt="X Icon">
+        </a>
+    </div>
+    <div class="qrs-icon-hold-42">
+        <a href="https://www.instagram.com/hitexeditex" target="_blank">
+            <img src="assets/ig-instagram-icon.svg" class="pqr-img-elem-91" alt="Instagram Icon">
+        </a>
+    </div>
+</div>
   </ul>
   
   <!-- Search bar and social media icons -->
@@ -160,10 +183,347 @@
   </div>
   <div class="nav__bar_oi-overlay" id="navOverlay"></div>
 </nav>
+  
+</head>
+<body>
+    <div class="app-scaffold">
+        <aside class="navigation-pillar">
+            <div class="pillar-crest">
+                <img src="https://i.pravatar.cc/150" alt="User Avatar" class="profile-sigil">
+                <div class="profile-identifier" id="profileName">Loading...</div>
+                <div class="user-email" id="profileEmail"></div>
+            </div>
+            <nav class="pillar-directory">
+                <ul>
+                    <li><a href="#" class="pillar-link active" data-section="dashboard">Dashboard</a></li>
+                    <li><a href="#" class="pillar-link" data-section="submissions">My Submissions</a></li>
+                    <li><a href="#" class="pillar-link" data-section="projects">Active Projects</a></li>
+                    <li><a href="#" class="pillar-link" data-section="communications">Messages</a></li>
+                    <li><a href="#" class="pillar-link" data-section="invoices">Invoices & Payments</a></li>
+                    <li><a href="#" class="pillar-link" data-section="resources">Resources</a></li>
+                    <li><a href="/profile.html" class="pillar-link">Edit Profile</a></li>
+                    <li><a href="#" class="pillar-link" data-section="support">Support</a></li>
+                </ul>
+            </nav>
+            <button class="session-terminate-btn" id="logoutButton">Logout</button>
+        </aside>
+
+        <main class="primary-viewport">
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="view-segment active">
+                <header class="viewport-heading">
+                    <h1>Dashboard Overview</h1>
+                    <a href="/service-levels.html" class="prompt-button">Submit New Manuscript</a>
+                </header>
+
+                <div class="metrics-matrix">
+                    <div class="metric-capsule">
+                        <h3>Total Manuscripts</h3>
+                        <div class="figure" id="totalManuscripts">0</div>
+                        <div class="delta">All time submissions</div>
+                    </div>
+                    <div class="metric-capsule">
+                        <h3>Active Projects</h3>
+                        <div class="figure" id="activeProjects">0</div>
+                        <div class="delta">Currently in progress</div>
+                    </div>
+                    <div class="metric-capsule">
+                        <h3>Completed Projects</h3>
+                        <div class="figure" id="completedProjects">0</div>
+                        <div class="delta">Successfully finished</div>
+                    </div>
+                    <div class="metric-capsule">
+                        <h3>Outstanding Balance</h3>
+                        <div class="figure" id="outstandingBalance">$0</div>
+                        <div class="delta">Pending payments</div>
+                    </div>
+                </div>
+
+                <!-- Discount system components will be injected here by JavaScript -->
+
+                <div class="data-enclosure">
+                    <div class="enclosure-header">
+                        <h2>Recent Activity</h2>
+                        <button class="prompt-button" onclick="refreshDashboard()">Refresh</button>
+                    </div>
+                    <div id="recentActivity" style="padding: 2rem;">
+                        <p>Loading recent activity...</p>
+                    </div>
+                </div>
+
+                <div class="data-enclosure">
+                    <h2 style="padding: 1.5rem 2rem 0; margin-bottom: 0;">Important Notifications</h2>
+                    <div class="alert-stream" id="notifications">
+                        <!-- Notifications will be populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Submissions Section -->
+            <section id="submissions-section" class="view-segment">
+                <header class="viewport-heading">
+                    <h1>My Submissions</h1>
+                    <a href="/get-quote.html" class="prompt-button">Submit New Manuscript</a>
+                </header>
+                <div class="data-enclosure">
+                    <div class="enclosure-header">
+                        <h2>Manuscript History</h2>
+                        <button class="op-button op-info" onclick="exportSubmissions()">Export List</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date Submitted</th>
+                                <th>Manuscript Title</th>
+                                <th>Word Count</th>
+                                <th>Service Type</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="manuscriptList">
+                            <!-- Will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects-section" class="view-segment">
+                <header class="viewport-heading">
+                    <h1>Active Projects</h1>
+                </header>
+                <div class="data-enclosure">
+                    <h2 style="padding: 1.5rem 2rem 0; margin-bottom: 1rem;">Projects in Progress</h2>
+                    <div id="activeProjectsList" style="padding: 0 2rem 2rem;">
+                        <!-- Will be populated by JavaScript based on manuscript status -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Communications Section -->
+            <section id="communications-section" class="view-segment">
+                <header class="viewport-heading">
+                    <h1>Messages & Communications</h1>
+                    <button class="prompt-button">New Message</button>
+                </header>
+                
+                <div class="view-switcher">
+                    <div class="switcher-controls">
+                        <button class="switcher-tab active" onclick="switchTab('inbox')">Inbox (0)</button>
+                        <button class="switcher-tab" onclick="switchTab('sent')">Sent</button>
+                        <button class="switcher-tab" onclick="switchTab('archived')">Archived</button>
+                    </div>
+                </div>
+
+                <div class="data-enclosure">
+                    <div id="inbox-tab" class="switcher-pane active">
+                        <div class="message-list">
+                            <p style="padding: 2rem; color: var(--text-light); text-align: center;">No messages in your inbox.</p>
+                        </div>
+                    </div>
+                    <div id="sent-tab" class="switcher-pane">
+                        <p style="padding: 2rem; color: var(--text-light); text-align: center;">Your sent messages will appear here.</p>
+                    </div>
+                    <div id="archived-tab" class="switcher-pane">
+                        <p style="padding: 2rem; color: var(--text-light); text-align: center;">Archived messages will appear here.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Invoices Section -->
+            <section id="invoices-section" class="view-segment">
+                <header class="viewport-heading">
+                    <h1>Invoices & Payments</h1>
+                </header>
+                <div class="data-enclosure">
+                    <div class="enclosure-header">
+                        <h2>Payment History</h2>
+                        <button class="op-button op-confirm">Download Tax Summary</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Invoice #</th>
+                                <th>Project</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="6" style="text-align: center; color: var(--text-light);">No invoices available yet.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Resources Section -->
+            <section id="resources-section" class="view-segment">
+                <header class="viewport-heading">
+                    <h1>Writing Resources</h1>
+                </header>
+                
+                <div class="metrics-matrix">
+                    <div class="data-enclosure">
+                        <h3 style="padding: 1.5rem 2rem 1rem; margin-bottom: 0;">Style Guides</h3>
+                        <div style="padding: 0 2rem 2rem;">
+                            <a href="#" class="op-button op-primary" style="margin-bottom: 0.5rem; width: 100%; text-align: center;">Chicago Manual of Style Guide</a><br>
+                            <a href="#" class="op-button op-primary" style="margin-bottom: 0.5rem; width: 100%; text-align: center;">AP Style Guide</a><br>
+                            <a href="#" class="op-button op-primary" style="width: 100%; text-align: center;">MLA Style Guide</a>
+                        </div>
+                    </div>
+                    
+                    <div class="data-enclosure">
+                        <h3 style="padding: 1.5rem 2rem 1rem; margin-bottom: 0;">Writing Tips</h3>
+                        <div style="padding: 0 2rem 2rem;">
+                            <a href="#" class="op-button op-info" style="margin-bottom: 0.5rem; width: 100%; text-align: center;">Character Development Tips</a><br>
+                            <a href="#" class="op-button op-info" style="margin-bottom: 0.5rem; width: 100%; text-align: center;">Plot Structure Guide</a><br>
+                            <a href="#" class="op-button op-info" style="width: 100%; text-align: center;">Dialogue Best Practices</a>
+                        </div>
+                    </div>
+                    
+                    <div class="data-enclosure">
+                        <h3 style="padding: 1.5rem 2rem 1rem; margin-bottom: 0;">Templates</h3>
+                        <div style="padding: 0 2rem 2rem;">
+                            <a href="#" class="op-button op-confirm" style="margin-bottom: 0.5rem; width: 100%; text-align: center;">Manuscript Format Template</a><br>
+                            <a href="#" class="op-button op-confirm" style="margin-bottom: 0.5rem; width: 100%; text-align: center;">Query Letter Template</a><br>
+                            <a href="#" class="op-button op-confirm" style="width: 100%; text-align: center;">Synopsis Template</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Support Section -->
+            <section id="support-section" class="view-segment">
+                <header class="viewport-heading">
+                    <h1>Support Center</h1>
+                </header>
+                
+                <div class="data-enclosure">
+                    <h2 style="padding: 1.5rem 2rem 1rem; margin-bottom: 0;">Frequently Asked Questions</h2>
+                    <div style="padding: 0 2rem 2rem;">
+                        <div class="faq-item">
+                            <h4>How long does the editing process take?</h4>
+                            <p>Editing timelines vary based on manuscript length and service type. Typically, comprehensive editing takes 7-14 business days, while proofreading takes 3-5 business days.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h4>Can I request revisions?</h4>
+                            <p>Yes! We offer one round of revisions within 30 days of project completion at no additional charge.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h4>What file formats do you accept?</h4>
+                            <p>We accept Word documents (.docx), PDF files, and plain text files. For best results, we recommend submitting in Word format.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h4>How do you ensure confidentiality?</h4>
+                            <p>All manuscripts are treated with strict confidentiality. Our editors sign non-disclosure agreements, and we use secure servers to protect your work.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="data-enclosure">
+                    <h2 style="padding: 1.5rem 2rem 1rem; margin-bottom: 0;">Contact Support</h2>
+                    <div style="padding: 0 2rem 2rem;">
+                        <p>Need help? Our support team is here to assist you.</p>
+                        <div style="margin-top: 1rem;">
+                            <button class="op-button op-primary" style="margin-right: 1rem;">Live Chat</button>
+                            <button class="op-button op-info" style="margin-right: 1rem;">Email Support</button>
+                            <button class="op-button op-confirm">Schedule Call</button>
+                        </div>
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: var(--grey-light); border-radius: var(--radius-sm);">
+                            <h4>Support Hours</h4>
+                            <p><strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM EST</p>
+                            <p><strong>Saturday:</strong> 10:00 AM - 4:00 PM EST</p>
+                            <p><strong>Sunday:</strong> Closed</p>
+                            <p style="margin-top: 1rem;"><strong>Emergency Support:</strong> Available 24/7 for urgent issues</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Admin Section will be dynamically added by JavaScript if user has admin access -->
+        </main>
+    </div>
+
+    <!-- Manuscript Details Modal -->
+    <div id="manuscriptModal" class="overlay-dialog">
+        <div class="dialog-box">
+            <button class="dialog-dismiss" onclick="closeModal()">&times;</button>
+            <h3 id="modalTitle">Manuscript Details</h3>
+            <div id="modalBody">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Message Modal -->
+    <div id="messageModal" class="overlay-dialog">
+        <div class="dialog-box">
+            <button class="dialog-dismiss" onclick="closeModal()">&times;</button>
+            <h3>New Message</h3>
+            <form style="margin-top: 1rem;">
+                <div class="form-group">
+                    <label for="recipient">To:</label>
+                    <select id="recipient">
+                        <option>Select Editor</option>
+                        <option>Support Team</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" rows="6"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="op-button" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="prompt-button">Send Message</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Institution Modal (for admin users) -->
+    <div id="addInstitutionModal" class="overlay-dialog">
+        <div class="dialog-box">
+            <button class="dialog-dismiss" onclick="closeModal()">&times;</button>
+            <h3>Add Partner Institution</h3>
+            <form style="margin-top: 1rem;">
+                <div class="form-group">
+                    <label for="institutionName">Institution Name:</label>
+                    <input type="text" id="institutionName" required>
+                </div>
+                <div class="form-group">
+                    <label for="emailDomains">Email Domains (comma separated):</label>
+                    <input type="text" id="emailDomains" placeholder="university.edu, college.edu" required>
+                </div>
+                <div class="form-group">
+                    <label for="discountPercentage">Discount Percentage:</label>
+                    <input type="number" id="discountPercentage" min="1" max="50" required>
+                </div>
+                <div class="form-group">
+                    <label for="contactEmail">Contact Email:</label>
+                    <input type="email" id="contactEmail">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="op-button" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="prompt-button">Add Institution</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
 
+    <!-- SERVICED CODE -->
 
-    <section style="margin-top: 5em;" class="old_sol_541-section old_sol_541-fixed-bg old_sol_541-intro-bg old_sol_541-no-alt-bg">
+
+     <section style="margin-top: 5em;" class="old_sol_541-section old_sol_541-fixed-bg old_sol_541-intro-bg old_sol_541-no-alt-bg">
         <div class="old_sol_541-container">
             <h2 class="old_sol_541-section-title">Our Service Levels</h2>
             <div class="old_sol_541-service-level-intro">
@@ -352,7 +712,7 @@
     </div>
 </div>
 
-
-<script src="discount-integration.js"></script>
+   <script src="discount-integration.js"></script>
+     
 </body>
 </html>
