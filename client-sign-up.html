@@ -880,8 +880,11 @@
                 successMessage += ' You will qualify for a one-time discount upon verification of your email during payment for any of our services.';
             }
             
-            alert(successMessage);
+           alert(successMessage);
+// Add a small delay to allow backend processing
+                  setTimeout(() => {
             window.location.href = 'client-dashboard.html';
+               }, 1500);
 
         } catch (error) {
             console.error('Registration error:', error);
