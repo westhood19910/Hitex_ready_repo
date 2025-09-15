@@ -32,9 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     setupNavigation();
     
     // Initialize discount system with proper timing
-    setTimeout(async () => {
-        await initializeDiscountSystem();
-    }, 500);
+    await initializeDiscountSystem();
     
     await checkAdminAccess();
     addDiscountStyles();
