@@ -1,3 +1,4 @@
+alert('JavaScript file is loading!');
 const API_BASE = 'https://all-branched-end.onrender.com';
 
 // Global variables for dashboard state
@@ -1220,9 +1221,8 @@ window.onclick = function(event) {
     });
 }
 
-// ==========================================
+
 // GLOBAL FUNCTION EXPORTS
-// ==========================================
 
 // Make functions available globally for onclick handlers
 window.dismissDiscountNotification = dismissDiscountNotification;
