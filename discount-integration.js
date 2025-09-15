@@ -475,7 +475,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         // Check discount eligibility
-      async function checkUserDiscountEligibility(retryCount = 0) {
+     // REPLACE THE EXISTING checkUserDiscountEligibility FUNCTION:
+async function checkUserDiscountEligibility(retryCount = 0) {
     try {
         const token = localStorage.getItem('authToken');
         if (!token) return;
@@ -487,7 +488,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
         
-        // Only retry on server errors or network issues
         if (response.status >= 500 && retryCount < 2) {
             console.log(`Discount eligibility check failed (${response.status}), retrying... (${retryCount + 1}/3)`);
             setTimeout(() => {
@@ -506,13 +506,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         console.log('Discount eligibility data:', data);
         
-        if (data.eligible) {
+        if (data.institution && data.verified) {
+            // User is verified and eligible
             showDiscountEligibilityBanner(data);
-        } else if (data.hasInstitutionFromSignup) {
-            showPartnershipSuggestion(data);
-        } else if (data.hasInstitutionalEmail) {
+        } else if (data.institution && data.requiresVerification) {
+            // User has partner institution but needs email verification
+            showEmailVerificationBanner(data);
+        } else if (data.hasInstitutionFromSignup && !data.institution) {
+            // User entered institution but it's not a partner
             showPartnershipSuggestion(data);
         }
+        // If no institution from signup, show nothing
         
     } catch (error) {
         console.error('Error checking discount eligibility:', error);
@@ -523,7 +527,136 @@ document.addEventListener('DOMContentLoaded', async () => {
             }, 1500);
         }
     }
-                }
+}
+
+// ADD THESE NEW FUNCTIONS AFTER addDiscountNotification:
+
+// Show email verification banner
+function showEmailVerificationBanner(eligibilityData) {
+    const banner = document.getElementById('institutionalDiscountBanner');
+    const institutionSpan = document.getElementById('eligibleInstitutionName');
+    const discountSpan = document.getElementById('eligibleDiscountPercent');
+    
+    if (banner && institutionSpan && discountSpan) {
+        institutionSpan.textContent = eligibilityData.institution.institutionName;
+        discountSpan.textContent = eligibilityData.institution.discountPercentage;
+        
+        const bannerMessage = banner.querySelector('.banner-message');
+        if (bannerMessage) {
+            bannerMessage.innerHTML = `
+                You entered <strong>${eligibilityData.institution.institutionName}</strong> during signup! 
+                To unlock your <strong>${eligibilityData.institution.discountPercentage}%</strong> institutional discount, 
+                please verify your institutional email address.
+            `;
+        }
+        
+        const bannerActions = banner.querySelector('.banner-actions');
+        if (bannerActions) {
+            bannerActions.innerHTML = `
+                <button class="prompt-button" onclick="startEmailVerification()">Verify Email</button>
+                <button class="op-button op-info" onclick="dismissDiscountNotification()">Maybe Later</button>
+            `;
+        }
+        
+        banner.style.display = 'block';
+        addVerificationNotification(eligibilityData);
+    }
+}
+
+// Start email verification process
+async function startEmailVerification() {
+    const institutionalEmail = prompt('Please enter your institutional email address:');
+    
+    if (!institutionalEmail || !institutionalEmail.includes('@')) {
+        alert('Please enter a valid email address');
+        return;
+    }
+    
+    try {
+        const token = localStorage.getItem('authToken');
+        const response = await fetch(`${API_BASE}/verify-institutional-email-for-discount`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ institutionalEmail })
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+            const verificationCode = prompt(`Verification code sent to ${institutionalEmail}. Please enter the code:`);
+            
+            if (verificationCode) {
+                await confirmEmailVerification(institutionalEmail, verificationCode);
+            }
+        } else {
+            alert('Error: ' + result.error);
+        }
+        
+    } catch (error) {
+        console.error('Error starting email verification:', error);
+        alert('Failed to send verification email. Please try again.');
+    }
+}
+
+// Confirm email verification
+async function confirmEmailVerification(institutionalEmail, code) {
+    try {
+        const token = localStorage.getItem('authToken');
+        const response = await fetch(`${API_BASE}/confirm-institutional-email-for-discount`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ institutionalEmail, code })
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+            alert(`Email verified successfully! You're now eligible for ${result.discountPercentage}% discount.`);
+            
+            // Hide verification banner and show claim banner
+            dismissDiscountNotification();
+            
+            // Refresh eligibility to show claim discount option
+            setTimeout(() => {
+                checkUserDiscountEligibility();
+            }, 1000);
+            
+        } else {
+            alert('Verification failed: ' + result.error);
+        }
+        
+    } catch (error) {
+        console.error('Error confirming email verification:', error);
+        alert('Failed to verify email. Please try again.');
+    }
+}
+
+// Add verification notification
+function addVerificationNotification(eligibilityData) {
+    const notifications = document.getElementById('notifications');
+    if (!notifications) return;
+    
+    const verificationNotificationHTML = `
+        <div class="alert-item" style="background: #fff3e0; border-left: 4px solid #ff9800;">
+            <h4>📧 Email Verification Required</h4>
+            <p>You entered <strong>${eligibilityData.institution.institutionName}</strong> during signup. 
+               To unlock your ${eligibilityData.institution.discountPercentage}% institutional discount, 
+               please verify your institutional email address. 
+               <a href="#" onclick="startEmailVerification()" style="color: #ff9800; font-weight: bold;">
+                   Start verification
+               </a>
+            </p>
+        </div>
+    `;
+    
+    notifications.insertAdjacentHTML('afterbegin', verificationNotificationHTML);
+}
 
         // Show discount banner
        function showDiscountEligibilityBanner(eligibilityData) {
@@ -1131,4 +1264,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.editInstitution = editInstitution;
         window.deactivateInstitution = deactivateInstitution;
         window.refreshAnalytics = refreshAnalytics;
+        // ADD TO THE EXISTING GLOBAL EXPORTS AT THE BOTTOM:
+        window.startEmailVerification = startEmailVerification;
+        window.confirmEmailVerification = confirmEmailVerification;
     
