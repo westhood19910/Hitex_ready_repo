@@ -840,42 +840,59 @@ function addVerificationNotification(eligibilityData) {
                  }
 
         // Show partnership suggestion
-        function showPartnershipSuggestion(data) {
+        // Add this new function for institution not found
+function showInstitutionNotFound(data) {
     const notifications = document.getElementById('notifications');
     if (!notifications) return;
     
-    let suggestionHTML;
+    const notFoundHTML = `
+        <div class="alert-item" style="background: #fff3e0; border-left: 4px solid #ff9800;">
+            <h4>🏛️ Institution Not Found</h4>
+            <p>We couldn't find <strong>${data.institutionFromSignup}</strong> in our university database. 
+               Please check the spelling or contact us if this is a valid institution.
+               <a href="mailto:support@hitexeditex.com?subject=Institution Not Found: ${encodeURIComponent(data.institutionFromSignup)}" 
+                  style="color: #ff9800; font-weight: bold;">
+                   Contact support
+               </a>
+            </p>
+        </div>
+    `;
     
-    if (data.hasInstitutionFromSignup) {
-        // User entered institution during signup but it's not a partner
-        suggestionHTML = `
-            <div class="alert-item" style="background: #fff3e0; border-left: 4px solid #ff9800;">
-                <h4>🏛️ Institution Partnership Opportunity</h4>
-                <p>We notice you entered <strong>${data.institutionFromSignup}</strong> during signup. 
-                   While your institution isn't currently a discount partner, we'd love to explore a partnership. 
-                   <a href="mailto:partnerships@hitexeditex.com?subject=Partnership Inquiry for ${encodeURIComponent(data.institutionFromSignup)}" 
-                      style="color: #ff9800; font-weight: bold;">
-                       Contact us
-                   </a> to discuss institutional discounts for ${data.institutionFromSignup}.
-                </p>
-            </div>
-        `;
-    } else {
-        // Fallback for institutional email detection
-        suggestionHTML = `
-            <div class="alert-item" style="background: #fff3e0; border-left: 4px solid #ff9800;">
-                <h4>📧 Institutional Partnership</h4>
-                <p>We notice you have an institutional email. While your institution isn't currently 
-                   a discount partner, we'd love to explore a partnership. 
-                   <a href="mailto:partnerships@hitexeditex.com" style="color: #ff9800; font-weight: bold;">
-                       Contact us
-                   </a> to discuss institutional discounts.
-                </p>
-            </div>
-        `;
+    notifications.insertAdjacentHTML('afterbegin', notFoundHTML);
+}
+
+// Update checkUserDiscountEligibility to handle new response
+async function checkUserDiscountEligibility(retryCount = 0) {
+    try {
+        const token = localStorage.getItem('authToken');
+        if (!token) return;
+        
+        const response = await fetch(`${API_BASE}/check-discount-eligibility`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        if (!response.ok) {
+            console.log('User not eligible or error:', response.status);
+            return;
+        }
+        
+        const data = await response.json();
+        console.log('Discount eligibility data:', data);
+        
+        if (data.institution && data.verified) {
+            showDiscountEligibilityBanner(data);
+        } else if (data.institution && data.requiresVerification) {
+            showEmailVerificationBanner(data);
+        } else if (data.institutionNotFound) {
+            showInstitutionNotFound(data);
+        }
+        
+    } catch (error) {
+        console.error('Error checking discount eligibility:', error);
     }
-    
-    notifications.insertAdjacentHTML('afterbegin', suggestionHTML);
 }
 
         // ==========================================
