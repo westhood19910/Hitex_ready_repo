@@ -839,6 +839,7 @@
                         emailError.style.display = 'none';
                     }
                 }
+                
             } catch (error) {
                 console.error('Email validation error:', error);
                 alert('Unable to validate institutional email at this time. Please try again later.');
@@ -880,11 +881,44 @@
                 successMessage += ' You will qualify for a one-time discount upon verification of your email during payment for any of our services.';
             }
             
-           alert(successMessage);
-// Add a small delay to allow backend processing
-                  setTimeout(() => {
-            window.location.href = 'client-dashboard.html';
-               }, 1500);
+           // FIXED signup success handler - handles JWT token properly
+if (!response.ok) {
+    throw new Error(result.error || 'Registration failed');
+}
+
+// CRITICAL FIX: Handle different registration scenarios properly
+if (result.requiresVerification) {
+    // Email verification required - don't redirect to dashboard yet
+    alert(result.message);
+    // Could redirect to verification page here if you have one
+    // window.location.href = 'email-verification.html';
+    
+} else if (result.token) {
+    // Registration successful with immediate login
+    console.log('Registration successful, storing token:', result.token);
+    
+    // CRITICAL: Clear old token and store new user's token
+    localStorage.removeItem('authToken'); 
+    localStorage.setItem('authToken', result.token);
+    
+    let successMessage = result.message;
+    if (result.institutionalUser) {
+        successMessage += ' You may qualify for institutional discounts!';
+    }
+    
+    alert(successMessage);
+    
+    // Small delay to ensure token is stored
+    setTimeout(() => {
+        console.log('Redirecting to dashboard with new token');
+        window.location.href = 'client-dashboard.html';
+    }, 500); // Reduced from 1500ms to 500ms
+    
+} else {
+    // Registration successful but no immediate login token
+    alert(result.message + ' Please log in to continue.');
+    window.location.href = 'client-login.html';
+}
 
         } catch (error) {
             console.error('Registration error:', error);
