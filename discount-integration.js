@@ -461,74 +461,102 @@ function insertDiscountComponents() {
 }
 
 // MAIN DISCOUNT ELIGIBILITY CHECK - NO DUPLICATES
-async function checkUserDiscountEligibility(retryCount = 0) {
-    console.log('=== DEBUG: Starting discount eligibility check ===');
+async function checkUserDiscountEligibility() {
+    console.log('Starting discount eligibility check...');
+    const token = localStorage.getItem('authToken');
+    if (!token) return;
+    
+    // Check if banner was already dismissed
+    const bannerDismissed = localStorage.getItem('discountBannerDismissed');
+    if (bannerDismissed) return;
     
     try {
-        const token = localStorage.getItem('authToken');
-        if (!token) {
-            console.log('❌ No auth token found');
-            return;
-        }
-        
-        console.log('Making request to check-discount-eligibility...');
-        const response = await fetch(`${API_BASE}/check-discount-eligibility`, {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
+        // Get user profile directly
+        const profileResponse = await fetch(`${API_BASE}/profile`, {
+            headers: { 'Authorization': `Bearer ${token}` }
         });
+        const profile = await profileResponse.json();
+        console.log('User institution from signup:', profile.currentInstitution);
         
-        console.log('Response status:', response.status);
-        
-        if (response.status >= 500 && retryCount < 2) {
-            console.log(`Server error (${response.status}), retrying... (${retryCount + 1}/3)`);
-            setTimeout(() => {
-                checkUserDiscountEligibility(retryCount + 1);
-            }, 1500);
+        // If no institution entered during signup, show nothing
+        if (!profile.currentInstitution) {
+            console.log('No institution entered during signup');
             return;
         }
         
-        if (!response.ok) {
-            console.log('❌ Response not OK:', response.status);
-            const errorText = await response.text();
-            console.log('Error details:', errorText);
-            return;
+        // User entered an institution - check if recognized by universities API
+        let institutionRecognized = false;
+        let recognizedInstitutionData = null;
+        
+        try {
+            const apiResponse = await fetch(`http://universities.hipolabs.com/search?name=${encodeURIComponent(profile.currentInstitution)}`);
+            const universities = await apiResponse.json();
+            
+            if (universities && universities.length > 0) {
+                institutionRecognized = true;
+                recognizedInstitutionData = universities[0];
+                console.log('Institution recognized:', recognizedInstitutionData.name);
+            }
+        } catch (apiError) {
+            console.log('University API check failed, treating as unrecognized');
         }
         
-        const data = await response.json();
-        console.log('✅ Eligibility data received:', data);
-        
-        discountEligibilityData = data;
-        
-        // Check all possible scenarios - NO DUPLICATES
-        if (data.eligible && data.institution && data.verified) {
-            console.log('🎉 User is verified and eligible - showing banner');
-            showDiscountEligibilityBanner(data);
-        } else if (data.eligible && data.institution && data.requiresVerification) {
-            console.log('📧 User needs email verification - showing verification banner');
-            showEmailVerificationBanner(data);
-        } else if (data.hasInstitutionFromSignup && data.institutionNotFound) {
-            console.log('🏛️ Institution not found - showing not found message');
-            showInstitutionNotFound(data);
-        } else if (data.hasInstitutionFromSignup && !data.eligible) {
-            console.log('📝 Institution entered but not eligible - showing partnership suggestion');
-            showPartnershipSuggestion(data);
-        } else {
-            console.log('ℹ️ No discount eligibility found');
-        }
+        // Show appropriate banner
+        showInstitutionalVerificationBanner(profile.currentInstitution, institutionRecognized, recognizedInstitutionData);
         
     } catch (error) {
-        console.error('❌ Error checking discount eligibility:', error);
-        if (retryCount < 2) {
-            console.log(`Network error, retrying... (${retryCount + 1}/3)`);
-            setTimeout(() => {
-                checkUserDiscountEligibility(retryCount + 1);
-            }, 1500);
-        }
+        console.error('Error in discount eligibility check:', error);
     }
+}
+
+function showInstitutionalVerificationBanner(institutionName, recognized, institutionData) {
+    const notifications = document.getElementById('notifications');
+    if (!notifications) return;
     
-    console.log('=== DEBUG: Discount eligibility check complete ===');
+    if (recognized) {
+        // Recognized institution message
+        notifications.innerHTML = `
+            <div class="discount-notification-banner" style="display: block; background: #4CAF50;">
+                <div class="banner-content">
+                    <button class="banner-dismiss" onclick="dismissDiscountNotification()">&times;</button>
+                    <div class="banner-header">
+                        <div class="banner-icon">🎓</div>
+                        <h3>Institution Recognized!</h3>
+                    </div>
+                    <p class="banner-message">
+                        We recognize <strong>${institutionData.name}</strong> from your signup! 
+                        Please verify your institutional email to unlock your discount.
+                    </p>
+                    <div class="banner-actions">
+                        <button class="prompt-button" onclick="startEmailVerification()">Verify Institutional Email</button>
+                        <button class="op-button op-info" onclick="dismissDiscountNotification()">Maybe Later</button>
+                    </div>
+                </div>
+            </div>
+        ` + notifications.innerHTML;
+    } else {
+        // Unrecognized institution message (like your KNUST example)
+        notifications.innerHTML = `
+            <div class="discount-notification-banner" style="display: block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <div class="banner-content">
+                    <button class="banner-dismiss" onclick="dismissDiscountNotification()">&times;</button>
+                    <div class="banner-header">
+                        <div class="banner-icon">🎓</div>
+                        <h3>Institutional Verification Available!</h3>
+                    </div>
+                    <p class="banner-message">
+                        You entered <strong>${institutionName}</strong> during signup. 
+                        While this institution isn't in our partner database, we can still verify 
+                        if you qualify for discounts through email verification.
+                    </p>
+                    <div class="banner-actions">
+                        <button class="prompt-button" onclick="startEmailVerification()">Verify Institutional Email</button>
+                        <button class="op-button op-info" onclick="dismissDiscountNotification()">Maybe Later</button>
+                    </div>
+                </div>
+            </div>
+        ` + notifications.innerHTML;
+    }
 }
 
 // BANNER DISPLAY FUNCTIONS - NO DUPLICATES
