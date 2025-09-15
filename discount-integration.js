@@ -379,22 +379,19 @@ async function refreshDashboard() {
 }
 
 // ==========================================
-// INSTITUTIONAL DISCOUNT SYSTEM
+// INSTITUTIONAL DISCOUNT SYSTEM - FIXED VERSION
 // ==========================================
 
 async function initializeDiscountSystem() {
     console.log('Initializing discount system...');
-    const bannerDismissed = localStorage.getItem('discountBannerDismissed');
     
     // Always insert components first
     insertDiscountComponents();
     
-    // Only check eligibility if banner hasn't been dismissed
-    if (!bannerDismissed) {
-        await checkUserDiscountEligibility();
-    }
+    // ALWAYS check eligibility regardless of dismissal for institutional signup users
+    await checkUserDiscountEligibility();
     
-    // Always load discount history
+    // Load discount history
     await loadUserDiscountHistory();
     
     console.log('Discount system initialized');
@@ -404,27 +401,6 @@ function insertDiscountComponents() {
     const dashboardSection = document.getElementById('dashboard-section');
     
     if (dashboardSection) {
-        const discountBannerHTML = `
-            <div id="institutionalDiscountBanner" class="discount-notification-banner" style="display: none;">
-                <div class="banner-content">
-                    <button class="banner-dismiss" onclick="dismissDiscountNotification()">&times;</button>
-                    <div class="banner-header">
-                        <div class="banner-icon">🎓</div>
-                        <h3>Institutional Discount Available!</h3>
-                    </div>
-                    <p class="banner-message">
-                        Great news! You're eligible for a <strong><span id="eligibleDiscountPercent">0</span>%</strong> 
-                        discount on all editing services through your institutional affiliation with 
-                        <strong><span id="eligibleInstitutionName">your institution</span></strong>.
-                    </p>
-                    <div class="banner-actions">
-                        <button class="prompt-button" onclick="generateInstitutionalDiscount()">Claim Discount</button>
-                        <button class="op-button op-info" onclick="dismissDiscountNotification()">Maybe Later</button>
-                    </div>
-                </div>
-            </div>
-        `;
-        
         const discountCodesHTML = `
             <div id="discountCodesSection" class="data-enclosure" style="display: none;">
                 <div class="enclosure-header">
@@ -455,212 +431,339 @@ function insertDiscountComponents() {
         // Insert after the metrics matrix
         const metricsMatrix = dashboardSection.querySelector('.metrics-matrix');
         if (metricsMatrix) {
-            metricsMatrix.insertAdjacentHTML('afterend', discountBannerHTML + discountCodesHTML);
+            metricsMatrix.insertAdjacentHTML('afterend', discountCodesHTML);
         }
     }
 }
 
-// MAIN DISCOUNT ELIGIBILITY CHECK - NO DUPLICATES
+// MAIN DISCOUNT ELIGIBILITY CHECK - SINGLE CLEAN VERSION
 async function checkUserDiscountEligibility() {
     console.log('Starting discount eligibility check...');
     const token = localStorage.getItem('authToken');
-    if (!token) return;
-    
-    // Check if banner was already dismissed
-    const bannerDismissed = localStorage.getItem('discountBannerDismissed');
-    if (bannerDismissed) return;
+    if (!token) {
+        console.log('No auth token found');
+        return;
+    }
     
     try {
         // Get user profile directly
         const profileResponse = await fetch(`${API_BASE}/profile`, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
-        const profile = await profileResponse.json();
-        console.log('User institution from signup:', profile.currentInstitution);
         
-        // If no institution entered during signup, show nothing
-        if (!profile.currentInstitution) {
-            console.log('No institution entered during signup');
+        if (!profileResponse.ok) {
+            console.log('Failed to fetch profile');
             return;
         }
         
-        // User entered an institution - check if recognized by universities API
+        const profile = await profileResponse.json();
+        console.log('User profile loaded:', profile);
+        console.log('User institution from signup:', profile.currentInstitution);
+        
+        // CRITICAL: If no institution entered during signup, show nothing
+        if (!profile.currentInstitution || profile.currentInstitution.trim() === '') {
+            console.log('No institution entered during signup - no alerts needed');
+            return;
+        }
+        
+        console.log('Institution found during signup:', profile.currentInstitution);
+        
+        // Check if user already has verified institutional status
+        if (profile.institutionalEmailVerified && profile.eligibleDiscountId) {
+            console.log('User already verified - showing success message');
+            showVerifiedInstitutionalStatus(profile);
+            return;
+        }
+        
+        // User entered an institution - check if it's recognized by universities API
         let institutionRecognized = false;
         let recognizedInstitutionData = null;
         
         try {
+            console.log('Checking institution against universities API...');
             const apiResponse = await fetch(`http://universities.hipolabs.com/search?name=${encodeURIComponent(profile.currentInstitution)}`);
             const universities = await apiResponse.json();
             
             if (universities && universities.length > 0) {
                 institutionRecognized = true;
                 recognizedInstitutionData = universities[0];
-                console.log('Institution recognized:', recognizedInstitutionData.name);
+                console.log('Institution RECOGNIZED:', recognizedInstitutionData.name);
+            } else {
+                console.log('Institution NOT RECOGNIZED in API');
             }
         } catch (apiError) {
-            console.log('University API check failed, treating as unrecognized');
+            console.log('University API check failed:', apiError);
+            institutionRecognized = false;
         }
         
-        // Show appropriate banner
-        showInstitutionalVerificationBanner(profile.currentInstitution, institutionRecognized, recognizedInstitutionData);
+        // ALWAYS show appropriate alert based on recognition status
+        if (institutionRecognized) {
+            // OPTION 2: Institution is recognized - ask for email verification
+            showRecognizedInstitutionAlert(profile.currentInstitution, recognizedInstitutionData);
+        } else {
+            // OPTION 1: Institution not recognized - offer general verification
+            showUnrecognizedInstitutionAlert(profile.currentInstitution);
+        }
         
     } catch (error) {
         console.error('Error in discount eligibility check:', error);
     }
 }
 
-function showInstitutionalVerificationBanner(institutionName, recognized, institutionData) {
+// OPTION 1: Institution not recognized in API
+function showUnrecognizedInstitutionAlert(institutionName) {
+    console.log('Showing unrecognized institution alert for:', institutionName);
+    
     const notifications = document.getElementById('notifications');
-    if (!notifications) return;
+    if (!notifications) {
+        console.error('Notifications element not found!');
+        return;
+    }
     
-    if (recognized) {
-        // Recognized institution message
-        notifications.innerHTML = `
-            <div class="discount-notification-banner" style="display: block; background: #4CAF50;">
-                <div class="banner-content">
-                    <button class="banner-dismiss" onclick="dismissDiscountNotification()">&times;</button>
-                    <div class="banner-header">
-                        <div class="banner-icon">🎓</div>
-                        <h3>Institution Recognized!</h3>
-                    </div>
-                    <p class="banner-message">
-                        We recognize <strong>${institutionData.name}</strong> from your signup! 
-                        Please verify your institutional email to unlock your discount.
-                    </p>
-                    <div class="banner-actions">
-                        <button class="prompt-button" onclick="startEmailVerification()">Verify Institutional Email</button>
-                        <button class="op-button op-info" onclick="dismissDiscountNotification()">Maybe Later</button>
-                    </div>
-                </div>
+    // Clear existing institutional alerts
+    clearExistingInstitutionalAlerts();
+    
+    const alertHTML = `
+        <div class="institutional-discount-alert" id="institutionalAlert" style="
+            background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(255, 152, 0, 0.3);
+        ">
+            <button class="alert-dismiss-btn" onclick="dismissInstitutionalAlert()" style="
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 24px;
+                cursor: pointer;
+                opacity: 0.8;
+                font-weight: bold;
+            ">&times;</button>
+            
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="font-size: 2rem; margin-right: 15px;">🏛️</div>
+                <h3 style="margin: 0; font-size: 1.4rem;">Institution Verification Available!</h3>
             </div>
-        ` + notifications.innerHTML;
-    } else {
-        // Unrecognized institution message (like your KNUST example)
-        notifications.innerHTML = `
-            <div class="discount-notification-banner" style="display: block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                <div class="banner-content">
-                    <button class="banner-dismiss" onclick="dismissDiscountNotification()">&times;</button>
-                    <div class="banner-header">
-                        <div class="banner-icon">🎓</div>
-                        <h3>Institutional Verification Available!</h3>
-                    </div>
-                    <p class="banner-message">
-                        You entered <strong>${institutionName}</strong> during signup. 
-                        While this institution isn't in our partner database, we can still verify 
-                        if you qualify for discounts through email verification.
-                    </p>
-                    <div class="banner-actions">
-                        <button class="prompt-button" onclick="startEmailVerification()">Verify Institutional Email</button>
-                        <button class="op-button op-info" onclick="dismissDiscountNotification()">Maybe Later</button>
-                    </div>
-                </div>
-            </div>
-        ` + notifications.innerHTML;
-    }
-}
-
-// BANNER DISPLAY FUNCTIONS - NO DUPLICATES
-function showDiscountEligibilityBanner(eligibilityData) {
-    const banner = document.getElementById('institutionalDiscountBanner');
-    const institutionSpan = document.getElementById('eligibleInstitutionName');
-    const discountSpan = document.getElementById('eligibleDiscountPercent');
-    
-    if (banner && institutionSpan && discountSpan) {
-        institutionSpan.textContent = eligibilityData.institution.name || eligibilityData.institution.institutionName;
-        discountSpan.textContent = eligibilityData.institution.discountPercentage;
-        banner.style.display = 'block';
-        
-        const bannerMessage = banner.querySelector('.banner-message');
-        if (bannerMessage) {
-            bannerMessage.innerHTML = `
-                Great news! Because you entered <strong>${eligibilityData.institution.name || eligibilityData.institution.institutionName}</strong> 
-                during signup, you're eligible for a <strong>${eligibilityData.institution.discountPercentage}%</strong> 
-                discount on all editing services through your institutional affiliation.
-            `;
-        }
-        
-        addDiscountNotification(eligibilityData);
-    }
-}
-
-function showEmailVerificationBanner(eligibilityData) {
-    const banner = document.getElementById('institutionalDiscountBanner');
-    const institutionSpan = document.getElementById('eligibleInstitutionName');
-    const discountSpan = document.getElementById('eligibleDiscountPercent');
-    
-    if (banner && institutionSpan && discountSpan) {
-        institutionSpan.textContent = eligibilityData.institution.name || eligibilityData.institution.institutionName;
-        discountSpan.textContent = eligibilityData.institution.discountPercentage;
-        
-        const bannerMessage = banner.querySelector('.banner-message');
-        if (bannerMessage) {
-            bannerMessage.innerHTML = `
-                You entered <strong>${eligibilityData.institution.name || eligibilityData.institution.institutionName}</strong> during signup! 
-                To unlock your <strong>${eligibilityData.institution.discountPercentage}%</strong> institutional discount, 
-                please verify your institutional email address.
-            `;
-        }
-        
-        const bannerActions = banner.querySelector('.banner-actions');
-        if (bannerActions) {
-            bannerActions.innerHTML = `
-                <button class="prompt-button" onclick="startEmailVerification()">Verify Email</button>
-                <button class="op-button op-info" onclick="dismissDiscountNotification()">Maybe Later</button>
-            `;
-        }
-        
-        banner.style.display = 'block';
-        addVerificationNotification(eligibilityData);
-    }
-}
-
-function showInstitutionNotFound(data) {
-    const notifications = document.getElementById('notifications');
-    if (!notifications) return;
-    
-    const notFoundHTML = `
-        <div class="alert-item" style="background: #fff3e0; border-left: 4px solid #ff9800;">
-            <h4>🏛️ Institution Not Found</h4>
-            <p>We couldn't find <strong>${data.institutionFromSignup}</strong> in our university database. 
-               Please check the spelling or contact us if this is a valid institution.
-               <a href="mailto:support@hitexeditex.com?subject=Institution Not Found: ${encodeURIComponent(data.institutionFromSignup)}" 
-                  style="color: #ff9800; font-weight: bold;">
-                   Contact support
-               </a>
+            
+            <p style="margin-bottom: 15px; line-height: 1.6; opacity: 0.95;">
+                You entered <strong>"${institutionName}"</strong> during signup. While this institution isn't in our partner database, 
+                we can still verify if you qualify for discounts through email verification.
             </p>
+            
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="verify-email-btn" onclick="startEmailVerification()" style="
+                    background: white;
+                    color: #f57c00;
+                    border: none;
+                    padding: 12px 20px;
+                    border-radius: 6px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                ">Verify Institutional Email</button>
+                <button onclick="dismissInstitutionalAlert()" style="
+                    background: rgba(255,255,255,0.2);
+                    color: white;
+                    border: 1px solid rgba(255,255,255,0.3);
+                    padding: 12px 20px;
+                    border-radius: 6px;
+                    cursor: pointer;
+                ">Maybe Later</button>
+            </div>
         </div>
     `;
     
-    notifications.insertAdjacentHTML('afterbegin', notFoundHTML);
+    notifications.insertAdjacentHTML('afterbegin', alertHTML);
+    console.log('Unrecognized institution alert added to DOM');
 }
 
-function showPartnershipSuggestion(data) {
-    const notifications = document.getElementById('notifications');
-    if (!notifications) return;
+// OPTION 2: Institution is recognized in API
+function showRecognizedInstitutionAlert(institutionName, institutionData) {
+    console.log('Showing recognized institution alert for:', institutionData.name);
     
-    const suggestionHTML = `
-        <div class="alert-item" style="background: #fff3e0; border-left: 4px solid #ff9800;">
-            <h4>🏛️ Institution Partnership</h4>
-            <p>We noticed you entered <strong>${data.institutionFromSignup}</strong> during signup. 
-               While this institution isn't currently a partner, we'd love to explore opportunities.
-               <a href="mailto:partnerships@hitexeditex.com?subject=Partnership Inquiry: ${encodeURIComponent(data.institutionFromSignup)}" 
-                  style="color: #ff9800; font-weight: bold;">
-                   Contact our partnerships team
-               </a>
+    const notifications = document.getElementById('notifications');
+    if (!notifications) {
+        console.error('Notifications element not found!');
+        return;
+    }
+    
+    // Clear existing institutional alerts
+    clearExistingInstitutionalAlerts();
+    
+    const alertHTML = `
+        <div class="institutional-discount-alert" id="institutionalAlert" style="
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(76, 175, 80, 0.3);
+        ">
+            <button class="alert-dismiss-btn" onclick="dismissInstitutionalAlert()" style="
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 24px;
+                cursor: pointer;
+                opacity: 0.8;
+                font-weight: bold;
+            ">&times;</button>
+            
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="font-size: 2rem; margin-right: 15px;">🎓</div>
+                <h3 style="margin: 0; font-size: 1.4rem;">Institution Recognized!</h3>
+            </div>
+            
+            <p style="margin-bottom: 15px; line-height: 1.6; opacity: 0.95;">
+                We recognize <strong>"${institutionData.name}"</strong> from your signup! 
+                Please verify your institutional email to unlock your <strong>15% discount</strong> on all editing services.
             </p>
+            
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="verify-email-btn" onclick="startEmailVerification()" style="
+                    background: white;
+                    color: #45a049;
+                    border: none;
+                    padding: 12px 20px;
+                    border-radius: 6px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                ">Verify Institutional Email</button>
+                <button onclick="dismissInstitutionalAlert()" style="
+                    background: rgba(255,255,255,0.2);
+                    color: white;
+                    border: 1px solid rgba(255,255,255,0.3);
+                    padding: 12px 20px;
+                    border-radius: 6px;
+                    cursor: pointer;
+                ">Maybe Later</button>
+            </div>
         </div>
     `;
     
-    notifications.insertAdjacentHTML('afterbegin', suggestionHTML);
+    notifications.insertAdjacentHTML('afterbegin', alertHTML);
+    console.log('Recognized institution alert added to DOM');
+}
+
+// Show success message for already verified users
+function showVerifiedInstitutionalStatus(profile) {
+    console.log('Showing verified status for user');
+    
+    const notifications = document.getElementById('notifications');
+    if (!notifications) return;
+    
+    clearExistingInstitutionalAlerts();
+    
+    const alertHTML = `
+        <div class="institutional-discount-alert" id="institutionalAlert" style="
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+        ">
+            <button class="alert-dismiss-btn" onclick="dismissInstitutionalAlert()" style="
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 24px;
+                cursor: pointer;
+                opacity: 0.8;
+                font-weight: bold;
+            ">&times;</button>
+            
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="font-size: 2rem; margin-right: 15px;">✅</div>
+                <h3 style="margin: 0; font-size: 1.4rem;">Institutional Discount Active!</h3>
+            </div>
+            
+            <p style="margin-bottom: 15px; line-height: 1.6; opacity: 0.95;">
+                Your institutional email has been verified! You're eligible for <strong>15% off</strong> all editing services.
+                Check your discount codes section below.
+            </p>
+            
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button onclick="generateInstitutionalDiscount()" style="
+                    background: white;
+                    color: #764ba2;
+                    border: none;
+                    padding: 12px 20px;
+                    border-radius: 6px;
+                    font-weight: bold;
+                    cursor: pointer;
+                ">Generate New Code</button>
+                <button onclick="dismissInstitutionalAlert()" style="
+                    background: rgba(255,255,255,0.2);
+                    color: white;
+                    border: 1px solid rgba(255,255,255,0.3);
+                    padding: 12px 20px;
+                    border-radius: 6px;
+                    cursor: pointer;
+                ">Dismiss</button>
+            </div>
+        </div>
+    `;
+    
+    notifications.insertAdjacentHTML('afterbegin', alertHTML);
+    
+    // Also show discount codes section
+    const discountSection = document.getElementById('discountCodesSection');
+    if (discountSection) {
+        discountSection.style.display = 'block';
+    }
+}
+
+// Helper function to clear existing institutional alerts
+function clearExistingInstitutionalAlerts() {
+    const existingAlert = document.getElementById('institutionalAlert');
+    if (existingAlert) {
+        existingAlert.remove();
+    }
+}
+
+// Dismiss alert function
+function dismissInstitutionalAlert() {
+    const alert = document.getElementById('institutionalAlert');
+    if (alert) {
+        alert.remove();
+    }
+    
+    // Don't set localStorage to prevent dismissal - we want these to show on each login
+    // until the user actually verifies their email
+    console.log('Institutional alert dismissed');
 }
 
 // EMAIL VERIFICATION FUNCTIONS
 async function startEmailVerification() {
-    const institutionalEmail = prompt('Please enter your institutional email address:');
+    console.log('Starting email verification process');
+    
+    const institutionalEmail = prompt('Please enter your institutional email address to verify your discount eligibility:');
     
     if (!institutionalEmail || !institutionalEmail.includes('@')) {
         alert('Please enter a valid email address');
         return;
+    }
+    
+    const loadingBtn = document.querySelector('.verify-email-btn');
+    if (loadingBtn) {
+        loadingBtn.textContent = 'Sending verification code...';
+        loadingBtn.disabled = true;
     }
     
     try {
@@ -677,11 +780,19 @@ async function startEmailVerification() {
         const result = await response.json();
         
         if (response.ok) {
-            const verificationCode = prompt(`Verification code sent to ${institutionalEmail}. Please enter the code:`);
+            alert(`Verification code sent to ${institutionalEmail}! Please check your email.`);
             
-            if (verificationCode) {
-                await confirmEmailVerification(institutionalEmail, verificationCode);
-            }
+            // Wait a moment, then ask for the code
+            setTimeout(() => {
+                const verificationCode = prompt(`Please enter the 6-digit verification code sent to ${institutionalEmail}:`);
+                
+                if (verificationCode && verificationCode.trim().length === 6) {
+                    confirmEmailVerification(institutionalEmail, verificationCode.trim());
+                } else {
+                    alert('Please enter a valid 6-digit verification code');
+                }
+            }, 1000);
+            
         } else {
             alert('Error: ' + result.error);
         }
@@ -689,10 +800,17 @@ async function startEmailVerification() {
     } catch (error) {
         console.error('Error starting email verification:', error);
         alert('Failed to send verification email. Please try again.');
+    } finally {
+        if (loadingBtn) {
+            loadingBtn.textContent = 'Verify Institutional Email';
+            loadingBtn.disabled = false;
+        }
     }
 }
 
 async function confirmEmailVerification(institutionalEmail, code) {
+    console.log('Confirming email verification');
+    
     try {
         const token = localStorage.getItem('authToken');
         const response = await fetch(`${API_BASE}/confirm-institutional-email-for-discount`, {
@@ -707,62 +825,30 @@ async function confirmEmailVerification(institutionalEmail, code) {
         const result = await response.json();
         
         if (response.ok) {
-            alert(`Email verified successfully! You're now eligible for ${result.discountPercentage}% discount.`);
+            alert(`Email verified successfully! You're now eligible for ${result.discountPercentage}% discount on all services.`);
             
-            dismissDiscountNotification();
+            // Clear the current alert
+            dismissInstitutionalAlert();
             
+            // Reload the discount system to show verified status
             setTimeout(() => {
                 checkUserDiscountEligibility();
+                loadUserDiscountHistory();
             }, 1000);
             
         } else {
             alert('Verification failed: ' + result.error);
+            
+            // Offer to resend code
+            if (confirm('Would you like to request a new verification code?')) {
+                startEmailVerification();
+            }
         }
         
     } catch (error) {
         console.error('Error confirming email verification:', error);
         alert('Failed to verify email. Please try again.');
     }
-}
-
-// NOTIFICATION FUNCTIONS
-function addDiscountNotification(eligibilityData) {
-    const notifications = document.getElementById('notifications');
-    if (!notifications) return;
-    
-    const discountNotificationHTML = `
-        <div class="alert-item" style="background: #f3e5f5; border-left: 4px solid #9c27b0;">
-            <h4>🎓 Institutional Discount Available</h4>
-            <p>Because you entered <strong>${eligibilityData.institution.name || eligibilityData.institution.institutionName}</strong> during signup, 
-               you're eligible for ${eligibilityData.institution.discountPercentage}% off all services. 
-               <a href="#" onclick="generateInstitutionalDiscount()" style="color: #9c27b0; font-weight: bold;">
-                   Claim your discount code
-               </a>
-            </p>
-        </div>
-    `;
-    
-    notifications.insertAdjacentHTML('afterbegin', discountNotificationHTML);
-}
-
-function addVerificationNotification(eligibilityData) {
-    const notifications = document.getElementById('notifications');
-    if (!notifications) return;
-    
-    const verificationNotificationHTML = `
-        <div class="alert-item" style="background: #fff3e0; border-left: 4px solid #ff9800;">
-            <h4>📧 Email Verification Required</h4>
-            <p>You entered <strong>${eligibilityData.institution.name || eligibilityData.institution.institutionName}</strong> during signup. 
-               To unlock your ${eligibilityData.institution.discountPercentage}% institutional discount, 
-               please verify your institutional email address. 
-               <a href="#" onclick="startEmailVerification()" style="color: #ff9800; font-weight: bold;">
-                   Start verification
-               </a>
-            </p>
-        </div>
-    `;
-    
-    notifications.insertAdjacentHTML('afterbegin', verificationNotificationHTML);
 }
 
 // DISCOUNT CODE FUNCTIONS
@@ -780,7 +866,7 @@ async function generateInstitutionalDiscount() {
         const data = await response.json();
         
         if (data.success) {
-            dismissDiscountNotification();
+            dismissInstitutionalAlert();
             showDiscountCodeSuccess(data.discountCode);
             loadUserDiscountHistory();
         } else {
@@ -880,14 +966,6 @@ async function copyUserDiscountCode() {
     } catch (error) {
         console.error('Failed to copy code:', error);
         alert('Please copy this code manually: ' + code);
-    }
-}
-
-function dismissDiscountNotification() {
-    const banner = document.getElementById('institutionalDiscountBanner');
-    if (banner) {
-        banner.style.display = 'none';
-        localStorage.setItem('discountBannerDismissed', 'true');
     }
 }
 
@@ -1086,77 +1164,6 @@ async function deactivateInstitution(institutionId) {
 function addDiscountStyles() {
     const discountStyles = `
         <style>
-        .discount-notification-banner {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 12px;
-            margin: 2rem 0;
-            position: relative;
-            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
-        }
-
-        .discount-notification-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100px;
-            height: 100px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            transform: translate(30px, -30px);
-        }
-
-        .banner-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .banner-dismiss {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
-        }
-
-        .banner-dismiss:hover {
-            opacity: 1;
-        }
-
-        .banner-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .banner-icon {
-            font-size: 2rem;
-            margin-right: 1rem;
-        }
-
-        .banner-header h3 {
-            margin: 0;
-            font-size: 1.5rem;
-        }
-
-        .banner-message {
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-            opacity: 0.95;
-        }
-
-        .banner-actions {
-            display: flex;
-            gap: 1rem;
-        }
-
         .discount-code-item {
             background: #f8f9ff;
             border: 1px solid #e1e5fe;
@@ -1214,11 +1221,22 @@ function addDiscountStyles() {
             padding: 2rem;
         }
 
-        @media (max-width: 768px) {
-            .banner-actions {
-                flex-direction: column;
+        .institutional-discount-alert {
+            animation: slideInFromTop 0.5s ease-out;
+        }
+
+        @keyframes slideInFromTop {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
             }
-            
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
             .discount-code-display {
                 flex-direction: column;
                 gap: 1rem;
@@ -1234,7 +1252,6 @@ function logout() {
     if (confirm('Are you sure you want to logout?')) {
         localStorage.removeItem('authToken');
         localStorage.removeItem('userProfile');
-        localStorage.removeItem('discountBannerDismissed');
         window.location.href = 'client-login.html';
     }
 }
@@ -1249,11 +1266,14 @@ window.onclick = function(event) {
     });
 }
 
-
+// ==========================================
 // GLOBAL FUNCTION EXPORTS
+// ==========================================
 
 // Make functions available globally for onclick handlers
-window.dismissDiscountNotification = dismissDiscountNotification;
+window.dismissInstitutionalAlert = dismissInstitutionalAlert;
+window.startEmailVerification = startEmailVerification;
+window.confirmEmailVerification = confirmEmailVerification;
 window.generateInstitutionalDiscount = generateInstitutionalDiscount;
 window.copyUserDiscountCode = copyUserDiscountCode;
 window.refreshDiscountCodes = refreshDiscountCodes;
@@ -1270,5 +1290,3 @@ window.openAddInstitutionModal = openAddInstitutionModal;
 window.editInstitution = editInstitution;
 window.deactivateInstitution = deactivateInstitution;
 window.refreshAnalytics = refreshAnalytics;
-window.startEmailVerification = startEmailVerification;
-window.confirmEmailVerification = confirmEmailVerification;
