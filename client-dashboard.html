@@ -3,9 +3,9 @@
 <head> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HiTex EdiTex</title>
-<script src="discount-integration.js" defer></script>
 <script src="pricing.js"></script>
 <script src="Embednav.js"></script>
+<script src="freshtex.js"></script> 
 <link rel="stylesheet" href="pricing.css">
 <link rel="stylesheet" href="clientdasnboard.css">
 <link rel="stylesheet" href="ser_them.css">
@@ -712,6 +712,61 @@
     </div>
 </div>
 
+   <script>
+console.log('DISCOUNT TEST: Starting discount system');
+
+// Simple discount eligibility check
+async function testDiscountSystem() {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+        console.log('No auth token found');
+        return;
+    }
+    
+    try {
+        console.log('Making discount eligibility request...');
+        const response = await fetch('https://all-branched-end.onrender.com/check-discount-eligibility', {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        console.log('Response status:', response.status);
+        
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Discount data received:', data);
+            
+            // Show a simple test banner
+            const notifications = document.getElementById('notifications');
+            if (data.hasInstitutionFromSignup) {
+                notifications.innerHTML = `
+                    <div style="padding: 20px; background: blue; color: white; margin: 10px;">
+                        TEST BANNER: You entered "${data.institutionFromSignup}" during signup!
+                    </div>
+                `;
+            } else {
+                notifications.innerHTML = `
+                    <div style="padding: 20px; background: gray; color: white; margin: 10px;">
+                        TEST: No institution found in signup data
+                    </div>
+                `;
+            }
+        } else {
+            console.log('Request failed:', response.status);
+        }
+    } catch (error) {
+        console.log('Error:', error);
+    }
+}
+
+// Run the test after page loads
+setTimeout(() => {
+    console.log('Starting discount test...');
+    testDiscountSystem();
+}, 2000);
+</script>
      
 </body>
 </html>
