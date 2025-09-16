@@ -453,6 +453,60 @@
                 padding-right: 45px !important;
             }
         }  
+
+        /* AUTO COMPLETE CODE */
+
+        .autocomplete-container {
+    position: relative;
+}
+
+.autocomplete-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.suggestion-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.2s ease;
+}
+
+.suggestion-item:hover {
+    background-color: #f8f9fa;
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.suggestion-item strong {
+    color: #333;
+    font-size: 14px;
+}
+
+.suggestion-item small {
+    color: #666;
+    font-size: 12px;
+}
+
+.suggestion-item.active {
+    background-color: #e3f2fd;
+}
     </style>
 </head>
 <body>
@@ -566,19 +620,20 @@
             </div>
 
             <!-- Current Institution (Optional) -->
-            <div class="unl_live-input-group">
-                <label for="currentInstitution" class="unl_live-label">Current Institution (Optional)</label>
-                <div class="unl_live-input-wrapper">
-                    
-                    <input 
-                        type="text" 
-                        id="currentInstitution" 
-                        name="currentInstitution" 
-                        class="unl_live-input" 
-                        placeholder="Enter your institution for potential discounts"
-                    >
-                </div>
+           <div class="unl_live-input-group">
+              <label for="currentInstitution" class="unl_live-label">Current Institution (Optional)</label>
+                <div class="unl_live-input-wrapper autocomplete-container">
+              <input 
+            type="text" 
+            id="currentInstitution" 
+            name="currentInstitution" 
+            class="unl_live-input" 
+            placeholder="Start typing your university name..."
+            autocomplete="off"
+             >
+        <ul id="institutionSuggestions" class="autocomplete-suggestions"></ul>
             </div>
+              </div>
 
             <!-- Institutional Email (Conditional) -->
             <div class="unl_live-input-group hidden" id="institutionalEmailGroup">
@@ -616,6 +671,103 @@
     <script>
     <!-- Modal for institutional discount info -->
    document.addEventListener('DOMContentLoaded', function() {
+
+    // University Autocomplete functionality
+    let institutionTimeout;
+    const institutionInput = document.getElementById('currentInstitution');
+    const suggestionsList = document.getElementById('institutionSuggestions');
+    const API_BASE = 'https://all-branched-end.onrender.com';
+
+    if (institutionInput && suggestionsList) {
+        institutionInput.addEventListener('input', (e) => {
+            clearTimeout(institutionTimeout);
+            const query = e.target.value.trim();
+            
+            if (query.length < 2) {
+                suggestionsList.innerHTML = '';
+                suggestionsList.style.display = 'none';
+                return;
+            }
+            
+            institutionTimeout = setTimeout(async () => {
+                try {
+                    const response = await fetch(
+                        `${API_BASE}/api/search-universities-autocomplete?query=${encodeURIComponent(query)}&limit=8`
+                    );
+                    const suggestions = await response.json();
+                    
+                    displaySuggestions(suggestions);
+                } catch (error) {
+                    console.error('Autocomplete failed:', error);
+                    suggestionsList.style.display = 'none';
+                }
+            }, 300);
+        });
+
+        // Handle keyboard navigation
+        institutionInput.addEventListener('keydown', (e) => {
+            const activeItem = suggestionsList.querySelector('.suggestion-item.active');
+            const items = suggestionsList.querySelectorAll('.suggestion-item');
+            
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                if (activeItem) {
+                    activeItem.classList.remove('active');
+                    const next = activeItem.nextElementSibling;
+                    if (next) next.classList.add('active');
+                } else if (items.length > 0) {
+                    items[0].classList.add('active');
+                }
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (activeItem) {
+                    activeItem.classList.remove('active');
+                    const prev = activeItem.previousElementSibling;
+                    if (prev) prev.classList.add('active');
+                }
+            } else if (e.key === 'Enter') {
+                if (activeItem) {
+                    e.preventDefault();
+                    institutionInput.value = activeItem.dataset.name;
+                    suggestionsList.style.display = 'none';
+                }
+            } else if (e.key === 'Escape') {
+                suggestionsList.style.display = 'none';
+            }
+        });
+    }
+
+    function displaySuggestions(suggestions) {
+        if (!suggestionsList) return;
+        
+        if (suggestions.length === 0) {
+            suggestionsList.style.display = 'none';
+            return;
+        }
+        
+        suggestionsList.innerHTML = suggestions.map(item => 
+            `<li class="suggestion-item" data-name="${item.name}" data-country="${item.country}">
+                <strong>${item.name}</strong><br>
+                <small>${item.country}</small>
+            </li>`
+        ).join('');
+        
+        suggestionsList.style.display = 'block';
+        
+        suggestionsList.querySelectorAll('.suggestion-item').forEach(item => {
+            item.addEventListener('click', () => {
+                institutionInput.value = item.dataset.name;
+                suggestionsList.style.display = 'none';
+            });
+        });
+    }
+
+    // Hide suggestions when clicking outside
+    document.addEventListener('click', (e) => {
+        if (institutionInput && suggestionsList && !e.target.closest('.autocomplete-container')) {
+            suggestionsList.style.display = 'none';
+        }
+    });
     
     // Password toggle functionality - WORKING VERSION
     function togglePasswordVisibility(toggleId, passwordId) {
