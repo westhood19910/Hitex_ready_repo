@@ -1,11 +1,236 @@
 alert('JavaScript file is loading!');
 const API_BASE = 'https://all-branched-end.onrender.com';
-
-// Global variables for dashboard state
 let currentSection = 'dashboard';
 let manuscripts = [];
 let currentUser = null;
 let discountEligibilityData = null;
+
+// FUZZY MATCHING UTILITIES
+function levenshteinDistance(str1, str2) {
+    const matrix = [];
+    const len1 = str1.length;
+    const len2 = str2.length;
+
+    for (let i = 0; i <= len2; i++) {
+        matrix[i] = [i];
+    }
+
+    for (let j = 0; j <= len1; j++) {
+        matrix[0][j] = j;
+    }
+
+    for (let i = 1; i <= len2; i++) {
+        for (let j = 1; j <= len1; j++) {
+            if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
+                matrix[i][j] = matrix[i - 1][j - 1];
+            } else {
+                matrix[i][j] = Math.min(
+                    matrix[i - 1][j - 1] + 1,
+                    matrix[i][j - 1] + 1,
+                    matrix[i - 1][j] + 1
+                );
+            }
+        }
+    }
+
+    return matrix[len2][len1];
+}
+
+function calculateSimilarity(str1, str2) {
+    if (!str1 || !str2) return 0;
+    
+    const longer = str1.length > str2.length ? str1 : str2;
+    const shorter = str1.length > str2.length ? str2 : str1;
+    
+    if (longer.length === 0) return 1.0;
+    
+    const distance = levenshteinDistance(longer.toLowerCase(), shorter.toLowerCase());
+    return (longer.length - distance) / longer.length;
+}
+
+function normalizeInstitutionName(name) {
+    return name
+        .toLowerCase()
+        .replace(/\s+/g, ' ')
+        .trim()
+        .replace(/[^\w\s]/g, '')
+        .replace(/\buniversity\b/g, 'univ')
+        .replace(/\bcollege\b/g, 'coll')
+        .replace(/\binstitute\b/g, 'inst')
+        .replace(/\btechnology\b/g, 'tech')
+        .replace(/\bof\b/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+function generateSearchVariations(originalName) {
+    const variations = [originalName];
+    const name = originalName.toLowerCase();
+    
+    // Common abbreviations to full forms
+    const expansions = {
+        'mit': 'massachusetts institute of technology',
+        'ucla': 'university of california los angeles',
+        'usc': 'university of southern california',
+        'nyu': 'new york university',
+        'ucsd': 'university of california san diego',
+        'ucsb': 'university of california santa barbara',
+        'ucb': 'university of california berkeley',
+        'gt': 'georgia institute of technology',
+        'cmu': 'carnegie mellon university',
+        'uic': 'university of illinois chicago',
+        'ut': 'university of texas',
+        'uw': 'university of washington'
+    };
+
+    // Full forms to common abbreviations
+    const abbreviations = {
+        'massachusetts institute of technology': 'mit',
+        'university of california los angeles': 'ucla',
+        'university of southern california': 'usc',
+        'new york university': 'nyu',
+        'georgia institute of technology': 'georgia tech',
+        'carnegie mellon university': 'cmu'
+    };
+
+    // Add expansions
+    if (expansions[name]) {
+        variations.push(expansions[name]);
+    }
+
+    // Add abbreviations
+    if (abbreviations[name]) {
+        variations.push(abbreviations[name]);
+    }
+
+    // Add variations with/without common words
+    if (name.includes(' university')) {
+        variations.push(name.replace(' university', ''));
+        variations.push(name.replace(' university', ' univ'));
+    }
+    if (name.includes(' college')) {
+        variations.push(name.replace(' college', ''));
+        variations.push(name.replace(' college', ' coll'));
+    }
+    if (name.includes(' institute')) {
+        variations.push(name.replace(' institute', ' inst'));
+    }
+
+    // Add "University of" prefix variations
+    if (!name.startsWith('university of')) {
+        variations.push(`university of ${name}`);
+    }
+
+    return [...new Set(variations)]; // Remove duplicates
+}
+
+// ENHANCED INSTITUTION RECOGNITION FUNCTION
+async function recognizeInstitutionWithFuzzyMatching(userInput) {
+    console.log('Starting enhanced institution recognition for:', userInput);
+    
+    let bestMatch = null;
+    let bestScore = 0;
+    let allResults = [];
+
+    try {
+        // Generate search variations
+        const searchVariations = generateSearchVariations(userInput);
+        console.log('Search variations:', searchVariations);
+
+        // Try each variation
+        for (const variation of searchVariations) {
+            try {
+                const apiResponse = await fetch(`http://universities.hipolabs.com/search?name=${encodeURIComponent(variation)}`);
+                const universities = await apiResponse.json();
+                
+                if (universities && universities.length > 0) {
+                    allResults.push(...universities);
+                }
+            } catch (error) {
+                console.log(`Search failed for variation: ${variation}`, error);
+            }
+        }
+
+        // Remove duplicates based on name
+        const uniqueResults = [];
+        const seen = new Set();
+        for (const uni of allResults) {
+            if (!seen.has(uni.name.toLowerCase())) {
+                seen.add(uni.name.toLowerCase());
+                uniqueResults.push(uni);
+            }
+        }
+
+        console.log(`Found ${uniqueResults.length} unique universities from API`);
+
+        // If we have exact matches, prioritize them
+        for (const university of uniqueResults) {
+            if (university.name.toLowerCase() === userInput.toLowerCase()) {
+                return {
+                    recognized: true,
+                    data: university,
+                    confidence: 1.0,
+                    matchType: 'exact'
+                };
+            }
+        }
+
+        // Calculate similarity scores for fuzzy matching
+        for (const university of uniqueResults) {
+            const similarity = calculateSimilarity(userInput, university.name);
+            const normalizedSimilarity = calculateSimilarity(
+                normalizeInstitutionName(userInput), 
+                normalizeInstitutionName(university.name)
+            );
+            
+            // Use the higher of the two similarity scores
+            const score = Math.max(similarity, normalizedSimilarity);
+            
+            if (score > bestScore) {
+                bestScore = score;
+                bestMatch = university;
+            }
+        }
+
+        // Define confidence thresholds
+        const HIGH_CONFIDENCE = 0.85;
+        const MEDIUM_CONFIDENCE = 0.70;
+        
+        if (bestScore >= HIGH_CONFIDENCE) {
+            console.log(`High confidence match found: ${bestMatch.name} (${bestScore.toFixed(2)})`);
+            return {
+                recognized: true,
+                data: bestMatch,
+                confidence: bestScore,
+                matchType: 'high-fuzzy'
+            };
+        } else if (bestScore >= MEDIUM_CONFIDENCE) {
+            console.log(`Medium confidence match found: ${bestMatch.name} (${bestScore.toFixed(2)})`);
+            return {
+                recognized: true,
+                data: bestMatch,
+                confidence: bestScore,
+                matchType: 'medium-fuzzy',
+                suggestedName: bestMatch.name
+            };
+        } else {
+            console.log(`No confident match found. Best score: ${bestScore.toFixed(2)}`);
+            return {
+                recognized: false,
+                confidence: bestScore,
+                bestGuess: bestMatch ? bestMatch.name : null
+            };
+        }
+
+    } catch (error) {
+        console.error('Enhanced institution recognition failed:', error);
+        return {
+            recognized: false,
+            error: error.message
+        };
+    }
+}
+
 
 // ==========================================
 // DASHBOARD INITIALIZATION
@@ -438,7 +663,7 @@ function insertDiscountComponents() {
 
 // MAIN DISCOUNT ELIGIBILITY CHECK - SINGLE CLEAN VERSION
 async function checkUserDiscountEligibility() {
-    console.log('Starting discount eligibility check...');
+    console.log('Starting discount eligibility check with fuzzy matching...');
     const token = localStorage.getItem('authToken');
     if (!token) {
         console.log('No auth token found');
@@ -475,34 +700,26 @@ async function checkUserDiscountEligibility() {
             return;
         }
         
-        // User entered an institution - check if it's recognized by universities API
-        let institutionRecognized = false;
-        let recognizedInstitutionData = null;
+        // Use enhanced recognition with fuzzy matching
+        const recognitionResult = await recognizeInstitutionWithFuzzyMatching(profile.currentInstitution);
         
-        try {
-            console.log('Checking institution against universities API...');
-            const apiResponse = await fetch(`http://universities.hipolabs.com/search?name=${encodeURIComponent(profile.currentInstitution)}`);
-            const universities = await apiResponse.json();
-            
-            if (universities && universities.length > 0) {
-                institutionRecognized = true;
-                recognizedInstitutionData = universities[0];
-                console.log('Institution RECOGNIZED:', recognizedInstitutionData.name);
+        console.log('Recognition result:', recognitionResult);
+        
+        if (recognitionResult.recognized) {
+            if (recognitionResult.matchType === 'medium-fuzzy' && recognitionResult.suggestedName) {
+                // Show recognition alert with name suggestion
+                showRecognizedInstitutionAlertWithSuggestion(
+                    profile.currentInstitution, 
+                    recognitionResult.data,
+                    recognitionResult.suggestedName
+                );
             } else {
-                console.log('Institution NOT RECOGNIZED in API');
+                // Show standard recognition alert
+                showRecognizedInstitutionAlert(profile.currentInstitution, recognitionResult.data);
             }
-        } catch (apiError) {
-            console.log('University API check failed:', apiError);
-            institutionRecognized = false;
-        }
-        
-        // ALWAYS show appropriate alert based on recognition status
-        if (institutionRecognized) {
-            // OPTION 2: Institution is recognized - ask for email verification
-            showRecognizedInstitutionAlert(profile.currentInstitution, recognizedInstitutionData);
         } else {
-            // OPTION 1: Institution not recognized - offer general verification
-            showUnrecognizedInstitutionAlert(profile.currentInstitution);
+            // Show unrecognized alert, possibly with best guess
+            showUnrecognizedInstitutionAlert(profile.currentInstitution, recognitionResult.bestGuess);
         }
         
     } catch (error) {
@@ -510,9 +727,10 @@ async function checkUserDiscountEligibility() {
     }
 }
 
-// OPTION 1: Institution not recognized in API
-function showUnrecognizedInstitutionAlert(institutionName) {
-    console.log('Showing unrecognized institution alert for:', institutionName);
+// ENHANCED ALERT FUNCTIONS WITH FUZZY MATCHING FEEDBACK
+// OPTION 2A: Institution recognized with suggestion (for medium confidence matches)
+function showRecognizedInstitutionAlertWithSuggestion(institutionName, institutionData, suggestedName) {
+    console.log('Showing recognized institution alert with suggestion for:', institutionData.name);
     
     const notifications = document.getElementById('notifications');
     if (!notifications) {
@@ -520,18 +738,17 @@ function showUnrecognizedInstitutionAlert(institutionName) {
         return;
     }
     
-    // Clear existing institutional alerts
     clearExistingInstitutionalAlerts();
     
     const alertHTML = `
         <div class="institutional-discount-alert" id="institutionalAlert" style="
-            background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
             color: white;
             padding: 20px;
             border-radius: 12px;
             margin: 20px 0;
             position: relative;
-            box-shadow: 0 4px 20px rgba(255, 152, 0, 0.3);
+            box-shadow: 0 4px 20px rgba(76, 175, 80, 0.3);
         ">
             <button class="alert-dismiss-btn" onclick="dismissInstitutionalAlert()" style="
                 position: absolute;
@@ -547,19 +764,19 @@ function showUnrecognizedInstitutionAlert(institutionName) {
             ">&times;</button>
             
             <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                <div style="font-size: 2rem; margin-right: 15px;">🏛️</div>
-                <h3 style="margin: 0; font-size: 1.4rem;">Institution Verification Available!</h3>
+                <div style="font-size: 2rem; margin-right: 15px;">🎓</div>
+                <h3 style="margin: 0; font-size: 1.4rem;">Institution Recognized!</h3>
             </div>
             
             <p style="margin-bottom: 15px; line-height: 1.6; opacity: 0.95;">
-                You entered <strong>"${institutionName}"</strong> during signup. While this institution isn't in our partner database, 
-                we can still verify if you qualify for discounts through email verification.
+                We found a close match for <strong>"${institutionName}"</strong>: <strong>${suggestedName}</strong>. 
+                Please verify your institutional email to unlock your <strong>15% discount</strong> on all editing services.
             </p>
             
             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                 <button class="verify-email-btn" onclick="startEmailVerification()" style="
                     background: white;
-                    color: #f57c00;
+                    color: #45a049;
                     border: none;
                     padding: 12px 20px;
                     border-radius: 6px;
@@ -580,10 +797,11 @@ function showUnrecognizedInstitutionAlert(institutionName) {
     `;
     
     notifications.insertAdjacentHTML('afterbegin', alertHTML);
-    console.log('Unrecognized institution alert added to DOM');
+    console.log('Recognized institution alert with suggestion added to DOM');
 }
 
-// OPTION 2: Institution is recognized in API
+
+// OPTION 2: Institution is recognized in API (standard version)
 function showRecognizedInstitutionAlert(institutionName, institutionData) {
     console.log('Showing recognized institution alert for:', institutionData.name);
     
@@ -593,7 +811,6 @@ function showRecognizedInstitutionAlert(institutionName, institutionData) {
         return;
     }
     
-    // Clear existing institutional alerts
     clearExistingInstitutionalAlerts();
     
     const alertHTML = `
@@ -654,6 +871,83 @@ function showRecognizedInstitutionAlert(institutionName, institutionData) {
     
     notifications.insertAdjacentHTML('afterbegin', alertHTML);
     console.log('Recognized institution alert added to DOM');
+}
+
+// ENHANCED UNRECOGNIZED ALERT WITH BEST GUESS
+function showUnrecognizedInstitutionAlert(institutionName, bestGuess = null) {
+    console.log('Showing unrecognized institution alert for:', institutionName);
+    
+    const notifications = document.getElementById('notifications');
+    if (!notifications) {
+        console.error('Notifications element not found!');
+        return;
+    }
+    
+    clearExistingInstitutionalAlerts();
+    
+    let suggestionText = '';
+    if (bestGuess) {
+        suggestionText = `<br><small style="opacity: 0.8;">Did you mean <strong>${bestGuess}</strong>?</small>`;
+    }
+    
+    const alertHTML = `
+        <div class="institutional-discount-alert" id="institutionalAlert" style="
+            background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(255, 152, 0, 0.3);
+        ">
+            <button class="alert-dismiss-btn" onclick="dismissInstitutionalAlert()" style="
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 24px;
+                cursor: pointer;
+                opacity: 0.8;
+                font-weight: bold;
+            ">&times;</button>
+            
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <div style="font-size: 2rem; margin-right: 15px;">🏛️</div>
+                <h3 style="margin: 0; font-size: 1.4rem;">Institution Verification Available!</h3>
+            </div>
+            
+            <p style="margin-bottom: 15px; line-height: 1.6; opacity: 0.95;">
+                You entered <strong>"${institutionName}"</strong> during signup. While this institution isn't in our partner database, 
+                we can still verify if you qualify for discounts through email verification.${suggestionText}
+            </p>
+            
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="verify-email-btn" onclick="startEmailVerification()" style="
+                    background: white;
+                    color: #f57c00;
+                    border: none;
+                    padding: 12px 20px;
+                    border-radius: 6px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                ">Verify Institutional Email</button>
+                <button onclick="dismissInstitutionalAlert()" style="
+                    background: rgba(255,255,255,0.2);
+                    color: white;
+                    border: 1px solid rgba(255,255,255,0.3);
+                    padding: 12px 20px;
+                    border-radius: 6px;
+                    cursor: pointer;
+                ">Maybe Later</button>
+            </div>
+        </div>
+    `;
+    
+    notifications.insertAdjacentHTML('afterbegin', alertHTML);
+    console.log('Unrecognized institution alert added to DOM');
 }
 
 // Show success message for already verified users
@@ -748,6 +1042,8 @@ function dismissInstitutionalAlert() {
     // until the user actually verifies their email
     console.log('Institutional alert dismissed');
 }
+
+
 
 // EMAIL VERIFICATION FUNCTIONS
 async function startEmailVerification() {
