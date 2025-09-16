@@ -140,7 +140,7 @@ async function recognizeInstitutionWithFuzzyMatching(userInput) {
         // Try each variation
         for (const variation of searchVariations) {
             try {
-                const apiResponse = await fetch(`http://universities.hipolabs.com/search?name=${encodeURIComponent(variation)}`);
+                const apiResponse = await fetch(`https://universities.hipolabs.com/search?name=${encodeURIComponent(variation)}`);
                 const universities = await apiResponse.json();
                 
                 if (universities && universities.length > 0) {
