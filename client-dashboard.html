@@ -2,7 +2,7 @@
 <html lang="en">
 <head> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HiTex Client Dashboard</title>
+<title>HiTex EdiTex</title>
 <script src="pricing.js"></script>
 <script src="Embednav.js"></script>
 <link rel="stylesheet" href="pricing.css">
@@ -186,33 +186,26 @@
 
 
     <div class="app-scaffold">
-       <div class="navigation-pillar">
-    <!-- Logout button on the left (hidden on mobile) -->
-    <button class="session-terminate-btn">Logout</button>
-    
-    <!-- Navigation menu in the center -->
-    <nav class="pillar-directory">
-        <ul>
-            <li><a href="#dashboard-section" class="pillar-link active">Dashboard</a></li>
-            <li><a href="#submissions-section" class="pillar-link">Submissions</a></li>
-            <li><a href="#projects-section" class="pillar-link">Projects</a></li>
-            <li><a href="#communications-section" class="pillar-link">Messages</a></li>
-            <li><a href="#invoices-section" class="pillar-link">Invoices</a></li>
-            <li><a href="#resources-section" class="pillar-link">Resources</a></li>
-            <li><a href="#support-section" class="pillar-link">Support</a></li>
-        </ul>
-        <!-- Mobile logout button (appears only in mobile dropdown) -->
-        <button class="mobile-logout">Logout</button>
-    </nav>
-    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
-    <div class="pillar-crest">
-        <div class="profile-info">
-            <div class="profile-identifier">John Doe</div>
-            <div class="user-email">john@example.com</div>
-        </div>
-        <img src="profile-image.jpg" alt="Profile" class="profile-sigil">
-    </div>
-</div>
+        <aside class="navigation-pillar">
+            <div class="pillar-crest">
+                <img src="https://i.pravatar.cc/150" alt="User Avatar" class="profile-sigil">
+                <div class="profile-identifier" id="profileName">Loading...</div>
+                <div class="user-email" id="profileEmail"></div>
+            </div>
+            <nav class="pillar-directory">
+                <ul>
+                    <li><a href="#" class="pillar-link active" data-section="dashboard">Dashboard</a></li>
+                    <li><a href="#" class="pillar-link" data-section="submissions">My Submissions</a></li>
+                    <li><a href="#" class="pillar-link" data-section="projects">Active Projects</a></li>
+                    <li><a href="#" class="pillar-link" data-section="communications">Messages</a></li>
+                    <li><a href="#" class="pillar-link" data-section="invoices">Invoices & Payments</a></li>
+                    <li><a href="#" class="pillar-link" data-section="resources">Resources</a></li>
+                    <li><a href="/profile.html" class="pillar-link">Edit Profile</a></li>
+                    <li><a href="#" class="pillar-link" data-section="support">Support</a></li>
+                </ul>
+            </nav>
+            <button class="session-terminate-btn" id="logoutButton">Logout</button>
+        </aside>
 
         <main class="primary-viewport">
             <!-- Dashboard Section -->
@@ -717,13 +710,6 @@
         </div>
     </div>
 </div>
-
-<script>
-function toggleMobileMenu() {
-    const nav = document.querySelector('.pillar-directory');
-    nav.classList.toggle('mobile-open');
-}
-</script>
 
    <script src="discount-integration.js"></script>
      
