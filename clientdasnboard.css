@@ -1,9 +1,9 @@
-
-        :root {
+:root {
             --primary: #1a5db4;
-            --primary-light: #e8f1fd;
+            --primary-light: rgba(232, 241, 253, 1);
             --primary-dark: #0c3b80;
             --accent: #D54C4F;
+            --das-button-background:linear-gradient(135deg, #1a5db4, #0c3b80);
             --accent-light: #fff0eb;
             --grey-light: #f7f9fc;
             --grey: #e5e9f2;
@@ -33,6 +33,7 @@
             --section-spacing-mobile: 3rem;
             --container-padding: 2rem;
             --container-padding-mobile: 1rem;
+            --navbar-height: 80px;
         }
 
         * {
@@ -49,72 +50,76 @@
         }
 
         .app-scaffold {
-            margin-top: 3em;
             display: flex;
+            flex-direction: column;
             min-height: 100vh;
         }
 
-        /* Navigation Sidebar */
+        /* Horizontal Navigation Bar */
         .navigation-pillar {
-            width: 280px;
-            background: var(--white);
-            border-right: 1px solid var(--grey);
+            width: 100%;
+            height: var(--navbar-height);
+            background: var(--das-button-background);
+            border-bottom: 1px solid var(--grey);
             display: flex;
-            flex-direction: column;
+            align-items: center;
             position: fixed;
-            height: 100vh;
+            top: 0;
+            left: 0;
             z-index: 100;
             box-shadow: var(--shadow);
+            padding: 0 2rem;
+            margin-top: 3rem;
         }
 
-        .pillar-crest {
-            padding: 2rem 1.5rem;
-            border-bottom: 1px solid var(--grey);
-            text-align: center;
-        }
-
-        .profile-sigil {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            margin-bottom: 1rem;
-            border: 3px solid var(--primary-light);
-        }
-
-        .profile-identifier {
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 0.25rem;
-        }
-
-        .user-email {
+        .session-terminate-btn {
+            padding: 0.5rem 1rem;
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
             font-size: 0.875rem;
-            color: var(--text-light);
+            margin-right: 2rem;
+        }
+
+        .session-terminate-btn:hover {
+            background: var(--accent);
+            transform: translateY(-1px);
         }
 
         .pillar-directory {
             flex: 1;
-            padding: 1rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .pillar-directory ul {
             list-style: none;
             padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .pillar-directory li {
-            margin-bottom: 0.25rem;
+            margin: 0;
         }
 
         .pillar-link {
             display: block;
-            padding: 0.75rem 1.5rem;
-            color: var(--text);
+            padding: 0.5rem 1rem;
+            color: var(--sub-head-color);
             text-decoration: none;
             border-radius: var(--radius-sm);
-            margin: 0 1rem;
             transition: var(--transition);
-            position: relative;
+            font-size: 0.9rem;
+            font-weight: 600;
+            white-space: nowrap;
         }
 
         .pillar-link:hover {
@@ -127,29 +132,48 @@
             color: var(--white);
         }
 
-        .session-terminate-btn {
-            margin: 1rem 1.5rem 2rem;
-            padding: 0.75rem 1rem;
-            background: var(--accent);
-            color: var(--white);
+        .pillar-crest {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-left: auto;
+            padding: 0;
             border: none;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            font-weight: 500;
-            transition: var(--transition);
         }
 
-        .session-terminate-btn:hover {
-            background: var(--accent);
-            transform: translateY(-1px);
+        .profile-sigil {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-light);
+            margin: 0;
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-identifier {
+            font-weight: 700;
+            color: var(--sub-head-color);
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .user-email {
+            font-size: 0.75rem;
+            color: var(--sub-head-color);
+            margin: 0;
         }
 
         /* Main Content Area */
         .primary-viewport {
             flex: 1;
-            margin-left: 280px;
+            margin-top: var(--navbar-height);
             padding: 2rem;
             overflow-y: auto;
+            margin-top: 7rem;
         }
 
         .view-segment {
@@ -480,19 +504,103 @@
             margin: 0;
         }
 
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.9rem;
+            cursor: pointer;
+            color: var(--sub-head-color);
+            font-weight: 600;
+        }
+
+        /* Mobile Logout Button */
+        .mobile-logout {
+            display: none;
+        }
+
         /* Responsive Design */
+        @media (max-width: 1024px) {
+            .pillar-directory ul {
+                gap: 0.25rem;
+            }
+            
+            .pillar-link {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
+            }
+            
+            .profile-identifier,
+            .user-email {
+                display: none;
+            }
+            
+            .pillar-crest {
+                margin-right: 1rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .navigation-pillar {
-                transform: translateX(-100%);
-                transition: transform 0.3s ease;
+                padding: 0 1rem;
             }
 
-            .navigation-pillar.mobile-open {
-                transform: translateX(0);
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .session-terminate-btn {
+                display: none;
+            }
+
+            .pillar-directory {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                border-top: 1px solid var(--grey);
+                box-shadow: var(--shadow);
+            }
+
+            .pillar-directory.mobile-open {
+                display: block;
+            }
+
+            .pillar-directory ul {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 1rem;
+                gap: 0.5rem;
+            }
+
+            .pillar-link {
+                padding: 0.75rem 1rem;
+                text-align: center;
+            }
+
+            .mobile-logout {
+                margin: 0.5rem 1rem 1rem;
+                width: calc(100% - 2rem);
+                padding: 0.75rem 1rem;
+                background: var(--accent);
+                color: var(--white);
+                border: none;
+                border-radius: var(--radius-sm);
+                cursor: pointer;
+                font-weight: 500;
+                transition: var(--transition);
+                font-size: 0.875rem;
+            }
+
+            .mobile-logout:hover {
+                background: var(--accent);
+                transform: translateY(-1px);
             }
 
             .primary-viewport {
-                margin-left: 0;
                 padding: 1rem;
             }
 
