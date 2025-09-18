@@ -1,9 +1,14 @@
-alert('JavaScript file is loading!');
+console.log('Initializing HiTex EdiTex Dashboard...');
 const API_BASE = 'https://all-branched-end.onrender.com';
 let currentSection = 'dashboard';
 let manuscripts = [];
 let currentUser = null;
 let discountEligibilityData = null;
+let verificationState = {
+    institutionalEmail: null,
+    verificationSent: false,
+    awaitingCode: false
+};
 
 // FUZZY MATCHING UTILITIES
 function levenshteinDistance(str1, str2) {
@@ -1049,6 +1054,12 @@ function dismissInstitutionalAlert() {
 async function startEmailVerification() {
     console.log('Starting email verification process');
     
+    // If we're already awaiting a code, just ask for it again
+    if (verificationState.awaitingCode && verificationState.institutionalEmail) {
+        promptForVerificationCode();
+        return;
+    }
+    
     const institutionalEmail = prompt('Please enter your institutional email address to verify your discount eligibility:');
     
     if (!institutionalEmail || !institutionalEmail.includes('@')) {
@@ -1076,17 +1087,16 @@ async function startEmailVerification() {
         const result = await response.json();
         
         if (response.ok) {
+            // Update verification state
+            verificationState.institutionalEmail = institutionalEmail;
+            verificationState.verificationSent = true;
+            verificationState.awaitingCode = true;
+            
             alert(`Verification code sent to ${institutionalEmail}! Please check your email.`);
             
-            // Wait a moment, then ask for the code
+            // Prompt for code immediately
             setTimeout(() => {
-                const verificationCode = prompt(`Please enter the 6-digit verification code sent to ${institutionalEmail}:`);
-                
-                if (verificationCode && verificationCode.trim().length === 6) {
-                    confirmEmailVerification(institutionalEmail, verificationCode.trim());
-                } else {
-                    alert('Please enter a valid 6-digit verification code');
-                }
+                promptForVerificationCode();
             }, 1000);
             
         } else {
@@ -1103,6 +1113,7 @@ async function startEmailVerification() {
         }
     }
 }
+// ENDED
 
 async function confirmEmailVerification(institutionalEmail, code) {
     console.log('Confirming email verification');
@@ -1123,6 +1134,13 @@ async function confirmEmailVerification(institutionalEmail, code) {
         if (response.ok) {
             alert(`Email verified successfully! You're now eligible for ${result.discountPercentage}% discount on all services.`);
             
+            // Clear verification state on success
+            verificationState = {
+                institutionalEmail: null,
+                verificationSent: false,
+                awaitingCode: false
+            };
+            
             // Clear the current alert
             dismissInstitutionalAlert();
             
@@ -1133,11 +1151,13 @@ async function confirmEmailVerification(institutionalEmail, code) {
             }, 1000);
             
         } else {
-            alert('Verification failed: ' + result.error);
-            
-            // Offer to resend code
-            if (confirm('Would you like to request a new verification code?')) {
-                startEmailVerification();
+            // FIXED: Better handling of verification failures
+            if (result.error.includes('Invalid or expired')) {
+                if (confirm('The verification code is invalid or has expired. Would you like us to send a new code?')) {
+                    requestNewVerificationCode(); // Don't ask for email again
+                }
+            } else {
+                alert('Verification failed: ' + result.error);
             }
         }
         
@@ -1145,6 +1165,95 @@ async function confirmEmailVerification(institutionalEmail, code) {
         console.error('Error confirming email verification:', error);
         alert('Failed to verify email. Please try again.');
     }
+}
+
+// ENDED
+
+// NEW: Separate function to prompt for verification code (fixes popup disappearing issue)
+function promptForVerificationCode() {
+    if (!verificationState.institutionalEmail) {
+        alert('Please start the verification process first');
+        return;
+    }
+    
+    const verificationCode = prompt(
+        `Please enter the 6-digit verification code sent to ${verificationState.institutionalEmail}:\n\n` +
+        `(If you didn't receive the code, you can request a new one)`
+    );
+    
+    if (verificationCode === null) {
+        // User cancelled - keep state but don't proceed
+        return;
+    }
+    
+    if (!verificationCode || verificationCode.trim().length !== 6) {
+        if (confirm('Invalid code format. Would you like to try again or request a new verification code?')) {
+            promptForVerificationCode(); // Try again
+        } else {
+            requestNewVerificationCode(); // Request new code
+        }
+        return;
+    }
+    
+    confirmEmailVerification(verificationState.institutionalEmail, verificationCode.trim());
+}
+
+// NEW: Function to request a new verification code without re-entering email (fixes issue #2)
+async function requestNewVerificationCode() {
+    if (!verificationState.institutionalEmail) {
+        alert('Please start the verification process first');
+        startEmailVerification();
+        return;
+    }
+    
+    try {
+        const token = localStorage.getItem('authToken');
+        const response = await fetch(`${API_BASE}/verify-institutional-email-for-discount`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ institutionalEmail: verificationState.institutionalEmail })
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+            alert(`New verification code sent to ${verificationState.institutionalEmail}!`);
+            setTimeout(() => {
+                promptForVerificationCode();
+            }, 1000);
+        } else {
+            alert('Error sending new code: ' + result.error);
+        }
+        
+    } catch (error) {
+        console.error('Error requesting new verification code:', error);
+        alert('Failed to send new verification code. Please try again.');
+    }
+}
+
+// NEW: Function to create appropriate verification button based on state
+function createVerificationButton() {
+    const buttonText = verificationState.awaitingCode ? 
+        'Enter Verification Code' : 
+        'Verify Institutional Email';
+    
+    const clickFunction = verificationState.awaitingCode ? 
+        'promptForVerificationCode()' : 
+        'startEmailVerification()';
+    
+    return `<button class="verify-email-btn" onclick="${clickFunction}" style="
+        background: white;
+        color: #45a049;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    ">${buttonText}</button>`;
 }
 
 // DISCOUNT CODE FUNCTIONS
@@ -1586,3 +1695,5 @@ window.openAddInstitutionModal = openAddInstitutionModal;
 window.editInstitution = editInstitution;
 window.deactivateInstitution = deactivateInstitution;
 window.refreshAnalytics = refreshAnalytics;
+window.promptForVerificationCode = promptForVerificationCode;
+window.requestNewVerificationCode = requestNewVerificationCode;
