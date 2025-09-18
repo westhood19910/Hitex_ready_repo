@@ -1054,64 +1054,14 @@ function dismissInstitutionalAlert() {
 async function startEmailVerification() {
     console.log('Starting email verification process');
     
-    // If we're already awaiting a code, just ask for it again
+    // If we're already awaiting a code, show the code input modal
     if (verificationState.awaitingCode && verificationState.institutionalEmail) {
-        promptForVerificationCode();
+        showVerificationCodeModal();
         return;
     }
     
-    const institutionalEmail = prompt('Please enter your institutional email address to verify your discount eligibility:');
-    
-    if (!institutionalEmail || !institutionalEmail.includes('@')) {
-        alert('Please enter a valid email address');
-        return;
-    }
-    
-    const loadingBtn = document.querySelector('.verify-email-btn');
-    if (loadingBtn) {
-        loadingBtn.textContent = 'Sending verification code...';
-        loadingBtn.disabled = true;
-    }
-    
-    try {
-        const token = localStorage.getItem('authToken');
-        const response = await fetch(`${API_BASE}/verify-institutional-email-for-discount`, {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ institutionalEmail })
-        });
-        
-        const result = await response.json();
-        
-        if (response.ok) {
-            // Update verification state
-            verificationState.institutionalEmail = institutionalEmail;
-            verificationState.verificationSent = true;
-            verificationState.awaitingCode = true;
-            
-            alert(`Verification code sent to ${institutionalEmail}! Please check your email.`);
-            
-            // Prompt for code immediately
-            setTimeout(() => {
-                promptForVerificationCode();
-            }, 1000);
-            
-        } else {
-            alert('Error: ' + result.error);
-        }
-        
-    } catch (error) {
-        console.error('Error starting email verification:', error);
-        alert('Failed to send verification email. Please try again.');
-    } finally {
-        if (loadingBtn) {
-            loadingBtn.textContent = 'Verify Institutional Email';
-            loadingBtn.disabled = false;
-        }
-    }
+    // Show email input modal instead of prompt
+    showEmailInputModal();
 }
 // ENDED
 
@@ -1170,32 +1120,16 @@ async function confirmEmailVerification(institutionalEmail, code) {
 // ENDED
 
 // NEW: Separate function to prompt for verification code (fixes popup disappearing issue)
+
 function promptForVerificationCode() {
     if (!verificationState.institutionalEmail) {
         alert('Please start the verification process first');
+        startEmailVerification();
         return;
     }
     
-    const verificationCode = prompt(
-        `Please enter the 6-digit verification code sent to ${verificationState.institutionalEmail}:\n\n` +
-        `(If you didn't receive the code, you can request a new one)`
-    );
-    
-    if (verificationCode === null) {
-        // User cancelled - keep state but don't proceed
-        return;
-    }
-    
-    if (!verificationCode || verificationCode.trim().length !== 6) {
-        if (confirm('Invalid code format. Would you like to try again or request a new verification code?')) {
-            promptForVerificationCode(); // Try again
-        } else {
-            requestNewVerificationCode(); // Request new code
-        }
-        return;
-    }
-    
-    confirmEmailVerification(verificationState.institutionalEmail, verificationCode.trim());
+    // Show modal instead of prompt
+    showVerificationCodeModal();
 }
 
 // NEW: Function to request a new verification code without re-entering email (fixes issue #2)
@@ -1235,6 +1169,7 @@ async function requestNewVerificationCode() {
 }
 
 // NEW: Function to create appropriate verification button based on state
+
 function createVerificationButton() {
     const buttonText = verificationState.awaitingCode ? 
         'Enter Verification Code' : 
@@ -1254,6 +1189,262 @@ function createVerificationButton() {
         cursor: pointer;
         transition: all 0.3s ease;
     ">${buttonText}</button>`;
+}
+
+function showEmailInputModal() {
+    const modal = document.getElementById('emailVerificationModal');
+    const title = document.getElementById('verificationModalTitle');
+    const body = document.getElementById('verificationModalBody');
+    
+    title.textContent = 'Verify Institutional Email';
+    body.innerHTML = `
+        <div style="margin-bottom: 1rem;">
+            <p>Please enter your institutional email address to verify your discount eligibility:</p>
+        </div>
+        <div class="form-group">
+            <label for="institutionalEmailInput">Institutional Email:</label>
+            <input type="email" id="institutionalEmailInput" placeholder="your.name@university.edu" style="width: 100%; padding: 8px; margin: 8px 0;">
+        </div>
+        <div style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">
+            <p>We'll send a 6-digit verification code to this email address.</p>
+        </div>
+        <div class="form-actions">
+            <button type="button" class="op-button" onclick="closeVerificationModal()">Cancel</button>
+            <button type="button" class="prompt-button" onclick="sendVerificationCode()" id="sendCodeBtn">Send Code</button>
+        </div>
+    `;
+    
+    modal.style.display = 'flex';
+    
+    // Focus on input and allow Enter key
+    setTimeout(() => {
+        const input = document.getElementById('institutionalEmailInput');
+        input.focus();
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendVerificationCode();
+            }
+        });
+    }, 100);
+}
+
+// NEW: Send verification code (called from modal)
+async function sendVerificationCode() {
+    const emailInput = document.getElementById('institutionalEmailInput');
+    const institutionalEmail = emailInput.value.trim();
+    
+    if (!institutionalEmail || !institutionalEmail.includes('@')) {
+        alert('Please enter a valid email address');
+        emailInput.focus();
+        return;
+    }
+    
+    const sendBtn = document.getElementById('sendCodeBtn');
+    sendBtn.textContent = 'Sending...';
+    sendBtn.disabled = true;
+    
+    try {
+        const token = localStorage.getItem('authToken');
+        const response = await fetch(`${API_BASE}/verify-institutional-email-for-discount`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ institutionalEmail })
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+            // Update verification state
+            verificationState.institutionalEmail = institutionalEmail;
+            verificationState.verificationSent = true;
+            verificationState.awaitingCode = true;
+            
+            // Show success message and switch to code input
+            setTimeout(() => {
+                showVerificationCodeModal();
+            }, 500);
+            
+        } else {
+            alert('Error: ' + result.error);
+        }
+        
+    } catch (error) {
+        console.error('Error sending verification code:', error);
+        alert('Failed to send verification email. Please try again.');
+    } finally {
+        sendBtn.textContent = 'Send Code';
+        sendBtn.disabled = false;
+    }
+}
+
+function showVerificationCodeModal() {
+    const modal = document.getElementById('emailVerificationModal');
+    const title = document.getElementById('verificationModalTitle');
+    const body = document.getElementById('verificationModalBody');
+    
+    title.textContent = 'Enter Verification Code';
+    body.innerHTML = `
+        <div style="margin-bottom: 1rem;">
+            <p>We've sent a 6-digit verification code to:</p>
+            <p style="font-weight: bold; color: #2c5aa0;">${verificationState.institutionalEmail}</p>
+        </div>
+        <div class="form-group">
+            <label for="verificationCodeInput">Verification Code:</label>
+            <input type="text" id="verificationCodeInput" placeholder="123456" maxlength="6" 
+                   style="width: 100%; padding: 12px; margin: 8px 0; text-align: center; font-size: 1.2rem; letter-spacing: 2px;">
+        </div>
+        <div style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">
+            <p>Enter the 6-digit code from your email. The code expires in 15 minutes.</p>
+        </div>
+        <div class="form-actions">
+            <button type="button" class="op-button op-info" onclick="resendVerificationCode()">Resend Code</button>
+            <button type="button" class="op-button" onclick="closeVerificationModal()">Cancel</button>
+            <button type="button" class="prompt-button" onclick="submitVerificationCode()" id="submitCodeBtn">Verify</button>
+        </div>
+    `;
+    
+    modal.style.display = 'flex';
+    
+    // Focus on input and format code as user types
+    setTimeout(() => {
+        const input = document.getElementById('verificationCodeInput');
+        input.focus();
+        
+        // Format input (numbers only, max 6 digits)
+        input.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '').substring(0, 6);
+        });
+        
+        // Allow Enter key to submit
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && e.target.value.length === 6) {
+                submitVerificationCode();
+            }
+        });
+    }, 100);
+}
+
+// NEW: Submit verification code (called from modal)
+async function submitVerificationCode() {
+    const codeInput = document.getElementById('verificationCodeInput');
+    const code = codeInput.value.trim();
+    
+    if (!code || code.length !== 6) {
+        alert('Please enter a valid 6-digit code');
+        codeInput.focus();
+        return;
+    }
+    
+    const submitBtn = document.getElementById('submitCodeBtn');
+    submitBtn.textContent = 'Verifying...';
+    submitBtn.disabled = true;
+    
+    try {
+        const token = localStorage.getItem('authToken');
+        const response = await fetch(`${API_BASE}/confirm-institutional-email-for-discount`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 
+                institutionalEmail: verificationState.institutionalEmail, 
+                code: code 
+            })
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+            // Success! Close modal and show success
+            closeVerificationModal();
+            
+            alert(`Email verified successfully! You're now eligible for ${result.discountPercentage}% discount on all services.`);
+            
+            // Clear verification state
+            verificationState = {
+                institutionalEmail: null,
+                verificationSent: false,
+                awaitingCode: false
+            };
+            
+            // Clear the current alert and reload discount system
+            dismissInstitutionalAlert();
+            
+            setTimeout(() => {
+                checkUserDiscountEligibility();
+                loadUserDiscountHistory();
+            }, 1000);
+            
+        } else {
+            // Handle verification failures
+            if (result.error.includes('Invalid or expired')) {
+                const retry = confirm('The verification code is invalid or has expired. Would you like us to send a new code?');
+                if (retry) {
+                    resendVerificationCode();
+                }
+            } else {
+                alert('Verification failed: ' + result.error);
+            }
+        }
+        
+    } catch (error) {
+        console.error('Error confirming email verification:', error);
+        alert('Failed to verify email. Please try again.');
+    } finally {
+        submitBtn.textContent = 'Verify';
+        submitBtn.disabled = false;
+    }
+}
+
+async function resendVerificationCode() {
+    if (!verificationState.institutionalEmail) {
+        alert('Please start the verification process again');
+        closeVerificationModal();
+        startEmailVerification();
+        return;
+    }
+    
+    try {
+        const token = localStorage.getItem('authToken');
+        const response = await fetch(`${API_BASE}/verify-institutional-email-for-discount`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ institutionalEmail: verificationState.institutionalEmail })
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+            alert(`New verification code sent to ${verificationState.institutionalEmail}!`);
+            // Clear the input field for new code
+            const input = document.getElementById('verificationCodeInput');
+            if (input) {
+                input.value = '';
+                input.focus();
+            }
+        } else {
+            alert('Error sending new code: ' + result.error);
+        }
+        
+    } catch (error) {
+        console.error('Error resending verification code:', error);
+        alert('Failed to send new verification code. Please try again.');
+    }
+}
+
+// NEW: Close verification modal
+function closeVerificationModal() {
+    const modal = document.getElementById('emailVerificationModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
 }
 
 // DISCOUNT CODE FUNCTIONS
@@ -1671,10 +1862,7 @@ window.onclick = function(event) {
     });
 }
 
-// ==========================================
 // GLOBAL FUNCTION EXPORTS
-// ==========================================
-
 // Make functions available globally for onclick handlers
 window.dismissInstitutionalAlert = dismissInstitutionalAlert;
 window.startEmailVerification = startEmailVerification;
@@ -1697,3 +1885,9 @@ window.deactivateInstitution = deactivateInstitution;
 window.refreshAnalytics = refreshAnalytics;
 window.promptForVerificationCode = promptForVerificationCode;
 window.requestNewVerificationCode = requestNewVerificationCode;
+window.showEmailInputModal = showEmailInputModal;
+window.sendVerificationCode = sendVerificationCode;
+window.showVerificationCodeModal = showVerificationCodeModal;
+window.submitVerificationCode = submitVerificationCode;
+window.resendVerificationCode = resendVerificationCode;
+window.closeVerificationModal = closeVerificationModal;
