@@ -755,18 +755,7 @@ function showRecognizedInstitutionAlertWithSuggestion(institutionName, instituti
             position: relative;
             box-shadow: 0 4px 20px rgba(76, 175, 80, 0.3);
         ">
-            <button class="alert-dismiss-btn" onclick="dismissInstitutionalAlert()" style="
-                position: absolute;
-                top: 15px;
-                right: 15px;
-                background: none;
-                border: none;
-                color: white;
-                font-size: 24px;
-                cursor: pointer;
-                opacity: 0.8;
-                font-weight: bold;
-            ">&times;</button>
+            
             
             <div style="display: flex; align-items: center; margin-bottom: 15px;">
                 <div style="font-size: 2rem; margin-right: 15px;">🎓</div>
@@ -828,18 +817,6 @@ function showRecognizedInstitutionAlert(institutionName, institutionData) {
             position: relative;
             box-shadow: 0 4px 20px rgba(76, 175, 80, 0.3);
         ">
-            <button class="alert-dismiss-btn" onclick="dismissInstitutionalAlert()" style="
-                position: absolute;
-                top: 15px;
-                right: 15px;
-                background: none;
-                border: none;
-                color: white;
-                font-size: 24px;
-                cursor: pointer;
-                opacity: 0.8;
-                font-weight: bold;
-            ">&times;</button>
             
             <div style="display: flex; align-items: center; margin-bottom: 15px;">
                 <div style="font-size: 2rem; margin-right: 15px;">🎓</div>
@@ -905,18 +882,7 @@ function showUnrecognizedInstitutionAlert(institutionName, bestGuess = null) {
             position: relative;
             box-shadow: 0 4px 20px rgba(255, 152, 0, 0.3);
         ">
-            <button class="alert-dismiss-btn" onclick="dismissInstitutionalAlert()" style="
-                position: absolute;
-                top: 15px;
-                right: 15px;
-                background: none;
-                border: none;
-                color: white;
-                font-size: 24px;
-                cursor: pointer;
-                opacity: 0.8;
-                font-weight: bold;
-            ">&times;</button>
+            
             
             <div style="display: flex; align-items: center; margin-bottom: 15px;">
                 <div style="font-size: 2rem; margin-right: 15px;">🏛️</div>
@@ -974,18 +940,6 @@ function showVerifiedInstitutionalStatus(profile) {
             position: relative;
             box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
         ">
-            <button class="alert-dismiss-btn" onclick="dismissInstitutionalAlert()" style="
-                position: absolute;
-                top: 15px;
-                right: 15px;
-                background: none;
-                border: none;
-                color: white;
-                font-size: 24px;
-                cursor: pointer;
-                opacity: 0.8;
-                font-weight: bold;
-            ">&times;</button>
             
             <div style="display: flex; align-items: center; margin-bottom: 15px;">
                 <div style="font-size: 2rem; margin-right: 15px;">✅</div>
