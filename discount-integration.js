@@ -578,6 +578,8 @@ function exportSubmissions() {
     document.body.removeChild(a);
 }
 
+// REFRESH CODE
+
 async function refreshDashboard() {
     const token = localStorage.getItem('authToken');
     if (!token) return;
@@ -591,8 +593,12 @@ async function refreshDashboard() {
         await loadManuscripts(headers);
         updateDashboardStats();
         
+        // Remove any existing refresh notifications
+        const existingRefreshNotifications = document.querySelectorAll('.refresh-notification');
+        existingRefreshNotifications.forEach(notification => notification.remove());
+        
         const notification = document.createElement('div');
-        notification.className = 'alert-item';
+        notification.className = 'alert-item refresh-notification'; // Add specific class
         notification.innerHTML = `
             <h4>Dashboard Updated</h4>
             <p>Your dashboard has been refreshed with the latest information.</p>

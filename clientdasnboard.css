@@ -1,5 +1,4 @@
-
-        :root {
+:root {
             --primary: #1a5db4;
             --primary-light: #e8f1fd;
             --primary-dark: #0c3b80;
@@ -13,6 +12,7 @@
             --white: #ffffff;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --dash-button-background: linear-gradient(135deg, #1a5db4, #0c3b80);
             --radius: 12px;
             --radius-sm: 6px;
             --transition: all 0.3s ease;
@@ -33,6 +33,7 @@
             --section-spacing-mobile: 3rem;
             --container-padding: 2rem;
             --container-padding-mobile: 1rem;
+            --navbar-height: 70px;
         }
 
         * {
@@ -51,70 +52,97 @@
         .app-scaffold {
             margin-top: 3em;
             display: flex;
+            flex-direction: column;
             min-height: 100vh;
         }
 
-        /* Navigation Sidebar */
+        /* Horizontal Navigation */
         .navigation-pillar {
-            width: 280px;
-            background: var(--white);
-            border-right: 1px solid var(--grey);
+            width: 100%;
+            background: var(--dash-button-background);
             display: flex;
             flex-direction: column;
             position: fixed;
-            height: 100vh;
+            top: 0;
+            left: 0;
             z-index: 100;
-            box-shadow: var(--shadow);
+            margin-top: 3em;
         }
 
-        .pillar-crest {
-            padding: 2rem 1.5rem;
-            border-bottom: 1px solid var(--grey);
-            text-align: center;
-        }
-
-        .profile-sigil {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            margin-bottom: 1rem;
-            border: 3px solid var(--primary-light);
-        }
-
-        .profile-identifier {
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 0.25rem;
-        }
-
-        .user-email {
-            font-size: 0.875rem;
-            color: var(--text-light);
+        .navbar-top {
+            display: flex;
+            align-items: center;
+            height: var(--navbar-height);
+            padding: 0 2rem;
         }
 
         .pillar-directory {
             flex: 1;
-            padding: 1rem 0;
+            padding: 0;
+        }
+
+        .pillar-crest {
+            display: flex;
+            align-items: center;
+            padding: 0;
+            border-bottom: none;
+            border-left: 1px solid var(--grey);
+            padding-left: 2rem;
+            margin-left: 2rem;
+            min-width: 250px;
+        }
+
+        .profile-sigil {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            margin-bottom: 0;
+            border: 2px solid var(--primary-light);
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .profile-identifier {
+            font-weight: 600;
+            color: var(--sub-head-color);
+            margin-bottom: 0.2rem;
+            font-size: 0.9rem;
+        }
+
+        .user-email {
+            font-size: 0.75rem;
+            color: var(--sub-head-color);
         }
 
         .pillar-directory ul {
             list-style: none;
             padding: 0;
+            display: flex;
+            align-items: center;
+            margin: 0;
         }
 
         .pillar-directory li {
-            margin-bottom: 0.25rem;
+            margin-bottom: 0;
+            margin-right: 1rem;
         }
 
         .pillar-link {
             display: block;
-            padding: 0.75rem 1.5rem;
-            color: var(--text);
+            padding: 0.5rem 1rem;
+            color: var(--sub-head-color);
             text-decoration: none;
             border-radius: var(--radius-sm);
-            margin: 0 1rem;
             transition: var(--transition);
             position: relative;
+            white-space: nowrap;
+            font-size: 0.9rem;
+            font-weight: 600;
         }
 
         .pillar-link:hover {
@@ -123,20 +151,35 @@
         }
 
         .pillar-link.active {
-            background-color: var(--primary);
-            color: var(--white);
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+        }
+
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .navbar-bottom {
+            padding: 0.75rem 2rem;
+            border-top: 1px solid var(--grey);
+            background: white;
+            display: flex;
+            justify-content: flex-start;
         }
 
         .session-terminate-btn {
-            margin: 1rem 1.5rem 2rem;
-            padding: 0.75rem 1rem;
-            background: var(--accent);
+            margin: 0;
+            padding: 0.5rem 1rem;
+            background: var(--button-background);
             color: var(--white);
             border: none;
             border-radius: var(--radius-sm);
             cursor: pointer;
             font-weight: 500;
             transition: var(--transition);
+            font-size: 0.9rem;
         }
 
         .session-terminate-btn:hover {
@@ -144,10 +187,21 @@
             transform: translateY(-1px);
         }
 
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
+        }
+
         /* Main Content Area */
         .primary-viewport {
             flex: 1;
-            margin-left: 280px;
+            margin-left: 0;
+            margin-top: calc(var(--navbar-height) + 60px); /* Adjusted for navbar + logout section */
             padding: 2rem;
             overflow-y: auto;
         }
@@ -175,7 +229,7 @@
 
         /* Buttons */
         .prompt-button {
-            background: var(--button-background);
+            background: var(--dash-button-background);
             color: var(--white);
             padding: 0.75rem 1.5rem;
             border: none;
@@ -190,6 +244,7 @@
         .prompt-button:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-hover);
+            color: var(--white);
         }
 
         .op-button {
@@ -481,19 +536,96 @@
         }
 
         /* Responsive Design */
+        @media (max-width: 1200px) {
+            .pillar-link {
+                font-size: 0.85rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .pillar-crest {
+                min-width: 200px;
+                padding-left: 1rem;
+                margin-left: 1rem;
+            }
+            
+            .profile-identifier {
+                font-size: 0.8rem;
+            }
+            
+            .user-email {
+                font-size: 0.7rem;
+            }
+        }
+
         @media (max-width: 768px) {
-            .navigation-pillar {
-                transform: translateX(-100%);
-                transition: transform 0.3s ease;
+            .navbar-top {
+                padding: 0 1rem;
             }
 
-            .navigation-pillar.mobile-open {
-                transform: translateX(0);
+            .navbar-bottom {
+                padding: 0.75rem 1rem;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+                order: 2;
+                margin-left: auto;
+                margin-right: 1rem;
+            }
+
+            .pillar-directory {
+                order: 1;
+                position: fixed;
+                top: calc(var(--navbar-height) + 60px);
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                border-bottom: 1px solid var(--grey);
+                box-shadow: var(--shadow);
+                display: none;
+                z-index: 99;
+                flex: none;
+            }
+
+            .pillar-directory.mobile-open {
+                display: block;
+            }
+
+            .pillar-directory ul {
+                flex-direction: column;
+                padding: 1rem 0;
+            }
+
+            .pillar-directory li {
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+                width: 100%;
+            }
+
+            .pillar-link {
+                padding: 0.75rem 1rem;
+                margin: 0 1rem;
+                display: block;
+            }
+
+            .pillar-crest {
+                order: 3;
+                border-left: none;
+                padding-left: 0;
+                margin-left: 0;
+                min-width: auto;
+            }
+
+            .session-terminate-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
             }
 
             .primary-viewport {
-                margin-left: 0;
                 padding: 1rem;
+                margin-top: calc(var(--navbar-height) + 60px);
             }
 
             .metrics-matrix {
@@ -624,4 +756,135 @@
             gap: 1rem;
             justify-content: flex-end;
             margin-top: 1.5rem;
+        }
+
+        /* Additional styles for the service sections */
+        .old_sol_541-section {
+            padding: 4rem 0;
+        }
+
+        .old_sol_541-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .old_sol_541-section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text);
+        }
+
+        .old_sol_541-service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .old_sol_541-service-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .old_sol_541-service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .old_sol_541-cta-btn {
+            background: var(--button-background);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: var(--transition);
+        }
+
+        .hi_wgy91-sev-ver-001 {
+            padding: 4rem 0;
+            background: var(--grey-light);
+        }
+
+        .hi_wgy91-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: -1rem;
+        }
+
+        .hi_wgy91-col-12 {
+            flex: 0 0 100%;
+            padding: 1rem;
+        }
+
+        .hi_wgy91-col-md-4 {
+            flex: 0 0 33.333%;
+            padding: 1rem;
+        }
+
+        .hi_wgy91-ju-00po {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--text);
+        }
+
+        .hi_wgy91-fru-p3-001 {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            height: 100%;
+        }
+
+        .yo_faq_container {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .yo_faq_main_title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text);
+        }
+
+        .yo_faq_item {
+            background: var(--white);
+            margin-bottom: 1rem;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .yo_faq_question {
+            padding: 1.5rem;
+            background: var(--primary-light);
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text);
+            transition: var(--transition);
+        }
+
+        .yo_faq_question:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .yo_faq_answer {
+            padding: 1.5rem;
+            display: none;
+        }
+
+        .yo_faq_answer.active {
+            display: block;
         }

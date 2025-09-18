@@ -186,13 +186,9 @@
 
 
     <div class="app-scaffold">
-        <aside class="navigation-pillar">
-            <div class="pillar-crest">
-                <img src="https://i.pravatar.cc/150" alt="User Avatar" class="profile-sigil">
-                <div class="profile-identifier" id="profileName">Loading...</div>
-                <div class="user-email" id="profileEmail"></div>
-            </div>
-            <nav class="pillar-directory">
+         <aside class="navigation-pillar">
+        <div class="navbar-top">
+            <nav class="pillar-directory" id="mobileNav">
                 <ul>
                     <li><a href="#" class="pillar-link active" data-section="dashboard">Dashboard</a></li>
                     <li><a href="#" class="pillar-link" data-section="submissions">My Submissions</a></li>
@@ -204,8 +200,23 @@
                     <li><a href="#" class="pillar-link" data-section="support">Support</a></li>
                 </ul>
             </nav>
+            
+            <!-- Mobile menu toggle button -->
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+            
+            <div class="pillar-crest">
+                <img src="https://i.pravatar.cc/150" alt="User Avatar" class="profile-sigil">
+                <div class="profile-info">
+                    <div class="profile-identifier" id="profileName">Loading...</div>
+                    <div class="user-email" id="profileEmail">example.com</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="navbar-bottom">
             <button class="session-terminate-btn" id="logoutButton">Logout</button>
-        </aside>
+        </div>
+    </aside>
 
         <main class="primary-viewport">
             <!-- Dashboard Section -->
@@ -531,7 +542,7 @@
 
 
     <!-- SERVICED CODE -->
-     
+
      <section style="margin-top: 5em;" class="old_sol_541-section old_sol_541-fixed-bg old_sol_541-intro-bg old_sol_541-no-alt-bg">
         <div class="old_sol_541-container">
             <h2 class="old_sol_541-section-title">Our Service Levels</h2>
@@ -720,6 +731,42 @@
         </div>
     </div>
 </div>
+
+ <script>
+
+ // function existing JavaScript file
+function toggleMobileMenu() {
+    const mobileNav = document.getElementById('mobileNav');
+    mobileNav.classList.toggle('mobile-open');
+}
+
+// Close mobile menu when clicking on a navigation link
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('.pillar-link');
+    const mobileNav = document.getElementById('mobileNav');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            // Close mobile menu when a link is clicked (on mobile)
+            if (window.innerWidth <= 768) {
+                mobileNav.classList.remove('mobile-open');
+            }
+        });
+    });
+    
+    // Close mobile menu when clicking outside of it
+    document.addEventListener('click', function(event) {
+        if (window.innerWidth <= 768) {
+            const isClickInsideNav = mobileNav.contains(event.target);
+            const isClickOnToggle = event.target.classList.contains('mobile-menu-toggle');
+            
+            if (!isClickInsideNav && !isClickOnToggle) {
+                mobileNav.classList.remove('mobile-open');
+            }
+        }
+    });
+});
+</script>
 
    <script src="discount-integration.js"></script>
      
