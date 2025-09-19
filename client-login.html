@@ -255,24 +255,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 const data = await response.json();
-
                 if (!response.ok) {
-                    throw new Error(data.error || 'Login failed');
+               throw new Error(data.error || 'Login failed');
                 }
 
-                // Store token & user info
-                // Store token & user info
+             // Store token & user info
                localStorage.setItem('authToken', data.token);
-                localStorage.setItem('user', JSON.stringify(data.user));
+               localStorage.setItem('user', JSON.stringify(data.user));
 
-              // Trigger dashboard activation
-               if (window.checkAuthenticationStatus) {
-               window.checkAuthenticationStatus();
-                  }
+              // Clear welcome message flag so it shows on first page after login
+                     localStorage.removeItem('welcomeMessageShown');
 
-                 alert('Login successful! Redirecting...');
+               // Trigger dashboard activation
+                          if (window.checkAuthenticationStatus) {
+                    window.checkAuthenticationStatus();
+                         }
 
-               // Redirect to frontend page after 1.5ss
+                   alert('Login successful! Redirecting...');
+
                    setTimeout(() => {
                  window.location.href = `${FRONTEND_URL}/client-dashboard.html`;
                 }, 1500);

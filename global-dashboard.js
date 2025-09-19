@@ -5,7 +5,6 @@
     let dashboardActive = false;
     let currentUser = null;
     let welcomeTimeout = null;
-    let welcomeShown = false; // Track if welcome message has been shown
     
     // Initialize dashboard system
     function initializeDashboard() {
@@ -83,15 +82,19 @@
         }
     }
     
-    // Show welcome message temporarily (only once per session)
+    // Show welcome message temporarily (only once per login session)
     function showWelcomeMessage(userName) {
-        if (welcomeShown) return; // Don't show again
+        // Check if welcome message has already been shown for this session
+        const welcomeShown = localStorage.getItem('welcomeMessageShown');
+        if (welcomeShown === 'true') return; // Don't show again
         
         const welcomeElement = document.getElementById('dashboardWelcomeMessage');
         if (welcomeElement) {
             welcomeElement.textContent = `Welcome back, ${userName}!`;
             welcomeElement.classList.add('show');
-            welcomeShown = true; // Mark as shown
+            
+            // Mark as shown in localStorage
+            localStorage.setItem('welcomeMessageShown', 'true');
             
             // Clear any existing timeout
             if (welcomeTimeout) {
@@ -108,7 +111,7 @@
                     welcomeElement.textContent = '';
                     welcomeElement.classList.remove('fade-out');
                 }, 500);
-            }, 15000); // Changed to 15 seconds
+            }, 15000); // 15 seconds
         }
     }
     
@@ -131,7 +134,7 @@
         document.getElementById('dashboardUserName').textContent = firstName;
         document.getElementById('dashboardUserEmail').textContent = userData.email || '';
         
-        // Show welcome message for 15 seconds (only once)
+        // Show welcome message for 15 seconds (only once per login session)
         showWelcomeMessage(firstName);
     }
     
@@ -139,7 +142,9 @@
     function deactivateDashboard() {
         dashboardActive = false;
         currentUser = null;
-        welcomeShown = false; // Reset for next login
+        
+        // Clear welcome message flag when logging out
+        localStorage.removeItem('welcomeMessageShown');
         
         // Clear welcome message timeout
         if (welcomeTimeout) {
