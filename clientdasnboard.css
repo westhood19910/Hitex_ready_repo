@@ -888,3 +888,17 @@
         .yo_faq_answer.active {
             display: block;
         }
+
+        /* SESSION INDICATOR */
+       
+.session-indicator {
+    background: #e8f5e8 !important;
+    color: #2e7d2e !important;
+    padding: 8px 16px !important;
+    text-align: center !important;
+    font-size: 0.9rem !important;
+    border-bottom: 1px solid #c8e6c9 !important;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
