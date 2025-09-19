@@ -1,4 +1,4 @@
-// Global Static Dashboard System
+// Global Dashboard System - Static Version with Navigation-Pillar Styling
 (function() {
     'use strict';
     
@@ -14,32 +14,41 @@
         setInterval(checkAuthenticationStatus, 30000);
     }
     
-    // Create dashboard HTML structure
+    // Create dashboard HTML structure - Based on navigation-pillar structure
     function createDashboardHTML() {
         const dashboardHTML = `
             <div id="globalDashboard" class="dashboard-container">
-                <div class="dashboard-user-info">
-                    <div class="dashboard-avatar" id="dashboardAvatar"></div>
-                    <div>
-                        <div id="dashboardUserName">Loading...</div>
-                        <div id="dashboardUserEmail" style="font-size: 0.8rem; color: #666;"></div>
+                <div class="dashboard-top">
+                    <div class="dashboard-user-info">
+                        <div class="dashboard-avatar" id="dashboardAvatar"></div>
+                        <div class="dashboard-user-details">
+                            <div class="dashboard-user-name" id="dashboardUserName">Loading...</div>
+                            <div class="dashboard-user-email" id="dashboardUserEmail"></div>
+                        </div>
+                    </div>
+                    
+                    <nav class="dashboard-nav">
+                        <ul>
+                            <li><a href="client-dashboard.html">Dashboard</a></li>
+                            <li><a href="client-dashboard.html#submissions">Submissions</a></li>
+                            <li><a href="client-dashboard.html#projects">Projects</a></li>
+                            <li><a href="client-dashboard.html#communications">Messages</a></li>
+                            <li><a href="client-dashboard.html#invoices">Invoices</a></li>
+                            <li><a href="client-dashboard.html#resources">Resources</a></li>
+                            <li><a href="profile.html">Profile</a></li>
+                            <li><a href="client-dashboard.html#support">Support</a></li>
+                        </ul>
+                    </nav>
+                    
+                    <div class="dashboard-actions">
+                        <button class="dashboard-logout" onclick="logoutUser()">Sign Out</button>
                     </div>
                 </div>
                 
-                <nav class="dashboard-nav">
-                    <ul>
-                        <li><a href="client-dashboard.html">Dashboard Overview</a></li>
-                        <li><a href="client-dashboard.html#submissions">My Submissions</a></li>
-                        <li><a href="client-dashboard.html#projects">Active Projects</a></li>
-                        <li><a href="client-dashboard.html#communications">Messages</a></li>
-                        <li><a href="client-dashboard.html#invoices">Invoices & Payments</a></li>
-                        <li><a href="client-dashboard.html#resources">Resources</a></li>
-                        <li><a href="profile.html">Edit Profile</a></li>
-                        <li><a href="client-dashboard.html#support">Support</a></li>
-                    </ul>
-                    
-                    <button class="dashboard-logout" onclick="logoutUser()">Sign Out</button>
-                </nav>
+                <div class="dashboard-bottom">
+                    <span>Quick access to your dashboard anywhere on the site</span>
+                    <span id="dashboardStatus">All systems operational</span>
+                </div>
             </div>
         `;
         
@@ -50,7 +59,7 @@
     async function checkAuthenticationStatus() {
         const token = localStorage.getItem('authToken');
         
-        if (token) {
+        if (token && !dashboardActive) {
             try {
                 // Verify token with server
                 const response = await fetch('https://all-branched-end.onrender.com/profile', {
@@ -67,31 +76,23 @@
                 console.error('Auth check failed:', error);
                 deactivateDashboard();
             }
-        } else {
+        } else if (!token && dashboardActive) {
             deactivateDashboard();
         }
     }
     
     // Activate dashboard mode
     function activateDashboard(userData) {
-        if (dashboardActive) return; // Prevent multiple activations
-        
         dashboardActive = true;
         currentUser = userData;
         
-        // Show the dashboard
+        // Show dashboard bar
         const dashboard = document.getElementById('globalDashboard');
         if (dashboard) {
-            dashboard.classList.add('logged-in');
+            dashboard.classList.add('active');
         }
         
-        // Update main navigation
-        const mainNav = document.querySelector('.nav__bar_oi');
-        if (mainNav) {
-            mainNav.classList.add('logged-in');
-        }
-        
-        // Adjust body padding to accommodate dashboard
+        // Add body class for content adjustment
         document.body.classList.add('dashboard-active');
         
         // Update dashboard user info
@@ -99,31 +100,26 @@
             userData.firstName || userData.fullName || 'User';
         document.getElementById('dashboardUserEmail').textContent = 
             userData.email || '';
+            
+        // Update status
+        document.getElementById('dashboardStatus').textContent = 
+            `Welcome back, ${userData.firstName || 'User'}`;
     }
     
     // Deactivate dashboard mode
     function deactivateDashboard() {
-        if (!dashboardActive) return; // Prevent multiple deactivations
-        
         dashboardActive = false;
         currentUser = null;
         
-        // Hide the dashboard
+        // Hide dashboard bar
         const dashboard = document.getElementById('globalDashboard');
         if (dashboard) {
-            dashboard.classList.remove('logged-in');
+            dashboard.classList.remove('active');
         }
         
-        // Remove logged-in class from main nav
-        const mainNav = document.querySelector('.nav__bar_oi');
-        if (mainNav) {
-            mainNav.classList.remove('logged-in');
-        }
-        
-        // Remove body padding adjustment
+        // Remove body class
         document.body.classList.remove('dashboard-active');
         
-        // Clear token if it exists
         localStorage.removeItem('authToken');
     }
     
@@ -140,6 +136,9 @@
             }
         }
     };
+    
+    // Export function for manual activation (for login pages)
+    window.checkAuthenticationStatus = checkAuthenticationStatus;
     
     // Initialize when DOM is ready
     if (document.readyState === 'loading') {
