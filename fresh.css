@@ -2,6 +2,7 @@
   --red: #D54C4F;
   --blue: #032672;
   --light-blue: #D3E5FF;
+  --dash-button-background: linear-gradient(135deg, #1a5db4, #0c3b80);
   --major-heading: 2.8em;
   --major-head-small: 1.4em;
   --major-header-font-weight: 800;
@@ -10282,9 +10283,6 @@ color: #ffffffff;
 }}
 
 /* STYLESHEET OVERLAY */
-
-/* dashboard-overlay.css */
-/* Dashboard Overlay System - Horizontal Layout */
 /* Dashboard System - Static Horizontal Layout - Inspired by navigation-pillar */
 .dashboard-overlay {
     display: none; /* Not needed for static design */
@@ -10316,44 +10314,24 @@ color: #ffffffff;
     padding: 0 2rem;
 }
 
-/* User Info Section - Based on pillar-crest */
-.dashboard-user-info {
-    display: flex;
-    align-items: center;
-    padding: 0;
-    border-right: 1px solid var(--grey);
-    padding-right: 2rem;
-    margin-right: 2rem;
-    min-width: 250px;
-    color: var(--sub-head-color);
-}
-
-.dashboard-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 1rem;
-    margin-bottom: 0;
-    border: 2px solid var(--primary-light);
-    background: var(--primary-light);
-}
-
-.dashboard-user-details {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
-
-.dashboard-user-name {
-    font-weight: 600;
-    color: var(--sub-head-color);
-    margin-bottom: 0.2rem;
+/* Logout Button on Left - Based on session-terminate-btn */
+.dashboard-logout {
+    margin: 0;
+    padding: 0.5rem 1rem;
+    background: var(--button-background);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--transition);
     font-size: 0.9rem;
+    margin-right: 2rem;
 }
 
-.dashboard-user-email {
-    font-size: 0.75rem;
-    color: var(--sub-head-color);
+.dashboard-logout:hover {
+    background: var(--accent);
+    transform: translateY(-1px);
 }
 
 /* Dashboard Navigation - Based on pillar-directory */
@@ -10398,30 +10376,44 @@ color: #ffffffff;
     color: var(--primary-dark);
 }
 
-/* Dashboard Actions */
-.dashboard-actions {
+/* User Info Section on Right - Based on pillar-crest */
+.dashboard-user-info {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    padding: 0;
+    border-left: 1px solid var(--grey);
+    padding-left: 2rem;
+    margin-left: 2rem;
+    min-width: 250px;
+    color: var(--sub-head-color);
 }
 
-/* Logout Button - Based on session-terminate-btn */
-.dashboard-logout {
-    margin: 0;
-    padding: 0.5rem 1rem;
-    background: var(--button-background);
-    color: var(--white);
-    border: none;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    font-weight: 500;
-    transition: var(--transition);
+.dashboard-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 1rem;
+    margin-bottom: 0;
+    border: 2px solid var(--primary-light);
+    background: var(--primary-light);
+}
+
+.dashboard-user-details {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.dashboard-user-name {
+    font-weight: 600;
+    color: var(--sub-head-color);
+    margin-bottom: 0.2rem;
     font-size: 0.9rem;
 }
 
-.dashboard-logout:hover {
-    background: var(--accent);
-    transform: translateY(-1px);
+.dashboard-user-email {
+    font-size: 0.75rem;
+    color: var(--sub-head-color);
 }
 
 /* Dashboard Bottom Section - Based on navbar-bottom */
@@ -10430,10 +10422,23 @@ color: #ffffffff;
     border-top: 1px solid var(--grey);
     background: white;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     font-size: 0.85rem;
     color: var(--text-light);
+    min-height: 50px;
+}
+
+/* Welcome Message - Temporary display */
+.dashboard-welcome-message {
+    color: var(--primary);
+    font-weight: 500;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+.dashboard-welcome-message.fade-out {
+    opacity: 0;
 }
 
 /* Adjust main content when dashboard is active */
@@ -10452,8 +10457,8 @@ body.dashboard-active {
 @media (max-width: 992px) {
     .dashboard-user-info {
         min-width: 200px;
-        padding-right: 1rem;
-        margin-right: 1rem;
+        padding-left: 1rem;
+        margin-left: 1rem;
     }
     
     .dashboard-user-name {
@@ -10478,14 +10483,10 @@ body.dashboard-active {
         padding: 0.75rem 1rem;
     }
 
-    .dashboard-user-info {
-        border-right: none;
-        border-bottom: 1px solid var(--grey);
-        padding-right: 0;
+    .dashboard-logout {
+        order: 3;
         margin-right: 0;
-        min-width: auto;
-        padding-bottom: 1rem;
-        width: 100%;
+        margin-top: 1rem;
     }
 
     .dashboard-nav {
@@ -10512,11 +10513,16 @@ body.dashboard-active {
         text-align: center;
     }
 
-    .dashboard-actions {
+    .dashboard-user-info {
         order: 2;
+        border-left: none;
+        border-top: 1px solid var(--grey);
+        padding-left: 0;
+        margin-left: 0;
+        min-width: auto;
+        padding-top: 1rem;
         width: 100%;
         justify-content: center;
-        margin-top: 1rem;
     }
 
     .dashboard-logout {
