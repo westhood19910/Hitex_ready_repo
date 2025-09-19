@@ -4,6 +4,7 @@
     
     let dashboardActive = false;
     let currentUser = null;
+    let welcomeTimeout = null;
     
     // Initialize dashboard system
     function initializeDashboard() {
@@ -19,13 +20,7 @@
         const dashboardHTML = `
             <div id="globalDashboard" class="dashboard-container">
                 <div class="dashboard-top">
-                    <div class="dashboard-user-info">
-                        <div class="dashboard-avatar" id="dashboardAvatar"></div>
-                        <div class="dashboard-user-details">
-                            <div class="dashboard-user-name" id="dashboardUserName">Loading...</div>
-                            <div class="dashboard-user-email" id="dashboardUserEmail"></div>
-                        </div>
-                    </div>
+                    <button class="dashboard-logout" onclick="logoutUser()">Sign Out</button>
                     
                     <nav class="dashboard-nav">
                         <ul>
@@ -40,14 +35,17 @@
                         </ul>
                     </nav>
                     
-                    <div class="dashboard-actions">
-                        <button class="dashboard-logout" onclick="logoutUser()">Sign Out</button>
+                    <div class="dashboard-user-info">
+                        <div class="dashboard-avatar" id="dashboardAvatar"></div>
+                        <div class="dashboard-user-details">
+                            <div class="dashboard-user-name" id="dashboardUserName">Loading...</div>
+                            <div class="dashboard-user-email" id="dashboardUserEmail"></div>
+                        </div>
                     </div>
                 </div>
                 
                 <div class="dashboard-bottom">
-                    <span>Quick access to your dashboard anywhere on the site</span>
-                    <span id="dashboardStatus">All systems operational</span>
+                    <span class="dashboard-welcome-message" id="dashboardWelcomeMessage"></span>
                 </div>
             </div>
         `;
@@ -81,6 +79,30 @@
         }
     }
     
+    // Show welcome message temporarily
+    function showWelcomeMessage(userName) {
+        const welcomeElement = document.getElementById('dashboardWelcomeMessage');
+        if (welcomeElement) {
+            welcomeElement.textContent = `Welcome back, ${userName}!`;
+            welcomeElement.classList.remove('fade-out');
+            
+            // Clear any existing timeout
+            if (welcomeTimeout) {
+                clearTimeout(welcomeTimeout);
+            }
+            
+            // Set timeout to fade out after 5 seconds
+            welcomeTimeout = setTimeout(() => {
+                welcomeElement.classList.add('fade-out');
+                
+                // Remove text after fade animation completes
+                setTimeout(() => {
+                    welcomeElement.textContent = '';
+                }, 500);
+            }, 5000);
+        }
+    }
+    
     // Activate dashboard mode
     function activateDashboard(userData) {
         dashboardActive = true;
@@ -96,20 +118,24 @@
         document.body.classList.add('dashboard-active');
         
         // Update dashboard user info
-        document.getElementById('dashboardUserName').textContent = 
-            userData.firstName || userData.fullName || 'User';
-        document.getElementById('dashboardUserEmail').textContent = 
-            userData.email || '';
-            
-        // Update status
-        document.getElementById('dashboardStatus').textContent = 
-            `Welcome back, ${userData.firstName || 'User'}`;
+        const firstName = userData.firstName || userData.fullName || 'User';
+        document.getElementById('dashboardUserName').textContent = firstName;
+        document.getElementById('dashboardUserEmail').textContent = userData.email || '';
+        
+        // Show welcome message for 5 seconds
+        showWelcomeMessage(firstName);
     }
     
     // Deactivate dashboard mode
     function deactivateDashboard() {
         dashboardActive = false;
         currentUser = null;
+        
+        // Clear welcome message timeout
+        if (welcomeTimeout) {
+            clearTimeout(welcomeTimeout);
+            welcomeTimeout = null;
+        }
         
         // Hide dashboard bar
         const dashboard = document.getElementById('globalDashboard');
