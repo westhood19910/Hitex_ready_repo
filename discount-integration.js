@@ -1,3 +1,22 @@
+// Session validation - ADD THIS AT THE TOP OF THE FILE
+function validateDashboardSession() {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+        window.location.replace('client-login.html');
+        return false;
+    }
+    return true;
+}
+
+// Call session validation before any other initialization
+if (!validateDashboardSession()) {
+    throw new Error('Session invalid - redirecting to login');
+}
+
+// Your existing code continues below this point...
+console.log('Initializing HiTex EdiTex Dashboard...');
+// ... rest of your existing code
+
 console.log('Initializing HiTex EdiTex Dashboard...');
 const API_BASE = 'https://all-branched-end.onrender.com';
 let currentSection = 'dashboard';
