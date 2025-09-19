@@ -15,7 +15,7 @@
         setInterval(checkAuthenticationStatus, 30000);
     }
     
-    // Create dashboard HTML structure - Based on navigation-pillar structure
+    // Create dashboard HTML structure - Removed bottom section
     function createDashboardHTML() {
         const dashboardHTML = `
             <div id="globalDashboard" class="dashboard-container">
@@ -42,10 +42,6 @@
                             <div class="dashboard-user-email" id="dashboardUserEmail"></div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="dashboard-bottom">
-                    <!-- No content - will remain collapsed -->
                 </div>
             </div>
             
