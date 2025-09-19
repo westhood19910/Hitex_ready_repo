@@ -10287,16 +10287,16 @@ color: #ffffffff;
     display: none; 
 }
 
-/* Static Dashboard Container - Based on navigation-pillar styling */
 .dashboard-container {
     position: fixed;
-    top: var(--navbar-height); /* Position right under main nav */
+    top: var(--navbar-height); 
     left: 0;
     width: 100%;
     background: var(--dash-button-background);
     z-index: 999;
-    display: none; /* Hidden by default */
-    margin-top: 3em; /* Match your navigation-pillar margin */
+    display: none; 
+    margin-top: 3em; 
+    padding: 0.3rem 0.4rem;
 }
 
 .dashboard-container.active {
@@ -10442,7 +10442,9 @@ color: #ffffffff;
 
 /* Adjust main content when dashboard is active - FIXED */
 body.dashboard-active {
-    margin-top: calc(var(--navbar-height) + 3em); /* Push content down by dashboard height */
+    padding-top: calc(70px + 3em + 70px) !important; /* navbar + margin + dashboard height */
+    margin-top: 0 !important;
+    box-sizing: border-box;
 }
 
 /* Mobile Responsive - Based on existing media queries */
@@ -10525,8 +10527,8 @@ body.dashboard-active {
         font-size: 0.8rem;
     }
 
-    body.dashboard-active {
-        margin-top: calc(200px + 3em); /* Adjust for taller mobile dashboard */
+  body.dashboard-active {
+        padding-top: calc(70px + 3em + 140px) !important; /* Adjust for taller mobile dashboard */
     }
 
     .dashboard-welcome-message {
