@@ -10300,6 +10300,7 @@ color: #ffffffff;
     z-index: 9999;
     display: none; /* Hidden by default */
     margin-top: 3em; /* Match your navigation-pillar margin */
+    padding: 1rem 0.7rem;
 }
 
 .dashboard-container.active {
