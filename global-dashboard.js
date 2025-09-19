@@ -1,18 +1,3 @@
-// Add this temporary function at the top of your global-dashboard.js
-function testDashboard() {
-    const mockUserData = {
-        firstName: 'Test',
-        fullName: 'Test User',
-        email: 'test@example.com'
-    };
-    
-    // Force show dashboard for testing
-    activateDashboard(mockUserData);
-}
-
-// Call it automatically for testing (remove this when done)
-setTimeout(testDashboard, 1000);
-
 // Global Dashboard System - Static Version with Navigation-Pillar Styling
 (function() {
     'use strict';
