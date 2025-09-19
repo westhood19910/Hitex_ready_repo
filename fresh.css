@@ -10416,25 +10416,37 @@ color: #ffffffff;
     color: var(--sub-head-color);
 }
 
-/* Dashboard Bottom Section - Based on navbar-bottom */
+/* Dashboard Bottom Section - Minimal space when empty */
 .dashboard-bottom {
-    padding: 0.75rem 2rem;
+    padding: 0;
     border-top: 1px solid var(--grey);
     background: white;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    font-size: 0.85rem;
-    color: var(--text-light);
-    min-height: 50px;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease;
 }
 
-/* Welcome Message - Temporary display */
+/* Welcome Message - Absolute positioned overlay */
 .dashboard-welcome-message {
-    color: var(--primary);
-    font-weight: 500;
-    opacity: 1;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--dash-button-background);
+    color: var(--white);
+    padding: 1rem 2rem;
+    border-radius: var(--radius);
+    font-size: 1.1rem;
+    font-weight: 600;
+    z-index: 10000;
+    box-shadow: var(--shadow-hover);
+    opacity: 0;
     transition: opacity 0.5s ease-out;
+    pointer-events: none;
+}
+
+.dashboard-welcome-message.show {
+    opacity: 1;
 }
 
 .dashboard-welcome-message.fade-out {
@@ -10443,7 +10455,7 @@ color: #ffffffff;
 
 /* Adjust main content when dashboard is active */
 body.dashboard-active {
-    padding-top: calc(var(--navbar-height) + 130px); /* Main nav + dashboard height */
+    padding-top: calc(var(--navbar-height) + var(--navbar-height) + 3em); /* Main nav + dashboard height + margin */
 }
 
 /* Mobile Responsive - Based on existing media queries */
@@ -10477,10 +10489,6 @@ body.dashboard-active {
         height: auto;
         min-height: var(--navbar-height);
         gap: 1rem;
-    }
-
-    .dashboard-bottom {
-        padding: 0.75rem 1rem;
     }
 
     .dashboard-logout {
@@ -10531,6 +10539,11 @@ body.dashboard-active {
     }
 
     body.dashboard-active {
-        padding-top: calc(var(--navbar-height) + 200px);
+        padding-top: calc(var(--navbar-height) + 200px + 3em);
+    }
+
+    .dashboard-welcome-message {
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
     }
 }
