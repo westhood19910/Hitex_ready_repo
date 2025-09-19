@@ -5,6 +5,7 @@
     let dashboardActive = false;
     let currentUser = null;
     let welcomeTimeout = null;
+    let welcomeShown = false; // Track if welcome message has been shown
     
     // Initialize dashboard system
     function initializeDashboard() {
@@ -45,9 +46,12 @@
                 </div>
                 
                 <div class="dashboard-bottom">
-                    <span class="dashboard-welcome-message" id="dashboardWelcomeMessage"></span>
+                    <!-- No content - will remain collapsed -->
                 </div>
             </div>
+            
+            <!-- Absolute positioned welcome message -->
+            <div class="dashboard-welcome-message" id="dashboardWelcomeMessage"></div>
         `;
         
         document.body.insertAdjacentHTML('afterbegin', dashboardHTML);
@@ -79,27 +83,32 @@
         }
     }
     
-    // Show welcome message temporarily
+    // Show welcome message temporarily (only once per session)
     function showWelcomeMessage(userName) {
+        if (welcomeShown) return; // Don't show again
+        
         const welcomeElement = document.getElementById('dashboardWelcomeMessage');
         if (welcomeElement) {
             welcomeElement.textContent = `Welcome back, ${userName}!`;
-            welcomeElement.classList.remove('fade-out');
+            welcomeElement.classList.add('show');
+            welcomeShown = true; // Mark as shown
             
             // Clear any existing timeout
             if (welcomeTimeout) {
                 clearTimeout(welcomeTimeout);
             }
             
-            // Set timeout to fade out after 5 seconds
+            // Set timeout to fade out after 15 seconds
             welcomeTimeout = setTimeout(() => {
                 welcomeElement.classList.add('fade-out');
+                welcomeElement.classList.remove('show');
                 
                 // Remove text after fade animation completes
                 setTimeout(() => {
                     welcomeElement.textContent = '';
+                    welcomeElement.classList.remove('fade-out');
                 }, 500);
-            }, 5000);
+            }, 15000); // Changed to 15 seconds
         }
     }
     
@@ -122,7 +131,7 @@
         document.getElementById('dashboardUserName').textContent = firstName;
         document.getElementById('dashboardUserEmail').textContent = userData.email || '';
         
-        // Show welcome message for 5 seconds
+        // Show welcome message for 15 seconds (only once)
         showWelcomeMessage(firstName);
     }
     
@@ -130,11 +139,19 @@
     function deactivateDashboard() {
         dashboardActive = false;
         currentUser = null;
+        welcomeShown = false; // Reset for next login
         
         // Clear welcome message timeout
         if (welcomeTimeout) {
             clearTimeout(welcomeTimeout);
             welcomeTimeout = null;
+        }
+        
+        // Hide and clear welcome message
+        const welcomeElement = document.getElementById('dashboardWelcomeMessage');
+        if (welcomeElement) {
+            welcomeElement.classList.remove('show', 'fade-out');
+            welcomeElement.textContent = '';
         }
         
         // Hide dashboard bar
