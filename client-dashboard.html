@@ -732,185 +732,40 @@
     </div>
 </div>
 
- <script>
-
+<script>
 
 (function() {
     'use strict';
-    // Check authentication on page load
-    function enforceAuthentication() {
+    
+    function validateSession() {
         const token = localStorage.getItem('authToken');
         if (!token) {
-            window.location.replace('/client-login.html');
+            window.location.replace('client-login.html');
             return false;
         }
         return true;
     }
-
-    // Override navigation functions
-    function enforceNavigation() {
-        // Store original functions
-        const originalPushState = history.pushState;
-        const originalReplaceState = history.replaceState;
-        
-        // Override history manipulation
-        history.pushState = function(state, title, url) {
-            if (url && !url.includes('client-dashboard') && !url.startsWith('#')) {
-                console.log('Navigation blocked:', url);
-                return;
-            }
-            return originalPushState.apply(history, arguments);
-        };
-        
-        history.replaceState = function(state, title, url) {
-            if (url && !url.includes('client-dashboard') && !url.startsWith('#')) {
-                console.log('Navigation blocked:', url);
-                return;
-            }
-            return originalReplaceState.apply(history, arguments);
-        };
-
-        // Handle back/forward buttons
-        window.addEventListener('popstate', function(event) {
-            const currentPath = window.location.pathname;
-            if (!currentPath.includes('client-dashboard')) {
-                history.pushState(null, null, '/client-dashboard.html');
-            }
-        });
-
-        // Intercept all link clicks
-        document.addEventListener('click', function(e) {
-            const link = e.target.closest('a');
-            if (link && link.href) {
-                const url = new URL(link.href, window.location.origin);
-                const path = url.pathname;
-                
-                // Allow internal dashboard navigation and logout
-                if (path.includes('client-dashboard') || 
-                    link.onclick?.toString().includes('logout') ||
-                    link.href.startsWith('#') ||
-                    link.href.startsWith('mailto:') ||
-                    link.href.startsWith('tel:')) {
-                    return; // Allow these links
-                }
-                
-                // Block all other navigation
-                e.preventDefault();
-                console.log('External navigation blocked:', link.href);
-                
-                // Show optional message
-                if (confirm('You are currently logged into your dashboard. To visit external links, please sign out first. Sign out now?')) {
-                    logout();
-                }
-            }
-        });
-
-        // Prevent form submissions that navigate away
-        document.addEventListener('submit', function(e) {
-            const form = e.target;
-            const action = form.action;
-            
-            if (action && !action.includes('client-dashboard') && !action.startsWith('#')) {
-                e.preventDefault();
-                console.log('Form submission blocked:', action);
-            }
-        });
-
-        // Override window.location setters
-        let isLoggingOut = false;
-        
-        const originalLocationAssign = window.location.assign;
-        window.location.assign = function(url) {
-            if (isLoggingOut || url.includes('client-login') || url.includes('client-sign-up')) {
-                return originalLocationAssign.call(window.location, url);
-            }
-            if (!url.includes('client-dashboard')) {
-                console.log('Location.assign blocked:', url);
-                return;
-            }
-            return originalLocationAssign.call(window.location, url);
-        };
-
-        // Prevent direct location changes
-        Object.defineProperty(window.location, 'href', {
-            set: function(url) {
-                if (isLoggingOut || url.includes('client-login') || url.includes('client-sign-up')) {
-                    window.location.replace(url);
-                    return;
-                }
-                if (!url.includes('client-dashboard')) {
-                    console.log('Location.href blocked:', url);
-                    return;
-                }
-                window.location.replace(url);
-            }
-        });
-
-        // Update logout function to allow navigation
-        const originalLogout = window.logout;
-        window.logout = function() {
-            if (confirm('Are you sure you want to logout?')) {
-                isLoggingOut = true;
-                localStorage.removeItem('authToken');
-                localStorage.removeItem('userProfile');
-                window.location.replace('/client-login.html');
-            }
-        };
+    
+    // Only validate session, don't restrict navigation
+    if (!validateSession()) {
+        throw new Error('Session invalid - redirecting to login');
     }
-
-    // Initialize on DOM ready
-    document.addEventListener('DOMContentLoaded', function() {
-        if (enforceAuthentication()) {
-            enforceNavigation();
+    
+    // Logout function
+    window.logout = function() {
+        if (confirm('Are you sure you want to logout?')) {
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('userProfile');
+            window.location.href = 'client-login.html';
         }
-    });
-
-    // Check authentication periodically
-    setInterval(function() {
-        const token = localStorage.getItem('authToken');
-        if (!token) {
-            window.location.replace('/client-login.html');
-        }
-    }, 30000); // Check every 30 seconds
-
+    };
 })();
 
-
- // function existing JavaScript file
-function toggleMobileMenu() {
-    const mobileNav = document.getElementById('mobileNav');
-    mobileNav.classList.toggle('mobile-open');
-}
-
-// Close mobile menu when clicking on a navigation link
-document.addEventListener('DOMContentLoaded', function() {
-    const navLinks = document.querySelectorAll('.pillar-link');
-    const mobileNav = document.getElementById('mobileNav');
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            // Close mobile menu when a link is clicked (on mobile)
-            if (window.innerWidth <= 768) {
-                mobileNav.classList.remove('mobile-open');
-            }
-        });
-    });
-    
-    // Close mobile menu when clicking outside of it
-    document.addEventListener('click', function(event) {
-        if (window.innerWidth <= 768) {
-            const isClickInsideNav = mobileNav.contains(event.target);
-            const isClickOnToggle = event.target.classList.contains('mobile-menu-toggle');
-            
-            if (!isClickInsideNav && !isClickOnToggle) {
-                mobileNav.classList.remove('mobile-open');
-            }
-        }
-    });
-});
 </script>
+ 
 
    <script src="discount-integration.js"></script>
+   <script src="global-dashboard.js"></script>
      
 </body>
 </html>
