@@ -6,6 +6,46 @@
     let currentUser = null;
     let welcomeTimeout = null;
     
+    // TEMPORARY TEST CODE - REMOVE BEFORE PRODUCTION
+    function testDashboard() {
+        const mockUserData = {
+            firstName: 'Test',
+            fullName: 'Test User', 
+            email: 'test@example.com'
+        };
+        
+        // Force show dashboard for testing
+        activateDashboard(mockUserData);
+    }
+
+    // Auto-trigger after page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(testDashboard, 1000);
+    });
+    
+    // Smart Navigation Function - ADD THIS HERE
+    window.smartNavigate = function(section) {
+        const currentPage = window.location.pathname;
+        
+        // If on dashboard page, switch sections without reload
+        if (currentPage.includes('client-dashboard')) {
+            if (typeof showSection === 'function') {
+                showSection(section);
+                // Update active link
+                document.querySelectorAll('.pillar-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                const activeLink = document.querySelector(`[onclick="smartNavigate('${section}')"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+            }
+        } else {
+            // From other pages, go to dashboard with section
+            window.location.href = `client-dashboard.html#${section}`;
+        }
+    };
+    
     // Initialize dashboard system
     function initializeDashboard() {
         createDashboardHTML();
@@ -15,31 +55,31 @@
         setInterval(checkAuthenticationStatus, 30000);
     }
     
-    // Create dashboard HTML structure - Removed bottom section
+    // Create dashboard HTML structure - Updated with smart navigation
     function createDashboardHTML() {
         const dashboardHTML = `
             <div id="globalDashboard" class="dashboard-container">
                 <div class="dashboard-top">
-                    <button class="dashboard-logout" onclick="logoutUser()">Sign Out</button>
+                    <button class="session-terminate-btn" onclick="logoutUser()">Sign Out</button>
                     
-                    <nav class="dashboard-nav">
+                    <nav class="pillar-directory">
                         <ul>
-                            <li><a href="client-dashboard.html">Dashboard</a></li>
-                            <li><a href="client-dashboard.html#submissions">Submissions</a></li>
-                            <li><a href="client-dashboard.html#projects">Projects</a></li>
-                            <li><a href="client-dashboard.html#communications">Messages</a></li>
-                            <li><a href="client-dashboard.html#invoices">Invoices</a></li>
-                            <li><a href="client-dashboard.html#resources">Resources</a></li>
-                            <li><a href="profile.html">Profile</a></li>
-                            <li><a href="client-dashboard.html#support">Support</a></li>
+                            <li><a href="client-dashboard.html" class="pillar-link">Dashboard</a></li>
+                            <li><a href="#" class="pillar-link" onclick="smartNavigate('submissions')">Submissions</a></li>
+                            <li><a href="#" class="pillar-link" onclick="smartNavigate('projects')">Projects</a></li>
+                            <li><a href="#" class="pillar-link" onclick="smartNavigate('communications')">Messages</a></li>
+                            <li><a href="#" class="pillar-link" onclick="smartNavigate('invoices')">Invoices</a></li>
+                            <li><a href="#" class="pillar-link" onclick="smartNavigate('resources')">Resources</a></li>
+                            <li><a href="profile.html" class="pillar-link">Profile</a></li>
+                            <li><a href="#" class="pillar-link" onclick="smartNavigate('support')">Support</a></li>
                         </ul>
                     </nav>
                     
-                    <div class="dashboard-user-info">
-                        <div class="dashboard-avatar" id="dashboardAvatar"></div>
-                        <div class="dashboard-user-details">
-                            <div class="dashboard-user-name" id="dashboardUserName">Loading...</div>
-                            <div class="dashboard-user-email" id="dashboardUserEmail"></div>
+                    <div class="pillar-crest">
+                        <img src="https://i.pravatar.cc/150" alt="User Avatar" class="profile-sigil" id="dashboardAvatar">
+                        <div class="profile-info">
+                            <div class="profile-identifier" id="dashboardUserName">Loading...</div>
+                            <div class="user-email" id="dashboardUserEmail"></div>
                         </div>
                     </div>
                 </div>
@@ -51,6 +91,8 @@
         
         document.body.insertAdjacentHTML('afterbegin', dashboardHTML);
     }
+    
+    // ... rest of your existing functions remain the same ...
     
     // Check if user is authenticated
     async function checkAuthenticationStatus() {
