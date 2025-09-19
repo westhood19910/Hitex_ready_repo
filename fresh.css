@@ -10283,9 +10283,8 @@ color: #ffffffff;
 }}
 
 /* STYLESHEET OVERLAY */
-/* Dashboard System - Static Horizontal Layout - Inspired by navigation-pillar */
 .dashboard-overlay {
-    display: none; /* Not needed for static design */
+    display: none; 
 }
 
 /* Static Dashboard Container - Based on navigation-pillar styling */
@@ -10295,16 +10294,13 @@ color: #ffffffff;
     left: 0;
     width: 100%;
     background: var(--dash-button-background);
-    display: flex;
-    flex-direction: column;
-    z-index: 9999;
+    z-index: 999;
     display: none; /* Hidden by default */
     margin-top: 3em; /* Match your navigation-pillar margin */
-    padding: 1rem 0.7rem;
 }
 
 .dashboard-container.active {
-    display: flex;
+    display: block;
 }
 
 /* Dashboard Top Section - Mirror of navbar-top */
@@ -10417,16 +10413,6 @@ color: #ffffffff;
     color: var(--sub-head-color);
 }
 
-/* Dashboard Bottom Section - Minimal space when empty */
-.dashboard-bottom {
-    padding: 0;
-    border-top: 1px solid var(--grey);
-    background: white;
-    height: 0;
-    overflow: hidden;
-    transition: height 0.3s ease;
-}
-
 /* Welcome Message - Absolute positioned overlay */
 .dashboard-welcome-message {
     position: fixed;
@@ -10454,9 +10440,9 @@ color: #ffffffff;
     opacity: 0;
 }
 
-/* Adjust main content when dashboard is active */
+/* Adjust main content when dashboard is active - FIXED */
 body.dashboard-active {
-    padding-top: calc(var(--navbar-height) + var(--navbar-height) + 3em); /* Main nav + dashboard height + margin */
+    margin-top: calc(var(--navbar-height) + 3em); /* Push content down by dashboard height */
 }
 
 /* Mobile Responsive - Based on existing media queries */
@@ -10540,7 +10526,7 @@ body.dashboard-active {
     }
 
     body.dashboard-active {
-        padding-top: calc(var(--navbar-height) + 200px + 3em);
+        margin-top: calc(200px + 3em); /* Adjust for taller mobile dashboard */
     }
 
     .dashboard-welcome-message {
