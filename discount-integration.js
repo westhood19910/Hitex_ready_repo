@@ -13,14 +13,13 @@ if (!validateDashboardSession()) {
     throw new Error('Session invalid - redirecting to login');
 }
 
-// Your existing code continues below this point...
-console.log('Initializing HiTex EdiTex Dashboard...');
-// ... rest of your existing code
-
 console.log('Initializing HiTex EdiTex Dashboard...');
 const API_BASE = 'https://all-branched-end.onrender.com';
 let currentSection = 'dashboard';
 let manuscripts = [];
+let invoices = [];
+let paymentHistory = [];
+let dashboardSummary = null;
 let currentUser = null;
 let discountEligibilityData = null;
 let verificationState = {
@@ -260,6 +259,10 @@ async function recognizeInstitutionWithFuzzyMatching(userInput) {
 // DASHBOARD INITIALIZATION
 // ==========================================
 
+// UPDATED DASHBOARD INITIALIZATION
+// ==========================================
+
+// UPDATE the existing DOMContentLoaded event listener
 document.addEventListener('DOMContentLoaded', async () => {
     const token = localStorage.getItem('authToken');
     if (!token) {
@@ -267,30 +270,35 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
     
-    console.log('Dashboard initializing...');
+    console.log('Dashboard initializing with invoice integration...');
     
     // Show loading state
     document.getElementById('profileName').textContent = 'Loading...';
     
     const headers = { 'Authorization': `Bearer ${token}` };
 
-    // Load core data
+    // Load core data with invoice integration
     await loadProfileInfo(headers);
-    await loadManuscripts(headers);
+    await loadManuscriptsWithInvoices(headers);
+    await loadDashboardSummary(headers);
+    await loadInvoices(headers);
+    await loadPaymentHistory(headers);
+    
+    // Update dashboard with new invoice data
     updateDashboardStats();
     setupNavigation();
     
-    // Initialize discount system with proper timing
+    // Initialize discount system
     setTimeout(async () => {
         await initializeDiscountSystem();
     }, 500);
     
     await checkAdminAccess();
-    addDiscountStyles();
+    addInvoiceStyles();
     
     document.getElementById('logoutButton').addEventListener('click', logout);
     
-    console.log('Dashboard initialization complete');
+    console.log('Dashboard initialization complete with invoice integration');
 });
 
 // ==========================================
@@ -347,71 +355,216 @@ async function loadProfileInfo(headers, retryCount = 0) {
     }
 }
 
-async function loadManuscripts(headers) {
+async function loadManuscriptsWithInvoices(headers) {
     try {
-        const response = await fetch(`${API_BASE}/my-manuscripts`, { headers });
+        const response = await fetch(`${API_BASE}/my-manuscripts-with-invoices`, { headers });
         manuscripts = await response.json();
         
         const list = document.getElementById('manuscriptList');
         list.innerHTML = '';
         
         if (manuscripts.length === 0) {
-            list.innerHTML = '<tr><td colspan="6" style="text-align:center;">You have not submitted any manuscripts yet.</td></tr>';
+            list.innerHTML = '<tr><td colspan="7" style="text-align:center;">You have not submitted any manuscripts yet.</td></tr>';
             return;
         }
         
         manuscripts.forEach((doc, index) => {
             const statusClass = `state-${(doc.status || 'new').toLowerCase().replace(/\s+/g, '-')}`;
+            const hasUnpaidInvoice = doc.hasUnpaidInvoice;
+            const totalBilled = doc.totalBilled || 0;
+            
             const row = list.insertRow();
             row.innerHTML = `
                 <td>${new Date(doc.uploadDate).toLocaleDateString()}</td>
-                <td>${doc.originalName || doc.title}</td>
+                <td>
+                    ${doc.originalName || doc.title}
+                    ${hasUnpaidInvoice ? '<br><small style="color: #dc3545;"><i class="fas fa-exclamation-triangle"></i> Payment Required</small>' : ''}
+                </td>
                 <td>${doc.wordCount || 'N/A'}</td>
                 <td>${doc.serviceType || 'Standard Edit'}</td>
                 <td><span class="state-indicator ${statusClass}">${doc.status || 'New'}</span></td>
+                <td>$${totalBilled.toFixed(2)}</td>
                 <td>
                     <button class="op-button op-primary" onclick="viewManuscript(${index})">View</button>
+                    ${hasUnpaidInvoice ? 
+                        `<button class="op-button op-caution" onclick="payInvoice(${index})">Pay Now</button>` : 
+                        ''}
                     <button class="op-button op-info" onclick="downloadManuscript(${index})">Download</button>
                 </td>
             `;
         });
+        
+        // Update table header to include billing column
+        updateManuscriptTableHeader();
+        
     } catch (err) {
-        console.error('Failed to load manuscripts:', err);
+        console.error('Failed to load manuscripts with invoices:', err);
     }
 }
 
+
+// FIND the existing updateDashboardStats function and REPLACE it with:
+
 function updateDashboardStats() {
-    document.getElementById('totalManuscripts').textContent = manuscripts.length;
-    document.getElementById('activeProjects').textContent = manuscripts.filter(m => 
-        ['assigned', 'in-progress', 'review'].includes((m.status || '').toLowerCase())
-    ).length;
-    document.getElementById('completedProjects').textContent = manuscripts.filter(m => 
-        (m.status || '').toLowerCase() === 'completed'
-    ).length;
+    // Use dashboard summary data if available
+    if (dashboardSummary) {
+        document.getElementById('totalManuscripts').textContent = dashboardSummary.manuscripts.total;
+        document.getElementById('activeProjects').textContent = dashboardSummary.manuscripts.active;
+        document.getElementById('completedProjects').textContent = dashboardSummary.manuscripts.completed;
+        document.getElementById('outstandingBalance').textContent = `$${dashboardSummary.financial.outstandingBalance.toFixed(2)}`;
+    } else {
+        // Fallback to existing calculation
+        document.getElementById('totalManuscripts').textContent = manuscripts.length;
+        document.getElementById('activeProjects').textContent = manuscripts.filter(m => 
+            ['assigned', 'in-progress', 'review'].includes((m.status || '').toLowerCase())
+        ).length;
+        document.getElementById('completedProjects').textContent = manuscripts.filter(m => 
+            (m.status || '').toLowerCase() === 'completed'
+        ).length;
+        
+        const outstandingBalance = manuscripts.reduce((sum, m) => {
+            return sum + (m.hasUnpaidInvoice ? (m.totalBilled || 0) : 0);
+        }, 0);
+        document.getElementById('outstandingBalance').textContent = `$${outstandingBalance.toFixed(2)}`;
+    }
     
-    document.getElementById('outstandingBalance').textContent = '$0.00';
-    
+    // Update recent activity with invoice information
     const recentActivity = document.getElementById('recentActivity');
-    if (manuscripts.length > 0) {
+    if (dashboardSummary && dashboardSummary.recentActivity.length > 0) {
+        recentActivity.innerHTML = dashboardSummary.recentActivity.map(activity => `
+            <div style="padding: 0.5rem 0; border-bottom: 1px solid var(--grey);">
+                <strong>${activity.description}</strong>
+                <br><small>${new Date(activity.createdAt).toLocaleDateString()} - $${activity.amount.toFixed(2)}</small>
+            </div>
+        `).join('');
+    } else if (manuscripts.length > 0) {
         const recent = manuscripts.slice(0, 3);
         recentActivity.innerHTML = recent.map(m => `
             <div style="padding: 0.5rem 0; border-bottom: 1px solid var(--grey);">
                 <strong>${m.originalName || m.title}</strong> - Status: ${m.status || 'New'}
+                ${m.hasUnpaidInvoice ? '<br><small style="color: #dc3545;">Payment Required</small>' : ''}
                 <br><small>${new Date(m.uploadDate).toLocaleDateString()}</small>
             </div>
         `).join('');
     } else {
         recentActivity.innerHTML = '<p>No recent activity to display.</p>';
     }
+
+    // Add invoice notifications if there are unpaid invoices
+    addInvoiceNotifications();
 }
 
 function setupNavigation() {
+    // Add invoices section to navigation if it doesn't exist
+    const navigation = document.querySelector('.pillar-directory ul');
+    if (navigation && !document.querySelector('[data-section="invoices"]')) {
+        const invoicesNavItem = document.createElement('li');
+        invoicesNavItem.innerHTML = '<a href="#" class="pillar-link" data-section="invoices">Invoices & Payments</a>';
+        
+        // Insert after "My Submissions" and before "Active Projects"
+        const projectsNavItem = document.querySelector('[data-section="projects"]');
+        if (projectsNavItem) {
+            projectsNavItem.parentNode.insertBefore(invoicesNavItem, projectsNavItem);
+        } else {
+            navigation.appendChild(invoicesNavItem);
+        }
+    }
+
+    // Add invoices section to main content if it doesn't exist
+    const mainViewport = document.querySelector('.primary-viewport');
+    if (mainViewport && !document.getElementById('invoices-section')) {
+        const invoicesSectionHTML = `
+            <section id="invoices-section" class="view-segment" style="display: none;">
+                <header class="viewport-heading">
+                    <h1>Invoices & Payments</h1>
+                    <button class="prompt-button" onclick="refreshInvoiceData()">Refresh</button>
+                </header>
+                
+                <div class="metrics-matrix">
+                    <div class="metric-capsule">
+                        <h3>Outstanding Balance</h3>
+                        <div class="figure" id="totalOutstanding">$0.00</div>
+                        <div class="delta">Unpaid invoices</div>
+                    </div>
+                    <div class="metric-capsule">
+                        <h3>Total Paid</h3>
+                        <div class="figure" id="totalPaid">$0.00</div>
+                        <div class="delta">All time payments</div>
+                    </div>
+                    <div class="metric-capsule">
+                        <h3>This Month</h3>
+                        <div class="figure" id="thisMonthPayments">$0.00</div>
+                        <div class="delta">Current month</div>
+                    </div>
+                    <div class="metric-capsule">
+                        <h3>Payment Methods</h3>
+                        <div class="figure" id="preferredMethod">Card</div>
+                        <div class="delta">Most used</div>
+                    </div>
+                </div>
+
+                <div class="data-enclosure">
+                    <div class="enclosure-header">
+                        <h2>Recent Invoices</h2>
+                        <div class="invoice-filters">
+                            <select id="invoiceStatusFilter" onchange="filterInvoices()">
+                                <option value="all">All Status</option>
+                                <option value="unpaid">Unpaid</option>
+                                <option value="paid">Paid</option>
+                                <option value="pending">Pending</option>
+                            </select>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Invoice #</th>
+                                <th>Date</th>
+                                <th>Service</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="invoicesList">
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="data-enclosure">
+                    <div class="enclosure-header">
+                        <h2>Payment History</h2>
+                        <button class="op-button op-confirm" onclick="downloadPaymentReport()">Download Report</button>
+                    </div>
+                    <div id="paymentHistoryContainer">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+        `;
+        
+        // Insert before admin section if it exists, otherwise append
+        const adminSection = document.getElementById('admin-section');
+        if (adminSection) {
+            mainViewport.insertBefore(createElementFromHTML(invoicesSectionHTML), adminSection);
+        } else {
+            mainViewport.insertAdjacentHTML('beforeend', invoicesSectionHTML);
+        }
+    }
+
+    // Setup existing navigation event listeners
     document.querySelectorAll('.pillar-link').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const section = e.target.getAttribute('data-section');
             if (section) {
-                showSection(section);
+                if (section === 'invoices') {
+                    showInvoicesSection();
+                    populateInvoicesSection();
+                } else {
+                    showSection(section);
+                }
                 
                 document.querySelectorAll('.pillar-link').forEach(l => l.classList.remove('active'));
                 e.target.classList.add('active');
@@ -451,6 +604,44 @@ function viewManuscript(index) {
     const modalBody = document.getElementById('modalBody');
     
     modalTitle.textContent = manuscript.originalName || manuscript.title;
+    
+    // Build invoice section HTML
+    let invoiceHTML = '';
+    if (manuscript.invoices && manuscript.invoices.length > 0) {
+        const unpaidInvoices = manuscript.invoices.filter(inv => inv.paymentStatus === 'unpaid');
+        const paidInvoices = manuscript.invoices.filter(inv => inv.paymentStatus === 'paid');
+        
+        invoiceHTML = `
+            <div style="margin: 1.5rem 0; padding: 1rem; background: #f8f9fa; border-radius: 6px;">
+                <strong>Billing Information:</strong>
+                ${unpaidInvoices.length > 0 ? `
+                    <div style="margin: 0.5rem 0; padding: 0.5rem; background: #fff3cd; border-left: 3px solid #ffc107;">
+                        <strong>Unpaid Invoices (${unpaidInvoices.length}):</strong>
+                        ${unpaidInvoices.map(inv => `
+                            <div style="margin: 0.25rem 0;">
+                                ${inv.invoiceNumber} - $${inv.total.toFixed(2)} 
+                                <button class="op-button op-small op-caution" onclick="viewInvoiceDetails('${inv.invoiceNumber}')">Pay</button>
+                            </div>
+                        `).join('')}
+                    </div>
+                ` : ''}
+                ${paidInvoices.length > 0 ? `
+                    <div style="margin: 0.5rem 0;">
+                        <strong>Payment History:</strong>
+                        ${paidInvoices.map(inv => `
+                            <div style="margin: 0.25rem 0; color: #28a745;">
+                                ${inv.invoiceNumber} - $${inv.total.toFixed(2)} (Paid)
+                            </div>
+                        `).join('')}
+                    </div>
+                ` : ''}
+                <div style="margin-top: 0.5rem;">
+                    <strong>Total Billed:</strong> $${manuscript.totalBilled.toFixed(2)}
+                </div>
+            </div>
+        `;
+    }
+    
     modalBody.innerHTML = `
         <div style="margin-bottom: 1rem;">
             <strong>Upload Date:</strong> ${new Date(manuscript.uploadDate).toLocaleDateString()}
@@ -467,6 +658,7 @@ function viewManuscript(index) {
         <div style="margin-bottom: 1rem;">
             <strong>Description:</strong> ${manuscript.description || 'No description provided'}
         </div>
+        ${invoiceHTML}
         ${manuscript.quote ? `
             <div style="margin-bottom: 1rem;">
                 <strong>Quote:</strong> ${manuscript.quote}
@@ -482,6 +674,11 @@ function viewManuscript(index) {
             ${manuscript.editedVersion ? `
                 <button class="op-button op-confirm" onclick="downloadEditedVersion(${index})">Download Edited Version</button>
             ` : ''}
+            ${manuscript.hasUnpaidInvoice ? `
+                <button class="op-button op-caution" onclick="payInvoice(${index})">Pay Invoice</button>
+            ` : `
+                <button class="op-button op-info" onclick="generateInvoiceForManuscript(${index})">Generate Invoice</button>
+            `}
             <button class="op-button op-info" onclick="messageEditor(${index})">Message Editor</button>
         </div>
     `;
@@ -609,7 +806,7 @@ async function refreshDashboard() {
     
     try {
         const headers = { 'Authorization': `Bearer ${token}` };
-        await loadManuscripts(headers);
+        await loadManuscriptsWithInvoices(headers);
         updateDashboardStats();
         
         // Remove any existing refresh notifications
@@ -1736,9 +1933,51 @@ async function deactivateInstitution(institutionId) {
 // UTILITY FUNCTIONS
 // ==========================================
 
-function addDiscountStyles() {
-    const discountStyles = `
+function addInvoiceStyles() {
+    const invoiceStyles = `
         <style>
+        .payment-history-item:hover {
+            background: #f8f9fa;
+            cursor: pointer;
+        }
+        
+        .invoice-filters {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .invoice-filters select {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .invoice-notification {
+            animation: slideInFromTop 0.5s ease-out;
+        }
+        
+        .op-button.op-small {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+        
+        .state-unpaid {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .state-paid {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .state-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
         .discount-code-item {
             background: #f8f9ff;
             border: 1px solid #e1e5fe;
@@ -1810,8 +2049,20 @@ function addDiscountStyles() {
                 opacity: 1;
             }
         }
-
+        
         @media (max-width: 768px) {
+            .payment-history-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .invoice-filters {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
             .discount-code-display {
                 flex-direction: column;
                 gap: 1rem;
@@ -1820,7 +2071,7 @@ function addDiscountStyles() {
         </style>
     `;
     
-    document.head.insertAdjacentHTML('beforeend', discountStyles);
+    document.head.insertAdjacentHTML('beforeend', invoiceStyles);
 }
 
 function logout() {
@@ -1840,6 +2091,429 @@ window.onclick = function(event) {
         }
     });
 }
+
+// ADD NEW INVOICE FUNCTIONS AFTER EXISTING FUNCTIONS
+
+async function loadDashboardSummary(headers) {
+    try {
+        const response = await fetch(`${API_BASE}/dashboard-summary`, { headers });
+        dashboardSummary = await response.json();
+        console.log('Dashboard summary loaded:', dashboardSummary);
+    } catch (err) {
+        console.error('Failed to load dashboard summary:', err);
+    }
+}
+
+// Load user invoices
+async function loadInvoices(headers) {
+    try {
+        const response = await fetch(`${API_BASE}/my-invoices?limit=20`, { headers });
+        const data = await response.json();
+        invoices = data.invoices || [];
+        console.log('Invoices loaded:', invoices.length);
+    } catch (err) {
+        console.error('Failed to load invoices:', err);
+    }
+}
+
+// Load payment history
+async function loadPaymentHistory(headers) {
+    try {
+        const response = await fetch(`${API_BASE}/payment-history?limit=10`, { headers });
+        const data = await response.json();
+        paymentHistory = data.payments || [];
+        console.log('Payment history loaded:', paymentHistory.length);
+    } catch (err) {
+        console.error('Failed to load payment history:', err);
+    }
+}
+
+// Add invoice notifications to the notifications area
+function addInvoiceNotifications() {
+    const notifications = document.getElementById('notifications');
+    if (!notifications) return;
+
+    // Remove existing invoice notifications
+    const existingInvoiceNotifications = notifications.querySelectorAll('.invoice-notification');
+    existingInvoiceNotifications.forEach(notification => notification.remove());
+
+    // Count unpaid invoices
+    const unpaidInvoices = invoices.filter(invoice => invoice.paymentStatus === 'unpaid');
+    
+    if (unpaidInvoices.length > 0) {
+        const totalOwed = unpaidInvoices.reduce((sum, invoice) => sum + invoice.total, 0);
+        
+        const alertHTML = `
+            <div class="alert-item invoice-notification" style="background: #fff3cd; border-left: 4px solid #ffc107;">
+                <h4><i class="fas fa-exclamation-triangle"></i> Payment Required</h4>
+                <p>You have ${unpaidInvoices.length} unpaid invoice${unpaidInvoices.length > 1 ? 's' : ''} totaling 
+                   <strong>$${totalOwed.toFixed(2)}</strong>. Please pay to continue editing services.</p>
+                <div style="margin-top: 1rem;">
+                    <button class="op-button op-caution" onclick="showInvoicesSection()">View Invoices</button>
+                    ${unpaidInvoices.length === 1 ? 
+                        `<button class="op-button op-primary" onclick="paySpecificInvoice('${unpaidInvoices[0]._id}')">Pay Now</button>` : 
+                        ''}
+                </div>
+            </div>
+        `;
+        
+        notifications.insertAdjacentHTML('afterbegin', alertHTML);
+    }
+}
+
+// Show invoices section in navigation
+function showInvoicesSection() {
+    showSection('invoices');
+    
+    // Update active navigation
+    document.querySelectorAll('.pillar-link').forEach(l => l.classList.remove('active'));
+    document.querySelector('[data-section="invoices"]').classList.add('active');
+}
+
+// Pay specific invoice
+async function paySpecificInvoice(invoiceId) {
+    window.open(`invoice.html?id=${invoiceId}`, '_blank');
+}
+
+// Pay invoice for manuscript
+function payInvoice(manuscriptIndex) {
+    const manuscript = manuscripts[manuscriptIndex];
+    if (manuscript.invoices && manuscript.invoices.length > 0) {
+        const unpaidInvoice = manuscript.invoices.find(inv => inv.paymentStatus === 'unpaid');
+        if (unpaidInvoice) {
+            window.open(`invoice.html?id=${unpaidInvoice.invoiceNumber}`, '_blank');
+        }
+    }
+}
+
+// View invoice details
+function viewInvoiceDetails(invoiceId) {
+    window.open(`invoice.html?id=${invoiceId}`, '_blank');
+}
+
+// Generate new invoice for manuscript
+async function generateInvoiceForManuscript(manuscriptIndex) {
+    const manuscript = manuscripts[manuscriptIndex];
+    const token = localStorage.getItem('authToken');
+    
+    try {
+        const response = await fetch(`${API_BASE}/create-invoice-for-manuscript/${manuscript._id}`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                serviceType: manuscript.serviceType || 'Standard Editing',
+                notes: `Invoice for manuscript: ${manuscript.originalName}`
+            })
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert('Invoice generated successfully!');
+            // Reload manuscript data
+            await loadManuscriptsWithInvoices({ 'Authorization': `Bearer ${token}` });
+            await loadInvoices({ 'Authorization': `Bearer ${token}` });
+            updateDashboardStats();
+            
+            // Open the new invoice
+            window.open(`invoice.html?id=${result.invoiceNumber}`, '_blank');
+        } else {
+            alert('Error generating invoice: ' + result.error);
+        }
+
+    } catch (error) {
+        console.error('Error generating invoice:', error);
+        alert('Failed to generate invoice. Please try again.');
+    }
+}
+
+// Update manuscript table header to include billing
+function updateManuscriptTableHeader() {
+    const existingHeader = document.querySelector('#manuscripts-section table thead tr');
+    if (existingHeader && !existingHeader.innerHTML.includes('Total Billed')) {
+        // Find the Actions column and insert Billing before it
+        const actionsHeader = existingHeader.querySelector('th:last-child');
+        if (actionsHeader) {
+            const billingHeader = document.createElement('th');
+            billingHeader.textContent = 'Total Billed';
+            existingHeader.insertBefore(billingHeader, actionsHeader);
+        }
+    }
+}
+
+// Populate invoices section with data
+function populateInvoicesSection() {
+    // Update metrics
+    const unpaidInvoices = invoices.filter(inv => inv.paymentStatus === 'unpaid');
+    const paidInvoices = invoices.filter(inv => inv.paymentStatus === 'paid');
+    
+    const totalOutstanding = unpaidInvoices.reduce((sum, inv) => sum + inv.total, 0);
+    const totalPaid = paymentHistory.reduce((sum, payment) => sum + payment.amount, 0);
+    
+    // Calculate this month's payments
+    const currentMonth = new Date().getMonth();
+    const currentYear = new Date().getFullYear();
+    const thisMonthPayments = paymentHistory
+        .filter(payment => {
+            const paymentDate = new Date(payment.createdAt);
+            return paymentDate.getMonth() === currentMonth && paymentDate.getFullYear() === currentYear;
+        })
+        .reduce((sum, payment) => sum + payment.amount, 0);
+
+    // Find most used payment method
+    const methodCounts = {};
+    paymentHistory.forEach(payment => {
+        methodCounts[payment.method] = (methodCounts[payment.method] || 0) + 1;
+    });
+    const preferredMethod = Object.keys(methodCounts).reduce((a, b) => 
+        methodCounts[a] > methodCounts[b] ? a : b, 'Card'
+    );
+
+    document.getElementById('totalOutstanding').textContent = `${totalOutstanding.toFixed(2)}`;
+    document.getElementById('totalPaid').textContent = `${totalPaid.toFixed(2)}`;
+    document.getElementById('thisMonthPayments').textContent = `${thisMonthPayments.toFixed(2)}`;
+    document.getElementById('preferredMethod').textContent = formatPaymentMethod(preferredMethod);
+
+    // Populate invoices table
+    populateInvoicesTable();
+    populatePaymentHistory();
+}
+
+// Populate invoices table
+function populateInvoicesTable(filterStatus = 'all') {
+    const tbody = document.getElementById('invoicesList');
+    if (!tbody) return;
+
+    tbody.innerHTML = '';
+
+    let filteredInvoices = invoices;
+    if (filterStatus !== 'all') {
+        filteredInvoices = invoices.filter(inv => inv.paymentStatus === filterStatus);
+    }
+
+    if (filteredInvoices.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">No invoices found.</td></tr>';
+        return;
+    }
+
+    filteredInvoices.forEach(invoice => {
+        const statusClass = `state-${invoice.paymentStatus.replace(/\s+/g, '-')}`;
+        const serviceDescription = invoice.services[0]?.description || 'Editing Service';
+        
+        const row = `
+            <tr>
+                <td>
+                    <strong>${invoice.invoiceNumber}</strong>
+                    ${invoice.manuscriptId ? `<br><small>Manuscript ID: ${invoice.manuscriptId}</small>` : ''}
+                </td>
+                <td>${new Date(invoice.issueDate).toLocaleDateString()}</td>
+                <td>${serviceDescription}</td>
+                <td>${invoice.total.toFixed(2)}</td>
+                <td>
+                    <span class="state-indicator ${statusClass}">
+                        ${invoice.paymentStatus.charAt(0).toUpperCase() + invoice.paymentStatus.slice(1)}
+                    </span>
+                </td>
+                <td>
+                    <button class="op-button op-info" onclick="viewInvoiceDetails('${invoice.invoiceNumber}')">View</button>
+                    ${invoice.paymentStatus === 'unpaid' ? 
+                        `<button class="op-button op-caution" onclick="paySpecificInvoice('${invoice.invoiceNumber}')">Pay</button>` : 
+                        ''}
+                    <button class="op-button op-secondary" onclick="downloadInvoicePDF('${invoice.invoiceNumber}')">PDF</button>
+                </td>
+            </tr>
+        `;
+        tbody.innerHTML += row;
+    });
+}
+
+// Populate payment history
+function populatePaymentHistory() {
+    const container = document.getElementById('paymentHistoryContainer');
+    if (!container) return;
+
+    if (paymentHistory.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No payment history available.</p>';
+        return;
+    }
+
+    const historyHTML = paymentHistory.map(payment => `
+        <div class="payment-history-item" style="
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 1rem; 
+            border-bottom: 1px solid #eee;
+            hover: background: #f8f9fa;
+        ">
+            <div>
+                <strong>Transaction ${payment.transactionId}</strong>
+                <br>
+                <small style="color: #666;">
+                    ${payment.invoice ? payment.invoice.invoiceNumber : 'N/A'} • 
+                    ${formatPaymentMethod(payment.method)} • 
+                    ${new Date(payment.createdAt).toLocaleDateString()}
+                </small>
+            </div>
+            <div style="text-align: right;">
+                <strong style="color: #28a745;">${payment.amount.toFixed(2)}</strong>
+                <br>
+                <span class="state-indicator state-${payment.status}">
+                    ${payment.status.charAt(0).toUpperCase() + payment.status.slice(1)}
+                </span>
+            </div>
+        </div>
+    `).join('');
+
+    container.innerHTML = historyHTML;
+}
+
+// Filter invoices by status
+function filterInvoices() {
+    const filterStatus = document.getElementById('invoiceStatusFilter').value;
+    populateInvoicesTable(filterStatus);
+}
+
+// Refresh invoice data
+async function refreshInvoiceData() {
+    const token = localStorage.getItem('authToken');
+    if (!token) return;
+
+    const headers = { 'Authorization': `Bearer ${token}` };
+    
+    try {
+        await loadInvoices(headers);
+        await loadPaymentHistory(headers);
+        await loadDashboardSummary(headers);
+        
+        populateInvoicesSection();
+        updateDashboardStats();
+        
+        // Show success message
+        const notifications = document.getElementById('notifications');
+        if (notifications) {
+            const successHTML = `
+                <div class="alert-item" style="background: #d4edda; border-left: 4px solid #28a745; color: #155724;">
+                    <h4>Data Refreshed</h4>
+                    <p>Invoice and payment data has been updated successfully.</p>
+                </div>
+            `;
+            notifications.insertAdjacentHTML('afterbegin', successHTML);
+        }
+        
+    } catch (error) {
+        console.error('Error refreshing invoice data:', error);
+        alert('Failed to refresh data. Please try again.');
+    }
+}
+
+// Download payment report
+async function downloadPaymentReport() {
+    const token = localStorage.getItem('authToken');
+    
+    try {
+        const response = await fetch(`${API_BASE}/download-payment-report`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        if (response.ok) {
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = `payment-report-${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        } else {
+            // Fallback: generate CSV in browser
+            generatePaymentReportCSV();
+        }
+    } catch (error) {
+        console.error('Error downloading payment report:', error);
+        generatePaymentReportCSV();
+    }
+}
+
+// Generate payment report CSV (fallback)
+function generatePaymentReportCSV() {
+    const headers = ['Date', 'Transaction ID', 'Invoice Number', 'Amount', 'Method', 'Status'];
+    const csvContent = [
+        headers.join(','),
+        ...paymentHistory.map(payment => [
+            new Date(payment.createdAt).toLocaleDateString(),
+            payment.transactionId,
+            payment.invoice ? payment.invoice.invoiceNumber : 'N/A',
+            payment.amount.toFixed(2),
+            payment.method,
+            payment.status
+        ].join(','))
+    ].join('\n');
+    
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `payment-report-${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+}
+
+// Download invoice PDF
+async function downloadInvoicePDF(invoiceNumber) {
+    const token = localStorage.getItem('authToken');
+    
+    try {
+        const response = await fetch(`${API_BASE}/download-invoice-pdf/${invoiceNumber}`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        if (response.ok) {
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = `Invoice_${invoiceNumber}.pdf`;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        } else {
+            alert('PDF download not available. Please view the invoice online.');
+            viewInvoiceDetails(invoiceNumber);
+        }
+    } catch (error) {
+        console.error('Error downloading PDF:', error);
+        alert('Failed to download PDF. Opening invoice view instead.');
+        viewInvoiceDetails(invoiceNumber);
+    }
+}
+
+// Format payment method for display
+function formatPaymentMethod(method) {
+    const methods = {
+        'card': 'Credit/Debit Card',
+        'paypal': 'PayPal',
+        'bank': 'Bank Transfer'
+    };
+    return methods[method] || method.charAt(0).toUpperCase() + method.slice(1);
+}
+
+// Helper function to create element from HTML string
+function createElementFromHTML(htmlString) {
+    const div = document.createElement('div');
+    div.innerHTML = htmlString.trim();
+    return div.firstChild;
+}
+
 
 // GLOBAL FUNCTION EXPORTS
 // Make functions available globally for onclick handlers
@@ -1870,3 +2544,15 @@ window.showVerificationCodeModal = showVerificationCodeModal;
 window.submitVerificationCode = submitVerificationCode;
 window.resendVerificationCode = resendVerificationCode;
 window.closeVerificationModal = closeVerificationModal;
+window.showInvoicesSection = showInvoicesSection;
+window.paySpecificInvoice = paySpecificInvoice;
+window.payInvoice = payInvoice;
+window.viewInvoiceDetails = viewInvoiceDetails;
+window.generateInvoiceForManuscript = generateInvoiceForManuscript;
+window.filterInvoices = filterInvoices;
+window.refreshInvoiceData = refreshInvoiceData;
+window.downloadPaymentReport = downloadPaymentReport;
+window.downloadInvoicePDF = downloadInvoicePDF;
+
+
+console.log('Dashboard invoice integration loaded successfully!');
