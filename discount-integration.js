@@ -809,7 +809,7 @@ async function refreshDashboard() {
         await loadManuscriptsWithInvoices(headers);
         updateDashboardStats();
         
-        // Remove any existing refresh notifications
+        // Remove any existing refresh notificationssss
         const existingRefreshNotifications = document.querySelectorAll('.refresh-notification');
         existingRefreshNotifications.forEach(notification => notification.remove());
         
