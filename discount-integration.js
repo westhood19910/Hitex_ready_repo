@@ -455,11 +455,11 @@ function updateDashboardStats() {
 }
 
 function setupNavigation() {
-    // Add invoices section to navigation if it doesn't exist
+    // Add invoices LINK to navigation if it doesn't exist
     const navigation = document.querySelector('.pillar-directory ul');
-    if (navigation && !document.querySelector('[data-section="invoices"]')) {
+    if (navigation && !document.querySelector('a[href="invoice.html"]')) {
         const invoicesNavItem = document.createElement('li');
-        invoicesNavItem.innerHTML = '<a href="#" class="pillar-link" data-section="invoices">Invoices & Payments</a>';
+        invoicesNavItem.innerHTML = '<a href="invoice.html" class="pillar-link">Invoices & Payments</a>';
         
         // Insert after "My Submissions" and before "Active Projects"
         const projectsNavItem = document.querySelector('[data-section="projects"]');
@@ -470,112 +470,26 @@ function setupNavigation() {
         }
     }
 
-    // Add invoices section to main content if it doesn't exist
-    const mainViewport = document.querySelector('.primary-viewport');
-    if (mainViewport && !document.getElementById('invoices-section')) {
-        const invoicesSectionHTML = `
-            <section id="invoices-section" class="view-segment" style="display: none;">
-                <header class="viewport-heading">
-                    <h1>Invoices & Payments</h1>
-                    <button class="prompt-button" onclick="refreshInvoiceData()">Refresh</button>
-                </header>
-                
-                <div class="metrics-matrix">
-                    <div class="metric-capsule">
-                        <h3>Outstanding Balance</h3>
-                        <div class="figure" id="totalOutstanding">$0.00</div>
-                        <div class="delta">Unpaid invoices</div>
-                    </div>
-                    <div class="metric-capsule">
-                        <h3>Total Paid</h3>
-                        <div class="figure" id="totalPaid">$0.00</div>
-                        <div class="delta">All time payments</div>
-                    </div>
-                    <div class="metric-capsule">
-                        <h3>This Month</h3>
-                        <div class="figure" id="thisMonthPayments">$0.00</div>
-                        <div class="delta">Current month</div>
-                    </div>
-                    <div class="metric-capsule">
-                        <h3>Payment Methods</h3>
-                        <div class="figure" id="preferredMethod">Card</div>
-                        <div class="delta">Most used</div>
-                    </div>
-                </div>
-
-                <div class="data-enclosure">
-                    <div class="enclosure-header">
-                        <h2>Recent Invoices</h2>
-                        <div class="invoice-filters">
-                            <select id="invoiceStatusFilter" onchange="filterInvoices()">
-                                <option value="all">All Status</option>
-                                <option value="unpaid">Unpaid</option>
-                                <option value="paid">Paid</option>
-                                <option value="pending">Pending</option>
-                            </select>
-                        </div>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Invoice #</th>
-                                <th>Date</th>
-                                <th>Service</th>
-                                <th>Amount</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="invoicesList">
-                            <!-- Populated by JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="data-enclosure">
-                    <div class="enclosure-header">
-                        <h2>Payment History</h2>
-                        <button class="op-button op-confirm" onclick="downloadPaymentReport()">Download Report</button>
-                    </div>
-                    <div id="paymentHistoryContainer">
-                        <!-- Populated by JavaScript -->
-                    </div>
-                </div>
-            </section>
-        `;
-        
-        // Insert before admin section if it exists, otherwise append
-        const adminSection = document.getElementById('admin-section');
-        if (adminSection) {
-            mainViewport.insertBefore(createElementFromHTML(invoicesSectionHTML), adminSection);
-        } else {
-            mainViewport.insertAdjacentHTML('beforeend', invoicesSectionHTML);
-        }
-    }
-
-    // Setup existing navigation event listeners
+    // Setup navigation event listeners
     document.querySelectorAll('.pillar-link').forEach(link => {
-    link.addEventListener('click', (e) => {
-        const section = e.target.getAttribute('data-section');
-        const href = e.target.getAttribute('href');
-        
-        // Only prevent default for internal sections, not external links
-        if (section && (!href || !href.endsWith('.html'))) {
-            e.preventDefault();
+        link.addEventListener('click', (e) => {
+            const section = e.target.getAttribute('data-section');
+            const href = e.target.getAttribute('href');
             
-            if (section === 'invoices') {
-                showInvoicesSection();
-                populateInvoicesSection();
-            } else {
-                showSection(section);
+            // Let external links work normally
+            if (href && href.endsWith('.html')) {
+                return; // Don't prevent default - allow navigation
             }
             
-            document.querySelectorAll('.pillar-link').forEach(l => l.classList.remove('active'));
-            e.target.classList.add('active');
-        }
-        // If it's an external link (href ends with .html), let the browser handle it naturally
+            // Handle internal sections only
+            if (section) {
+                e.preventDefault();
+                showSection(section);
+                document.querySelectorAll('.pillar-link').forEach(l => l.classList.remove('active'));
+                e.target.classList.add('active');
+            }
+        });
     });
-});
 }
 
 function showSection(sectionName) {
