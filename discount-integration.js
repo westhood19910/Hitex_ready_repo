@@ -555,23 +555,27 @@ function setupNavigation() {
 
     // Setup existing navigation event listeners
     document.querySelectorAll('.pillar-link').forEach(link => {
-        link.addEventListener('click', (e) => {
+    link.addEventListener('click', (e) => {
+        const section = e.target.getAttribute('data-section');
+        const href = e.target.getAttribute('href');
+        
+        // Only prevent default for internal sections, not external links
+        if (section && (!href || !href.endsWith('.html'))) {
             e.preventDefault();
-            const section = e.target.getAttribute('data-section');
-            if (section) {
-                if (section === 'invoices') {
-                    showInvoicesSection();
-                    populateInvoicesSection();
-                } else {
-                    showSection(section);
-                }
-                
-                document.querySelectorAll('.pillar-link').forEach(l => l.classList.remove('active'));
-                e.target.classList.add('active');
+            
+            if (section === 'invoices') {
+                showInvoicesSection();
+                populateInvoicesSection();
+            } else {
+                showSection(section);
             }
-        });
+            
+            document.querySelectorAll('.pillar-link').forEach(l => l.classList.remove('active'));
+            e.target.classList.add('active');
+        }
+        // If it's an external link (href ends with .html), let the browser handle it naturally
     });
-}
+         });
 
 function showSection(sectionName) {
     document.querySelectorAll('.view-segment').forEach(section => {
