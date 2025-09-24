@@ -575,7 +575,8 @@ function setupNavigation() {
         }
         // If it's an external link (href ends with .html), let the browser handle it naturally
     });
-         });
+});
+}
 
 function showSection(sectionName) {
     document.querySelectorAll('.view-segment').forEach(section => {
