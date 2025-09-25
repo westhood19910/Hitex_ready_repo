@@ -10535,3 +10535,174 @@ body.dashboard-active {
         padding: 0.8rem 1.5rem;
     }
 }
+
+
+/* GENERAL CODE FOR NEW GUEST GET QUOTE*/
+
+/* Add these styles to your existing CSS files */
+
+/* Guest submission success modal */
+.overlay-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    animation: slideUp 0.4s ease-out;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow: auto;
+}
+
+/* Quote completion message on signup page */
+#quoteCompletionMessage {
+    animation: slideDown 0.5s ease-out;
+}
+
+/* Prefilled form field styling */
+input[style*="background-color: rgb(240, 248, 255)"],
+select[style*="background-color: rgb(240, 248, 255)"] {
+    border: 2px solid #4CAF50 !important;
+    position: relative;
+}
+
+input[style*="background-color: rgb(240, 248, 255)"]:after,
+select[style*="background-color: rgb(240, 248, 255)"]:after {
+    content: '✓';
+    position: absolute;
+    right: 10px;
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+/* Loading states */
+.submitting {
+    position: relative;
+    pointer-events: none;
+}
+
+.submitting::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    margin: auto;
+    border: 2px solid transparent;
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    top: 0;
+    right: 10px;
+    bottom: 0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { 
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Success indicators */
+.success-field {
+    border-color: #4CAF50 !important;
+    background-color: #f8fff8 !important;
+}
+
+.success-field::placeholder {
+    color: #4CAF50;
+    opacity: 0.7;
+}
+
+/* Guest quote form enhancements */
+.guest-notice {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.guest-notice h4 {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+}
+
+.guest-notice p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Email verification badge */
+.email-verification-badge {
+    display: inline-block;
+    background: #4CAF50;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .modal-content {
+        margin: 20px;
+        padding: 1.5rem;
+    }
+    
+    #quoteCompletionMessage {
+        margin-bottom: 15px;
+        padding: 12px 15px;
+    }
+    
+    #quoteCompletionMessage h4 {
+        font-size: 1rem;
+    }
+    
+    #quoteCompletionMessage p {
+        font-size: 0.8rem;
+    }
+}
