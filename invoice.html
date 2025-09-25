@@ -2,59 +2,59 @@
 <html lang="en">
 <head> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hitex Invoices</title>
-<script src="pricing.js"></script>
-<script src="Embednav.js"></script>
-<link rel="stylesheet" href="pricing.css">
+<title>Hitex Editex</title>
+<script src="Embednav.js" defer></script>
 <link rel="stylesheet" href="invoice.css">
-<link rel="stylesheet" href="clientdasnboard.css">
+<script src="social.js" defer></script>
+<script src="freshtex.js" defer></script> 
 <link rel="stylesheet" href="ser_them.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" defer>
 <link rel="stylesheet" href="fresh.css">  
 <link rel="stylesheet" href="Embednav.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head> 
 <body>
-<!-- <header class="pag-2-hed-1">
-    <div class="lat_clo_001">              
-    <a href="index.html" class="action-home">
-      <i class="fa-solid fa-house"></i>
-   </a>  
-    </div>  
-    <div class="lat_clo_002">
-    <button class="toggle-button-2" onclick="toggleLanguageList()">En &#9776;</button> 
-    <ul class="language-list" id="languagelist">
-        <li>
-            <a href="Chinese.html" class="language-link" data-lang="chinese">中文</a>
-        </li>
-        <li>
-            <a href="French.html" class="language-link" data-lang="french">Français</a>
-        </li>
-        <li>
-            <a href="Spanish.html" class="language-link" data-lang="spanish">Español</a>
-        </li>
-        <li>
-            <a href="Japanese.html" class="language-link" data-lang="japanese">日本語</a>
-        </li>
-        <li>
-            <a href="Arabic.html" class="language-link" data-lang="arabian">عربي</a>
-        </li>
-        <li>
-            <a href="portuguese.html" class="language-link" data-lang="portuguese">Português</a>
-        </li>
-        <li>
-            <a href="Korean.html" class="language-link" data-lang="japanese">한국어</a>
-        </li>
-    </ul>
-</div>
-</header> -->
 
+    <!-- <header class="pag-2-hed-1">
+                <div class="lat_clo_001">              
+                <a href="index.html" class="action-home"> 
+                  <i class="fa-solid fa-house"></i>
+               </a>  
+                </div>  
+                <div class="lat_clo_002">
+                <button class="toggle-button-2" onclick="toggleLanguageList()">En &#9776;</button> 
+                <ul class="language-list" id="languagelist">
+                    <li>
+                        <a href="/zh/home.html" class="language-link" data-lang="chinese">中文</a>
+                    </li>
+                    <li>
+                        <a href="/fr/home.html" class="language-link" data-lang="french">Français</a>
+                    </li>
+                    <li>
+                        <a href="/es/home.html" class="language-link" data-lang="spanish">Español</a>
+                    </li>
+                    <li>
+                        <a href="/ja/home.html" class="language-link" data-lang="japanese">日本語</a>
+                    </li>
+                    <li>
+                        <a href="/ar/home.html" class="language-link" data-lang="arabian">عربي</a>
+                    </li>
+                    <li>
+                        <a href="/pt/home.html" class="language-link" data-lang="portuguese">Português</a>
+                    </li>
+                    <li>
+                        <a href="/kor/home.html" class="language-link" data-lang="japanese">한국어</a>
+                    </li>
+                </ul>
+            </div>
+    </header> -->
+              <!-- Modified Navigation HTML -->
                
 <nav class="nav__bar_oi">
   <div class="nav__bar_oi-logo">
-    <a href="index.html"><img src="assets/png_20221026_003820_0000.png" alt="HiTex EdiTex Logo"></a>
+    <img src="assets/png_20221026_003820_0000.png" alt="HiTex EdiTex Logo">
   </div>
   
   <button class="nav__bar_oi-toggle" id="navToggle">
@@ -65,12 +65,12 @@
   
   <ul class="nav__bar_oi-menu" id="navMenu">
     <li class="nav__bar_oi-menu-item">
-      <a href="about.html" class="nav__bar_oi-menu-link">About Us</a>
+      <a href="#" class="nav__bar_oi-menu-link">About Us</a>
       <div class="nav__bar_oi-dropdown">
-        <a href="about.html" class="nav__bar_oi-dropdown-item">About Hitex EdiTex</a>
+        <a href="about.html" class="nav__bar_oi-dropdown-item">About HiTex EdiTex</a>
         <a href="leadership.html" class="nav__bar_oi-dropdown-item">Leadership</a>
         <!-- <a href="#offices" class="nav__bar_oi-dropdown-item">Offices</a> -->
-        <!-- <a href="impact.html" class="nav__bar_oi-dropdown-item">Impact</a> --> 
+        <!-- <a href="impact.html" class="nav__bar_oi-dropdown-item">Impact</a> -->
       </div>
     </li>
     <li class="nav__bar_oi-menu-item">
@@ -82,7 +82,7 @@
         <a href="translate.html" class="nav__bar_oi-dropdown-item">Translation Services</a>
         <a href="service-levels.html" class="nav__bar_oi-dropdown-item">Service Levels</a>
         <a href="pricing.html" class="nav__bar_oi-dropdown-item">Pricing</a>
-        <a href="aaauhtoredly.html" class="nav__bar_oi-dropdown-item">Authoredly</a>
+        <a href="auhtoredly.html" class="nav__bar_oi-dropdown-item">Authoredly</a>
       </div>
     </li>
     <li class="nav__bar_oi-menu-item">
@@ -91,6 +91,7 @@
         <a href="life-at-hitex.html" class="nav__bar_oi-dropdown-item">Life at HiTex EdiTex</a>
         <a href="In-house.html" class="nav__bar_oi-dropdown-item">In-house</a>
         <a href="freelance.html" class="nav__bar_oi-dropdown-item">Freelance</a>
+         <a href="admin-login.html" class="nav__bar_oi-dropdown-item">ad</a>
       </div>
     </li>
     <li class="nav__bar_oi-menu-item">
@@ -108,6 +109,7 @@
       <button class="nav__bar_oi-button nav__bar_oi-button-signup">Client Sign-Up</button>
       <button class="nav__bar_oi-button nav__bar_oi-button-login">Client Log-in</button>
     </div>
+   
     <div class="xzy-container-88">
      <div class="qrs-icon-hold-42">
         <a href="https://www.threads.net/@hitexeditex">
@@ -156,13 +158,12 @@
         <a href="client-sign-up.html" class="new_loger_nav__bar_oi-button new_loger_nav__bar_oi-button-signup">Client Sign-up</a>
         <a href="client-login.html" class="new_loger_nav__bar_oi-button new_loger_nav__bar_oi-button-login">Client Log-in</a>
       </div>
-   <div class="intbeh_01">
                         <div class="kli_002_wer">
                             <a href="https://www.threads.net/@hitexeditex">
                             <img src="assets/threads-icon.svg" class="alb-im-001">
                            </a>
                         </div>
-                           </div>
+                           
                         <div class="kli_002_wer">
                     <a href="https://www.linkedin.com/company/hitexeditex/">
                     <img src="assets/linkedin-app-icon.svg" class="alb-im-001">
@@ -179,6 +180,7 @@
                     </div>  
     </div>
   </div>
+  
   <div class="nav__bar_oi-overlay" id="navOverlay"></div>
 </nav>
 
