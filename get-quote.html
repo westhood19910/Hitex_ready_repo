@@ -53,7 +53,7 @@
                
 <nav class="nav__bar_oi">
   <div class="nav__bar_oi-logo">
-    <img src="assets/png_20221026_003820_0000.png" alt="HiTex EdiTex Logo">
+    <a href="index.html"><img src="assets/png_20221026_003820_0000.png" alt="HiTex EdiTex Logo"></a>
   </div>
   
   <button class="nav__bar_oi-toggle" id="navToggle">
@@ -509,11 +509,12 @@
                 </div>
                 <div class="form-grid">
                     <div class="form-group">
-                        <label for="doc-type">Type of document *</label>
+                        <label for="doc-type">Type of Service *</label>
                         <select id="doc-type" name="DOCTYPE" required>
                             <option value="">Select type...</option>
-                            <option value="academic">Academic Paper</option>
-                            <option value="thesis">Thesis/Dissertation</option>
+                            <option value="academic">Advanced Editing</option>
+                            <option value="thesis">Specialist Editing</option>
+                            <option value="thesis">Scientific Editing</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -591,7 +592,7 @@
                         <label for="email">Primary email *</label>
                         <input type="email" id="email" name="email" required>
                     </div>
-                     <div class="xyz-container-88">
+                     <div class="form-group">
             <label for="mobile">Mobile Number</label>
                 <div class="xyz-input-wrapper-99">
               <select id="country-code" name="country_code"></select>
@@ -774,41 +775,239 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- FORM SUBMISSION LOGIC ---
-    if (quoteForm) {
-        quoteForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
+   // Replace the existing form submission logic with this updated version
+
+   // ADD THESE FUNCTIONS BEFORE THE FORM SUBMISSION HANDLER:
+
+// Enhanced error handling for the quote form
+function handleSubmissionError(error, email) {
+    console.error('Submission error:', error);
+    
+    if (error.message.includes('user_exists')) {
+        showUserExistsModal(email);
+    } else if (error.message.includes('disposable_email_blocked')) {
+        showDisposableEmailError();
+    } else {
+        alert('Submission failed: ' + error.message);
+    }
+}
+
+function showUserExistsModal(email) {
+    const modal = document.createElement('div');
+    modal.className = 'overlay-dialog';
+    modal.style.display = 'flex';
+    modal.innerHTML = `
+        <div class="modal-content" style="max-width: 450px; text-align: center; padding: 2rem;">
+            <div style="color: #ff9800; font-size: 2.5rem; margin-bottom: 1rem;">👋</div>
+            <h2 style="color: #2c5aa0; margin-bottom: 1rem;">Account Already Exists</h2>
+            <p style="margin-bottom: 1.5rem; line-height: 1.6;">
+                An account with <strong>${email}</strong> already exists. Please sign in to submit your quote request.
+            </p>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button onclick="window.location.href='client-login.html'" 
+                        style="background: #2c5aa0; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer;">
+                    Sign In
+                </button>
+                <button onclick="this.parentElement.parentElement.parentElement.remove()" 
+                        style="background: #6c757d; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer;">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+function showDisposableEmailError() {
+    const modal = document.createElement('div');
+    modal.className = 'overlay-dialog';
+    modal.style.display = 'flex';
+    modal.innerHTML = `
+        <div class="modal-content" style="max-width: 450px; text-align: center; padding: 2rem;">
+            <div style="color: #f44336; font-size: 2.5rem; margin-bottom: 1rem;">🚫</div>
+            <h2 style="color: #f44336; margin-bottom: 1rem;">Invalid Email Address</h2>
+            <p style="margin-bottom: 1.5rem; line-height: 1.6;">
+                Please use a permanent email address. Temporary or disposable email addresses are not allowed for quote requests.
+            </p>
+            <button onclick="this.parentElement.parentElement.remove()" 
+                    style="background: #2c5aa0; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer;">
+                Update Email Address
+            </button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+// Enhanced validation for email field
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        return { valid: false, message: 'Please enter a valid email address' };
+    }
+    
+    // Check for common typos
+    const commonDomains = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com'];
+    const domain = email.split('@')[1]?.toLowerCase();
+    
+    // Simple typo suggestions
+    if (domain) {
+        const suggestions = [];
+        commonDomains.forEach(correctDomain => {
+            if (levenshteinDistance(domain, correctDomain) <= 2 && domain !== correctDomain) {
+                suggestions.push(correctDomain);
+            }
+        });
+        
+        if (suggestions.length > 0) {
+            return { 
+                valid: true, 
+                suggestion: email.replace(domain, suggestions[0]),
+                message: `Did you mean ${email.replace(domain, suggestions[0])}?`
+            };
+        }
+    }
+    
+    return { valid: true };
+}
+
+// Simple Levenshtein distance calculation for typo detection
+function levenshteinDistance(str1, str2) {
+    const matrix = [];
+    for (let i = 0; i <= str2.length; i++) {
+        matrix[i] = [i];
+    }
+    for (let j = 0; j <= str1.length; j++) {
+        matrix[0][j] = j;
+    }
+    for (let i = 1; i <= str2.length; i++) {
+        for (let j = 1; j <= str1.length; j++) {
+            if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
+                matrix[i][j] = matrix[i - 1][j - 1];
+            } else {
+                matrix[i][j] = Math.min(
+                    matrix[i - 1][j - 1] + 1,
+                    matrix[i][j - 1] + 1,
+                    matrix[i - 1][j] + 1
+                );
+            }
+        }
+    }
+    return matrix[str2.length][str1.length];
+}
+
+// Enhanced form validation with real-time feedback
+function setupFormValidation() {
+    const emailInput = document.getElementById('email');
+    
+    if (emailInput) {
+        emailInput.addEventListener('blur', function() {
+            const validation = validateEmail(this.value);
             
-            const token = localStorage.getItem('authToken');
-            if (!token) {
-                alert('You must be logged in to submit a request.');
-                return window.location.href = 'client-login.html';
+            // Remove existing suggestion
+            const existingSuggestion = this.parentElement.querySelector('.email-suggestion');
+            if (existingSuggestion) {
+                existingSuggestion.remove();
+            }
+            
+            if (validation.suggestion) {
+                const suggestionElement = document.createElement('div');
+                suggestionElement.className = 'email-suggestion';
+                suggestionElement.innerHTML = `
+                    <small style="color: #ff9800; cursor: pointer;" onclick="acceptEmailSuggestion('${validation.suggestion}')">
+                        ${validation.message}
+                    </small>
+                `;
+                this.parentElement.appendChild(suggestionElement);
+            }
+        });
+    }
+}
+
+function acceptEmailSuggestion(suggestedEmail) {
+    const emailInput = document.getElementById('email');
+    if (emailInput) {
+        emailInput.value = suggestedEmail;
+        emailInput.focus();
+    }
+    
+    // Remove suggestion
+    const suggestion = document.querySelector('.email-suggestion');
+    if (suggestion) {
+        suggestion.remove();
+    }
+}
+
+// Initialize enhanced validation when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    setupFormValidation();
+});
+
+// NOW THE EXISTING FORM SUBMISSION CODE CONTINUES HERE:
+if (quoteForm) {
+    quoteForm.addEventListener('submit', async (e) => {
+        // ... your existing form code
+    });
+}
+
+if (quoteForm) {
+    quoteForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const submitBtn = quoteForm.querySelector('.submit-btn');
+        if (submitBtn) {
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+        }
+        
+        try {
+            // Create FormData from the form
+            const formData = new FormData(quoteForm);
+            
+            // Get user email for checking
+            const emailInput = document.getElementById('email');
+            const userEmail = emailInput ? emailInput.value : '';
+            
+            // Add selected service type
+            const activeServiceTab = document.querySelector('.service-tab.active');
+            if (activeServiceTab) {
+                formData.append('serviceType', activeServiceTab.dataset.service);
             }
 
-            const submitBtn = quoteForm.querySelector('.submit-btn');
-            if (submitBtn) {
-                submitBtn.textContent = 'Submitting...';
-                submitBtn.disabled = true;
-            }
+            // Check authentication status first
+            const token = localStorage.getItem('authToken');
             
-            try {
-                // Create FormData from the form
-                const formData = new FormData(quoteForm);
+            if (!token) {
+                // User is not logged in - submit as guest request
+                const response = await fetch('https://all-branched-end.onrender.com/submit-guest-quote-request', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
                 
+                if (!response.ok) {
+                    throw new Error(result.error || 'Submission failed');
+                }
+                
+                // Show success message for guest submission
+                showGuestSubmissionSuccess(userEmail);
+                quoteForm.reset();
+                
+                // Reset price display
+                if (priceDisplay) {
+                    priceDisplay.textContent = '$0.00';
+                }
+                
+            } else {
+                // User is logged in - proceed with normal submission
                 // Add user identification to form data
                 if (currentUserData && currentUserData.id) {
                     formData.append('userId', currentUserData.id);
                 }
                 
-                // Always include user email (from the form field)
-                const emailInput = document.getElementById('email');
+                // Always include user email
                 if (emailInput && emailInput.value) {
                     formData.append('userEmail', emailInput.value);
-                }
-                
-                // Add selected service type
-                const activeServiceTab = document.querySelector('.service-tab.active');
-                if (activeServiceTab) {
-                    formData.append('serviceType', activeServiceTab.dataset.service);
                 }
 
                 // Submit to backend
@@ -824,7 +1023,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     throw new Error(result.error || 'Submission failed');
                 }
                 
-                // Success
+                // Success for logged-in users
                 alert('Success! ' + result.message);
                 quoteForm.reset();
                 
@@ -834,41 +1033,71 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 
                 // Re-populate user data after reset
-                if (currentUserData) {
-                    if (currentUserData.salutation) {
-                        const salutationSelect = document.getElementById('salutation');
-                        if (salutationSelect) salutationSelect.value = currentUserData.salutation;
-                    }
-                    if (currentUserData.firstName) {
-                        const firstNameInput = document.getElementById('first-name');
-                        if (firstNameInput) firstNameInput.value = currentUserData.firstName;
-                    }
-                    if (currentUserData.lastName) {
-                        const lastNameInput = document.getElementById('last-name');
-                        if (lastNameInput) lastNameInput.value = currentUserData.lastName;
-                    }
-                    if (currentUserData.email) {
-                        const emailInput = document.getElementById('email');
-                        if (emailInput) {
-                            emailInput.value = currentUserData.email;
-                            emailInput.readOnly = true;
-                            emailInput.style.backgroundColor = '#f0f0f0';
-                            emailInput.style.cursor = 'not-allowed';
-                        }
-                    }
-                }
-
-            } catch (error) {
-                console.error('Submission error:', error);
-                alert('Submission failed: ' + error.message);
-            } finally {
-                if (submitBtn) {
-                    submitBtn.textContent = 'Submit Order';
-                    submitBtn.disabled = false;
-                }
+                repopulateUserData();
             }
-        });
+
+        } catch (error) {
+            console.error('Submission error:', error);
+            alert('Submission failed: ' + error.message);
+        } finally {
+            if (submitBtn) {
+                submitBtn.textContent = 'Submit Order';
+                submitBtn.disabled = false;
+            }
+        }
+    });
+}
+
+// Function to show guest submission success
+function showGuestSubmissionSuccess(email) {
+    const modal = document.createElement('div');
+    modal.className = 'overlay-dialog';
+    modal.style.display = 'flex';
+    modal.innerHTML = `
+        <div class="modal-content" style="max-width: 500px; text-align: center; padding: 2rem;">
+            <div style="color: #4CAF50; font-size: 3rem; margin-bottom: 1rem;">✉️</div>
+            <h2 style="color: #2c5aa0; margin-bottom: 1rem;">Check Your Email!</h2>
+            <p style="margin-bottom: 1.5rem; line-height: 1.6;">
+                We've sent a secure link to <strong>${email}</strong>. Please check your email and click the link to complete your quote request and create your account.
+            </p>
+            <p style="color: #666; font-size: 0.9rem; margin-bottom: 1.5rem;">
+                Don't see the email? Check your spam folder or contact support.
+            </p>
+            <button onclick="this.parentElement.parentElement.remove()" 
+                    style="background: #2c5aa0; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer;">
+                Got it!
+            </button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+// Function to repopulate user data after form reset
+function repopulateUserData() {
+    if (currentUserData) {
+        if (currentUserData.salutation) {
+            const salutationSelect = document.getElementById('salutation');
+            if (salutationSelect) salutationSelect.value = currentUserData.salutation;
+        }
+        if (currentUserData.firstName) {
+            const firstNameInput = document.getElementById('firstName');
+            if (firstNameInput) firstNameInput.value = currentUserData.firstName;
+        }
+        if (currentUserData.lastName) {
+            const lastNameInput = document.getElementById('lastName');
+            if (lastNameInput) lastNameInput.value = currentUserData.lastName;
+        }
+        if (currentUserData.email) {
+            const emailInput = document.getElementById('email');
+            if (emailInput) {
+                emailInput.value = currentUserData.email;
+                emailInput.readOnly = true;
+                emailInput.style.backgroundColor = '#f0f0f0';
+                emailInput.style.cursor = 'not-allowed';
+            }
+        }
     }
+}
 
     // --- COUNTRY CODE FUNCTIONALITY ---
     // A comprehensive list of countries and their dialing codes

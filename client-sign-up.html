@@ -668,9 +668,75 @@
         </p>
     </div>
 
-    <script>
-    <!-- Modal for institutional discount info -->
-   document.addEventListener('DOMContentLoaded', function() {
+      <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Check for prefilled data from URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const prefillData = urlParams.get('prefill');
+    const error = urlParams.get('error');
+    const errorMessage = urlParams.get('message');
+    
+    // Show error message if present
+    if (error && errorMessage) {
+        alert(decodeURIComponent(errorMessage));
+    }
+    
+    // Prefill form if data is available
+    if (prefillData) {
+        try {
+            const data = JSON.parse(decodeURIComponent(prefillData));
+            
+            // Add a hidden field for the quote token
+            if (data.quoteToken) {
+                const quoteTokenInput = document.createElement('input');
+                quoteTokenInput.type = 'hidden';
+                quoteTokenInput.name = 'quoteToken';
+                quoteTokenInput.value = data.quoteToken;
+                document.getElementById('signupForm').appendChild(quoteTokenInput);
+                
+                // Show a message about completing quote request
+                showQuoteCompletionMessage();
+            }
+            
+            // Prefill form fields
+            if (data.firstName) {
+                const firstNameInput = document.getElementById('firstName');
+                if (firstNameInput) {
+                    firstNameInput.value = data.firstName;
+                    firstNameInput.style.backgroundColor = '#f0f8ff';
+                }
+            }
+            
+            if (data.lastName) {
+                const lastNameInput = document.getElementById('lastName');
+                if (lastNameInput) {
+                    lastNameInput.value = data.lastName;
+                    lastNameInput.style.backgroundColor = '#f0f8ff';
+                }
+            }
+            
+            if (data.email) {
+                const emailInput = document.getElementById('email');
+                if (emailInput) {
+                    emailInput.value = data.email;
+                    emailInput.style.backgroundColor = '#f0f8ff';
+                    // Make email read-only since it came from the quote request
+                    emailInput.readOnly = true;
+                }
+            }
+            
+            if (data.salutation) {
+                const salutationSelect = document.getElementById('salutation');
+                if (salutationSelect) {
+                    salutationSelect.value = data.salutation;
+                    salutationSelect.style.backgroundColor = '#f0f8ff';
+                }
+            }
+            
+        } catch (e) {
+            console.error('Failed to parse prefill data:', e);
+        }
+    }
 
     // University Autocomplete functionality
     let institutionTimeout;
@@ -798,7 +864,6 @@
     togglePasswordVisibility('togglePassword', 'password');
     togglePasswordVisibility('toggleConfirmPassword', 'confirmPassword');
 
-
     // Modal functionality
     const modal = document.getElementById('infoModal');
     const whyEmailLink = document.getElementById('whyEmailLink');
@@ -914,150 +979,164 @@
         });
     }
 
-    // Form submission - PERFECTLY MATCHING YOUR BACKEND
-    document.getElementById('signupForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
+    console.log('Enhanced signup form with guest quote support initialized');
+});
 
-        const form = e.target;
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
-        const submitButton = document.querySelector('.unl_live-submit-button');
+function showQuoteCompletionMessage() {
+    const container = document.querySelector('.unl_live-signup-container');
+    const messageHTML = `
+        <div id="quoteCompletionMessage" style="
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        ">
+            <div style="font-size: 1.5rem; margin-bottom: 8px;">📝</div>
+            <h4 style="margin: 0 0 8px 0;">Complete Your Quote Request</h4>
+            <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">
+                Create your account below to receive your personalized editing quote
+            </p>
+        </div>
+    `;
+    
+    container.insertAdjacentHTML('afterbegin', messageHTML);
+}
 
-        // Basic validation
-        if (data.password !== data.confirmPassword) {
-            alert('Passwords do not match.');
-            return;
-        }
+// Form submission - UPDATED TO HANDLE QUOTE TOKENS
+document.getElementById('signupForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-        if (!data.firstName || !data.lastName || !data.email || !data.password) {
-            alert('Please fill in all required fields.');
-            return;
-        }
+    const form = e.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+    const submitButton = document.querySelector('.unl_live-submit-button');
 
-        if (data.password.length < 8) {
-            alert('Password must be at least 8 characters long.');
-            return;
-        }
+    // Basic validation
+    if (data.password !== data.confirmPassword) {
+        alert('Passwords do not match.');
+        return;
+    }
 
-        // Validate institutional email if provided
-        if (data.institutionalEmail && data.institutionalEmail.trim()) {
-            submitButton.textContent = 'Validating Institutional Email...';
-            submitButton.disabled = true;
+    if (!data.firstName || !data.lastName || !data.email || !data.password) {
+        alert('Please fill in all required fields.');
+        return;
+    }
 
-            try {
-                const emailValidation = await validateInstitutionalEmailOnline(data.institutionalEmail);
-                
-                if (!emailValidation.valid) {
-                    const emailError = document.getElementById('emailError');
-                    if (emailError) {
-                        emailError.textContent = emailValidation.message || 'Please enter a valid institutional email address.';
-                        emailError.style.display = 'block';
-                        emailError.style.color = 'var(--red)';
-                    }
-                    
-                    submitButton.textContent = 'Sign Up';
-                    submitButton.disabled = false;
-                    return;
-                } else {
-                    const emailError = document.getElementById('emailError');
-                    if (emailError) {
-                        emailError.style.display = 'none';
-                    }
-                }
+    if (data.password.length < 8) {
+        alert('Password must be at least 8 characters long.');
+        return;
+    }
 
-            } catch (error) {
-                console.error('Email validation error:', error);
-                alert('Unable to validate institutional email at this time. Please try again later.');
-                submitButton.textContent = 'Sign Up';
-                submitButton.disabled = false;
-                return;
-            }
-        }
-
-        submitButton.textContent = 'Creating Account...';
+    // Validate institutional email if provided
+    if (data.institutionalEmail && data.institutionalEmail.trim()) {
+        submitButton.textContent = 'Validating Institutional Email...';
         submitButton.disabled = true;
 
         try {
-            // Send exactly what your backend expects
-            const response = await fetch('https://all-branched-end.onrender.com/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    salutation: data.salutation || null,
-                    firstName: data.firstName,
-                    lastName: data.lastName,
-                    email: data.email,
-                    password: data.password,
-                    currentInstitution: data.currentInstitution || null,
-                    institutionalEmail: data.institutionalEmail || null
-                }),
-            });
-
-            const result = await response.json();
-
-            if (!response.ok) {
-                throw new Error(result.error || 'Registration failed');
-            }
-
-            let successMessage = result.message;
-            if (result.institutionalUser) {
-                successMessage += ' You will qualify for a one-time discount upon verification of your email during payment for any of our services.';
-            }
+            const emailValidation = await validateInstitutionalEmailOnline(data.institutionalEmail);
             
-           // FIXED signup success handler - handles JWT token properly
-if (!response.ok) {
-    throw new Error(result.error || 'Registration failed');
-}
-
-// CRITICAL FIX: Handle different registration scenarios properly
-if (result.requiresVerification) {
-    // Email verification required - don't redirect to dashboard yet
-    alert(result.message);
-    // Could redirect to verification page here if you have one
-    // window.location.href = 'email-verification.html';
-    
-} else if (result.token) {
-    // Registration successful with immediate login
-    console.log('Registration successful, storing token:', result.token);
-    
-    // CRITICAL: Clear old token and store new user's token
-    localStorage.removeItem('authToken'); 
-    localStorage.setItem('authToken', result.token);
-    
-    let successMessage = result.message;
-    if (result.institutionalUser) {
-        successMessage += ' You may qualify for institutional discounts!';
-    }
-    
-    alert(successMessage);
-    
-    // Small delay to ensure token is stored
-    setTimeout(() => {
-        console.log('Redirecting to dashboard with new token');
-        window.location.href = 'client-dashboard.html';
-    }, 500); // Reduced from 1500ms to 500ms
-    
-} else {
-    // Registration successful but no immediate login token
-    alert(result.message + ' Please log in to continue.');
-    window.location.href = 'client-login.html';
-}
+            if (!emailValidation.valid) {
+                const emailError = document.getElementById('emailError');
+                if (emailError) {
+                    emailError.textContent = emailValidation.message || 'Please enter a valid institutional email address.';
+                    emailError.style.display = 'block';
+                    emailError.style.color = 'var(--red)';
+                }
+                
+                submitButton.textContent = 'Sign Up';
+                submitButton.disabled = false;
+                return;
+            } else {
+                const emailError = document.getElementById('emailError');
+                if (emailError) {
+                    emailError.style.display = 'none';
+                }
+            }
 
         } catch (error) {
-            console.error('Registration error:', error);
-            alert('Registration failed: ' + error.message);
-        } finally {
+            console.error('Email validation error:', error);
+            alert('Unable to validate institutional email at this time. Please try again later.');
             submitButton.textContent = 'Sign Up';
             submitButton.disabled = false;
+            return;
         }
-    });
+    }
 
-    console.log('Frontend perfectly matched to backend - ready for testing!');
+    submitButton.textContent = 'Creating Account...';
+    submitButton.disabled = true;
+
+    try {
+        // Check if this is a quote completion registration
+        const endpoint = data.quoteToken ? '/register-with-quote' : '/register';
+        
+        const response = await fetch(`https://all-branched-end.onrender.com${endpoint}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                salutation: data.salutation || null,
+                firstName: data.firstName,
+                lastName: data.lastName,
+                email: data.email,
+                password: data.password,
+                currentInstitution: data.currentInstitution || null,
+                institutionalEmail: data.institutionalEmail || null,
+                quoteToken: data.quoteToken || null
+            }),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.error || 'Registration failed');
+        }
+
+        // Handle successful registration
+        if (result.requiresVerification) {
+            // Email verification required - don't redirect to dashboard yet
+            alert(result.message);
+        } else if (result.token) {
+            // Registration successful with immediate login
+            console.log('Registration successful, storing token:', result.token);
+            
+            // Clear old token and store new user's token
+            localStorage.removeItem('authToken'); 
+            localStorage.setItem('authToken', result.token);
+            
+            let successMessage = result.message;
+            if (result.institutionalUser) {
+                successMessage += ' You may qualify for institutional discounts!';
+            }
+            if (result.manuscriptId) {
+                successMessage += ' Your quote request has been submitted successfully!';
+            }
+            
+            alert(successMessage);
+            
+            // Small delay to ensure token is stored
+            setTimeout(() => {
+                console.log('Redirecting to dashboard');
+                window.location.href = 'client-dashboard.html';
+            }, 500);
+            
+        } else {
+            // Registration successful but no immediate login token
+            alert(result.message + ' Please log in to continue.');
+            window.location.href = 'client-login.html';
+        }
+
+    } catch (error) {
+        console.error('Registration error:', error);
+        alert('Registration failed: ' + error.message);
+    } finally {
+        submitButton.textContent = 'Sign Up';
+        submitButton.disabled = false;
+    }
 });
-
-    </script>
+</script>
 
     <script src="global-dashboard.js"></script>
     
