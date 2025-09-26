@@ -222,69 +222,90 @@
         
             <script>
               
+// Handle forgot password form submission
 document.addEventListener('DOMContentLoaded', () => {
-    // --- CONFIG ---
-    const BACKEND_URL = "https://all-branched-end.onrender.com";
-    const FRONTEND_URL = "https://hitex-editex.vercel.app"; 
-
-    // --- DOM ELEMENTS ---
-    const loginForm = document.getElementById('loginForm');
-
-    if (loginForm) {
-        loginForm.addEventListener('submit', async (e) => {
+    const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+    
+    if (forgotPasswordForm) {
+        forgotPasswordForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value.trim();
-
-            if (!email || !password) {
-                alert('Please enter both email and password.');
+            
+            const email = document.getElementById('resetEmail').value.trim();
+            const sendResetBtn = document.getElementById('sendResetBtn');
+            const resetMessage = document.getElementById('resetMessage');
+            
+            console.log('=== DEBUGGING FORGOT PASSWORD ===');
+            console.log('Email entered:', email);
+            console.log('Backend URL:', BACKEND_URL);
+            
+            if (!email) {
+                showResetMessage('Please enter your email address.', 'error');
                 return;
             }
-
-            const submitBtn = loginForm.querySelector('button[type="submit"]');
-            submitBtn.textContent = 'Logging in...';
-            submitBtn.disabled = true;
-
+            
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showResetMessage('Please enter a valid email address.', 'error');
+                return;
+            }
+            
+            sendResetBtn.textContent = 'Sending...';
+            sendResetBtn.disabled = true;
+            
             try {
-                const response = await fetch(`${BACKEND_URL}/login`, {
+                console.log('Making request to:', `${BACKEND_URL}/forgot-password`);
+                
+                const response = await fetch(`${BACKEND_URL}/forgot-password`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password })
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({ email })
                 });
-
+                
+                console.log('Response status:', response.status);
+                console.log('Response ok:', response.ok);
+                
                 const data = await response.json();
-                if (!response.ok) {
-               throw new Error(data.error || 'Login failed');
+                console.log('Response data:', data);
+                
+                if (response.ok) {
+                    showResetMessage(data.message || 'Password reset link sent to your email!', 'success');
+                    document.getElementById('forgotPasswordForm').reset();
+                    
+                    // Auto-close modal after 3 seconds
+                    setTimeout(() => {
+                        closeForgotPasswordModal();
+                    }, 3000);
+                } else {
+                    console.log('Server error response:', data);
+                    showResetMessage(data.error || 'Failed to send reset link. Please try again.', 'error');
                 }
-
-             // Store token & user info
-               localStorage.setItem('authToken', data.token);
-               localStorage.setItem('user', JSON.stringify(data.user));
-
-              // Clear welcome message flag so it shows on first page after login
-                     localStorage.removeItem('welcomeMessageShown');
-
-               // Trigger dashboard activation
-                          if (window.checkAuthenticationStatus) {
-                    window.checkAuthenticationStatus();
-                         }
-
-                   alert('Login successful! Redirecting...');
-
-                   setTimeout(() => {
-                 window.location.href = `${FRONTEND_URL}/client-dashboard.html`;
-                }, 1500);
-
+                
             } catch (error) {
-                alert('Login failed: ' + error.message);
+                console.error('=== DETAILED ERROR INFO ===');
+                console.error('Error type:', error.name);
+                console.error('Error message:', error.message);
+                console.error('Error stack:', error.stack);
+                
+                // More specific error handling
+                if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
+                    showResetMessage('Cannot connect to server. Please check if the backend is running.', 'error');
+                } else if (error.name === 'SyntaxError') {
+                    showResetMessage('Server returned invalid response format.', 'error');
+                } else {
+                    showResetMessage(`Network error: ${error.message}`, 'error');
+                }
+                
             } finally {
-                submitBtn.textContent = 'Log In';
-                submitBtn.disabled = false;
+                sendResetBtn.textContent = 'Send Reset Link';
+                sendResetBtn.disabled = false;
             }
         });
     }
-});
+        });
 
 function showForgotPasswordModal() {
     document.getElementById('forgotPasswordModal').style.display = 'block';
