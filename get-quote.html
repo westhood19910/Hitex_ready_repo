@@ -679,11 +679,10 @@
             </div>
         </form>
     </div>
-   <script>
-  // Enhanced authentication logic for the quote form
-// Add this to your quote page JavaScript
 
-// Global variable to store user data
+   <script>
+// Complete Quote Form Script - Enhanced Authentication
+// Global variables
 let currentUserData = null;
 let isUserAuthenticated = false;
 
@@ -702,11 +701,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 currentUserData = await response.json();
                 isUserAuthenticated = true;
                 
-                // Hide or disable personal information section for authenticated users
+                // Hide personal information section for authenticated users
                 hidePersonalInfoSection();
-                
-                // Pre-populate any remaining visible fields
-                prePopulateUserFields();
                 
                 // Show authenticated user indicator
                 showAuthenticatedUserIndicator();
@@ -724,10 +720,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else {
         showGuestUserInterface();
     }
+
+    // Initialize form functionality
+    initializeFormFunctionality();
 });
 
 function hidePersonalInfoSection() {
-    const personalInfoSection = document.querySelector('fieldset.form-section:has(.section-title)');
     const sectionTitle = Array.from(document.querySelectorAll('.section-title'))
         .find(title => title.textContent.includes('Personal Information'));
     
@@ -737,7 +735,10 @@ function hidePersonalInfoSection() {
             // Hide the entire personal information section
             section.style.display = 'none';
             
-            // Add a user info display instead
+            // Remove required attributes from personal info fields
+            removeRequiredFromPersonalFields();
+            
+            // Add user info display
             const userInfoDisplay = document.createElement('div');
             userInfoDisplay.className = 'authenticated-user-info';
             userInfoDisplay.innerHTML = `
@@ -796,42 +797,50 @@ function hidePersonalInfoSection() {
     }
 }
 
-function prePopulateUserFields() {
-    // Pre-populate any fields that are still visible
-    if (currentUserData.salutation) {
-        const salutationSelect = document.getElementById('salutation');
-        if (salutationSelect && salutationSelect.closest('fieldset').style.display !== 'none') {
-            salutationSelect.value = currentUserData.salutation;
-        }
-    }
+// Function to remove required attribute from personal info fields
+function removeRequiredFromPersonalFields() {
+    const personalFields = [
+        'firstName',
+        'lastName', 
+        'email',
+        'how-heard'
+    ];
     
-    if (currentUserData.firstName) {
-        const firstNameInput = document.getElementById('firstName');
-        if (firstNameInput && firstNameInput.closest('fieldset').style.display !== 'none') {
-            firstNameInput.value = currentUserData.firstName;
+    personalFields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field) {
+            field.removeAttribute('required');
+            // Remove asterisk from label
+            const label = document.querySelector(`label[for="${fieldId}"]`);
+            if (label && label.textContent.includes('*')) {
+                label.textContent = label.textContent.replace(' *', '');
+            }
         }
-    }
+    });
+}
+
+// Function to restore required attribute for guest users
+function restoreRequiredForPersonalFields() {
+    const requiredFields = [
+        { id: 'firstName', label: 'First name *' },
+        { id: 'lastName', label: 'Last name *' },
+        { id: 'email', label: 'Primary email *' },
+        { id: 'how-heard', label: 'How did you hear about us? *' }
+    ];
     
-    if (currentUserData.lastName) {
-        const lastNameInput = document.getElementById('lastName');
-        if (lastNameInput && lastNameInput.closest('fieldset').style.display !== 'none') {
-            lastNameInput.value = currentUserData.lastName;
+    requiredFields.forEach(field => {
+        const element = document.getElementById(field.id);
+        if (element) {
+            element.setAttribute('required', 'required');
+            const label = document.querySelector(`label[for="${field.id}"]`);
+            if (label && !label.textContent.includes('*')) {
+                label.textContent = field.label;
+            }
         }
-    }
-    
-    if (currentUserData.email) {
-        const emailInput = document.getElementById('email');
-        if (emailInput && emailInput.closest('fieldset').style.display !== 'none') {
-            emailInput.value = currentUserData.email;
-            emailInput.readOnly = true;
-            emailInput.style.backgroundColor = '#f0f0f0';
-            emailInput.style.cursor = 'not-allowed';
-        }
-    }
+    });
 }
 
 function showAuthenticatedUserIndicator() {
-    // Update the page heading to show user is logged in
     const pageHeading = document.getElementById('page-main-heading');
     if (pageHeading) {
         const originalText = pageHeading.textContent;
@@ -852,8 +861,6 @@ function showAuthenticatedUserIndicator() {
 }
 
 function showGuestUserInterface() {
-    // Show the full form for guest users
-    const personalInfoSection = document.querySelector('fieldset.form-section:has(.section-title)');
     const sectionTitle = Array.from(document.querySelectorAll('.section-title'))
         .find(title => title.textContent.includes('Personal Information'));
     
@@ -864,6 +871,9 @@ function showGuestUserInterface() {
         }
     }
     
+    // Restore required attributes for guest users
+    restoreRequiredForPersonalFields();
+    
     // Remove any authenticated user indicators
     const authIndicator = document.querySelector('.authenticated-user-info');
     if (authIndicator) {
@@ -872,40 +882,39 @@ function showGuestUserInterface() {
 }
 
 // Function to switch to guest mode
-function switchToGuestMode() {
+window.switchToGuestMode = function() {
     const confirmed = confirm(
         'Are you sure you want to submit this quote as a different user? ' +
         'You will need to fill in all personal information manually.'
     );
     
     if (confirmed) {
-        // Clear authentication
         localStorage.removeItem('authToken');
         currentUserData = null;
         isUserAuthenticated = false;
-        
-        // Show guest interface
-        showGuestUserInterface();
-        
-        // Reload the page to reset everything
         window.location.reload();
     }
-}
+};
 
 // Enhanced form submission that handles both authenticated and guest users
 async function submitQuoteForm(formData) {
     const token = localStorage.getItem('authToken');
     
     if (token && isUserAuthenticated) {
-        // Authenticated user submission
+        // Authenticated user submission - skip personal info validation
         try {
             // Add user identification to form data
             if (currentUserData && currentUserData.id) {
                 formData.append('userId', currentUserData.id);
             }
             
-            // Always include user email
+            // Always include user email from stored data
             formData.append('userEmail', currentUserData.email);
+            
+            // Add personal info from stored user data for backend processing
+            formData.append('firstName', currentUserData.firstName || '');
+            formData.append('lastName', currentUserData.lastName || '');
+            formData.append('salutation', currentUserData.salutation || '');
             
             // Submit to authenticated endpoint
             const response = await fetch('https://all-branched-end.onrender.com/submit-manuscript', {
@@ -920,7 +929,6 @@ async function submitQuoteForm(formData) {
                 throw new Error(result.error || 'Submission failed');
             }
             
-            // Success for authenticated users
             alert('Success! ' + result.message);
             return { success: true, result };
             
@@ -929,7 +937,21 @@ async function submitQuoteForm(formData) {
             throw error;
         }
     } else {
-        // Guest user submission
+        // Guest user submission - validate personal info
+        const requiredGuestFields = ['firstName', 'lastName', 'email', 'how-heard'];
+        const missingFields = [];
+        
+        requiredGuestFields.forEach(fieldName => {
+            const value = formData.get(fieldName);
+            if (!value || value.trim() === '') {
+                missingFields.push(fieldName);
+            }
+        });
+        
+        if (missingFields.length > 0) {
+            throw new Error('Please fill in all required personal information fields.');
+        }
+        
         try {
             const response = await fetch('https://all-branched-end.onrender.com/submit-guest-quote-request', {
                 method: 'POST',
@@ -942,7 +964,6 @@ async function submitQuoteForm(formData) {
                 throw new Error(result.error || 'Submission failed');
             }
             
-            // Show success message for guest submission
             const userEmail = formData.get('email');
             showGuestSubmissionSuccess(userEmail);
             return { success: true, result, isGuest: true };
@@ -954,64 +975,6 @@ async function submitQuoteForm(formData) {
     }
 }
 
-// Update your existing form submission handler
-document.addEventListener('DOMContentLoaded', () => {
-    const quoteForm = document.querySelector('.quote-form');
-    
-    if (quoteForm) {
-        quoteForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const submitBtn = quoteForm.querySelector('.submit-btn');
-            if (submitBtn) {
-                submitBtn.textContent = 'Submitting...';
-                submitBtn.disabled = true;
-            }
-            
-            try {
-                // Create FormData from the form
-                const formData = new FormData(quoteForm);
-                
-                // Add selected service type
-                const activeServiceTab = document.querySelector('.service-tab.active');
-                if (activeServiceTab) {
-                    formData.append('serviceType', activeServiceTab.dataset.service);
-                }
-                
-                // Submit using the enhanced function
-                const result = await submitQuoteForm(formData);
-                
-                if (result.success && !result.isGuest) {
-                    // Reset form for authenticated users
-                    quoteForm.reset();
-                    
-                    // Reset price display
-                    const priceDisplay = document.getElementById('calculated-price');
-                    if (priceDisplay) {
-                        priceDisplay.textContent = '$0.00';
-                    }
-                    
-                    // Re-hide personal info section and re-populate user data
-                    if (isUserAuthenticated) {
-                        hidePersonalInfoSection();
-                        prePopulateUserFields();
-                    }
-                }
-                
-            } catch (error) {
-                console.error('Submission error:', error);
-                alert('Submission failed: ' + error.message);
-            } finally {
-                if (submitBtn) {
-                    submitBtn.textContent = 'Submit Order';
-                    submitBtn.disabled = false;
-                }
-            }
-        });
-    }
-});
-
-// Function to show guest submission success (keep your existing implementation)
 function showGuestSubmissionSuccess(email) {
     const modal = document.createElement('div');
     modal.className = 'overlay-dialog';
@@ -1035,11 +998,8 @@ function showGuestSubmissionSuccess(email) {
     document.body.appendChild(modal);
 }
 
-console.log('Enhanced quote form with authentication management initialized');
-
-// Main form functionality
-document.addEventListener('DOMContentLoaded', () => {
-    // --- DOM ELEMENT SELECTION ---
+// Initialize form functionality
+function initializeFormFunctionality() {
     const serviceTabs = document.querySelectorAll('.service-tab');
     const wordCountInput = document.getElementById('word-count');
     const priceDisplay = document.getElementById('calculated-price');
@@ -1050,7 +1010,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const recommenderInputBox = document.getElementById('recommender-input-box');
     const provideRecommenderRadios = document.querySelectorAll('input[name="provide-recommender"]');
 
-    // --- PRICE CALCULATION LOGIC ---
+    // Price calculation
     function calculatePrice() {
         const activeTab = document.querySelector('.service-tab.active');
         if (!activeTab) return;
@@ -1071,7 +1031,24 @@ document.addEventListener('DOMContentLoaded', () => {
             event.currentTarget.classList.add('active');
             
             if (pageHeading) {
-                pageHeading.textContent = event.currentTarget.textContent;
+                const originalText = event.currentTarget.textContent;
+                if (isUserAuthenticated) {
+                    pageHeading.innerHTML = `
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                            <span>${originalText}</span>
+                            <span style="
+                                background: #4caf50;
+                                color: white;
+                                padding: 4px 8px;
+                                border-radius: 12px;
+                                font-size: 12px;
+                                font-weight: normal;
+                            ">✓ Signed In</span>
+                        </div>
+                    `;
+                } else {
+                    pageHeading.textContent = originalText;
+                }
             }
             calculatePrice();
         });
@@ -1085,7 +1062,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial price calculation
     calculatePrice();
 
-    // --- HOW DID YOU HEAR ABOUT US LOGIC ---
+    // How did you hear about us logic
     if (howHeardSelect && colleagueDetailsDiv && recommenderInputBox) {
         howHeardSelect.addEventListener('change', function() {
             if (this.value === 'colleague') {
@@ -1096,7 +1073,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Listen for changes on the "Yes/No" radio buttons
         provideRecommenderRadios.forEach(radio => {
             radio.addEventListener('change', function() {
                 if (this.value === 'yes') {
@@ -1108,335 +1084,61 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- FORM SUBMISSION LOGIC ---
-   // Replace the existing form submission logic with this updated version
-
-   // ADD THESE FUNCTIONS BEFORE THE FORM SUBMISSION HANDLER:
-
-// Enhanced error handling for the quote form
-function handleSubmissionError(error, email) {
-    console.error('Submission error:', error);
-    
-    if (error.message.includes('user_exists')) {
-        showUserExistsModal(email);
-    } else if (error.message.includes('disposable_email_blocked')) {
-        showDisposableEmailError();
-    } else {
-        alert('Submission failed: ' + error.message);
-    }
-}
-
-function showUserExistsModal(email) {
-    const modal = document.createElement('div');
-    modal.className = 'overlay-dialog';
-    modal.style.display = 'flex';
-    modal.innerHTML = `
-        <div class="modal-content" style="max-width: 450px; text-align: center; padding: 2rem;">
-            <div style="color: #ff9800; font-size: 2.5rem; margin-bottom: 1rem;">👋</div>
-            <h2 style="color: #2c5aa0; margin-bottom: 1rem;">Account Already Exists</h2>
-            <p style="margin-bottom: 1.5rem; line-height: 1.6;">
-                An account with <strong>${email}</strong> already exists. Please sign in to submit your quote request.
-            </p>
-            <div style="display: flex; gap: 10px; justify-content: center;">
-                <button onclick="window.location.href='client-login.html'" 
-                        style="background: #2c5aa0; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer;">
-                    Sign In
-                </button>
-                <button onclick="this.parentElement.parentElement.parentElement.remove()" 
-                        style="background: #6c757d; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer;">
-                    Cancel
-                </button>
-            </div>
-        </div>
-    `;
-    document.body.appendChild(modal);
-}
-
-function showDisposableEmailError() {
-    const modal = document.createElement('div');
-    modal.className = 'overlay-dialog';
-    modal.style.display = 'flex';
-    modal.innerHTML = `
-        <div class="modal-content" style="max-width: 450px; text-align: center; padding: 2rem;">
-            <div style="color: #f44336; font-size: 2.5rem; margin-bottom: 1rem;">🚫</div>
-            <h2 style="color: #f44336; margin-bottom: 1rem;">Invalid Email Address</h2>
-            <p style="margin-bottom: 1.5rem; line-height: 1.6;">
-                Please use a permanent email address. Temporary or disposable email addresses are not allowed for quote requests.
-            </p>
-            <button onclick="this.parentElement.parentElement.remove()" 
-                    style="background: #2c5aa0; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer;">
-                Update Email Address
-            </button>
-        </div>
-    `;
-    document.body.appendChild(modal);
-}
-
-// Enhanced validation for email field
-function validateEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        return { valid: false, message: 'Please enter a valid email address' };
-    }
-    
-    // Check for common typos
-    const commonDomains = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com'];
-    const domain = email.split('@')[1]?.toLowerCase();
-    
-    // Simple typo suggestions
-    if (domain) {
-        const suggestions = [];
-        commonDomains.forEach(correctDomain => {
-            if (levenshteinDistance(domain, correctDomain) <= 2 && domain !== correctDomain) {
-                suggestions.push(correctDomain);
-            }
-        });
-        
-        if (suggestions.length > 0) {
-            return { 
-                valid: true, 
-                suggestion: email.replace(domain, suggestions[0]),
-                message: `Did you mean ${email.replace(domain, suggestions[0])}?`
-            };
-        }
-    }
-    
-    return { valid: true };
-}
-
-// Simple Levenshtein distance calculation for typo detection
-function levenshteinDistance(str1, str2) {
-    const matrix = [];
-    for (let i = 0; i <= str2.length; i++) {
-        matrix[i] = [i];
-    }
-    for (let j = 0; j <= str1.length; j++) {
-        matrix[0][j] = j;
-    }
-    for (let i = 1; i <= str2.length; i++) {
-        for (let j = 1; j <= str1.length; j++) {
-            if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
-                matrix[i][j] = matrix[i - 1][j - 1];
-            } else {
-                matrix[i][j] = Math.min(
-                    matrix[i - 1][j - 1] + 1,
-                    matrix[i][j - 1] + 1,
-                    matrix[i - 1][j] + 1
-                );
-            }
-        }
-    }
-    return matrix[str2.length][str1.length];
-}
-
-// Enhanced form validation with real-time feedback
-function setupFormValidation() {
-    const emailInput = document.getElementById('email');
-    
-    if (emailInput) {
-        emailInput.addEventListener('blur', function() {
-            const validation = validateEmail(this.value);
+    // Form submission
+    if (quoteForm) {
+        quoteForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
             
-            // Remove existing suggestion
-            const existingSuggestion = this.parentElement.querySelector('.email-suggestion');
-            if (existingSuggestion) {
-                existingSuggestion.remove();
-            }
-            
-            if (validation.suggestion) {
-                const suggestionElement = document.createElement('div');
-                suggestionElement.className = 'email-suggestion';
-                suggestionElement.innerHTML = `
-                    <small style="color: #ff9800; cursor: pointer;" onclick="acceptEmailSuggestion('${validation.suggestion}')">
-                        ${validation.message}
-                    </small>
-                `;
-                this.parentElement.appendChild(suggestionElement);
-            }
-        });
-    }
-}
-
-function acceptEmailSuggestion(suggestedEmail) {
-    const emailInput = document.getElementById('email');
-    if (emailInput) {
-        emailInput.value = suggestedEmail;
-        emailInput.focus();
-    }
-    
-    // Remove suggestion
-    const suggestion = document.querySelector('.email-suggestion');
-    if (suggestion) {
-        suggestion.remove();
-    }
-}
-
-// Initialize enhanced validation when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    setupFormValidation();
-});
-
-// NOW THE EXISTING FORM SUBMISSION CODE CONTINUES HERE:
-if (quoteForm) {
-    quoteForm.addEventListener('submit', async (e) => {
-        // ... your existing form code
-    });
-}
-
-if (quoteForm) {
-    quoteForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const submitBtn = quoteForm.querySelector('.submit-btn');
-        if (submitBtn) {
-            submitBtn.textContent = 'Submitting...';
-            submitBtn.disabled = true;
-        }
-        
-        try {
-            // Create FormData from the form
-            const formData = new FormData(quoteForm);
-            
-            // Get user email for checking
-            const emailInput = document.getElementById('email');
-            const userEmail = emailInput ? emailInput.value : '';
-            
-            // Add selected service type
-            const activeServiceTab = document.querySelector('.service-tab.active');
-            if (activeServiceTab) {
-                formData.append('serviceType', activeServiceTab.dataset.service);
-            }
-
-            // Check authentication status first
-            const token = localStorage.getItem('authToken');
-            
-            if (!token) {
-                // User is not logged in - submit as guest request
-                const response = await fetch('https://all-branched-end.onrender.com/submit-guest-quote-request', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const result = await response.json();
-                
-                if (!response.ok) {
-                    throw new Error(result.error || 'Submission failed');
-                }
-                
-                // Show success message for guest submission
-                showGuestSubmissionSuccess(userEmail);
-                quoteForm.reset();
-                
-                // Reset price display
-                if (priceDisplay) {
-                    priceDisplay.textContent = '$0.00';
-                }
-                
-            } else {
-                // User is logged in - proceed with normal submission
-                // Add user identification to form data
-                if (currentUserData && currentUserData.id) {
-                    formData.append('userId', currentUserData.id);
-                }
-                
-                // Always include user email
-                if (emailInput && emailInput.value) {
-                    formData.append('userEmail', emailInput.value);
-                }
-
-                // Submit to backend
-                const response = await fetch('https://all-branched-end.onrender.com/submit-manuscript', {
-                    method: 'POST',
-                    headers: { 'Authorization': `Bearer ${token}` },
-                    body: formData
-                });
-
-                const result = await response.json();
-                
-                if (!response.ok) {
-                    throw new Error(result.error || 'Submission failed');
-                }
-                
-                // Success for logged-in users
-                alert('Success! ' + result.message);
-                quoteForm.reset();
-                
-                // Reset price display
-                if (priceDisplay) {
-                    priceDisplay.textContent = '$0.00';
-                }
-                
-                // Re-populate user data after reset
-                repopulateUserData();
-            }
-
-        } catch (error) {
-            console.error('Submission error:', error);
-            alert('Submission failed: ' + error.message);
-        } finally {
+            const submitBtn = quoteForm.querySelector('.submit-btn');
             if (submitBtn) {
-                submitBtn.textContent = 'Submit Order';
-                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submitting...';
+                submitBtn.disabled = true;
             }
-        }
-    });
-}
-
-// Function to show guest submission success
-function showGuestSubmissionSuccess(email) {
-    const modal = document.createElement('div');
-    modal.className = 'overlay-dialog';
-    modal.style.display = 'flex';
-    modal.innerHTML = `
-        <div class="modal-content" style="max-width: 500px; text-align: center; padding: 2rem;">
-            <div style="color: #4CAF50; font-size: 3rem; margin-bottom: 1rem;">✉️</div>
-            <h2 style="color: #2c5aa0; margin-bottom: 1rem;">Check Your Email!</h2>
-            <p style="margin-bottom: 1.5rem; line-height: 1.6;">
-                We've sent a secure link to <strong>${email}</strong>. Please check your email and click the link to complete your quote request and create your account.
-            </p>
-            <p style="color: #666; font-size: 0.9rem; margin-bottom: 1.5rem;">
-                Don't see the email? Check your spam folder or contact support.
-            </p>
-            <button onclick="this.parentElement.parentElement.remove()" 
-                    style="background: #2c5aa0; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer;">
-                Got it!
-            </button>
-        </div>
-    `;
-    document.body.appendChild(modal);
-}
-
-// Function to repopulate user data after form reset
-function repopulateUserData() {
-    if (currentUserData) {
-        if (currentUserData.salutation) {
-            const salutationSelect = document.getElementById('salutation');
-            if (salutationSelect) salutationSelect.value = currentUserData.salutation;
-        }
-        if (currentUserData.firstName) {
-            const firstNameInput = document.getElementById('firstName');
-            if (firstNameInput) firstNameInput.value = currentUserData.firstName;
-        }
-        if (currentUserData.lastName) {
-            const lastNameInput = document.getElementById('lastName');
-            if (lastNameInput) lastNameInput.value = currentUserData.lastName;
-        }
-        if (currentUserData.email) {
-            const emailInput = document.getElementById('email');
-            if (emailInput) {
-                emailInput.value = currentUserData.email;
-                emailInput.readOnly = true;
-                emailInput.style.backgroundColor = '#f0f0f0';
-                emailInput.style.cursor = 'not-allowed';
+            
+            try {
+                const formData = new FormData(quoteForm);
+                
+                // Add selected service type
+                const activeServiceTab = document.querySelector('.service-tab.active');
+                if (activeServiceTab) {
+                    formData.append('serviceType', activeServiceTab.dataset.service);
+                }
+                
+                const result = await submitQuoteForm(formData);
+                
+                if (result.success && !result.isGuest) {
+                    quoteForm.reset();
+                    
+                    if (priceDisplay) {
+                        priceDisplay.textContent = '$0.00';
+                    }
+                    
+                    // Re-hide personal info section for authenticated users
+                    if (isUserAuthenticated) {
+                        hidePersonalInfoSection();
+                    }
+                }
+                
+            } catch (error) {
+                console.error('Submission error:', error);
+                alert('Submission failed: ' + error.message);
+            } finally {
+                if (submitBtn) {
+                    submitBtn.textContent = 'Submit Order';
+                    submitBtn.disabled = false;
+                }
             }
-        }
+        });
     }
+
+    // Country code functionality
+    initializeCountryCodes();
 }
 
-    // --- COUNTRY CODE FUNCTIONALITY ---
-    // A comprehensive list of countries and their dialing codes
+// Country code initialization
+function initializeCountryCodes() {
     const countries = [
-        { name: "Afghanistan 🇦🇫", code: "+93" },
+    { name: "Afghanistan 🇦🇫", code: "+93" },
         { name: "Albania 🇦🇱", code: "+355" },
         { name: "Algeria 🇩🇿", code: "+213" },
         { name: "American Samoa 🇦🇸", code: "+1-684" },
@@ -1675,13 +1377,13 @@ function repopulateUserData() {
         { name: "Yemen 🇾🇪", code: "+967" },
         { name: "Zambia 🇿🇲", code: "+260" },
         { name: "Zimbabwe 🇿🇼", code: "+263" }
+        
     ];
 
     const countryCodeSelect = document.getElementById('country-code');
     const mobileInput = document.getElementById('mobile');
 
     if (countryCodeSelect && mobileInput) {
-        // Add default option
         let defaultOption = document.createElement('option');
         defaultOption.textContent = 'Code';
         defaultOption.value = '';
@@ -1689,7 +1391,6 @@ function repopulateUserData() {
         defaultOption.selected = true;
         countryCodeSelect.appendChild(defaultOption);
 
-        // Populate dropdown
         countries.forEach(country => {
             const option = document.createElement('option');
             option.value = country.code;
@@ -1697,31 +1398,18 @@ function repopulateUserData() {
             countryCodeSelect.appendChild(option);
         });
 
-        // Update mobile input when country code changes
         countryCodeSelect.addEventListener('change', function() {
             mobileInput.value = this.value + ' ';
             mobileInput.focus();
         });
     }
+}
 
-    console.log('Quote form JavaScript initialized with user data pre-population and enhanced submission handling.');
-});
+console.log('Enhanced quote form with authentication management initialized');
 
-
-// Make switchToGuestMode globally accessible
-window.switchToGuestMode = function() {
-    const confirmed = confirm(
-        'Are you sure you want to submit this quote as a different user? ' +
-        'You will need to fill in all personal information manually.'
-    );
+   </script>
     
-    if (confirmed) {
-        localStorage.removeItem('authToken');
-        window.location.reload();
-    }
-};
     
-    </script>
 
 <script src="global-dashboard.js"></script>
 </body>
