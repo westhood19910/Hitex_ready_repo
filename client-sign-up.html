@@ -840,35 +840,61 @@
             suggestionsList.style.display = 'none';
         }
     });
-    
-    // Password toggle functionality - WORKING VERSION
-    function togglePasswordVisibility(toggleId, passwordId) {
-        const toggle = document.getElementById(toggleId);
-        const password = document.getElementById(passwordId);
-        
-        if (toggle && password) {
-            toggle.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                const currentType = password.getAttribute('type');
-                const newType = currentType === 'password' ? 'text' : 'password';
-                password.setAttribute('type', newType);
-                
-                if (newType === 'text') {
-                    this.classList.remove('fa-eye');
-                    this.classList.add('fa-eye-slash');
-                } else {
-                    this.classList.remove('fa-eye-slash');
-                    this.classList.add('fa-eye');
-                }
-            });
-        }
-    }
+      
 
-    // Initialize password toggles
+    // Password toggle functionality - FIXED VERSION
+function togglePasswordVisibility(toggleId, passwordId) {
+    const toggle = document.getElementById(toggleId);
+    const password = document.getElementById(passwordId);
+    
+    if (!toggle || !password) {
+        console.error(`Toggle or password field not found: ${toggleId}, ${passwordId}`);
+        return;
+    }
+    
+    // Remove any existing listeners to prevent duplicates
+    const newToggle = toggle.cloneNode(true);
+    toggle.parentNode.replaceChild(newToggle, toggle);
+    
+    // Add the click event listener
+    newToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        console.log('Toggle clicked for:', passwordId); // Debug log
+        
+        const currentType = password.getAttribute('type');
+        const newType = currentType === 'password' ? 'text' : 'password';
+        password.setAttribute('type', newType);
+        
+        // Toggle icon classes
+        if (newType === 'text') {
+            this.classList.remove('fa-eye');
+            this.classList.add('fa-eye-slash');
+        } else {
+            this.classList.remove('fa-eye-slash');
+            this.classList.add('fa-eye');
+        }
+        
+        console.log('Password type changed to:', newType); // Debug log
+    });
+    
+    // Also make it keyboard accessible
+    newToggle.setAttribute('tabindex', '0');
+    newToggle.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.click();
+        }
+    });
+}
+
+// Initialize password toggles with a slight delay to ensure DOM is ready
+      setTimeout(() => {
     togglePasswordVisibility('togglePassword', 'password');
     togglePasswordVisibility('toggleConfirmPassword', 'confirmPassword');
+           }, 100);
+   
 
     // Modal functionality
     const modal = document.getElementById('infoModal');
