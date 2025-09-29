@@ -1158,7 +1158,7 @@
             }
         }
 
-        function displayManuscripts(manuscripts) {
+        async function displayManuscripts(manuscripts) {
             const tbody = document.querySelector('#manuscriptsTable tbody');
             tbody.innerHTML = '';
 
@@ -1167,12 +1167,41 @@
                 return;
             }
 
+            // Get user emails for manuscripts
+            for (const m of manuscripts) {
+                if (m.userId && !m.submitterInfo?.email) {
+                    try {
+                        const response = await fetch(`${API_BASE}/admin/user/${m.userId}`, {
+                            headers: getAuthHeaders()
+                        });
+                        if (response.ok) {
+                            const userData = await response.json();
+                            m.submitterInfo = {
+                                email: userData.email,
+                                firstName: userData.firstName,
+                                lastName: userData.lastName
+                            };
+                        }
+                    } catch (error) {
+                        console.error('Failed to fetch user data:', error);
+                    }
+                }
+            }
+
             manuscripts.forEach(m => {
+                const userEmail = m.submitterInfo?.email || 'N/A';
+                const userName = m.submitterInfo ? 
+                    `${m.submitterInfo.firstName || ''} ${m.submitterInfo.lastName || ''}`.trim() : 
+                    'Unknown';
+                
                 const row = tbody.insertRow();
                 row.innerHTML = `
                     <td>${new Date(m.uploadDate).toLocaleDateString()}</td>
                     <td>${m.originalName}</td>
-                    <td>${m.submitterInfo?.email || 'N/A'}</td>
+                    <td>
+                        ${userName}<br>
+                        <small style="color: var(--text-light);">${userEmail}</small>
+                    </td>
                     <td><span class="badge badge-${m.status.toLowerCase().replace(' ', '-')}">${m.status}</span></td>
                     <td>${m.assignedEditorId ? getEditorName(m.assignedEditorId) : 'Unassigned'}</td>
                     <td>
