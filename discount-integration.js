@@ -299,6 +299,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('logoutButton').addEventListener('click', logout);
     
     console.log('Dashboard initialization complete with invoice integration');
+
+    console.log('Dashboard initialization complete with invoice integration and manuscript notifications');
+
 });
 
 // ==========================================
@@ -452,6 +455,81 @@ function updateDashboardStats() {
 
     // Add invoice notifications if there are unpaid invoices
     addInvoiceNotifications();
+    addManuscriptNotifications();
+}
+
+// ADD MANUSCRIPT COMPLETION NOTIFICATIONS
+function addManuscriptNotifications() {
+    const notifications = document.getElementById('notifications');
+    if (!notifications) return;
+
+    // Remove existing manuscript notifications first
+    const existingManuscriptNotifications = notifications.querySelectorAll('.manuscript-notification');
+    existingManuscriptNotifications.forEach(notification => notification.remove());
+
+    // Check for completed manuscripts that haven't been acknowledged
+    const completedManuscripts = manuscripts.filter(m => 
+        m.status === 'completed' && 
+        !localStorage.getItem(`notified_${m._id}`)
+    );
+
+    completedManuscripts.forEach(manuscript => {
+        const alertHTML = `
+            <div class="alert-item manuscript-notification" style="background: #d4edda; border-left: 4px solid #28a745; animation: slideInFromTop 0.5s ease-out;">
+                <h4><i class="fas fa-check-circle"></i> Manuscript Ready!</h4>
+                <p>Your manuscript "<strong>${manuscript.originalName || manuscript.title}</strong>" has been completed and is ready for download.</p>
+                ${manuscript.editorNotes ? `
+                    <div style="background: rgba(0,0,0,0.05); padding: 0.75rem; border-radius: 4px; margin: 0.5rem 0;">
+                        <strong>Editor's Notes:</strong>
+                        <p style="margin: 0.25rem 0 0 0;">${manuscript.editorNotes}</p>
+                    </div>
+                ` : ''}
+                <div style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <button class="op-button op-confirm" onclick="viewCompletedManuscript('${manuscript._id}')">
+                        <i class="fas fa-eye"></i> View & Download
+                    </button>
+                    <button class="op-button op-info" onclick="dismissManuscriptNotification('${manuscript._id}')">
+                        Dismiss
+                    </button>
+                </div>
+            </div>
+        `;
+        notifications.insertAdjacentHTML('afterbegin', alertHTML);
+    });
+}
+
+function viewCompletedManuscript(manuscriptId) {
+    const index = manuscripts.findIndex(m => m._id === manuscriptId);
+    if (index !== -1) {
+        viewManuscript(index);
+        localStorage.setItem(`notified_${manuscriptId}`, 'true');
+        dismissManuscriptNotification(manuscriptId);
+    }
+}
+
+function dismissManuscriptNotification(manuscriptId) {
+    const notifications = document.querySelectorAll('.manuscript-notification');
+    notifications.forEach(notification => notification.remove());
+    localStorage.setItem(`notified_${manuscriptId}`, 'true');
+}
+
+// OPTIONAL: AUTO-REFRESH FOR NEW MANUSCRIPTS
+function startManuscriptPolling() {
+    setInterval(async () => {
+        const token = localStorage.getItem('authToken');
+        if (!token) return;
+        
+        const headers = { 'Authorization': `Bearer ${token}` };
+        const previousCount = manuscripts.length;
+        
+        await loadManuscriptsWithInvoices(headers);
+        
+        // Check if there are new completed manuscripts
+        if (manuscripts.length > previousCount || 
+            manuscripts.some(m => m.status === 'completed' && !localStorage.getItem(`notified_${m._id}`))) {
+            addManuscriptNotifications();
+        }
+    }, 60000); // Check every minute
 }
 
 function setupNavigation() {
@@ -2504,6 +2582,9 @@ window.filterInvoices = filterInvoices;
 window.refreshInvoiceData = refreshInvoiceData;
 window.downloadPaymentReport = downloadPaymentReport;
 window.downloadInvoicePDF = downloadInvoicePDF;
+window.viewCompletedManuscript = viewCompletedManuscript;
+window.dismissManuscriptNotification = dismissManuscriptNotification;
+window.addManuscriptNotifications = addManuscriptNotifications;
 
 
 console.log('Dashboard invoice integration loaded successfully!');
