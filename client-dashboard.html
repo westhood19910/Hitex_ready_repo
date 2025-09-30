@@ -617,10 +617,13 @@
 </div>
 
 <script>
-
 (function() {
     'use strict';
     
+    const API_BASE = 'https://all-branched-end.onrender.com';
+    let manuscripts = [];
+    
+    // ===== SESSION VALIDATION =====
     function validateSession() {
         const token = localStorage.getItem('authToken');
         if (!token) {
@@ -630,7 +633,6 @@
         return true;
     }
     
-    // Only validate session, don't restrict navigation
     if (!validateSession()) {
         throw new Error('Session invalid - redirecting to login');
     }
@@ -643,10 +645,228 @@
             window.location.href = 'client-login.html';
         }
     };
+    
+    // ===== API HELPERS =====
+    function getAuthHeaders() {
+        return {
+            'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+            'Content-Type': 'application/json'
+        };
+    }
+    
+    // ===== PROFILE FUNCTIONS =====
+    async function loadUserProfile() {
+        try {
+            const response = await fetch(`${API_BASE}/profile`, {
+                headers: getAuthHeaders()
+            });
+            
+            if (response.ok) {
+                const profile = await response.json();
+                document.getElementById('profileName').textContent = 
+                    profile.fullName || `${profile.firstName} ${profile.lastName}`;
+                document.getElementById('profileEmail').textContent = profile.email;
+                localStorage.setItem('userProfile', JSON.stringify(profile));
+            }
+        } catch (error) {
+            console.error('Profile load error:', error);
+        }
+    }
+    
+    // ===== MANUSCRIPT FUNCTIONS =====
+    async function loadManuscripts() {
+        try {
+            const response = await fetch(`${API_BASE}/my-manuscripts`, {
+                headers: getAuthHeaders()
+            });
+            
+            if (response.ok) {
+                manuscripts = await response.json();
+                displayManuscripts(manuscripts);
+                updateDashboardStats(manuscripts);
+            } else {
+                throw new Error('Failed to load manuscripts');
+            }
+        } catch (error) {
+            console.error('Manuscripts load error:', error);
+            document.getElementById('manuscriptList').innerHTML = 
+                '<tr><td colspan="6" style="text-align:center;">Error loading manuscripts</td></tr>';
+        }
+    }
+    
+    function displayManuscripts(manuscripts) {
+        const tbody = document.getElementById('manuscriptList');
+        
+        if (!manuscripts || manuscripts.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">No manuscripts found</td></tr>';
+            return;
+        }
+        
+        tbody.innerHTML = manuscripts.map(m => `
+            <tr>
+                <td>${new Date(m.uploadDate).toLocaleDateString()}</td>
+                <td>${m.originalName}</td>
+                <td>${m.wordCount || 'N/A'}</td>
+                <td>${m.serviceType || 'Standard Editing'}</td>
+                <td>
+                    <span class="badge badge-${getStatusClass(m.status)}">
+                        ${m.status}
+                    </span>
+                </td>
+                <td>
+                    <button class="op-button op-info" onclick="downloadOriginal('${m._id}')">
+                        Download Original
+                    </button>
+                    ${m.editedVersion ? `
+                        <button class="op-button op-confirm" onclick="downloadEdited('${m._id}')">
+                            Download Edited
+                        </button>
+                    ` : ''}
+                </td>
+            </tr>
+        `).join('');
+    }
+    
+    // ===== DOWNLOAD FUNCTIONS =====
+    window.downloadOriginal = async function(manuscriptId) {
+        try {
+            const response = await fetch(`${API_BASE}/download/${manuscriptId}`, {
+                headers: getAuthHeaders()
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                if (data.downloadUrl) {
+                    window.open(data.downloadUrl, '_blank');
+                    showNotification('Download started', 'success');
+                }
+            } else {
+                throw new Error('Download failed');
+            }
+        } catch (error) {
+            console.error('Download error:', error);
+            showNotification('Failed to download manuscript', 'error');
+        }
+    };
+    
+    window.downloadEdited = async function(manuscriptId) {
+        try {
+            const response = await fetch(`${API_BASE}/download-edited/${manuscriptId}`, {
+                headers: getAuthHeaders()
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                if (data.downloadUrl) {
+                    window.open(data.downloadUrl, '_blank');
+                    showNotification('Download started', 'success');
+                }
+            } else {
+                throw new Error('Edited version not available');
+            }
+        } catch (error) {
+            console.error('Download error:', error);
+            showNotification('No edited version available yet', 'error');
+        }
+    };
+    
+    // ===== DASHBOARD STATS =====
+    function updateDashboardStats(manuscripts) {
+        document.getElementById('totalManuscripts').textContent = manuscripts.length;
+        
+        const active = manuscripts.filter(m => 
+            m.status !== 'completed' && m.status !== 'New'
+        ).length;
+        document.getElementById('activeProjects').textContent = active;
+        
+        const completed = manuscripts.filter(m => m.status === 'completed').length;
+        document.getElementById('completedProjects').textContent = completed;
+        
+        displayRecentActivity(manuscripts.slice(0, 5));
+    }
+    
+    function displayRecentActivity(recentManuscripts) {
+        const container = document.getElementById('recentActivity');
+        
+        if (recentManuscripts.length === 0) {
+            container.innerHTML = '<p>No recent activity</p>';
+            return;
+        }
+        
+        container.innerHTML = recentManuscripts.map(m => `
+            <div style="padding: 1rem; border-bottom: 1px solid #eee;">
+                <strong>${m.originalName}</strong>
+                <span class="badge badge-${getStatusClass(m.status)}">${m.status}</span>
+                <br>
+                <small style="color: #666;">
+                    ${new Date(m.uploadDate).toLocaleDateString()}
+                </small>
+            </div>
+        `).join('');
+    }
+    
+    // ===== HELPERS =====
+    function getStatusClass(status) {
+        const statusMap = {
+            'New': 'new',
+            'Assigned': 'assigned',
+            'In Progress': 'assigned',
+            'completed': 'completed'
+        };
+        return statusMap[status] || 'new';
+    }
+    
+    function showNotification(message, type) {
+        const notification = document.createElement('div');
+        notification.className = `alert alert-${type}`;
+        notification.textContent = message;
+        notification.style.position = 'fixed';
+        notification.style.top = '20px';
+        notification.style.right = '20px';
+        notification.style.zIndex = '10000';
+        notification.style.padding = '1rem';
+        notification.style.borderRadius = '8px';
+        notification.style.background = type === 'success' ? '#28a745' : '#dc3545';
+        notification.style.color = 'white';
+        
+        document.body.appendChild(notification);
+        setTimeout(() => notification.remove(), 3000);
+    }
+    
+    window.refreshDashboard = function() {
+        loadManuscripts();
+        showNotification('Dashboard refreshed', 'success');
+    };
+    
+    // ===== NAVIGATION =====
+    document.querySelectorAll('.pillar-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            if (this.getAttribute('data-section')) {
+                e.preventDefault();
+                const section = this.getAttribute('data-section');
+                
+                document.querySelectorAll('.view-segment').forEach(s => 
+                    s.classList.remove('active')
+                );
+                document.getElementById(`${section}-section`).classList.add('active');
+                
+                document.querySelectorAll('.pillar-link').forEach(l => 
+                    l.classList.remove('active')
+                );
+                this.classList.add('active');
+            }
+        });
+    });
+    
+    // ===== INITIALIZE =====
+    document.addEventListener('DOMContentLoaded', function() {
+        loadUserProfile();
+        loadManuscripts();
+    });
+    
 })();
-
 </script>
- 
+
 
    <script src="discount-integration.js"></script>
    
