@@ -1234,25 +1234,29 @@
                     </td>
                     <td><span class="badge badge-${m.status.toLowerCase().replace(' ', '-')}">${m.status}</span></td>
                     <td>${m.assignedEditorId ? getEditorName(m.assignedEditorId) : 'Unassigned'}</td>
-                    <td>
-                         <button class="btn btn-info btn-sm" onclick="downloadManuscript('${m._id}')" title="Download Original">
-                         <i class="fas fa-download"></i>
-                        </button>
-                        ${m.status === 'completed' && m.editedVersion ? `
-                               <button class="btn btn-primary btn-sm" onclick="downloadEditedManuscript('${m._id}')" title="Download Edited">
-                             <i class="fas fa-file-download"></i> Edited
-                               </button>
-                        ` : m.assignedEditorId ? `
-                       <button class="btn btn-success btn-sm" onclick="showUploadEditedModal('${m._id}')" title="Upload Edited">
-                          <i class="fas fa-upload"></i> Upload
-                       </button>
-                     ` : ''}
-                 ${!m.assignedEditorId ? `
-        <button class="btn btn-warning btn-sm" onclick="showAssignmentModal('${m._id}')" title="Assign">
+     <td>
+                  <button class="btn btn-info btn-sm" onclick="downloadManuscript('${m._id}')" title="Download Original">
+        <i class="fas fa-download"></i> Original
+                          </button>
+    
+             ${m.status === 'completed' && m.editedVersion ? `
+        <button class="btn btn-primary btn-sm" onclick="downloadEditedManuscript('${m._id}')" title="Download Edited">
+            <i class="fas fa-file-download"></i> Edited
+        </button>
+    ` : `
+        <button class="btn btn-success btn-sm" onclick="showUploadEditedModal('${m._id}')" title="Upload Edited Version">
+            <i class="fas fa-upload"></i> Upload
+        </button>
+    `}
+    
+    ${m.assignedEditorId ? `
+        <span class="badge badge-assigned" style="font-size: 0.7rem; margin-left: 0.25rem;">Assigned</span>
+    ` : `
+        <button class="btn btn-warning btn-sm" onclick="showAssignmentModal('${m._id}')" title="Assign to Editor">
             <i class="fas fa-user-plus"></i> Assign
         </button>
-    ` : ''}
-                 </td>
+    `}
+                </td>
                 `;
             });
         }
