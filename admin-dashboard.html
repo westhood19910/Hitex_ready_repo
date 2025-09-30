@@ -1045,6 +1045,36 @@
             </div>
         </div>
     </div>
+   <!-- UPLOAD EDITED MANUSCROPT MODAL -->
+    <div id="uploadEditedModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Upload Edited Manuscript</h2>
+            <button class="close-modal" onclick="closeModal('uploadEditedModal')">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="uploadEditedForm">
+                <input type="hidden" id="editManuscriptId">
+                
+                <div class="form-group">
+                    <label>Edited Manuscript File *</label>
+                    <input type="file" class="form-control" id="editedFile" required 
+                           accept=".doc,.docx,.pdf,.txt,.rtf">
+                </div>
+
+                <div class="form-group">
+                    <label>Editor Notes (optional)</label>
+                    <textarea class="form-control" id="editorNotes" rows="4" 
+                              placeholder="Add any notes for the client..."></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="closeModal('uploadEditedModal')">Cancel</button>
+            <button class="btn btn-success" onclick="submitEditedManuscript()">Upload & Complete</button>
+        </div>
+    </div>
+</div>
 
     <script>
         const API_BASE = 'https://all-branched-end.onrender.com';
@@ -1205,15 +1235,24 @@
                     <td><span class="badge badge-${m.status.toLowerCase().replace(' ', '-')}">${m.status}</span></td>
                     <td>${m.assignedEditorId ? getEditorName(m.assignedEditorId) : 'Unassigned'}</td>
                     <td>
-                        <button class="btn btn-info btn-sm" onclick="downloadManuscript('${m._id}')">
-                            <i class="fas fa-download"></i>
+                         <button class="btn btn-info btn-sm" onclick="downloadManuscript('${m._id}')" title="Download Original">
+                         <i class="fas fa-download"></i>
                         </button>
-                        ${!m.assignedEditorId ? `
-                            <button class="btn btn-success btn-sm" onclick="showAssignmentModal('${m._id}')">
-                                <i class="fas fa-user-plus"></i> Assign
-                            </button>
-                        ` : ''}
-                    </td>
+                        ${m.status === 'completed' && m.editedVersion ? `
+                               <button class="btn btn-primary btn-sm" onclick="downloadEditedManuscript('${m._id}')" title="Download Edited">
+                             <i class="fas fa-file-download"></i> Edited
+                               </button>
+                        ` : m.assignedEditorId ? `
+                       <button class="btn btn-success btn-sm" onclick="showUploadEditedModal('${m._id}')" title="Upload Edited">
+                          <i class="fas fa-upload"></i> Upload
+                       </button>
+                     ` : ''}
+                 ${!m.assignedEditorId ? `
+        <button class="btn btn-warning btn-sm" onclick="showAssignmentModal('${m._id}')" title="Assign">
+            <i class="fas fa-user-plus"></i> Assign
+        </button>
+    ` : ''}
+                 </td>
                 `;
             });
         }
@@ -1801,7 +1840,79 @@
     }
      }
 
-        function filterManuscripts() {
+      function showUploadEditedModal(manuscriptId) {
+            document.getElementById('editManuscriptId').value = manuscriptId;
+            document.getElementById('uploadEditedForm').reset();
+            openModal('uploadEditedModal');
+        }
+
+        async function submitEditedManuscript() {
+            const manuscriptId = document.getElementById('editManuscriptId').value;
+            const fileInput = document.getElementById('editedFile');
+            const editorNotes = document.getElementById('editorNotes').value;
+
+            if (!fileInput.files[0]) {
+                showAlert('Please select a file', 'warning');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('editedFile', fileInput.files[0]);
+            if (editorNotes) {
+                formData.append('editorNotes', editorNotes);
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/admin/manuscript/${manuscriptId}/upload-edited`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('adminAuthToken')}`
+                    },
+                    body: formData
+                });
+
+                if (response.ok) {
+                    showAlert('Edited manuscript uploaded successfully! User has been notified.', 'success');
+                    closeModal('uploadEditedModal');
+                    loadManuscripts();
+                } else {
+                    const error = await response.json();
+                    showAlert(error.error || 'Upload failed', 'danger');
+                }
+            } catch (error) {
+                console.error('Upload error:', error);
+                showAlert('Failed to upload edited manuscript', 'danger');
+            }
+        }
+
+        async function downloadEditedManuscript(id) {
+            try {
+                const response = await fetch(`${API_BASE}/download-edited/${id}`, {
+                    headers: getAuthHeaders()
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.downloadUrl) {
+                        const a = document.createElement('a');
+                        a.href = data.downloadUrl;
+                        a.download = data.filename || 'edited-manuscript';
+                        a.target = '_blank';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        showAlert('Download started', 'success');
+                    }
+                } else {
+                    showAlert('No edited version available', 'warning');
+                }
+            } catch (error) {
+                console.error('Download error:', error);
+                showAlert('Download error', 'danger');
+            }
+                  }
+
+                function filterManuscripts() {
             const status = document.getElementById('manuscriptStatusFilter').value;
             const search = document.getElementById('manuscriptSearch').value.toLowerCase();
             
