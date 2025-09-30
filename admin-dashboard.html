@@ -1768,29 +1768,38 @@
             container.appendChild(nextBtn);
         }
 
-        async function downloadManuscript(id) {
-            try {
-                const response = await fetch(`${API_BASE}/download/${id}`, {
-                    headers: getAuthHeaders()
-                });
+       async function downloadManuscript(id) {
+    try {
+        const response = await fetch(`${API_BASE}/download/${id}`, {
+            headers: getAuthHeaders()
+        });
+        
+        if (response.ok) {
+            const data = await response.json();  // ✅ Parse JSON response
+            
+            if (data.downloadUrl) {
+                // Open the signed URL in a new window to trigger download
+                const a = document.createElement('a');
+                a.href = data.downloadUrl;
+                a.download = data.filename || 'manuscript';
+                a.target = '_blank';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
                 
-                if (response.ok) {
-                    const blob = await response.blob();
-                    const url = window.URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'manuscript.docx';
-                    document.body.appendChild(a);
-                    a.click();
-                    window.URL.revokeObjectURL(url);
-                    document.body.removeChild(a);
-                } else {
-                    showAlert('Download failed', 'danger');
-                }
-            } catch (error) {
-                showAlert('Download error', 'danger');
+                showAlert('Download started', 'success');
+            } else {
+                showAlert('Download URL not available', 'danger');
             }
+        } else {
+            const error = await response.json();
+            showAlert(error.error || 'Download failed', 'danger');
         }
+    } catch (error) {
+        console.error('Download error:', error);
+        showAlert('Download error: ' + error.message, 'danger');
+    }
+     }
 
         function filterManuscripts() {
             const status = document.getElementById('manuscriptStatusFilter').value;
