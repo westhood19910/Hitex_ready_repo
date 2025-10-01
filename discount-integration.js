@@ -2318,10 +2318,10 @@ function displayMessages(filter = 'inbox') {
                         </button>
                     ` : ''}
                     ${message.type === 'discount' ? `
-                        <button class="op-button op-confirm op-small" onclick="startEmailVerification()">
-                            Verify Now
-                        </button>
-                    ` : ''}
+                   <button class="op-button op-confirm op-small" onclick="verifyFromMessage('${message._id}')">
+                     Verify Now
+                       </button>
+                      ` : ''}
                     <div class="message-actions">
                         ${!message.archived ? `
                             <button class="op-button op-secondary op-small" onclick="archiveMessage('${message._id}')">Archive</button>
@@ -2334,6 +2334,22 @@ function displayMessages(filter = 'inbox') {
     }).join('');
     
     container.innerHTML = `<div class="message-list">${messagesHTML}</div>`;
+}
+
+async function verifyFromMessage(messageId) {
+    // Switch to dashboard section
+    showSection('dashboard');
+    
+    // Update active navigation
+    document.querySelectorAll('.pillar-link').forEach(l => l.classList.remove('active'));
+    const dashboardLink = document.querySelector('[data-section="dashboard"]');
+    if (dashboardLink) dashboardLink.classList.add('active');
+    
+    // Wait for section to load, then open verification modal
+    setTimeout(() => {
+        markMessageAsRead(messageId);
+        startEmailVerification();
+    }, 300);
 }
 
 function getMessageIcon(type) {
@@ -2872,6 +2888,7 @@ window.toggleMessage = toggleMessage;
 window.archiveMessage = archiveMessage;
 window.deleteMessage = deleteMessage;
 window.viewManuscriptFromMessage = viewManuscriptFromMessage;
+window.verifyFromMessage = verifyFromMessage;
 
 
 console.log('Dashboard invoice integration loaded successfully!');
