@@ -459,6 +459,49 @@ function updateDashboardStats() {
     // Add invoice notifications if there are unpaid invoices
     addInvoiceNotifications();
     addManuscriptNotifications();
+    displayActiveProjects();
+}
+
+function displayActiveProjects() {
+    const container = document.getElementById('activeProjectsList');
+    if (!container) return;
+    
+    const activeProjects = manuscripts.filter(m => 
+        ['assigned', 'in-progress', 'in progress', 'review'].includes((m.status || '').toLowerCase())
+    );
+    
+    if (activeProjects.length === 0) {
+        container.innerHTML = '<p style="color: #666; text-align: center;">No active projects at the moment.</p>';
+        return;
+    }
+    
+    container.innerHTML = activeProjects.map(m => `
+        <div style="border: 1px solid #ddd; padding: 1.5rem; margin-bottom: 1rem; border-radius: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                <div>
+                    <h3 style="margin: 0 0 0.5rem 0;">${m.originalName}</h3>
+                    <p style="margin: 0; color: #666;">
+                        Submitted: ${new Date(m.uploadDate).toLocaleDateString()} | 
+                        Word Count: ${m.wordCount || 'N/A'}
+                    </p>
+                </div>
+                <span class="state-indicator state-${(m.status || 'new').toLowerCase().replace(/\s+/g, '-')}">
+                    ${m.status}
+                </span>
+            </div>
+            <p style="margin: 1rem 0;"><strong>Service Type:</strong> ${m.serviceType || 'Standard Edit'}</p>
+            ${m.editorNotes ? `
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 4px; margin: 1rem 0;">
+                    <strong>Latest Update:</strong>
+                    <p style="margin: 0.5rem 0 0 0;">${m.editorNotes}</p>
+                </div>
+            ` : ''}
+            <div style="margin-top: 1rem;">
+                <button class="op-button op-info" onclick="viewManuscript(${manuscripts.indexOf(m)})">View Details</button>
+                <button class="op-button op-secondary" onclick="messageEditor(${manuscripts.indexOf(m)})">Message Editor</button>
+            </div>
+        </div>
+    `).join('');
 }
 
 // ADD MANUSCRIPT COMPLETION NOTIFICATIONS
