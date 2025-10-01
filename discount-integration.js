@@ -2337,6 +2337,9 @@ function displayMessages(filter = 'inbox') {
 }
 
 async function verifyFromMessage(messageId) {
+    // Mark message as read first
+    await markMessageAsRead(messageId);
+    
     // Switch to dashboard section
     showSection('dashboard');
     
@@ -2345,11 +2348,10 @@ async function verifyFromMessage(messageId) {
     const dashboardLink = document.querySelector('[data-section="dashboard"]');
     if (dashboardLink) dashboardLink.classList.add('active');
     
-    // Wait for section to load, then open verification modal
+    // Wait for section to load, then directly open the email input modal
     setTimeout(() => {
-        markMessageAsRead(messageId);
-        startEmailVerification();
-    }, 300);
+        showEmailInputModal();
+    }, 500);
 }
 
 function getMessageIcon(type) {
