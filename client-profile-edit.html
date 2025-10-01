@@ -215,6 +215,32 @@
             margin-bottom: 1rem;
         }
 
+        .password-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .password-input-wrapper input {
+            padding-right: 3rem;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 0.75rem;
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            padding: 0.5rem;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .password-toggle:hover {
+            color: #2c5aa0;
+        }
+
         @media (max-width: 768px) {
             .profile-section {
                 padding: 1rem;
@@ -356,12 +382,22 @@
                 <form id="changePasswordForm">
                     <div class="form-group">
                         <label for="currentPassword">Current Password *</label>
-                        <input type="password" id="currentPassword" name="currentPassword" required>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="currentPassword" name="currentPassword" required>
+                            <button type="button" class="password-toggle" onclick="togglePasswordVisibility('currentPassword')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="newPassword">New Password *</label>
-                        <input type="password" id="newPassword" name="newPassword" required>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="newPassword" name="newPassword" required>
+                            <button type="button" class="password-toggle" onclick="togglePasswordVisibility('newPassword')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
                         <div class="password-strength" id="passwordStrength"></div>
                         <small id="passwordRequirements">
                             Password must be at least 8 characters with uppercase, lowercase, number, and special character
@@ -370,7 +406,12 @@
 
                     <div class="form-group">
                         <label for="confirmPassword">Confirm New Password *</label>
-                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="confirmPassword" name="confirmPassword" required>
+                            <button type="button" class="password-toggle" onclick="togglePasswordVisibility('confirmPassword')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
                     </div>
 
                     <div class="form-actions">
@@ -766,6 +807,23 @@
             if (confirm('Are you sure you want to logout?')) {
                 localStorage.removeItem('authToken');
                 window.location.href = 'client-login.html';
+            }
+        }
+
+        // Toggle password visibility
+        function togglePasswordVisibility(fieldId) {
+            const input = document.getElementById(fieldId);
+            const button = input.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
             }
         }
 
