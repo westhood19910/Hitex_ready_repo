@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - HiTex EdiTex</title>
+    <link rel="stylesheet" href="clientdasnboard.css">
+    <link rel="stylesheet" href="fresh.css">
+    <link rel="stylesheet" href="Embednav.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .profile-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .profile-section h2 {
+            color: #2c5aa0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #2c5aa0;
+            box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
+        }
+
+        .form-group input:disabled {
+            background: #f5f5f5;
+            cursor: not-allowed;
+        }
+
+        .form-group small {
+            display: block;
+            margin-top: 0.25rem;
+            color: #666;
+            font-size: 0.875rem;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: #2c5aa0;
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #234780;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .password-strength {
+            height: 4px;
+            border-radius: 2px;
+            margin-top: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .strength-weak { background: #dc3545; width: 33%; }
+        .strength-medium { background: #ffc107; width: 66%; }
+        .strength-strong { background: #28a745; width: 100%; }
+
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #d4edda;
+            color: #155724;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .unverified-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #fff3cd;
+            color: #856404;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 0 auto 2rem;
+        }
+
+        .danger-zone {
+            background: #fff5f5;
+            border: 2px solid #feb2b2;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .danger-zone h3 {
+            color: #c53030;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .profile-section {
+                padding: 1rem;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .form-actions button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="alertContainer"></div>
+
+    <div class="app-scaffold">
+        <aside class="navigation-pillar">
+            <div class="navbar-top">
+                <nav class="pillar-directory">
+                    <ul>
+                        <li><a href="clientdasnboard.html" class="pillar-link">Dashboard</a></li>
+                        <li><a href="clientdasnboard.html#submissions" class="pillar-link">My Submissions</a></li>
+                        <li><a href="invoice.html" class="pillar-link">Invoices</a></li>
+                        <li><a href="profile.html" class="pillar-link active">Edit Profile</a></li>
+                        <li><a href="clientdasnboard.html#support" class="pillar-link">Support</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="pillar-crest">
+                    <img src="https://i.pravatar.cc/150" alt="User Avatar" class="profile-sigil">
+                    <div class="profile-info">
+                        <div class="profile-identifier" id="navProfileName">Loading...</div>
+                        <div class="user-email" id="navProfileEmail">loading@example.com</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="navbar-bottom">
+                <button class="session-terminate-btn" onclick="logout()">Logout</button>
+            </div>
+        </aside>
+
+        <main class="primary-viewport">
+            <header class="viewport-heading">
+                <h1>Edit Profile</h1>
+            </header>
+
+            <!-- Profile Avatar -->
+            <div class="profile-avatar" id="profileAvatar">
+                <span id="avatarInitials">U</span>
+            </div>
+
+            <!-- Basic Information Section -->
+            <section class="profile-section">
+                <h2><i class="fas fa-user"></i> Basic Information</h2>
+                <form id="basicInfoForm">
+                    <div class="form-group">
+                        <label for="salutation">Salutation</label>
+                        <select id="salutation" name="salutation">
+                            <option value="">Select...</option>
+                            <option value="Mr.">Mr.</option>
+                            <option value="Ms.">Ms.</option>
+                            <option value="Mrs.">Mrs.</option>
+                            <option value="Dr.">Dr.</option>
+                            <option value="Prof.">Prof.</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" disabled>
+                        <small>Contact support to change your email address</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mobile">Mobile Number</label>
+                        <input type="tel" id="mobile" name="mobile" placeholder="+1 (555) 000-0000">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                        <button type="button" class="btn-secondary" onclick="resetBasicInfo()">
+                            <i class="fas fa-undo"></i> Reset
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Institutional Information Section -->
+            <section class="profile-section">
+                <h2><i class="fas fa-university"></i> Institutional Information</h2>
+                <form id="institutionalForm">
+                    <div class="form-group">
+                        <label for="currentInstitution">Current Institution</label>
+                        <input type="text" id="currentInstitution" name="currentInstitution" 
+                               placeholder="Your university or organization">
+                        <small>Enter your affiliated institution to check discount eligibility</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="institutionalEmail">Institutional Email</label>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <input type="email" id="institutionalEmail" name="institutionalEmail" 
+                                   placeholder="your.name@university.edu" style="flex: 1;">
+                            <span id="verificationStatus"></span>
+                        </div>
+                        <small>Use your institutional email to verify eligibility for discounts</small>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i> Update Institution
+                        </button>
+                        <button type="button" class="btn-secondary" onclick="verifyInstitutionalEmail()">
+                            <i class="fas fa-check-circle"></i> Verify Email
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Change Password Section -->
+            <section class="profile-section">
+                <h2><i class="fas fa-lock"></i> Change Password</h2>
+                <form id="changePasswordForm">
+                    <div class="form-group">
+                        <label for="currentPassword">Current Password *</label>
+                        <input type="password" id="currentPassword" name="currentPassword" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newPassword">New Password *</label>
+                        <input type="password" id="newPassword" name="newPassword" required>
+                        <div class="password-strength" id="passwordStrength"></div>
+                        <small id="passwordRequirements">
+                            Password must be at least 8 characters with uppercase, lowercase, number, and special character
+                        </small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm New Password *</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-key"></i> Change Password
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Danger Zone -->
+            <section class="profile-section">
+                <div class="danger-zone">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Danger Zone</h3>
+                    <p>Once you delete your account, there is no going back. This action will permanently delete your account, manuscripts, and all associated data.</p>
+                    <button type="button" class="btn-danger" onclick="initiateAccountDeletion()">
+                        <i class="fas fa-trash-alt"></i> Delete Account
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="overlay-dialog" style="display: none;">
+        <div class="dialog-box">
+            <h3 id="confirmTitle">Confirm Action</h3>
+            <p id="confirmMessage">Are you sure you want to proceed?</p>
+            <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: flex-end;">
+                <button class="btn-secondary" onclick="closeConfirmModal()">Cancel</button>
+                <button class="btn-danger" id="confirmButton" onclick="confirmAction()">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'https://all-branched-end.onrender.com';
+        let currentUser = null;
+        let pendingAction = null;
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                window.location.href = 'client-login.html';
+                return;
+            }
+
+            await loadUserProfile();
+            setupPasswordStrengthChecker();
+            setupFormHandlers();
+        });
+
+        // Load user profile
+        async function loadUserProfile() {
+            try {
+                const token = localStorage.getItem('authToken');
+                const response = await fetch(`${API_BASE}/profile`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (response.ok) {
+                    currentUser = await response.json();
+                    populateProfileForm();
+                } else {
+                    showAlert('Failed to load profile', 'error');
+                }
+            } catch (error) {
+                console.error('Error loading profile:', error);
+                showAlert('Error loading profile', 'error');
+            }
+        }
+
+        // Populate form with user data
+        function populateProfileForm() {
+            if (!currentUser) return;
+
+            // Basic info
+            document.getElementById('salutation').value = currentUser.salutation || '';
+            document.getElementById('firstName').value = currentUser.firstName || '';
+            document.getElementById('lastName').value = currentUser.lastName || '';
+            document.getElementById('email').value = currentUser.email || '';
+            document.getElementById('mobile').value = currentUser.mobile || '';
+
+            // Institutional info
+            document.getElementById('currentInstitution').value = currentUser.currentInstitution || '';
+            document.getElementById('institutionalEmail').value = currentUser.institutionalEmail || '';
+
+            // Update navigation
+            document.getElementById('navProfileName').textContent = currentUser.firstName || 'User';
+            document.getElementById('navProfileEmail').textContent = currentUser.email || '';
+
+            // Avatar
+            const initials = (currentUser.firstName?.charAt(0) || '') + (currentUser.lastName?.charAt(0) || '');
+            document.getElementById('avatarInitials').textContent = initials || 'U';
+
+            // Verification status
+            updateVerificationStatus();
+        }
+
+        // Update verification status badge
+        function updateVerificationStatus() {
+            const statusSpan = document.getElementById('verificationStatus');
+            if (currentUser.institutionalEmailVerified) {
+                statusSpan.innerHTML = '<span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>';
+            } else if (currentUser.institutionalEmail) {
+                statusSpan.innerHTML = '<span class="unverified-badge"><i class="fas fa-exclamation-circle"></i> Not Verified</span>';
+            } else {
+                statusSpan.innerHTML = '';
+            }
+        }
+
+        // Setup form handlers
+        function setupFormHandlers() {
+            // Basic info form
+            document.getElementById('basicInfoForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                await updateBasicInfo();
+            });
+
+            // Institutional form
+            document.getElementById('institutionalForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                await updateInstitutionalInfo();
+            });
+
+            // Password form
+            document.getElementById('changePasswordForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                await changePassword();
+            });
+        }
+
+        // Update basic information
+        async function updateBasicInfo() {
+            try {
+                const token = localStorage.getItem('authToken');
+                const formData = {
+                    salutation: document.getElementById('salutation').value,
+                    firstName: document.getElementById('firstName').value,
+                    lastName: document.getElementById('lastName').value,
+                    mobile: document.getElementById('mobile').value
+                };
+
+                const response = await fetch(`${API_BASE}/profile/update`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    showAlert('Profile updated successfully!', 'success');
+                    await loadUserProfile();
+                } else {
+                    const error = await response.json();
+                    showAlert(error.error || 'Failed to update profile', 'error');
+                }
+            } catch (error) {
+                console.error('Error updating profile:', error);
+                showAlert('Error updating profile', 'error');
+            }
+        }
+
+        // Update institutional information
+        async function updateInstitutionalInfo() {
+            try {
+                const token = localStorage.getItem('authToken');
+                const institutionalEmail = document.getElementById('institutionalEmail').value;
+                const institution = document.getElementById('currentInstitution').value;
+
+                if (institutionalEmail && !currentUser.institutionalEmailVerified) {
+                    if (!confirm('Adding an institutional email requires verification. Continue?')) {
+                        return;
+                    }
+                }
+
+                const response = await fetch(`${API_BASE}/profile/add-institutional-email`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        institutionalEmail: institutionalEmail,
+                        institution: institution
+                    })
+                });
+
+                if (response.ok) {
+                    showAlert('Institutional information updated!', 'success');
+                    await loadUserProfile();
+                } else {
+                    const error = await response.json();
+                    showAlert(error.error || 'Failed to update institutional information', 'error');
+                }
+            } catch (error) {
+                console.error('Error updating institutional info:', error);
+                showAlert('Error updating institutional information', 'error');
+            }
+        }
+
+        // Verify institutional email
+        async function verifyInstitutionalEmail() {
+            const institutionalEmail = document.getElementById('institutionalEmail').value;
+            
+            if (!institutionalEmail) {
+                showAlert('Please enter an institutional email first', 'error');
+                return;
+            }
+
+            if (currentUser.institutionalEmailVerified) {
+                showAlert('Your institutional email is already verified!', 'info');
+                return;
+            }
+
+            // Redirect to dashboard with verification flow
+            window.location.href = 'clientdasnboard.html?action=verify-email';
+        }
+
+        // Change password
+        async function changePassword() {
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validate
+            if (newPassword !== confirmPassword) {
+                showAlert('New passwords do not match', 'error');
+                return;
+            }
+
+            if (!validatePassword(newPassword)) {
+                showAlert('Password does not meet requirements', 'error');
+                return;
+            }
+
+            try {
+                const token = localStorage.getItem('authToken');
+                const response = await fetch(`${API_BASE}/profile/change-password`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        currentPassword: currentPassword,
+                        newPassword: newPassword
+                    })
+                });
+
+                if (response.ok) {
+                    showAlert('Password changed successfully!', 'success');
+                    document.getElementById('changePasswordForm').reset();
+                } else {
+                    const error = await response.json();
+                    showAlert(error.error || 'Failed to change password', 'error');
+                }
+            } catch (error) {
+                console.error('Error changing password:', error);
+                showAlert('Error changing password', 'error');
+            }
+        }
+
+        // Password strength checker
+        function setupPasswordStrengthChecker() {
+            const passwordInput = document.getElementById('newPassword');
+            const strengthBar = document.getElementById('passwordStrength');
+
+            passwordInput.addEventListener('input', (e) => {
+                const password = e.target.value;
+                const strength = calculatePasswordStrength(password);
+
+                strengthBar.className = 'password-strength';
+                if (strength > 70) {
+                    strengthBar.classList.add('strength-strong');
+                } else if (strength > 40) {
+                    strengthBar.classList.add('strength-medium');
+                } else if (password.length > 0) {
+                    strengthBar.classList.add('strength-weak');
+                }
+            });
+        }
+
+        function calculatePasswordStrength(password) {
+            let strength = 0;
+            if (password.length >= 8) strength += 25;
+            if (password.length >= 12) strength += 15;
+            if (/[a-z]/.test(password)) strength += 15;
+            if (/[A-Z]/.test(password)) strength += 15;
+            if (/[0-9]/.test(password)) strength += 15;
+            if (/[^a-zA-Z0-9]/.test(password)) strength += 15;
+            return strength;
+        }
+
+        function validatePassword(password) {
+            return password.length >= 8 &&
+                   /[A-Z]/.test(password) &&
+                   /[a-z]/.test(password) &&
+                   /[0-9]/.test(password) &&
+                   /[^a-zA-Z0-9]/.test(password);
+        }
+
+        // Delete account
+        function initiateAccountDeletion() {
+            pendingAction = 'deleteAccount';
+            document.getElementById('confirmTitle').textContent = 'Delete Account';
+            document.getElementById('confirmMessage').innerHTML = `
+                <p style="color: #c53030; font-weight: bold;">WARNING: This action cannot be undone!</p>
+                <p>This will permanently delete:</p>
+                <ul>
+                    <li>Your account and profile</li>
+                    <li>All submitted manuscripts</li>
+                    <li>Payment history and invoices</li>
+                    <li>All associated data</li>
+                </ul>
+                <p>Please type your password to confirm:</p>
+                <input type="password" id="deleteConfirmPassword" style="width: 100%; padding: 0.5rem; margin-top: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+            `;
+            document.getElementById('confirmModal').style.display = 'flex';
+        }
+
+        async function confirmAction() {
+            if (pendingAction === 'deleteAccount') {
+                const password = document.getElementById('deleteConfirmPassword').value;
+                
+                if (!password) {
+                    showAlert('Please enter your password', 'error');
+                    return;
+                }
+
+                try {
+                    const token = localStorage.getItem('authToken');
+                    const response = await fetch(`${API_BASE}/profile/delete-account`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ password: password })
+                    });
+
+                    if (response.ok) {
+                        alert('Your account has been deleted. You will be redirected to the homepage.');
+                        localStorage.clear();
+                        window.location.href = 'index.html';
+                    } else {
+                        const error = await response.json();
+                        showAlert(error.error || 'Failed to delete account', 'error');
+                    }
+                } catch (error) {
+                    console.error('Error deleting account:', error);
+                    showAlert('Error deleting account', 'error');
+                }
+            }
+            
+            closeConfirmModal();
+        }
+
+        function closeConfirmModal() {
+            document.getElementById('confirmModal').style.display = 'none';
+            pendingAction = null;
+        }
+
+        // Reset basic info form
+        function resetBasicInfo() {
+            if (confirm('Reset all changes to basic information?')) {
+                populateProfileForm();
+            }
+        }
+
+        // Show alert
+        function showAlert(message, type) {
+            const container = document.getElementById('alertContainer');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                ${message}
+            `;
+            
+            container.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.remove();
+            }, 5000);
+        }
+
+        // Logout
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('authToken');
+                window.location.href = 'client-login.html';
+            }
+        }
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            const modal = document.getElementById('confirmModal');
+            if (event.target === modal) {
+                closeConfirmModal();
+            }
+        }
+    </script>
+</body>
+</html>
