@@ -308,35 +308,33 @@
                 </div>
             </section>
 
+            
             <!-- Communications Section -->
-            <section id="communications-section" class="view-segment">
-                <header class="viewport-heading">
-                    <h1>Messages & Communications</h1>
-                    <button class="prompt-button">New Message</button>
-                </header>
-                
-                <div class="view-switcher">
-                    <div class="switcher-controls">
-                        <button class="switcher-tab active" onclick="switchTab('inbox')">Inbox (0)</button>
-                        <button class="switcher-tab" onclick="switchTab('sent')">Sent</button>
-                        <button class="switcher-tab" onclick="switchTab('archived')">Archived</button>
-                    </div>
-                </div>
+        <section id="communications-section" class="view-segment">
+    <header class="viewport-heading">
+        <h1>Messages & Communications</h1>
+    </header>
+    
+    <div class="view-switcher">
+        <div class="switcher-controls">
+            <button class="switcher-tab active" onclick="switchTab('inbox')">Inbox (0)</button>
+            <button class="switcher-tab" onclick="switchTab('unread')">Unread</button>
+            <button class="switcher-tab" onclick="switchTab('archived')">Archived</button>
+        </div>
+    </div>
 
-                <div class="data-enclosure">
-                    <div id="inbox-tab" class="switcher-pane active">
-                        <div class="message-list">
-                            <p style="padding: 2rem; color: var(--text-light); text-align: center;">No messages in your inbox.</p>
-                        </div>
-                    </div>
-                    <div id="sent-tab" class="switcher-pane">
-                        <p style="padding: 2rem; color: var(--text-light); text-align: center;">Your sent messages will appear here.</p>
-                    </div>
-                    <div id="archived-tab" class="switcher-pane">
-                        <p style="padding: 2rem; color: var(--text-light); text-align: center;">Archived messages will appear here.</p>
-                    </div>
-                </div>
-            </section>
+    <div class="data-enclosure">
+        <div id="inbox-tab" class="switcher-pane active">
+            <p style="padding: 2rem; color: var(--text-light); text-align: center;">Loading messages...</p>
+        </div>
+        <div id="unread-tab" class="switcher-pane">
+            <p style="padding: 2rem; color: var(--text-light); text-align: center;">Loading unread messages...</p>
+        </div>
+        <div id="archived-tab" class="switcher-pane">
+            <p style="padding: 2rem; color: var(--text-light); text-align: center;">Loading archived messages...</p>
+        </div>
+    </div>
+       </section>
    
             <!-- Resources Section -->
             <section id="resources-section" class="view-segment">

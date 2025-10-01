@@ -22,6 +22,8 @@ let paymentHistory = [];
 let dashboardSummary = null;
 let currentUser = null;
 let discountEligibilityData = null;
+let userMessages = [];
+let unreadMessageCount = 0;
 let verificationState = {
     institutionalEmail: null,
     verificationSent: false,
@@ -283,6 +285,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadDashboardSummary(headers);
     await loadInvoices(headers);
     await loadPaymentHistory(headers);
+    await loadUserMessages(headers);
     
     // Update dashboard with new invoice data
     updateDashboardStats();
@@ -588,8 +591,12 @@ function switchTab(tabName) {
     
     document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
     document.getElementById(tabName + '-tab').classList.add('active');
+    
+    // If switching to message tabs, display appropriate messages
+    if (['inbox', 'unread', 'archived'].includes(tabName)) {
+        displayMessages(tabName === 'inbox' ? 'inbox' : tabName);
+    }
 }
-
 // ==========================================
 // MANUSCRIPT MANAGEMENT FUNCTIONS
 // ==========================================
@@ -1210,14 +1217,36 @@ function clearExistingInstitutionalAlerts() {
 }
 
 // Dismiss alert function
-function dismissInstitutionalAlert() {
+async function dismissInstitutionalAlert() {
     const alert = document.getElementById('institutionalAlert');
     if (alert) {
         alert.remove();
     }
     
-    // Don't set localStorage to prevent dismissal - we want these to show on each login
-    // until the user actually verifies their email
+    // Create message reminder
+    try {
+        const token = localStorage.getItem('authToken');
+        const profile = currentUser;
+        
+        if (profile && profile.currentInstitution) {
+            await fetch(`${API_BASE}/create-discount-reminder`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    institutionName: profile.currentInstitution
+                })
+            });
+            
+            // Reload messages
+            await loadUserMessages({ 'Authorization': `Bearer ${token}` });
+        }
+    } catch (error) {
+        console.error('Error creating discount reminder:', error);
+    }
+    
     console.log('Institutional alert dismissed');
 }
 
@@ -2097,6 +2126,74 @@ function addInvoiceStyles() {
                 gap: 1rem;
             }
         }
+
+         .message-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.message-item:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.message-unread {
+    background: #f0f7ff;
+    border-left: 4px solid #2c5aa0;
+}
+
+.message-read {
+    background: white;
+}
+
+.message-priority-high {
+    border-left-color: #dc3545 !important;
+}
+
+.message-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    cursor: pointer;
+    gap: 1rem;
+}
+
+.message-icon {
+    font-size: 1.5rem;
+}
+
+.message-info {
+    flex: 1;
+}
+
+.message-info strong {
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.message-info small {
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.unread-indicator {
+    color: #2c5aa0;
+    font-size: 1.2rem;
+}
+
+.message-body {
+    padding: 0 1rem 1rem 4rem;
+    color: #444;
+    line-height: 1.6;
+}
+
+.message-actions {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+}
         </style>
     `;
     
@@ -2156,6 +2253,192 @@ async function loadPaymentHistory(headers) {
         console.error('Failed to load payment history:', err);
     }
 }
+
+async function loadUserMessages(headers) {
+    try {
+        const response = await fetch(`${API_BASE}/my-messages?filter=inbox&limit=50`, { headers });
+        const data = await response.json();
+        userMessages = data.messages || [];
+        unreadMessageCount = data.unreadCount || 0;
+        
+        console.log('Messages loaded:', userMessages.length, 'Unread:', unreadMessageCount);
+        
+        updateMessageCount();
+        displayMessages();
+    } catch (err) {
+        console.error('Failed to load messages:', err);
+    }
+}
+
+function updateMessageCount() {
+    const messagesTab = document.querySelector('[onclick="switchTab(\'inbox\')"]');
+    if (messagesTab && unreadMessageCount > 0) {
+        messagesTab.textContent = `Inbox (${unreadMessageCount})`;
+    }
+}
+
+function displayMessages(filter = 'inbox') {
+    const container = document.getElementById(`${filter}-tab`);
+    if (!container) return;
+    
+    let filteredMessages = userMessages;
+    if (filter === 'unread') {
+        filteredMessages = userMessages.filter(m => !m.read && !m.archived);
+    } else if (filter === 'archived') {
+        filteredMessages = userMessages.filter(m => m.archived);
+    } else {
+        filteredMessages = userMessages.filter(m => !m.archived);
+    }
+    
+    if (filteredMessages.length === 0) {
+        container.innerHTML = '<p style="padding: 2rem; color: var(--text-light); text-align: center;">No messages in this folder.</p>';
+        return;
+    }
+    
+    const messagesHTML = filteredMessages.map(message => {
+        const messageTypeIcon = getMessageIcon(message.type);
+        const priorityClass = message.priority === 'high' ? 'message-priority-high' : '';
+        const readClass = message.read ? 'message-read' : 'message-unread';
+        
+        return `
+            <div class="message-item ${readClass} ${priorityClass}" data-message-id="${message._id}">
+                <div class="message-header" onclick="toggleMessage('${message._id}')">
+                    <div class="message-icon">${messageTypeIcon}</div>
+                    <div class="message-info">
+                        <strong>${message.subject}</strong>
+                        <small>${new Date(message.createdAt).toLocaleString()}</small>
+                    </div>
+                    ${!message.read ? '<span class="unread-indicator">●</span>' : ''}
+                </div>
+                <div class="message-body" id="message-body-${message._id}" style="display: none;">
+                    <p>${message.content}</p>
+                    ${message.metadata && message.metadata.manuscriptId ? `
+                        <button class="op-button op-info op-small" onclick="viewManuscriptFromMessage('${message.metadata.manuscriptId}')">
+                            View Manuscript
+                        </button>
+                    ` : ''}
+                    ${message.type === 'discount' ? `
+                        <button class="op-button op-confirm op-small" onclick="startEmailVerification()">
+                            Verify Now
+                        </button>
+                    ` : ''}
+                    <div class="message-actions">
+                        ${!message.archived ? `
+                            <button class="op-button op-secondary op-small" onclick="archiveMessage('${message._id}')">Archive</button>
+                        ` : ''}
+                        <button class="op-button op-caution op-small" onclick="deleteMessage('${message._id}')">Delete</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
+    
+    container.innerHTML = `<div class="message-list">${messagesHTML}</div>`;
+}
+
+function getMessageIcon(type) {
+    const icons = {
+        'manuscript': '📄',
+        'discount': '🎓',
+        'system': '⚙️',
+        'general': '✉️'
+    };
+    return icons[type] || '✉️';
+}
+
+async function toggleMessage(messageId) {
+    const messageBody = document.getElementById(`message-body-${messageId}`);
+    const message = userMessages.find(m => m._id === messageId);
+    
+    if (!message) return;
+    
+    if (messageBody.style.display === 'none') {
+        messageBody.style.display = 'block';
+        
+        if (!message.read) {
+            await markMessageAsRead(messageId);
+        }
+    } else {
+        messageBody.style.display = 'none';
+    }
+}
+
+async function markMessageAsRead(messageId) {
+    try {
+        const token = localStorage.getItem('authToken');
+        const response = await fetch(`${API_BASE}/message/${messageId}/read`, {
+            method: 'PATCH',
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        
+        if (response.ok) {
+            const message = userMessages.find(m => m._id === messageId);
+            if (message) {
+                message.read = true;
+                unreadMessageCount = Math.max(0, unreadMessageCount - 1);
+                updateMessageCount();
+                
+                const messageElement = document.querySelector(`[data-message-id="${messageId}"]`);
+                if (messageElement) {
+                    messageElement.classList.remove('message-unread');
+                    messageElement.classList.add('message-read');
+                    const unreadIndicator = messageElement.querySelector('.unread-indicator');
+                    if (unreadIndicator) unreadIndicator.remove();
+                }
+            }
+        }
+    } catch (error) {
+        console.error('Error marking message as read:', error);
+    }
+}
+
+async function archiveMessage(messageId) {
+    try {
+        const token = localStorage.getItem('authToken');
+        const response = await fetch(`${API_BASE}/message/${messageId}/archive`, {
+            method: 'PATCH',
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        
+        if (response.ok) {
+            const message = userMessages.find(m => m._id === messageId);
+            if (message) {
+                message.archived = true;
+                displayMessages('inbox');
+            }
+        }
+    } catch (error) {
+        console.error('Error archiving message:', error);
+    }
+}
+
+async function deleteMessage(messageId) {
+    if (!confirm('Are you sure you want to delete this message?')) return;
+    
+    try {
+        const token = localStorage.getItem('authToken');
+        const response = await fetch(`${API_BASE}/message/${messageId}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        
+        if (response.ok) {
+            userMessages = userMessages.filter(m => m._id !== messageId);
+            displayMessages('inbox');
+        }
+    } catch (error) {
+        console.error('Error deleting message:', error);
+    }
+}
+
+function viewManuscriptFromMessage(manuscriptId) {
+    const index = manuscripts.findIndex(m => m._id === manuscriptId);
+    if (index !== -1) {
+        viewManuscript(index);
+        showSection('submissions');
+    }
+}
+
 
 // Add invoice notifications to the notifications area
 function addInvoiceNotifications() {
@@ -2585,6 +2868,10 @@ window.downloadInvoicePDF = downloadInvoicePDF;
 window.viewCompletedManuscript = viewCompletedManuscript;
 window.dismissManuscriptNotification = dismissManuscriptNotification;
 window.addManuscriptNotifications = addManuscriptNotifications;
+window.toggleMessage = toggleMessage;
+window.archiveMessage = archiveMessage;
+window.deleteMessage = deleteMessage;
+window.viewManuscriptFromMessage = viewManuscriptFromMessage;
 
 
 console.log('Dashboard invoice integration loaded successfully!');
