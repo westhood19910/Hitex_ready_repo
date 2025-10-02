@@ -167,17 +167,15 @@
         localStorage.removeItem('authToken');
     }
     
-    // Logout function
+    // Logout function - Always redirects to home page
     window.logoutUser = function() {
         if (confirm('Are you sure you want to sign out?')) {
             localStorage.removeItem('authToken');
             localStorage.removeItem('userProfile');
             deactivateDashboard();
             
-            // Redirect to home if on dashboard page
-            if (window.location.pathname.includes('client-dashboard')) {
-                window.location.href = 'index.html';
-            }
+            // Always redirect to home page after logout
+            window.location.href = 'index.html';
         }
     };
     
