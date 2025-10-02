@@ -287,6 +287,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadPaymentHistory(headers);
     await loadUserMessages(headers);
     
+    startMessagePolling();
     // Update dashboard with new invoice data
     updateDashboardStats();
     setupNavigation();
@@ -2237,6 +2238,46 @@ function addInvoiceStyles() {
     display: flex;
     gap: 0.5rem;
 }
+      /* Message notification dot */
+        .message-notification-dot {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background-color: #dc3545;
+            border-radius: 50%;
+            animation: pulse-notification 2s infinite;
+        }
+
+        @media (max-width: 768px) {
+            .message-notification-dot {
+                position: relative;
+                display: inline-block;
+                margin-left: 8px;
+                top: -2px;
+                right: auto;
+                transform: none;
+            }
+        }
+
+        @keyframes pulse-notification {
+            0% {
+                box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 4px rgba(220, 53, 69, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(220, 53, 69, 0);
+            }
+        }
+
+        .pillar-link {
+            position: relative;
+        }
+
         </style>
     `;
     
@@ -2307,18 +2348,31 @@ async function loadUserMessages(headers) {
         console.log('Messages loaded:', userMessages.length, 'Unread:', unreadMessageCount);
         
         updateMessageCount();
+        updateMessageNotificationDot(); 
         displayMessages();
     } catch (err) {
         console.error('Failed to load messages:', err);
     }
 }
 
-function updateMessageCount() {
+    function updateMessageCount() {
     const messagesTab = document.querySelector('[onclick="switchTab(\'inbox\')"]');
     if (messagesTab && unreadMessageCount > 0) {
         messagesTab.textContent = `Inbox (${unreadMessageCount})`;
     }
-}
+    updateMessageNotificationDot();
+    }
+    // Add this function to show/hide the notification dot
+function updateMessageNotificationDot() {
+    const notificationDot = document.getElementById('messageNotificationDot');
+    if (!notificationDot) return;
+    
+    if (unreadMessageCount > 0) {
+        notificationDot.style.display = 'inline-block';
+    } else {
+        notificationDot.style.display = 'none';
+    }
+     }
 
 function displayMessages(filter = 'inbox') {
     const container = document.getElementById(`${filter}-tab`);
@@ -2438,6 +2492,7 @@ async function markMessageAsRead(messageId) {
                 message.read = true;
                 unreadMessageCount = Math.max(0, unreadMessageCount - 1);
                 updateMessageCount();
+                updateMessageNotificationDot(); 
                 
                 const messageElement = document.querySelector(`[data-message-id="${messageId}"]`);
                 if (messageElement) {
@@ -2885,6 +2940,17 @@ function createElementFromHTML(htmlString) {
     const div = document.createElement('div');
     div.innerHTML = htmlString.trim();
     return div.firstChild;
+}
+
+// Add polling for new messages
+function startMessagePolling() {
+    setInterval(async () => {
+        const token = localStorage.getItem('authToken');
+        if (!token) return;
+        
+        const headers = { 'Authorization': `Bearer ${token}` };
+        await loadUserMessages(headers);
+    }, 30000); // Check every 30 seconds
 }
 
 
