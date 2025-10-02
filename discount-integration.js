@@ -2243,10 +2243,10 @@ function addInvoiceStyles() {
             position: absolute;
             top: 50%;
             right: 15px;
-            transform: translateY(-50%);
+            transform: translateY(-60%);
             width: 8px;
             height: 8px;
-            background-color: #dc3545;
+            background-color: #03ff9fff;
             border-radius: 50%;
             animation: pulse-notification 2s infinite;
         }
